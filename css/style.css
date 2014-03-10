@@ -1,0 +1,275 @@
+@import url(http://fonts.googleapis.com/css?family=Quattrocento);
+
+body {
+	background-image: url('../img/ricepaper.png');
+	font-family: 'Quattrocento', serif;
+}
+
+#welcomeMessage {
+    display: none;
+    margin-right: 35px;
+    margin-top: -4.5%;
+    width: 300px;
+    text-align: right;
+    position: relative;
+}
+
+#welcomeMessage #middleWelcome {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+}
+
+#welcomeMessage input[value="Logout"] {
+    float: right;
+}
+
+#loginForm {
+    display: block;
+    margin-right: 25px;
+}
+
+.welcome {
+    color: #EAD5AA;
+    font-size: 1.7em;
+    text-shadow: 3px 3px rgba(82,73,40,0.5);
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+    top: -50%;
+}
+
+#title {
+	width: 370px;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+#logo {
+	width: 120px;
+	margin: 5px 0px 0px 5px;
+}
+
+/* Styling for navigation bar */
+
+nav {
+    clear: both;
+    height: 50px;
+    position: absolute;
+    width: 900px;
+    top: 80px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: .3em;
+}
+
+nav li {
+    float: right;
+    margin: auto 1.1%;
+}
+
+nav li:last-child {
+    /*margin: 0;*/
+}
+
+nav li a {
+    display: block;
+    padding: .5em;
+    background: -webkit-gradient(linear, left top, left bottom, from(#B40527), to(#83192C));
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #7C1A19;
+    border-radius: 5px 5px 5px 5px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    width: 150px;
+    box-shadow: 2px 2px 3px rgba(128,30,29,0.5);
+}
+
+nav li a:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B40527));
+    color: #FFFFFF;
+}
+
+/* End styling of navigation bar. */
+
+section#login {
+    float: right;
+    margin-top: 15px;
+}
+
+#login_email, #login_password {
+    width: 120px;
+    margin-right: 2px;
+    margin-left: 0px;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.button {
+    display: inline-block;
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEE5C5), to(#CEC7AE));
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #FBE0C4;
+    border-radius: 5px 5px 5px 5px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 1px 1px 1px rgba(221,213,186,0.5);
+    font-size: 0.85em;
+    padding: 3px 4px;
+    width: 120px;
+    margin: 5px 3px;
+    font-family: 'Amethysta', serif;
+}
+
+.button:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#CEC7AE), to(#EEE5C5));
+    color: #B40527;
+    cursor: pointer;
+}
+
+.dark {
+    background: -webkit-gradient(linear, left top, left bottom, from(#A79C7C), to(#524B28));
+    border-color: #490706;
+}
+
+.dark:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#524B28), to(#A79C7C));
+}
+
+.small {
+    font-size: .75em;
+    margin: 2px;
+    width: auto;
+}
+
+/* Styling header, main, and footer */
+
+header, main, footer {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 4px 4px 4px rgba(82,73,40,0.5); 
+    padding: 0.5%;
+}
+
+header {
+    background-color: #192942;
+    padding-top: 1%;
+    position: relative;
+    height: 120px;
+}
+
+header > a img {
+    float: left;
+    width: 150px;
+    margin-right: 10px;
+}
+
+header > a h1 {
+    font-size: 45px;
+    margin: 0px;
+    color: #DBF8DA;
+    text-shadow: 3px 3px rgba(82,73,40,0.5);
+    display: inline-block;
+}
+
+header a {
+    text-decoration: none;
+}
+
+
+main {
+    background-color: #FBE0C4;
+    border-style: solid;
+    border-width: 1.3px;
+    border-color: #B7A080;
+    height: 100px;
+    width: 897.4px;
+    position: relative;
+}
+
+footer {
+    clear: both;
+    text-align: center;
+    margin: auto;
+    background-color: #83192C;
+    height: 30px;
+    color: black;
+    position: relative;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0px;
+    display: inline-block;
+    position: relative;
+    top: 25%;
+}
+
+footer li {
+	display: inline;
+    margin-right: 10px;
+    position: relative;
+    top: -50%;
+}
+
+footer li a {
+    text-decoration: none;
+    color: white;
+}
+
+footer li a:hover {
+    color: #52B4D2;
+}
+
+/* End header, main, footer styling. */
+    
+#about {
+    margin: 0px 30px 30px 30px;
+}
+
+article#mailing, article#phone {
+    text-align: center;
+}
+
+#registrationForm {
+   width:450px;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 30px;
+   text-align: right;
+}
+
+#registrationForm label {
+   display: inline-block;
+   width: 190px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 200px;
+    height: 20px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#register {
+   text-align: center;
+   margin-top: 10px;
+}
+
+.heading {
+    text-align: center;
+    font-size: 2em;
+    color: #413817;
+    text-shadow: 2px 2px 2px rgba(72,63,30,0.5);
+}
+
+.subheading {
+    margin-bottom: -10px;
+    font-size: 1.5em;
+}
