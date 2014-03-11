@@ -84,19 +84,18 @@ nav li:hover .dropdown {
     background: none;
     color: black;
     box-shadow: none;
-    border-width: 1px;
-    border-bottom-width: 0px;
-    border-top-width: 0px;
-    /* border: none; */
-    /* border-style: solid; */
-    /* border-right-width: 1px; */
-    /* border-left-width: 1px; */
-    border-color: #CCC;
+    border: none;
     text-align: left;
 }
 
 .dropdown a:hover {
     background: none;
+}
+
+.border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
 }
 
 /* End styling of navigation bar. */
