@@ -57,7 +57,7 @@ nav {
     height: 50px;
     position: absolute;
     width: 900px;
-    top: 80px;
+    top: 90px;
 }
 
 nav ul {
@@ -86,13 +86,14 @@ nav li a {
     text-decoration: none;
     text-align: center;
     color: white;
-    width: 150px;
+    width: 130px;
     box-shadow: 2px 2px 3px rgba(128,30,29,0.5);
+    font-size: .85em;
 }
 
 nav li a:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B40527));
-    color: #FFFFFF;
+    color: #CCCCCC;
 }
 
 /* End styling of navigation bar. */
@@ -128,7 +129,7 @@ section#login {
 
 .button:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#CEC7AE), to(#EEE5C5));
-    color: #B40527;
+    color: #555555;
     cursor: pointer;
 }
 
@@ -221,10 +222,11 @@ footer li {
 footer li a {
     text-decoration: none;
     color: white;
+    font-size: 0.85em;
 }
 
 footer li a:hover {
-    color: #52B4D2;
+    color: #CCCCCC;
 }
 
 /* End header, main, footer styling. */
