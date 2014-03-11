@@ -86,10 +86,14 @@ nav li:hover .dropdown {
     box-shadow: none;
     border: none;
     text-align: left;
+    padding-right: 2px;
 }
 
 .dropdown a:hover {
     background: none;
+    background-color: #EEE;
+    color: black;
+    padding-right: 2px;
 }
 
 .border {
