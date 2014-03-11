@@ -147,7 +147,7 @@ section#login {
     word-wrap: break-word;
 }
 
-#welcome {
+#welcomeMessage ul {
     list-style: none;
 }
 
@@ -161,7 +161,7 @@ section#login {
 }
 
 .account {
-    float: right;
+    right: 0px;
 }
 
 /* End styling of welcome section. */
