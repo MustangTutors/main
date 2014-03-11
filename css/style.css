@@ -147,15 +147,22 @@ section#login {
     word-wrap: break-word;
 }
 
+#welcome {
+    list-style: none;
+}
+
 #welcomeMessage img {
     width: 20px;
     margin-left: 5px;
 }
 
-#welcomeMessage div#welcome:hover .dropdown {
+#welcomeMessage #welcome:hover .dropdown {
     display: block;
 }
 
+.account {
+    float: right;
+}
 
 /* End styling of welcome section. */
 
