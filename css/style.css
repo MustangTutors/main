@@ -5,40 +5,6 @@ body {
 	font-family: 'Quattrocento', serif;
 }
 
-#welcomeMessage {
-    display: none;
-    margin-right: 35px;
-    margin-top: -4.5%;
-    width: 300px;
-    text-align: right;
-    position: relative;
-}
-
-#welcomeMessage #middleWelcome {
-    display: inline-block;
-    position: relative;
-    top: 50%;
-}
-
-#welcomeMessage input[value="Logout"] {
-    float: right;
-}
-
-#loginForm {
-    display: block;
-    margin-right: 25px;
-}
-
-.welcome {
-    color: #EAD5AA;
-    font-size: 1.7em;
-    text-shadow: 3px 3px rgba(82,73,40,0.5);
-    position: relative;
-    display: inline-block;
-    word-wrap: break-word;
-    top: -50%;
-}
-
 #title {
 	width: 370px;
 	margin-top: 20px;
@@ -98,9 +64,16 @@ nav li a:hover {
 
 /* End styling of navigation bar. */
 
+/* Styling of login form. */
+
+#loginForm {
+    display: none;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
 section#login {
     float: right;
-    margin-top: 15px;
 }
 
 #login_email, #login_password {
@@ -109,6 +82,43 @@ section#login {
     margin-left: 0px;
     border-radius: 4px 4px 4px 4px;
 }
+
+/* End styling of login section. */
+
+/* Styling of welcome section. */
+
+#welcomeMessage {
+    display: block;
+    margin-right: 35px;
+    margin-top: 25px;
+    width: 300px;
+    text-align: right;
+    position: relative;
+}
+
+#welcomeMessage #middleWelcome {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+}
+
+#welcomeMessage input[value="Logout"] {
+    float: right;
+}
+
+.welcome {
+    color: #EAD5AA;
+    font-size: 1.7em;
+    text-shadow: 3px 3px rgba(82,73,40,0.5);
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+    top: -50%;
+}
+
+/* End styling of welcome section. */
+
+/* Styling of buttons. */
 
 .button {
     display: inline-block;
@@ -147,6 +157,8 @@ section#login {
     margin: 2px;
     width: auto;
 }
+
+/* End styling of buttons. */
 
 /* Styling header, main, and footer */
 
