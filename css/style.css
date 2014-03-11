@@ -84,16 +84,13 @@ nav ul {
     border: none;
     text-align: left;
     padding: 3px;
-    width: 134px;
-    margin-left: -2px;
-    margin-right: 2px;
+    width: 136px;
 }
 
 .dropdown a:hover {
     background: none;
     background-color: #EEE;
     color: black;
-    padding-right: 2px;
 }
 
 .border {
