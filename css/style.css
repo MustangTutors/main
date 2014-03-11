@@ -183,13 +183,12 @@ section#login {
 #welcomeMessage .account {
     right: 0px;
     text-align: left;
+    width: 200px;
 }
 
 #welcomeMessage #welcome:hover .dropdown a {
     display: block;
-    width: 134px;
-    margin-left: 1px;
-    margin-right: -1px;
+    width: 192px;
 }
 
 /* End styling of welcome section. */
