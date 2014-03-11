@@ -29,8 +29,19 @@
 
 <nav>
     <ul>
-        <li><a href="registration.html">Register</a></li>
-        <li>
+        <li id="toggleButton">
+            <label id="toggle" class="switch-light switch-candy" onclick="">
+                <span id="statusLabel">Tutor Status:</span>
+                <input type="checkbox">
+                <span>
+                    <span>Busy</span>
+                    <span>Available</span>
+                </span>
+
+                <a></a>
+            </label>
+        </li>
+        <li class="nav">
             <a href="#">Student History</a>
             <ul class="dropdown">
                 <div class="border">
@@ -39,13 +50,12 @@
                 </div>
             </ul>
         </li>
-        <li><a href="index.html">Search for Tutors</a></li>
-        <li>
+        <li class="nav"><a href="index.html">Search for Tutors</a></li>
+        <li class="nav">
             <a href="#">
                 Applications
                 <span id="counter">2</span>
             </a>
-            
         </li>
     </ul>
 </nav>

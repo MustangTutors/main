@@ -23,7 +23,7 @@ nav {
     height: 50px;
     position: absolute;
     width: 900px;
-    top: 80px;
+    top: 90px;
 }
 
 nav ul {
@@ -32,17 +32,13 @@ nav ul {
     padding: .3em;
 }
 
-nav li {
+.nav {
     float: right;
     margin: auto 1.1%;
     position: relative;
 }
 
-nav li:last-child {
-    /*margin: 0;*/
-}
-
-nav li a {
+.nav a {
     display: block;
     padding: .5em;
     background: -webkit-gradient(linear, left top, left bottom, from(#B40527), to(#83192C));
@@ -55,10 +51,10 @@ nav li a {
     color: white;
     width: 130px;
     box-shadow: 2px 2px 3px rgba(128,30,29,0.5);
-    font-size: .85em;
+    font-size: 0.85em;
 }
 
-nav li a:hover {
+.nav a:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B40527));
     color: #CCCCCC;
 }
@@ -73,7 +69,7 @@ nav li a:hover {
     /* border-color: #CCC; */
 }
 
-nav li:hover .dropdown {
+.nav:hover .dropdown {
     display: block;
 }
 
@@ -114,6 +110,21 @@ nav li:hover .dropdown {
     border-radius: 5px;
     padding: 2px 4px;
     color: white;
+}
+
+#toggle {
+    position: relative;
+    width: 200px;
+    float: right;
+    margin: auto 1.1%;
+    font-size: 0.85em;
+}
+
+#statusLabel {
+    color: white;
+    position: absolute;
+    left: 3px;
+    top: -25px;
 }
 
 /* End styling of navigation bar. */
@@ -241,7 +252,7 @@ header {
     background-color: #192942;
     padding-top: 1%;
     position: relative;
-    height: 110px;
+    height: 120px;
 }
 
 header > a img {
