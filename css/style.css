@@ -87,6 +87,9 @@ nav li:hover .dropdown {
     border: none;
     text-align: left;
     padding-right: 2px;
+    width: 134px;
+    margin-left: -2px;
+    margin-right: 2px;
 }
 
 .dropdown a:hover {
