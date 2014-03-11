@@ -86,7 +86,7 @@ nav li:hover .dropdown {
     box-shadow: none;
     border: none;
     text-align: left;
-    padding-right: 2px;
+    padding: 3px;
     width: 134px;
     margin-left: -2px;
     margin-right: 2px;
@@ -160,8 +160,16 @@ section#login {
     display: block;
 }
 
-.account {
+#welcomeMessage .account {
     right: 0px;
+    text-align: left;
+}
+
+#welcomeMessage #welcome:hover .dropdown a {
+    display: block;
+    width: 134px;
+    margin-left: 1px;
+    margin-right: -1px;
 }
 
 /* End styling of welcome section. */
