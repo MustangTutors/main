@@ -48,7 +48,7 @@ nav li a {
     border-style: solid;
     border-width: 0.1em;
     border-color: #7C1A19;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 2px;
     text-decoration: none;
     text-align: center;
     color: white;
@@ -60,6 +60,43 @@ nav li a {
 nav li a:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B40527));
     color: #CCCCCC;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    padding: 0;
+    z-index: 100;
+    background-color: white;
+    /* border-width: 1px; */
+    /* border-color: #CCC; */
+}
+
+nav li:hover .dropdown {
+    display: block;
+}
+
+.dropdown li {
+    float: none;
+}
+
+.dropdown a {
+    background: none;
+    color: black;
+    box-shadow: none;
+    border-width: 1px;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
+    /* border: none; */
+    /* border-style: solid; */
+    /* border-right-width: 1px; */
+    /* border-left-width: 1px; */
+    border-color: #CCC;
+    text-align: left;
+}
+
+.dropdown a:hover {
+    background: none;
 }
 
 /* End styling of navigation bar. */
