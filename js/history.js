@@ -1,4 +1,11 @@
 $(document).ready(function(){
+	if(true){
+		toggleView();
+	}
+
+	// When toggle view clicked, load correct view
+	$(document).on('change', '#history_view input[type="checkbox"]', toggleView);
+
 	// Add "Share" message when user hovers over share icon and change share icon to gray
 	$(document).on('mouseover', '#share', function(){
 		// Make "Share" message appear
@@ -49,6 +56,22 @@ $(document).ready(function(){
 			$('#share_alert').css('display', 'block');
 		}
 	});
-
-	$(document).on('click')
 });
+
+// Toggle view of history
+function toggleView() {
+	var view = $('#history_view input[type="checkbox"]').prop('checked');
+
+	// If on Student View
+	if(view) {
+		$('#tutor_history').fadeOut(100, function() {
+			$('#student_history').fadeIn(100);
+		});	
+	}
+	// Else on Tutor View
+	else {
+		$('#student_history').fadeOut(100, function() {
+			$('#tutor_history').fadeIn(100);
+		});	
+	}
+}

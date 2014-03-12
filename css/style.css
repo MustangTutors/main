@@ -742,6 +742,7 @@ div.center {
 
 section#tutor_history {
     display: none;
+    position: relative;
 }
 
 #history_view {
