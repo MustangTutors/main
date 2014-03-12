@@ -444,13 +444,34 @@ section#tutors h2 {
     z-index: 1;
     background-color: #F0EAE3;
     border: 1px solid #83192C;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tutorBox-extended.extend-right {
+    left: 140px;
     border-left: none;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.tutorNameRating {
+.tutorBox-extended.extend-left {
+    left: 0px;
+    border-right: none;
+    box-shadow: 0px 4px 2px -2px rgba(0, 0, 0, 0.5);
+}
+
+.tutorBox-extended .tutorNameRating {
     margin-top: 60px;
     margin-left: 15px;
+}
+
+.tutorBox-extended.extend-right .tutorNameRating {
+    margin-top: 60px;
+    margin-left: 15px;
+}
+
+.tutorBox-extended.extend-left .tutorNameRating {
+    margin-top: 60px;
+    margin-right: 15px;
 }
 
 .tutorBox-extended .tutorName {
@@ -463,6 +484,14 @@ section#tutors h2 {
     padding: 3px;
     margin: 5px;
     float: right;
+}
+
+.extend-right .available, .extend-right .busy {
+    float: right;
+}
+
+.extend-left .available, .extend-left .busy {
+    float: left;
 }
 
 .available {
