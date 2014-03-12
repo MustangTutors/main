@@ -628,19 +628,29 @@ div.reviewCourses ul, div.reviewHours ol {
     padding: 0px 0px 0px 15px;
 }
 
+div.reviewCourses li, div.reviewHours li {
+    padding-bottom: 3px;
+}
+
 div.reviewCourses span.listLabel {
-    width: 95px;
+    width: 105px;
     vertical-align: top;
 }
 
 span.listLabel {
     display: inline-block;
-    width: 100px;
+    width: 110px;
+    font-weight: bold;
 }
 
 span.listContent {
     display: inline-block;
-    width: 190px;
+    width: 180px;
+}
+
+.viewTranscript.button {
+    width: 110px;
+    text-align: center;
 }
 
 .reviewButtons {
@@ -648,10 +658,13 @@ span.listContent {
     margin-top: 5px;
 }
 
+.reviewButtons .button {
+    font-weight: bold;
+}
+
 .deny.button {
     background: -webkit-gradient(linear, left top, left bottom, from(#E6B3BC), to(#D27283));
     border-color: #83192C;
-    font-weight: bold;
 }
 
 .deny.button:hover {
@@ -662,7 +675,6 @@ span.listContent {
 .approve.button {
     background: -webkit-gradient(linear, left top, left bottom, from(#B2DDB1), to(#95CE94));
     border-color: #498D47;
-    font-weight: bold;
 }
 
 .approve.button:hover {

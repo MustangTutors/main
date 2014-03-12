@@ -12,11 +12,11 @@ $(document).ready(function() {
     $(".tutorBox:nth-of-type(4n), .tutorBox:nth-of-type(4n-1)").find(".tutorBox-extended").addClass("extend-left");
 
     // When you hover in and out of a tutor's box, it shows/hides more info.
-    $(".tutorBox-small").on("mouseenter", function() {
+    $(document).on("mouseenter", ".tutorBox-small", function() {
         $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
         $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
     });
-    $(".tutorBox-small").on("mouseleave", function() {
+    $(document).on("mouseleave", ".tutorBox-small", function() {
         $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
         $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
     });
