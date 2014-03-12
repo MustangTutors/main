@@ -1,6 +1,6 @@
 <section id="login">
     <form id="loginForm">
-        <input type="email" name="email" id="login_email" placeholder="Email" required>
+        <input type="text" name="id" id="login_id" placeholder="SMU ID" pattern="[0-9]{8}" title="Must be an 8 digit number." required>
         <input type="password" name="password" id="login_password" placeholder="Password" pattern=".{8,}" required>
         <input type="submit" value="Login" class="button small">
     </form>
