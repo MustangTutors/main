@@ -448,6 +448,11 @@ section#tutors h2 {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+.tutorNameRating {
+    margin-top: 60px;
+    margin-left: 15px;
+}
+
 .tutorBox-extended .tutorName {
     font-size: 2em;
 }
@@ -468,6 +473,10 @@ section#tutors h2 {
 .busy {
     border-color: #c2c018;
     background-color: #f7f698;
+}
+
+.rating {
+    margin-left: 20px;
 }
 
 .ratingStars {
