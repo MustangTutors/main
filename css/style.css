@@ -790,9 +790,27 @@ section#tutor_history {
     color: #CCC;
 }
 
+.subtract {
+    display: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(#B57580), to(#83192C));
+    border-color: #83192C;
+}
+
+.subtract:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B57580));
+    color: #CCC;
+}
+
 #add_message {
+    display: none;
     top: 10px;
     right: -35px;
+}
+
+#cancel_message {
+    display: none;
+    top: 10px;
+    right: -50px;
 }
 
 /* End styling for Tutor History View. */

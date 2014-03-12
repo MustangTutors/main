@@ -57,16 +57,36 @@ $(document).ready(function(){
 		}
 	});
 
-	// Add "Add" message when user hovers over add icon
-	$(document).on('mouseover', '.add', function(){
-		// Make "Add" message appear
-		$('#add_message').css('display', 'inline-block');
+	// Add "Add" message when user hovers over add icon and "Cancel" when over subtract icon
+	$(document).on('mouseover', '.add_meeting .add', function(){
+		if($('.add_meeting .subtract.add').css('display') === "none"){
+			// Make "Add" message appear
+			$('#add_message').css('display', 'inline-block');
+		}
+		else {
+			// Make "Cancel" message appear
+			$('#cancel_message').css('display', 'inline-block');
+		}
 	});
 
-	// Remove "add" message
-	$(document).on('mouseout', '.add', function(){
-		// Make "Add" message disappear
-		$('#add_message').hide();
+	// Remove "add" message and "Cancel" when over subtract icon
+	$(document).on('mouseout', '.add_meeting .add', function(){
+        // Make "Cancel" message disappear
+        $('#cancel_message').hide();
+        // Make "Add" message disappear
+        $('#add_message').hide();
+	});
+
+	// Change add icon to subtract icon on click
+	$(document).on('click', '.add_meeting .add', function(){
+		if($('.add_meeting .subtract.add').css('display') === "none"){
+			$('#add_icon').hide();
+			$('#subtract_icon').css('display', 'inline-block');
+		}
+		else {
+			$('#subtract_icon').hide();
+			$('#add_icon').css('display', 'inline-block');
+		}
 	});
 });
 
