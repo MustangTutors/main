@@ -472,6 +472,7 @@ section#tutors h2 {
 .tutorBox-extended.extend-left .tutorNameRating {
     margin-top: 60px;
     margin-right: 15px;
+    text-align: right;
 }
 
 .tutorBox-extended .tutorName {
@@ -506,6 +507,14 @@ section#tutors h2 {
 
 .rating {
     margin-left: 20px;
+}
+
+.extend-right .rating {
+    margin-left: 20px;
+}
+
+.extend-left .rating {
+    margin-right: 20px;
 }
 
 .ratingStars {
