@@ -310,7 +310,7 @@ footer ul {
     margin: 0px;
     display: inline-block;
     position: relative;
-    top: 25%;
+    top: 20%;
 }
 
 footer li {
@@ -347,10 +347,6 @@ footer li a:hover {
 
 /* End search page styling. */
 
-
-
-
-
 #about {
     margin: 0px 30px 30px 30px;
 }
@@ -385,13 +381,35 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 
 .heading {
-    text-align: center;
     font-size: 2em;
-    color: #413817;
-    text-shadow: 2px 2px 2px rgba(72,63,30,0.5);
+    color: #192942;
+    text-shadow: 2px 2px 2px rgba(25,41,66,0.5);
+    margin: 10px;
 }
 
 .subheading {
     margin-bottom: -10px;
     font-size: 1.5em;
 }
+
+/* Styling for History. */
+
+
+
+/* End Styling for History. */
+
+/* Styling for Student History View. */
+
+section#tutor_history {
+    display: block;
+}
+
+/* End styling for Student History View. */
+
+/* Styling for Tutor History View. */
+
+section#tutor_history {
+    display: none;
+}
+
+/* End styling for Tutor History View. */
