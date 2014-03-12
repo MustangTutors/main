@@ -404,9 +404,9 @@ section#tutors h2 {
 }
 
 .tutorPicture {
-    background-color: #BCB1A6;
+    background-image: url('../img/tweed.png');
     position: relative;
-    border: 1px dashed #83192C;
+    border: 3px ridge #192942;
     margin: 5px auto;
     width: 120px;
     height: 160px;
