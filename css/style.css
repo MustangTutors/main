@@ -121,7 +121,7 @@ nav ul {
     color: white;
 }
 
-#toggle {
+.toggle {
     position: relative;
     width: 200px;
     float: right;
