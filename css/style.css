@@ -452,6 +452,32 @@ section#tutors h2 {
     font-size: 2em;
 }
 
+.available, .busy {
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 5px;
+    float: right;
+}
+
+.available {
+    border-color: #066d18;
+    background-color: #86cd93;
+}
+
+.busy {
+    border-color: #c2c018;
+    background-color: #f7f698;
+}
+
+.ratingStars {
+    display: inline-block;
+}
+
+.ratingStars img {
+    width: 16px;
+}
+
 /* End search page styling. */
 
 
