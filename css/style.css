@@ -296,6 +296,7 @@ main {
     border-bottom: none;
     width: 897.4px;
     position: relative;
+    padding-bottom: 10px;
 }
 
 footer {
@@ -566,7 +567,7 @@ section#student_history {
 
 /* Styling for Share window. */
 
-section#share_history {
+#share_history {
     display: none;
     background-color: rgba(0, 0, 0, 0.77);
     width: 100%;
@@ -577,7 +578,7 @@ section#share_history {
     z-index: 200;
 }
 
-section#share_history #share_form {
+#share_history #share_form {
     position: fixed;
     width: 350px;
     height: auto;
@@ -626,12 +627,15 @@ div.center {
 
 .meeting {
     padding: 10px;
-    margin: 20px 30px 0px 30px;
-    background-color: #FEECDA;
+    margin: 0px 30px 20px 30px;
+    background-color: #f2e4d4;
+    border-width: 1.6px;
+    border-style: solid;
+    border-color: #b0a69b;
 }
 
 .date_time {
-    color: #999;
+    color: #777;
     float: right;
     text-align: right;
 }
@@ -644,6 +648,10 @@ div.center {
 
 .summary {
     display: block;
+    margin: 15px 12px 4px 12px;
+    padding: 7px;
+    background-color: #fff6eb;
+    border-radius: 3px;
 }
 
 /* End styling for meeting. */
