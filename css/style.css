@@ -496,7 +496,7 @@ section#tutors h2 {
     text-align: right;
 }
 
-.tutorBox-extended .tutorName {
+.tutorBox-extended .tutorName, .tutorNamePending .tutorName {
     font-size: 2em;
 }
 
@@ -585,6 +585,72 @@ section#tutors h2 {
 }
 
 /* End registration page styling. */
+
+
+/* Begin applications page styling. */
+
+#applicationsMain h2 {
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tutorPictureTranscript {
+    float: left;
+    padding: 7px 0px;
+    margin: 13px 0px 4px 0px;
+}
+
+.tutorNamePending {
+    clear: both;
+    padding-left: 10px;
+}
+
+div.reviewCourses, div.reviewHours {
+    display: inline-block;
+    height: 200px;
+    width: 300px;
+    float: left;
+}
+
+div.reviewCourses ul, div.reviewHours ol {
+    list-style: none;
+    padding: 0px 0px 0px 15px;
+}
+
+span.day {
+    display: inline-block;
+    width: 100px;
+}
+
+.reviewButtons {
+    float: right;
+    margin-top: 5px;
+}
+
+.deny.button {
+    background: -webkit-gradient(linear, left top, left bottom, from(#E6B3BC), to(#D27283));
+    border-color: #83192C;
+    font-weight: bold;
+}
+
+.deny.button:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#D27283), to(#E6B3BC));
+    color: #444;
+}
+
+.approve.button {
+    background: -webkit-gradient(linear, left top, left bottom, from(#B2DDB1), to(#95CE94));
+    border-color: #498D47;
+    font-weight: bold;
+}
+
+.approve.button:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#95CE94), to(#B2DDB1));
+    color: #444;
+}
+
+/* End applications page styling. */
 
 
 /* Styling for History. */
