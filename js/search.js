@@ -6,6 +6,8 @@ $(document).ready(function() {
     $(".tutorBox .ratingStars").eq(3).html(convertToStars(1));
     $(".tutorBox .ratingStars").eq(4).html(convertToStars(2.5));
 
+    // Apply the extend-left class to the left half of tutors, apply the 
+    // extend-right class to the right half of tutors.
     $(".tutorBox:nth-of-type(4n-3), .tutorBox:nth-of-type(4n-2)").find(".tutorBox-extended").addClass("extend-right");
     $(".tutorBox:nth-of-type(4n), .tutorBox:nth-of-type(4n-1)").find(".tutorBox-extended").addClass("extend-left");
 
@@ -28,11 +30,17 @@ function convertToStars(num) {
     num = (Math.round(num * 2) / 2).toFixed(1);
 
     // Add to the output the right number of stars
+    var starsAdded = 0;
     for (num; num > 0.5; num--) {
         output += '<img src="img/star.png" alt="Rating Star">';
+        starsAdded++;
     }
     if (num !== 0) {
         output += '<img src="img/halfstar.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    for (starsAdded; starsAdded < 5; starsAdded++) {
+        output += '<img src="img/emptystar.png" alt="Rating Star">';
     }
 
     return output;
