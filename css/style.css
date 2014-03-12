@@ -13,6 +13,10 @@ h2 {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
+.left {
+    text-align: left;
+}
+
 .heading {
     font-size: 2em;
     color: #192942;
@@ -360,6 +364,11 @@ footer li a:hover {
 
 /* Start search page styling. */
 
+main#search {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 #tutorSearchPage {
     display: table;
     padding: 0px 20px;
@@ -590,8 +599,7 @@ section#tutors h2 {
 
 /* Begin applications page styling. */
 
-#applicationsMain h2 {
-    text-align: left;
+#applicationsMain > h2 {
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -612,6 +620,7 @@ div.reviewCourses, div.reviewHours {
     height: 200px;
     width: 300px;
     float: left;
+    margin: 15px 5px 4px 15px;
 }
 
 div.reviewCourses ul, div.reviewHours ol {
@@ -619,9 +628,19 @@ div.reviewCourses ul, div.reviewHours ol {
     padding: 0px 0px 0px 15px;
 }
 
-span.day {
+div.reviewCourses span.listLabel {
+    width: 95px;
+    vertical-align: top;
+}
+
+span.listLabel {
     display: inline-block;
     width: 100px;
+}
+
+span.listContent {
+    display: inline-block;
+    width: 190px;
 }
 
 .reviewButtons {
