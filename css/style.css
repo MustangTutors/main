@@ -317,6 +317,7 @@ main {
     width: 897.4px;
     position: relative;
     padding-bottom: 10px;
+    padding-top: 5px;
 }
 
 footer {
@@ -591,7 +592,45 @@ section#tutors h2 {
 
 .history h2.heading {
     text-align: left;
+    margin-top: 5px;
 }
+
+/* Styling for meeting. */
+
+.meeting {
+    padding: 10px;
+    margin: 0px 30px 20px 30px;
+    background-color: #F2E4D4;
+    border-width: 1.6px;
+    border-style: solid;
+    border-color: #B0A69B;
+}
+
+article.meeting:first-of-type {
+    margin-top: 20px;
+}
+
+.date_time {
+    color: #777;
+    float: right;
+    text-align: right;
+}
+
+.course_contributor {
+    width: auto;
+    text-align: right;
+    display: inline-block;
+}
+
+.summary {
+    display: block;
+    margin: 15px 15px 4px 15px;
+    padding: 12px 10px 12px 10px;
+    background-color: #FFF6EB;
+    border-radius: 3px;
+}
+
+/* End styling for meeting. */
 
 /* End Styling for History. */
 
@@ -647,7 +686,7 @@ section#student_history {
 
 #share_window #share_form {
     position: fixed;
-    width: 350px;
+    width: 400px;
     height: auto;
     left: 50%;
     top: 25%;
@@ -657,20 +696,23 @@ section#student_history {
     border-color: #B9B499;
 }
 
+.share_email_holder {
+    margin-bottom: 10px;
+}
+
 .share_email {
-    width: 350px;
+    text-align: center;
 }
 
 .share_email input {
     display: inline-block;
-    width: 43%;
+    width: 150px;
     margin-left: 2%;
 }
 
 .share_email label {
     display: inline-block;
     text-align: right;
-    width: 35%;
 }
 
 div.center {
@@ -688,40 +730,11 @@ div.center {
     color: #CCC;
 }
 
+#share_alert {
+    display: none;
+}
+
 /* End styling for Share window. */
-
-/* Styling for meeting. */
-
-.meeting {
-    padding: 10px;
-    margin: 0px 30px 20px 30px;
-    background-color: #F2E4D4;
-    border-width: 1.6px;
-    border-style: solid;
-    border-color: #B0A69B;
-}
-
-.date_time {
-    color: #777;
-    float: right;
-    text-align: right;
-}
-
-.course_contributor {
-    width: auto;
-    text-align: right;
-    display: inline-block;
-}
-
-.summary {
-    display: block;
-    margin: 15px 12px 4px 12px;
-    padding: 7px;
-    background-color: #FFF6EB;
-    border-radius: 3px;
-}
-
-/* End styling for meeting. */
 
 /* End styling for Student History View. */
 
@@ -729,6 +742,21 @@ div.center {
 
 section#tutor_history {
     display: none;
+}
+
+#history_view {
+    position: absolute;
+    width: 250px;
+    top: 27px;
+    left: 550px;
+}
+
+#history_view a {
+    border: 1px solid #192942;
+    background-color: #192942;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#3092B0), to(#22667B));
+    background-image: -webkit-linear-gradient(top, #3092B0, #22667B);
+    background-image: linear-gradient(to  bottom, from(#3092B0), to(#22667B));
 }
 
 /* End styling for Tutor History View. */

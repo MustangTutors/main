@@ -46,7 +46,7 @@ $(document).ready(function(){
        		$('#share_window #share_form .share_email_holder').append(new_email);
 		}
 		else {
-			$('#share_alert').show();
+			$('#share_alert').css('display', 'block');
 		}
 	});
 
