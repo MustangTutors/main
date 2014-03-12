@@ -1,8 +1,9 @@
 $(document).ready(function() {
-    $(".tutorBox").on("mouseenter", function() {
-        $(this).children(".tutorBox-extended").stop().slideDown();
+    $(".tutorBox-small").on("mouseenter", function() {
+        $(this).siblings(".tutorBox-extended").stop().animate({width:'toggle'}, 250);
     });
-    $(".tutorBox").on("mouseleave", function() {
-        $(this).children(".tutorBox-extended").stop().slideUp();
+    $(".tutorBox-small").on("mouseleave", function() {
+        $(this).siblings(".tutorBox-extended").stop().animate({width:'toggle'}, 250);
+
     });
 });
