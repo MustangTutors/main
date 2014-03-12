@@ -313,7 +313,7 @@ footer ul {
     margin: 0px;
     display: inline-block;
     position: relative;
-    top: 25%;
+    top: 20%;
 }
 
 footer li {
@@ -427,5 +427,39 @@ section#tutors h2 {
     display: none;
 }
 
-
 /* End search page styling. */
+
+
+.heading {
+    font-size: 2em;
+    color: #192942;
+    text-shadow: 2px 2px 2px rgba(25,41,66,0.5);
+    margin: 10px;
+}
+
+.subheading {
+    margin-bottom: -10px;
+    font-size: 1.5em;
+}
+
+/* Styling for History. */
+
+
+
+/* End Styling for History. */
+
+/* Styling for Student History View. */
+
+section#tutor_history {
+    display: block;
+}
+
+/* End styling for Student History View. */
+
+/* Styling for Tutor History View. */
+
+section#tutor_history {
+    display: none;
+}
+
+/* End styling for Tutor History View. */
