@@ -290,7 +290,7 @@ header a {
 
 
 main {
-    background-color: #FBE0C4;
+    background-color: #FEECDA;
     border: 1.3px solid #B7A080;
     border-top: none;
     border-bottom: none;
@@ -532,11 +532,12 @@ section#tutors h2 {
     font-size: 2em;
     color: #192942;
     text-shadow: 2px 2px 2px rgba(25,41,66,0.5);
-    margin: 10px;
+    margin: 0px;
+    padding: 15px;
 }
 
 .subheading {
-    margin-bottom: -10px;
+    margin: 0px;
     font-size: 1.5em;
 }
 
@@ -566,7 +567,7 @@ section#student_history {
 /* Styling for Share window. */
 
 section#share_history {
-    display: block;
+    display: none;
     background-color: rgba(0, 0, 0, 0.77);
     width: 100%;
     height: 100%;
@@ -620,6 +621,32 @@ div.center {
 }
 
 /* End styling for Share window. */
+
+/* Styling for meeting. */
+
+.meeting {
+    padding: 10px;
+    margin: 20px 30px 0px 30px;
+    background-color: #FEECDA;
+}
+
+.date_time {
+    color: #999;
+    float: right;
+    text-align: right;
+}
+
+.course_contributor {
+    width: auto;
+    text-align: right;
+    display: inline-block;
+}
+
+.summary {
+    display: block;
+}
+
+/* End styling for meeting. */
 
 /* End styling for Student History View. */
 
