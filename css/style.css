@@ -5,6 +5,10 @@ body {
 	font-family: 'Quattrocento', serif;
 }
 
+h2 {
+    margin: 0px;
+}
+
 #title {
 	width: 370px;
 	margin-top: 20px;
@@ -14,6 +18,10 @@ body {
 #logo {
 	width: 120px;
 	margin: 5px 0px 0px 5px;
+}
+
+.clearBoth {
+    clear: both;
 }
 
 /* Styling for navigation bar */
@@ -237,12 +245,18 @@ section#login {
 
 /* Styling header, main, and footer */
 
+header, footer {
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+
 header, main, footer {
     width: 900px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 4px 4px 4px rgba(82,73,40,0.5); 
-    padding: 0.5%;
+    box-shadow: 4px 4px 4px rgba(82,73,40,0.5);
+    padding-left: 0.5%;
+    padding-right: 0.5%;
 }
 
 header {
@@ -276,9 +290,9 @@ main {
     border-style: solid;
     border-width: 1.3px;
     border-color: #B7A080;
-    height: 100px;
     width: 897.4px;
     position: relative;
+    display: table;
 }
 
 footer {
@@ -317,7 +331,26 @@ footer li a:hover {
 }
 
 /* End header, main, footer styling. */
-    
+
+
+/* Start search page styling. */
+
+#searchTutors {
+    background-color: #ccc;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    width: 175px;
+    padding: 10px;
+    margin: 0px 30px;
+    display: table-cell;
+}
+
+/* End search page styling. */
+
+
+
+
+
 #about {
     margin: 0px 30px 30px 30px;
 }
