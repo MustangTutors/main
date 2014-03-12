@@ -28,4 +28,10 @@ $(document).ready(function(){
 		// Hide share window
 		$('#share_window').hide();
 	});
+
+	// Add new email box when the last email box is clicked
+	$(document).on('click', '#share_window .share_email input[type="email"]:last-of-type', function(){
+		var new_email = $('<div class="share_email"><label for="email">Email:</label><input type="email" name="email" placeholder="Enter an email" required></div>');
+        new_email.insertBefore('#share_window div.center');
+	});
 });
