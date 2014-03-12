@@ -222,7 +222,7 @@ section#login {
 
 .button {
     display: inline-block;
-    background: -webkit-gradient(linear, left top, left bottom, from(#EEE5C5), to(#CEC7AE));
+    background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
     border-style: solid;
     border-width: 0.1em;
     border-color: #A0968A;
@@ -238,7 +238,7 @@ section#login {
 }
 
 .button:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#CEC7AE), to(#EEE5C5));
+    background: -webkit-gradient(linear, left top, left bottom, from(#E2D5C5), to(#FCF3EA));
     color: #555555;
     cursor: pointer;
 }
@@ -627,7 +627,7 @@ section#student_history {
 
 /* Styling for Share window. */
 
-#share_history {
+#share_window {
     display: none;
     background-color: rgba(0, 0, 0, 0.77);
     width: 100%;
@@ -638,14 +638,14 @@ section#student_history {
     z-index: 200;
 }
 
-#share_history #share_form {
+#share_window #share_form {
     position: fixed;
     width: 350px;
     height: auto;
     left: 50%;
     top: 25%;
     margin-left: -175px;
-    background-color: #FDF8DD;
+    background-color: #FEECDA;
     border-style: solid;
     border-color: #B9B499;
 }
@@ -671,12 +671,12 @@ div.center {
     margin: 5px;
 }
 
-#share_history #share_send {
+#share_window #share_send {
     background: -webkit-gradient(linear, left top, left bottom, from(#B40527), to(#83192C));
     color: white;
 }
 
-#share_history #share_send:hover {
+#share_window #share_send:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B40527));
     color: #CCC;
 }
