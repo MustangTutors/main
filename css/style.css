@@ -13,6 +13,19 @@ h2 {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
+.heading {
+    font-size: 2em;
+    color: #192942;
+    text-shadow: 2px 2px 2px rgba(25,41,66,0.5);
+    margin: 0px;
+    padding: 15px;
+}
+
+.subheading {
+    margin: 0px;
+    font-size: 1.5em;
+}
+
 #title {
 	width: 370px;
 	margin-top: 20px;
@@ -212,7 +225,7 @@ section#login {
     background: -webkit-gradient(linear, left top, left bottom, from(#EEE5C5), to(#CEC7AE));
     border-style: solid;
     border-width: 0.1em;
-    border-color: #FBE0C4;
+    border-color: #A0968A;
     border-radius: 5px 5px 5px 5px;
     text-decoration: none;
     color: black;
@@ -346,7 +359,7 @@ footer li a:hover {
 }
 
 #searchTutors {
-    background-color: #3092B0;
+    background-color: #B5C4DC;
     border-left: 2px solid #192942;
     border-right: 2px solid #192942;
     width: 175px;
@@ -529,18 +542,43 @@ section#tutors h2 {
 /* End search page styling. */
 
 
-.heading {
-    font-size: 2em;
-    color: #192942;
-    text-shadow: 2px 2px 2px rgba(25,41,66,0.5);
-    margin: 0px;
-    padding: 15px;
+/* Begin registration page styling. */
+
+#registerMain {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-.subheading {
-    margin: 0px;
-    font-size: 1.5em;
+#registration {
+    width: 500px;
+    margin: 0px auto;
+    background-color: #fff6eb;
+    border: 2px solid #b0a69b;
 }
+
+#registrationForm label {
+    display: inline-block;
+    width: 175px;
+    text-align: right;
+}
+
+#registrationForm input {
+    width: 250px;
+    margin: 5px 0px 5px 10px;
+    height: 20px;
+}
+
+#registrationForm div {
+    text-align: center;
+}
+
+#registrationForm #register {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* End registration page styling. */
+
 
 /* Styling for History. */
 
