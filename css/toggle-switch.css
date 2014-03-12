@@ -192,6 +192,7 @@
       border: 1px solid #7C1A19;
       background-color: #9E0624;
       border-radius: 3px;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#B40527), to(#83192C));
       background-image: -webkit-linear-gradient(top, from(#B40527), to(#83192C));
       background-image: linear-gradient(to  bottom, from(#B40527), to(#83192C));
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.45); }

@@ -16,50 +16,84 @@
 	<header></header>
 
 	<main>
-		<section id="student_history" class="history">
-			<h2 class="heading">Your Student History</h2>
-			<img src="img/share.png" alt="Share" id="share">
-			<span id="share_message">Share</span>
-			<article class="meeting">
-				<div class="course_contributor">
-					<h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
-					<span class="contributor">Tutored by: Jane Smith</span>
-				</div>
-				<div class="date_time">
-					<span class="date">12/12/2013</span>
-					<br>
-					<span class="time">5:00PM to 6:00PM</span>
-				</div>
-				<span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
-			</article>
+		<label id="history_view" class="toggle switch-light switch-candy" onclick="">
+	        <input type="checkbox">
+	        <span>
+                <span>Tutor View</span>
+	            <span>Student View</span>
+	        </span>
 
-			<article class="meeting">
-				<div class="course_contributor">
-					<h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
-					<span class="contributor">Tutored by: Jane Smith</span>
-				</div>
-				<div class="date_time">
-					<span class="date">12/12/2013</span>
-					<br>
-					<span class="time">5:00PM to 6:00PM</span>
-				</div>
-				<span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
-			</article>
-		</section>
+	        <a></a>
+	    </label>
+
+		<section id="student_history" class="history">
+            <h2 class="heading">Your Student History</h2>
+            <img src="img/share.png" alt="Share" id="share">
+            <span id="share_message">Share</span>
+            <article class="meeting">
+                <div class="course_contributor">
+                    <h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
+                    <span class="contributor">Tutored by: Jane Smith</span>
+                </div>
+                <div class="date_time">
+                    <span class="date">12/12/2013</span>
+                    <br>
+                    <span class="time">5:00PM to 6:00PM</span>
+                </div>
+                <span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
+            </article>
+
+            <article class="meeting">
+                <div class="course_contributor">
+                    <h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
+                    <span class="contributor">Tutored by: Jane Smith</span>
+                </div>
+                <div class="date_time">
+                    <span class="date">12/12/2013</span>
+                    <br>
+                    <span class="time">5:00PM to 6:00PM</span>
+                </div>
+                <span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
+            </article>
+        </section>
 
 		<section id="tutor_history" class="history">
 			<h2 class="heading">Your Tutor History</h2>
+
+            <article class="meeting">
+                <div class="course_contributor">
+                    <h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
+                    <span class="contributor">Student tutored: Jane Smith</span>
+                </div>
+                <div class="date_time">
+                    <span class="date">12/12/2013</span>
+                    <br>
+                    <span class="time">5:00PM to 6:00PM</span>
+                </div>
+                <span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
+            </article>
+
+            <article class="meeting">
+                <div class="course_contributor">
+                    <h3 class="subheading">CSE 4340: Statistics for Engineers</h3>
+                    <span class="contributor">Student tutored: Jane Smith</span>
+                </div>
+                <div class="date_time">
+                    <span class="date">12/12/2013</span>
+                    <br>
+                    <span class="time">5:00PM to 6:00PM</span>
+                </div>
+                <span class="summary">Lorem ipsum dolor sit amet, consecturer adipiscing elit.</span>
+            </article>
 		</section>
 
 		<section id="share_window">
 			<div id="share_form">
 				<h2 class="heading">Share Your History</h2>
-
-				<div class="share_email">
-					<label for="email">Email:</label>
-					<input type="email" name="email" placeholder="Enter an email" required>
+				<div class="share_email_holder">
+					<div class="share_email"><label for="email">Email:</label><input type="email" name="email" placeholder="Enter an email"></div>
 				</div>
-
+				<span id="share_alert" class="error">To add more emails, send and share again.</span>
 				<div class="center">
                     <a href="#" class="button close" id="share_cancel">Cancel</a>
                     <input type="submit" class="button" id="share_send" value="Send!">
