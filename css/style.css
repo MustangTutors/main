@@ -457,14 +457,25 @@ section#tutors h2 {
 
 /* Styling for History. */
 
-
+#student_history h2.heading, #tutor_history h2.heading {
+    text-align: left;
+}
 
 /* End Styling for History. */
 
 /* Styling for Student History View. */
 
-section#tutor_history {
+section#student_history {
     display: block;
+    position: relative;
+}
+
+#share {
+    width: 20px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
 }
 
 /* End styling for Student History View. */
