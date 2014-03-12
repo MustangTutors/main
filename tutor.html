@@ -20,10 +20,11 @@
                 <h2>Story Zanetti</h2>
                 <img src="img/tutors/tutor.jpg">
                 <div id="rating" style="display: inline-block;">
-                    <h3>Average rating:</h3>
-                    <h3>Your rating:</h3>
+                    <h3>Average rating: </h3><span></span>
+                    <h3>Your rating: </h3><span></span>
                 </div>
             </section>
+
             <article class="schedule" style="display: inline-block;">
                 <h2>Courses</h2>
                 <ul style="list-style: none;">
@@ -33,6 +34,7 @@
                     <li>CSE 4340: Statistics for Engineers</li>
                 </ul>
             </article>
+
             <article class="schedule" style="display: inline-block;">
                 <h2>Regular Hours</h2>
                 <ul style="list-style: none;">
@@ -44,8 +46,17 @@
                     <li><span class="day">Friday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
                 </ul>
             </article>
-            <section id="comments">
-                <h2>Comments</h2>
+
+            <section id="comments" style="display: block; position: relative">
+                <h2 style="position: absolute;">Comments</h2>
+                <textarea name="commentBox" rows="5" cols="50" maxlength="140" spellcheck=true style="resize: none; margin-top: 50px;">
+                </textarea>
+                <button name="addComment" style="display: block;">Add Comment</button>
+                <div id="commentList" style="width: 150px; height: 150px; overflow: scroll;">
+                    The Altshuler Learning Enhancement Center (A-LEC) at Southern Methodist University is an extraordinarily useful service where students of the university can go on a drop-in basis to seek tutoring for any subject. Unfortunately, the service is not user-friendly; students have to physically go to the A-LEC to see if a tutor is available for a subject. If there are no available tutors, the students have to wait at the center potentially for hours. Even if a student knows a particular tutor’s schedule, there is no guarantee that the tutor will be present or available when the student arrives. Additionally, students, tutors, and parents have no easy way to view a record of a student’s meetings with a tutor.
+
+Our product, Mustang Tutors, addresses all of these issues and allows the A-LEC to more adequately utilize its potential. Each tutor will have a profile with all of his/her relevant information. Tutors will be able to check-in, providing an accurate account of their availability. Students will be able to search for available tutors who can tutor them for a class, and students can rate and review tutors who have helped them, providing the A-LEC with a form of quality control. Mustang Tutors will revolutionize the way that SMU students get help in their classes from the A-LEC.
+                </div>
             </section>
         </div>
     </main>
