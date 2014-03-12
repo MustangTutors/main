@@ -558,11 +558,33 @@ section#student_history {
 }
 
 #share {
-    width: 20px;
+    width: 25px;
     position: absolute;
-    right: 20px;
-    top: 10px;
+    right: 4%;
+    top: 3%;
     cursor: pointer;
+    background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CEC2B3;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+#share:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#E2D5C5), to(#FCF3EA));
+}
+
+#share_message {
+    display: none;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    right: 3.5%;
+    top: 3%;
+    margin-top: 48px;
 }
 
 /* Styling for Share window. */
@@ -628,10 +650,10 @@ div.center {
 .meeting {
     padding: 10px;
     margin: 0px 30px 20px 30px;
-    background-color: #f2e4d4;
+    background-color: #F2E4D4;
     border-width: 1.6px;
     border-style: solid;
-    border-color: #b0a69b;
+    border-color: #B0A69B;
 }
 
 .date_time {
@@ -650,7 +672,7 @@ div.center {
     display: block;
     margin: 15px 12px 4px 12px;
     padding: 7px;
-    background-color: #fff6eb;
+    background-color: #FFF6EB;
     border-radius: 3px;
 }
 
