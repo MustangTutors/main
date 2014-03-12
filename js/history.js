@@ -56,6 +56,18 @@ $(document).ready(function(){
 			$('#share_alert').css('display', 'block');
 		}
 	});
+
+	// Add "Add" message when user hovers over add icon
+	$(document).on('mouseover', '.add', function(){
+		// Make "Add" message appear
+		$('#add_message').css('display', 'inline-block');
+	});
+
+	// Remove "add" message
+	$(document).on('mouseout', '.add', function(){
+		// Make "Add" message disappear
+		$('#add_message').hide();
+	});
 });
 
 // Toggle view of history
