@@ -15,91 +15,157 @@
     <header></header>
 
     <main>
-     	<section id="searchTutors">
-            <h2>Search</h2>
-            <form id="searchTutorsForm">
-                <input type="text" name="tutorName" id="search-tutorName" placeholder="Tutor Name">
-                <hr>
-                <select name="subject" id="search-subject">
-                    <option disabled selected>Subject</option>
-                    <option>Any</option>
-                </select>
-                <input type="text" name="courseNumber" id="search-courseNumber" pattern="" placeholder="Course Number">
-                <input type="text" name="courseName" id="search-courseName" placeholder="Course Name">
-                <input type="checkbox" name="available" id="search-available" value="1">
-                <label for="search-available">Available Only</label>
-                <input type="submit" value="Go!">
-            </form>
-        </section>
+        <div id="tutorSearchPage">
+         	<section id="searchTutors">
+                <h2>Search</h2>
+                <form id="searchTutorsForm">
+                    <input type="text" name="tutorName" id="search-tutorName" placeholder="Tutor Name">
+                    <hr>
+                    <select name="subject" id="search-subject">
+                        <option disabled selected>Subject</option>
+                        <option>Any</option>
+                    </select>
+                    <input type="text" name="courseNumber" id="search-courseNumber" pattern="" placeholder="Course Number">
+                    <input type="text" name="courseName" id="search-courseName" placeholder="Course Name">
+                    <input type="checkbox" name="available" id="search-available" value="1">
+                    <label for="search-available">Tutor is Available</label>
+                    <input type="submit" value="Go!" class="button">
+                </form>
+            </section>
 
-        <section id="tutors">
-            <h2>Tutors</h2>
-            <article class="tutorBox">
-                <div class="tutorBox-small">
-                    <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
-                    <span class="tutorName">Story Zanetti</span>
-                    <img src="img/available.png" alt="Availability">
-                </div>
-                <div class="tutorBox-extended">
-                    <span class="tutorName">Story Zanetti</span>
-                    <span class="availability">Available</span>
-                    <div class="rating">
-                        <span>Average of 123:</span>
-                        <div class="ratingStars">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/halfstar.png" alt="Rating Star">
+            <section id="tutors">
+                <h2>Tutors</h2>
+                <article class="tutorBox">
+                    <div class="tutorBox-small">
+                        <div class="tutorPicture">
+                            <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
+                        </div>
+                        <div class="tutorNameAvailability">
+                            <img src="img/available.png" alt="Availability">
+                            <span class="tutorName">Sfjidfaisfjo Fjidsofjsodafjof</span>
                         </div>
                     </div>
-                </div>
-            </article>
-
-            <article class="tutorBox">
-                <div class="tutorBox-small">
-                    <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
-                    <span class="tutorName">Story Zanetti</span>
-                    <img src="img/available.png" alt="Availability">
-                </div>
-                <div class="tutorBox-extended">
-                    <span class="tutorName">Story Zanetti</span>
-                    <span class="availability">Available</span>
-                    <div class="rating">
-                        <span>Average of 123:</span>
-                        <div class="ratingStars">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/halfstar.png" alt="Rating Star">
+                    <div class="tutorBox-extended">
+                        <span class="tutorName">Story Zanetti</span>
+                        <span class="availability">Available</span>
+                        <div class="rating">
+                            <span>Average of 123:</span>
+                            <div class="ratingStars">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/halfstar.png" alt="Rating Star">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <article class="tutorBox">
-                <div class="tutorBox-small">
-                    <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
-                    <span class="tutorName">Story Zanetti</span>
-                    <img src="img/busy.png" alt="Availability">
-                </div>
-                <div class="tutorBox-extended">
-                    <span class="tutorName">Story Zanetti</span>
-                    <span class="availability">Available</span>
-                    <div class="rating">
-                        <span>Average of 123:</span>
-                        <div class="ratingStars">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/star.png" alt="Rating Star">
-                            <img src="img/halfstar.png" alt="Rating Star">
+                <article class="tutorBox">
+                    <div class="tutorBox-small">
+                        <div class="tutorPicture">
+                            <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
+                        </div>
+                        <div class="tutorNameAvailability">
+                            <img src="img/available.png" alt="Availability">
+                            <span class="tutorName">Story Zanetti</span>
                         </div>
                     </div>
-                </div>
-            </article>
-        </section>
+                    <div class="tutorBox-extended">
+                        <span class="tutorName">Story Zanetti</span>
+                        <span class="availability">Available</span>
+                        <div class="rating">
+                            <span>Average of 123:</span>
+                            <div class="ratingStars">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/halfstar.png" alt="Rating Star">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tutorBox">
+                    <div class="tutorBox-small">
+                        <div class="tutorPicture">
+                            <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
+                        </div>
+                        <div class="tutorNameAvailability">
+                            <img src="img/available.png" alt="Availability">
+                            <span class="tutorName">Story Zanetti</span>
+                        </div>
+                    </div>
+                    <div class="tutorBox-extended">
+                        <span class="tutorName">Story Zanetti</span>
+                        <span class="availability">Available</span>
+                        <div class="rating">
+                            <span>Average of 123:</span>
+                            <div class="ratingStars">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/halfstar.png" alt="Rating Star">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tutorBox">
+                    <div class="tutorBox-small">
+                        <div class="tutorPicture">
+                            <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
+                        </div>
+                        <div class="tutorNameAvailability">
+                            <img src="img/busy.png" alt="Availability">
+                            <span class="tutorName">Story Zanetti</span>
+                        </div>
+                    </div>
+                    <div class="tutorBox-extended">
+                        <span class="tutorName">Story Zanetti</span>
+                        <span class="availability">Available</span>
+                        <div class="rating">
+                            <span>Average of 123:</span>
+                            <div class="ratingStars">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/halfstar.png" alt="Rating Star">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tutorBox">
+                    <div class="tutorBox-small">
+                        <div class="tutorPicture">
+                            <img src="img/tutors/tutor.jpg" alt="Tutor's Headshot">
+                        </div>
+                        <div class="tutorNameAvailability">
+                            <img src="img/busy.png" alt="Availability">
+                            <span class="tutorName">Story Zanetti</span>
+                        </div>
+                    </div>
+                    <div class="tutorBox-extended">
+                        <span class="tutorName">Story Zanetti</span>
+                        <span class="availability">Available</span>
+                        <div class="rating">
+                            <span>Average of 123:</span>
+                            <div class="ratingStars">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/star.png" alt="Rating Star">
+                                <img src="img/halfstar.png" alt="Rating Star">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
     </main>
 
     <footer></footer>
