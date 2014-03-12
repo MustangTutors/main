@@ -13,10 +13,6 @@ h2 {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.left {
-    text-align: left;
-}
-
 .heading {
     font-size: 2em;
     color: #192942;
@@ -364,11 +360,6 @@ footer li a:hover {
 
 /* Start search page styling. */
 
-main#search {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
 #tutorSearchPage {
     display: table;
     padding: 0px 20px;
@@ -506,7 +497,7 @@ section#tutors h2 {
     text-align: right;
 }
 
-.tutorBox-extended .tutorName, .tutorNamePending .tutorName {
+.tutorBox-extended .tutorName {
     font-size: 2em;
 }
 
@@ -595,94 +586,6 @@ section#tutors h2 {
 }
 
 /* End registration page styling. */
-
-
-/* Begin applications page styling. */
-
-#applicationsMain > h2 {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.tutorPictureTranscript {
-    float: left;
-    padding: 7px 0px;
-    margin: 13px 0px 4px 0px;
-}
-
-.tutorNamePending {
-    clear: both;
-    padding-left: 10px;
-}
-
-div.reviewCourses, div.reviewHours {
-    display: inline-block;
-    height: 200px;
-    width: 300px;
-    float: left;
-    margin: 15px 5px 4px 15px;
-}
-
-div.reviewCourses ul, div.reviewHours ol {
-    list-style: none;
-    padding: 0px 0px 0px 15px;
-}
-
-div.reviewCourses li, div.reviewHours li {
-    padding-bottom: 3px;
-}
-
-div.reviewCourses span.listLabel {
-    width: 105px;
-    vertical-align: top;
-}
-
-span.listLabel {
-    display: inline-block;
-    width: 110px;
-    font-weight: bold;
-}
-
-span.listContent {
-    display: inline-block;
-    width: 180px;
-}
-
-.viewTranscript.button {
-    width: 110px;
-    text-align: center;
-}
-
-.reviewButtons {
-    float: right;
-    margin-top: 5px;
-}
-
-.reviewButtons .button {
-    font-weight: bold;
-}
-
-.deny.button {
-    background: -webkit-gradient(linear, left top, left bottom, from(#E6B3BC), to(#D27283));
-    border-color: #83192C;
-}
-
-.deny.button:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#D27283), to(#E6B3BC));
-    color: #444;
-}
-
-.approve.button {
-    background: -webkit-gradient(linear, left top, left bottom, from(#B2DDB1), to(#95CE94));
-    border-color: #498D47;
-}
-
-.approve.button:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#95CE94), to(#B2DDB1));
-    color: #444;
-}
-
-/* End applications page styling. */
 
 
 /* Styling for History. */
@@ -887,27 +790,9 @@ section#tutor_history {
     color: #CCC;
 }
 
-.subtract {
-    display: none;
-    background: -webkit-gradient(linear, left top, left bottom, from(#B57580), to(#83192C));
-    border-color: #83192C;
-}
-
-.subtract:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#83192C), to(#B57580));
-    color: #CCC;
-}
-
 #add_message {
-    display: none;
     top: 10px;
     right: -35px;
-}
-
-#cancel_message {
-    display: none;
-    top: 10px;
-    right: -50px;
 }
 
 /* End styling for Tutor History View. */
