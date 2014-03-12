@@ -630,3 +630,11 @@ section#tutor_history {
 }
 
 /* End styling for Tutor History View. */
+
+/* Styling for About Us */
+
+img[src="tutoring.png"] {
+    float: right;
+}
+
+/* End syling for About Us*/
