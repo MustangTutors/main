@@ -689,6 +689,7 @@ span.listContent {
     border-width: 1.6px;
     border-style: solid;
     border-color: #B0A69B;
+    position: relative;
 }
 
 article.meeting:first-of-type {
@@ -744,13 +745,16 @@ section#student_history {
     background: -webkit-gradient(linear, left top, left bottom, from(#E2D5C5), to(#FCF3EA));
 }
 
-#share_message {
+.hover {
     display: none;
     background-color: rgba(0,0,0,0.7);
     border-radius: 5px;
     color: white;
     padding: 5px;
     position: absolute;
+}
+
+#share_message {
     right: 3.5%;
     top: 3%;
     margin-top: 48px;
@@ -843,6 +847,37 @@ section#tutor_history {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#3092B0), to(#22667B));
     background-image: -webkit-linear-gradient(top, #3092B0, #22667B);
     background-image: linear-gradient(to  bottom, from(#3092B0), to(#22667B));
+}
+
+.add {
+    display: inline-block;
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.7em;
+    color: white;
+    top: 13.5%;
+    right: 1.5%;
+    padding: 0px 9px 2px 9px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #192942;
+    border-radius: 50px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#969CA9), to(#192942));
+    cursor: pointer;
+}
+
+.add_meeting {
+    position: relative;
+}
+
+.add:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#192942), to(#969CA9));
+    color: #CCC;
+}
+
+#add_message {
+    top: 10px;
+    right: -35px;
 }
 
 /* End styling for Tutor History View. */
