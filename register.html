@@ -15,7 +15,39 @@
     <header></header>
 
     <main>
-     	
+     	<section id="registration">
+            <h2 class="heading">Registration</h2>
+            <form id="registrationForm">
+                <span class="error"></span>
+                <div>
+                    <label for="registration_first">First Name: *</label>
+                    <input type="text" name="fName" id="registration_first" placeholder="Enter first name" required>
+                </div>
+                <div>
+                    <label for="registration_last">Last Name: *</label>
+                    <input type="text" name="lName" id="registration_last" placeholder="Enter last name" required>
+                </div>
+                <div>
+                    <label for="registration_email">Email: *</label>
+                    <input type="email" name="email" id="registration_email" placeholder="Enter email" required>
+                </div>
+                <div>
+                    <label for="registration_id">SMU ID: *</label>
+                    <input type="text" name="id" id="registration_id" placeholder="Enter SMU ID" pattern="[0-9]{8}" title="Must be an 8 digit number." required>
+                </div>
+                <div>
+                    <label for="registration_password">Password: *</label>
+                    <input type="password" name="password" id="registration_password" placeholder="Enter password" pattern=".{8,}" title="At least 8 characters" required>
+                </div>
+                <div>
+                    <label for="registration_confirm">Confirm Password: *</label>
+                    <input type="password" name="confirm_password" id="registration_confirm" placeholder="Confirm password" pattern=".{8,}" required>
+                </div>
+                <div id="register">
+                    <input type="submit" value="Register!" class="button">
+                </div>
+            </form>
+        </section>
     </main>
 
     <footer></footer>
