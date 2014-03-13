@@ -111,7 +111,7 @@ function toggleView() {
 }
 
 function showAddMeetingWindow(){
-	$('#tutor_history article.add_meeting').animate({height: "500px"}, 400, function(){
+	$('#tutor_history article.add_meeting').animate({height: "350px"}, 400, function(){
 		$('#tutor_history #meeting_form').show();
 	});
 	

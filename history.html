@@ -69,15 +69,29 @@
                 <div id="meeting_form">
                     <div>
                         <label for="student_id">Student ID:</label>
-                        <input type="text" name="student_id" pattern="" placeholder="Student ID">
+                        <input type="text" name="student_id" pattern="" placeholder="Enter student ID">
                     </div>
-
-                    <label for="course_number">Course Tutored:</label>
-                    <select name="subject" id="search-subject">
-                        <option disabled selected>Subject</option>
-                        <option>Any</option>
-                    </select>
-                    <input type="text" name="course_number" pattern="" placeholder="Course Number">
+                    <div>
+                        <label for="course_number">Course:</label>
+                        <select name="subject" id="search-subject">
+                            <option disabled selected>Subject</option>
+                            <option>CSE</option>
+                            <option>DISC</option>
+                            <option>MATH</option>
+                        </select>
+                        <input type="text" name="course_number" pattern="" placeholder="Enter course number">
+                    </div>
+                    <div>
+                        <label>Date:</label>
+                    </div>
+                    <div>
+                        <label>Time:</label>
+                    </div>
+                    <hr>
+                    <div id="summary">
+                        <label for="summary">Comments (1-3 sentences):</label>
+                        <input type="text" name="summary" pattern="" placeholder="">
+                    </div>
                 </div>
             </article>
 
