@@ -1,47 +1,33 @@
 $(document).ready(function() {
-    $("header").load("header.html");
+    $("header").load("header.html", setToggleColor);
     $("footer").load("footer.html");
 
-    setToggleColor();
-
     // Change font color on toggle switch
-    $(document).on('change', 'label.toggle input[type="checkbox"]', function(){
-        var which = $(this).prop('checked');
-
-        if(which){
-            $(this).siblings('span').children('span.false').css('color', '#AAA');
-            $(this).siblings('span').children('span.true').css('color', 'white');
-        }
-        else {
-            $(this).siblings('span').children('span.false').css('color', 'white');
-            $(this).siblings('span').children('span.true').css('color', '#AAA');
-        }
-    });
+    $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
 });
 
-// Set the color of the toggles when the page loads
+// Set the color of the toggle
 function setToggleColor() {
-    var hist_view = $('label#historyView input[type="checkbox"]').prop('checked');
+    var which = $(this).prop('checked');
 
-    if(hist_view){
-        $('label#history_view span.true').css('color','white');
-        $('label#history_view span.false').css('color','#AAA');
+    // If the toggle is 'checked' (slider is on the right)
+    if(which){
+        // Set the colors
+        $(this).siblings('span').children('span.false').css('color', '#AAA');
+        $(this).siblings('span').children('span.true').css('color', 'white');
     }
-    else{
-        $('label#history_view span.true').css('color','#AAA');
-        $('label#history_view span.false').css('color','white');
-    }
-
-    // This part doesn't work. I don't know why.
-    var tutor_in = $('#toggleButton label input[type="checkbox"]').prop('checked');
-
-    if(tutor_in){
-        
-        $('#toggleButton label span.true').css('color','white');
-        $('#toggleButton label span.false').css('color','#AAA');
-    }
-    else{
-        $('#toggleButton label span.true').css('color','#AAA');
-        $('#toggleButton label span.false').css('color','white');
+    // If the toggle is 'unchecked' (slider is on the left)
+    else {
+        // If a toggle was clicked, use 'this', otherwise target all the toggles.
+        var toggle;
+        if (which === undefined) {
+            toggle = $('label.toggle input[type="checkbox"]');
+        }
+        else {
+            toggle = $(this);
+        }
+        // Set the colors
+        toggle.siblings('span').children('span.false').css('color', 'white');
+        toggle.siblings('span').children('span.true').css('color', '#AAA');
     }
 }
