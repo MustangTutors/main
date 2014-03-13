@@ -212,8 +212,8 @@ section#login {
     margin-left: 5px;
 }
 
-#welcomeMessage #welcome:hover .dropdown {
-    display: block;
+#welcomeMessage #welcome .dropdown {
+    display: none;
 }
 
 #welcomeMessage .account {
@@ -222,7 +222,7 @@ section#login {
     width: 200px;
 }
 
-#welcomeMessage #welcome:hover .dropdown a {
+#welcomeMessage #welcome .dropdown a {
     display: block;
     width: 192px;
 }

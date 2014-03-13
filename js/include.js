@@ -4,6 +4,18 @@ $(document).ready(function() {
 
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
+
+    // If settings icon is clicked, show dropdown
+    $(document).on('click', '#welcomeMessage #welcome', function() {
+        var drop = $('#welcomeMessage #welcome .dropdown');
+
+        if(drop.css('display') === "block"){
+            drop.hide();
+        }
+        else {
+            drop.show();
+        }
+    });
 });
 
 // Set the color of the toggle
