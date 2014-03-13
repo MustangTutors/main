@@ -207,13 +207,22 @@ section#login {
     list-style: none;
 }
 
-#welcomeMessage img {
+#welcomeMessage img[src="img/gear.png"] {
     width: 20px;
     margin-left: 5px;
 }
 
+#welcomeMessage img[src="img/gear_arrow.png"] {
+    position: absolute;
+    top: 12px;
+    right: -10px;
+    width: 7px;
+}
+
+
 #welcomeMessage #welcome .dropdown {
     display: none;
+    margin-right: -10px;
 }
 
 #welcomeMessage .account {
@@ -224,7 +233,12 @@ section#login {
 
 #welcomeMessage #welcome .dropdown a {
     display: block;
-    width: 192px;
+    width: 192px;s
+}
+
+#settings_message {
+    top: 30px;
+    right: -20px;
 }
 
 /* End styling of welcome section. */
