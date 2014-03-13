@@ -7,44 +7,33 @@ $(document).ready(function() {
 
     // If settings icon is clicked, show dropdown
     $(document).on('click', '#welcomeMessage #welcome', function() {
+        $('#settings_message').hide();
+
         var drop = $('#welcomeMessage #welcome .dropdown');
 
         if(drop.css('display') === "block"){
-            drop.hide();
-            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').animate({  borderSpacing: 0 }, {
-                step: function(now,fx) {
-                  $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-                },
-                duration:'fast'
-            });
+            drop.slideUp();
+            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(0deg');
+            $('#settings_message').css('display', 'inline-block');
         }
         else {
-            drop.show();
-            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').animate({  borderSpacing: -90 }, {
-                step: function(now,fx) {
-                  $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-                },
-                duration:'fast'
-            });
+            drop.slideDown();
+            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(-90deg');
         }
     });
 
     // Add "Settings" message when user hovers over settings icon and change settings icon
     $(document).on('mouseover', '#settings', function(){
         // Make "Settings" message appear
-        $('#settings_message').css('display', 'inline-block');
-
-        // Change settings icon to gray
-        $('#settings').attr('src', 'img/gear.png');
+        if($('#welcomeMessage #welcome .dropdown').css('display') !== "block"){
+            $('#settings_message').css('display', 'inline-block');
+        }
     });
 
     // Remove "settings" message and change settings icon back
     $(document).on('mouseout', '#settings', function(){
         // Make "Settings" message disappear
         $('#settings_message').hide();
-
-        // Change settings icon to black
-        $('#settings').attr('src', 'img/gear.png');
     });
 });
 

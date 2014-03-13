@@ -214,6 +214,7 @@ section#login {
 
 #welcomeMessage img[src="img/gear_arrow.png"] {
     position: absolute;
+    transition: -webkit-transform 0.5s;
     top: 12px;
     right: -10px;
     width: 7px;
