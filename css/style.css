@@ -915,7 +915,78 @@ section#tutor_history {
 /* Styling for About Us */
 
 img[src="tutoring.png"] {
-    float: right;
+    float: left;
+    padding-right: 10px;
+    padding-bottom: 5px;
 }
 
 /* End syling for About Us*/
+
+/* Styling for Contact Us */
+
+.information {
+    text-align: center;
+}
+
+/* End styling for Contact Us */
+
+/* Styling for Tutor Profile */
+
+section#profileBox > img {
+    max-width: 140px;
+    max-height: 160px;
+    margin-top: 10px;
+}
+
+div#tutorInformation {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+section#rating, section#rating h2, 
+section#rating span h3 span, .schedule {
+    display: inline-block;
+}
+
+.schedule ul {
+    list-style: none;
+}
+
+section#comments {
+    display: block;
+    position: relative;
+}
+
+section#comments h2 {
+    position: absolute;
+}
+
+textarea {
+    resize: none;
+    margin-top: 50px;
+}
+
+input[name="addComment"] {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 325px;
+}
+
+div#commentList {
+    width: 425px;
+    height: 200px;
+    overflow: scroll;
+    background-color: white;
+}
+
+div#commentList ul {
+    list-style: none;
+    display: inline;
+}
+
+div#commentList ul li:nth-child(odd) {
+    background-color: #FEECDA;
+}
+
+/* End styling for Tutor Profile */
+
