@@ -615,6 +615,15 @@ section#tutors h2 {
     padding-left: 10px;
 }
 
+img.applicationStatus {
+    visibility: hidden;
+    height: 35px;
+    float: right;
+    margin-right: 10px;
+    transform:rotate(-5deg);
+    -webkit-transform:rotate(-5deg);
+}
+
 div.reviewCourses, div.reviewHours {
     display: inline-block;
     height: 200px;
