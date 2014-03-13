@@ -82,10 +82,12 @@ $(document).ready(function(){
 		if($('.add_meeting .subtract.add').css('display') === "none"){
 			$('#add_icon').hide();
 			$('#subtract_icon').css('display', 'inline-block');
+			showAddMeetingWindow();
 		}
 		else {
 			$('#subtract_icon').hide();
 			$('#add_icon').css('display', 'inline-block');
+			hideAddMeetingWindow();
 		}
 	});
 });
@@ -106,4 +108,16 @@ function toggleView() {
 			$('#tutor_history').fadeIn(100);
 		});	
 	}
+}
+
+function showAddMeetingWindow(){
+	$('#tutor_history article.add_meeting').animate({height: "500px"}, 400, function(){
+		$('#tutor_history #meeting_form').show();
+	});
+	
+}
+
+function hideAddMeetingWindow(){
+	$('#tutor_history #meeting_form').hide();
+	$('#tutor_history article.add_meeting').animate({height: "40px"}, 400);
 }

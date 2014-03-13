@@ -890,8 +890,8 @@ section#tutor_history {
     font-weight: bold;
     font-size: 1.7em;
     color: white;
-    top: 13.5%;
-    right: 1.5%;
+    top: 7px;
+    right: 7px;
     padding: 0px 9px 2px 9px;
     border-style: solid;
     border-width: 1px;
@@ -903,6 +903,7 @@ section#tutor_history {
 
 .add_meeting {
     position: relative;
+    height: 30px;
 }
 
 .add:hover {
@@ -932,6 +933,14 @@ section#tutor_history {
     top: 10px;
     right: -50px;
 }
+
+/* Styling for new meeting. */
+
+#meeting_form {
+    display: none;
+}
+
+/* End styling for new meeting. */
 
 /* End styling for Tutor History View. */
 
