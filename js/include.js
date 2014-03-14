@@ -19,7 +19,13 @@ $(document).ready(function() {
         else {
             drop.slideDown();
             $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(-90deg');
+            $('#settings').focus();
         }
+    });
+
+    $(document).on('blur', '#settings', function() {
+        $('#welcomeMessage #welcome .dropdown').slideUp();
+        $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(0deg');
     });
 
     // Add "Settings" message when user hovers over settings icon and change settings icon
