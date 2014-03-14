@@ -111,13 +111,12 @@ function toggleView() {
 }
 
 function showAddMeetingWindow(){
-	$('#tutor_history article.add_meeting').animate({height: "350px"}, 400, function(){
-		$('#tutor_history #meeting_form').show();
-	});
+	$('#tutor_history #meeting_form').slideDown();
+	$('#tutor_history article.add_meeting').animate({height: "350px"}, 400);
 	
 }
 
 function hideAddMeetingWindow(){
-	$('#tutor_history #meeting_form').hide();
+	$('#tutor_history #meeting_form').slideUp();
 	$('#tutor_history article.add_meeting').animate({height: "40px"}, 400);
 }

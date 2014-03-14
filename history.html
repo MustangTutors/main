@@ -71,7 +71,7 @@
                         <label for="student_id">Student ID:</label>
                         <input type="text" name="student_id" pattern="" placeholder="Enter student ID">
                     </div>
-                    <div>
+                    <div id="form_info">
                         <label for="course_number">Course:</label>
                         <select name="subject" id="search-subject">
                             <option disabled selected>Subject</option>
@@ -90,7 +90,11 @@
                     <hr>
                     <div id="summary">
                         <label for="summary">Comments (1-3 sentences):</label>
-                        <input type="text" name="summary" pattern="" placeholder="">
+                        <textarea name="summary" rows="10" cols="50"></textarea>
+                    </div>
+                    <div class="center">
+                        <a href="#" class="button" id="rest_meeting">Reset</a>
+                        <input type="submit" class="button send" value="Add">
                     </div>
                 </div>
             </article>
@@ -131,7 +135,7 @@
 				<span id="share_alert" class="error">To add more emails, send and share again.</span>
 				<div class="center">
                     <a href="#" class="button close" id="share_cancel">Cancel</a>
-                    <input type="submit" class="button" id="share_send" value="Send!">
+                    <input type="submit" class="button send" value="Send!">
                 </div>
 			</div>
 		</section>

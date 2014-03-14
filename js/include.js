@@ -28,12 +28,14 @@ $(document).ready(function() {
         if($('#welcomeMessage #welcome .dropdown').css('display') !== "block"){
             $('#settings_message').css('display', 'inline-block');
         }
+        $('#settings .welcome').css('color', '#E2E0D7');
     });
 
     // Remove "settings" message and change settings icon back
     $(document).on('mouseout', '#settings', function(){
         // Make "Settings" message disappear
         $('#settings_message').hide();
+        $('#settings .welcome').css('color', '#D7D4C8');
     });
 });
 
