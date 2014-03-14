@@ -12,8 +12,7 @@ $(document).ready(function() {
         var drop = $('#welcomeMessage #welcome .dropdown');
 
         if(drop.css('display') === "block"){
-            drop.slideUp();
-            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(0deg');
+            $('#settings').blur();
             $('#settings_message').css('display', 'inline-block');
         }
         else {
@@ -23,6 +22,7 @@ $(document).ready(function() {
         }
     });
 
+    // If you click away from the settings, the dropdown hides.
     $(document).on('blur', '#settings', function() {
         $('#welcomeMessage #welcome .dropdown').slideUp();
         $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(0deg');
