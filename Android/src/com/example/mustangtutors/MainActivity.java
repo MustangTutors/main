@@ -115,6 +115,8 @@ public class MainActivity extends Activity {
     		Intent intent = new Intent(this, LoginActivity.class);
     		startActivity(intent);
     	}
+    	
+    	// Highlight the item in the drawer, then close the drawer.
     	mDrawerList.setItemChecked(position, true);
     	mDrawerLayout.closeDrawer(mDrawerList);
     }
