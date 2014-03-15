@@ -1,12 +1,4 @@
 $(document).ready(function() {
-    // // Temporary stuff.
-    // $(".tutorBox .ratingStars").eq(0).html(convertToStars(4.3));
-    // $(".tutorBox .ratingStars").eq(1).html(convertToStars(5));
-    // $(".tutorBox .ratingStars").eq(2).html(convertToStars(2.7));
-    // $(".tutorBox .ratingStars").eq(3).html(convertToStars(1));
-    // $(".tutorBox .ratingStars").eq(4).html(convertToStars(2.5));
-    // $(".tutorBox .ratingStars").eq(5).html(convertToStars(2));
-
     // When you hover in and out of a tutor's box, it shows/hides more info.
     $(document).on("mouseenter", ".tutorBox-small", function() {
         $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
