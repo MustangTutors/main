@@ -22,6 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.mustangtutors.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.example.mustangtutors.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mustangtutors.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ package com.example.mustangtutors;
 
 public final class R {
     public static final class array {
-        public static final int planets_array=0x7f060000;
+        public static final int logged_out_menu=0x7f060000;
     }
     public static final class attr {
     }
@@ -26,48 +26,60 @@ public final class R {
     public static final class drawable {
         public static final int action_search=0x7f020000;
         public static final int drawer_shadow=0x7f020001;
-        public static final int earth=0x7f020002;
-        public static final int ic_drawer=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int jupiter=0x7f020005;
-        public static final int mars=0x7f020006;
-        public static final int mercury=0x7f020007;
-        public static final int neptune=0x7f020008;
-        public static final int saturn=0x7f020009;
-        public static final int uranus=0x7f02000a;
-        public static final int venus=0x7f02000b;
+        public static final int ic_drawer=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int action_websearch=0x7f090004;
-        public static final int content_frame=0x7f090001;
-        public static final int drawer_layout=0x7f090000;
-        public static final int image=0x7f090003;
-        public static final int left_drawer=0x7f090002;
+        public static final int action_forgot_password=0x7f09000a;
+        public static final int content_frame=0x7f090008;
+        public static final int drawer_layout=0x7f090007;
+        public static final int email=0x7f090003;
+        public static final int left_drawer=0x7f090009;
+        public static final int login=0x7f090005;
+        public static final int login_form=0x7f090002;
+        public static final int login_status=0x7f090000;
+        public static final int login_status_message=0x7f090001;
+        public static final int password=0x7f090004;
+        public static final int sign_in_button=0x7f090006;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int drawer_list_item=0x7f030001;
-        public static final int fragment_planet=0x7f030002;
+        public static final int activity_login=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int drawer_list_item=0x7f030002;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int login=0x7f080000;
+        public static final int main=0x7f080001;
     }
     public static final class string {
-        public static final int action_websearch=0x7f050003;
+        public static final int action_forgot_password=0x7f050008;
+        public static final int action_sign_in_register=0x7f050006;
+        public static final int action_sign_in_short=0x7f050007;
         public static final int app_name=0x7f050000;
-        public static final int app_not_available=0x7f050004;
         public static final int drawer_close=0x7f050002;
         public static final int drawer_open=0x7f050001;
+        public static final int error_field_required=0x7f05000d;
+        public static final int error_incorrect_password=0x7f05000c;
+        public static final int error_invalid_email=0x7f05000a;
+        public static final int error_invalid_password=0x7f05000b;
+        public static final int login_progress_signing_in=0x7f050009;
+        /**  Strings related to login 
+         */
+        public static final int prompt_email=0x7f050004;
+        public static final int prompt_password=0x7f050005;
+        public static final int title_activity_login=0x7f050003;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -86,5 +98,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int LoginFormContainer=0x7f070002;
     }
 }
