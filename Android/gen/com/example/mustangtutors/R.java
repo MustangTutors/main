@@ -9,8 +9,10 @@ package com.example.mustangtutors;
 
 public final class R {
     public static final class array {
-        public static final int logged_in_menu=0x7f060001;
+        public static final int logged_in_menu=0x7f060002;
+        public static final int logged_in_menu_images=0x7f060003;
         public static final int logged_out_menu=0x7f060000;
+        public static final int logged_out_menu_images=0x7f060001;
     }
     public static final class attr {
     }
@@ -37,6 +39,8 @@ public final class R {
     }
     public static final class id {
         public static final int content_frame=0x7f090008;
+        public static final int drawer_item_icon=0x7f09000a;
+        public static final int drawer_item_text=0x7f09000b;
         public static final int drawer_layout=0x7f090007;
         public static final int left_drawer=0x7f090009;
         public static final int login=0x7f090005;
