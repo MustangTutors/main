@@ -31,20 +31,28 @@ $(document).ready(function(){
 	});
 
 	// When cancel is clicked on share window
-	$(document).on('click', '#share_cancel', function(){
-		// Hide share window
-		$('#share_window').hide();
+	$(document).on('click', '#share_cancel', closeAndClearShare);
 
-		// Hide show alert
-		$('#share_alert').hide();
+    // When send is clicked on share window
+    $(document).on('click', '#share_send', function(){
+        var values = false;
 
-		// Clear all email boxes
-		$('#share_window #share_form .share_email_holder div.share_email').remove();
+        for(var i = 0; i < $('.share_email input[type="email"]').length; i++){
+            if($('.share_email input[type="email"]').eq(i).val() !== ""){
+                values = true;
+            }
+        }
 
-		// Create new one
-		var new_email = $('<div class="share_email"><label for="email">Email:</label><input type="email" name="email" placeholder="Enter an email"></div>');
-        $('#share_window #share_form .share_email_holder').append(new_email);
-	});
+        if(values) {
+            // Create JSON with all emails
+            createEmailJSON();
+
+            // Close and clear share window
+            closeAndClearShare();
+        } else {
+            alert("Please enter an email before continuing.");
+        }
+    });
 
 	// Add new email box if clicked or tabbed into
 	$(document).on('focus', '#share_window #share_form .share_email_holder div.share_email:last-of-type input[type="email"]', function(){
@@ -90,6 +98,50 @@ $(document).ready(function(){
 			hideAddMeetingWindow();
 		}
 	});
+
+	// Parse JSON for student meetings
+    $.ajax({
+        url: "js/student_history.json",
+        success: function(json) {
+            json = json.meetings;
+            for(var i = 0; i < json.length; i++) {
+                // Assign json values
+                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                var contributor = "Tutored by: " + json[i].first_name + " " + json[i].last_name;
+                var date = json[i].day;
+                var time = json[i].start_time + " to " + json[i].end_time;
+                var summary = json[i].summary;
+
+                // Create and append new node with json information
+                var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                					'<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                					'<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+                $('#student_history').append(newArticle);
+            }
+        }
+    });
+
+    // Parse JSON for student meetings
+    $.ajax({
+        url: "js/tutor_history.json",
+        success: function(json) {
+            json = json.meetings;
+            for(var i = 0; i < json.length; i++) {
+                // Assign json values
+                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                var contributor = "Student tutored: " + json[i].first_name + " " + json[i].last_name;
+                var date = json[i].day;
+                var time = json[i].start_time + " to " + json[i].end_time;
+                var summary = json[i].summary;
+
+                // Create and append new node with json information
+                var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                                    '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                                    '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+                $('#tutor_history').append(newArticle);
+            }
+        }
+    });
 });
 
 // Toggle view of history
@@ -110,13 +162,45 @@ function toggleView() {
 	}
 }
 
-function showAddMeetingWindow(){
+function showAddMeetingWindow() {
 	$('#tutor_history #meeting_form').slideDown();
 	$('#tutor_history article.add_meeting').animate({height: "350px"}, 400);
 	
 }
 
-function hideAddMeetingWindow(){
+function hideAddMeetingWindow() {
 	$('#tutor_history #meeting_form').slideUp();
 	$('#tutor_history article.add_meeting').animate({height: "40px"}, 400);
+}
+
+function closeAndClearShare() {
+    // Hide share window
+    $('#share_window').hide();
+
+    // Hide show alert
+    $('#share_alert').hide();
+
+    // Clear all email boxes
+    $('#share_window #share_form .share_email_holder div.share_email').remove();
+
+    // Create new one
+    var new_email = $('<div class="share_email"><label for="email">Email:</label><input type="email" name="email" placeholder="Enter an email"></div>');
+    $('#share_window #share_form .share_email_holder').append(new_email);
+}
+
+// Create a JSON of all emails to share history with
+function createEmailJSON() {
+    // Put all emails in a JSON
+    var emails = $('.share_email input[type="email"]');
+    var emailsJSON = new Object();
+    emailsJSON.emails = new Array();
+
+    for(var i = 0; i < emails.length; i++) {
+        var holder = emails.eq(i).val();
+        if(holder !== "" && emailsJSON.emails.indexOf("asdf@asdf.com") === -1) {
+            emailsJSON.emails.push(holder);
+        }
+    }
+
+    return JSON.stringify(emailsJSON);
 }

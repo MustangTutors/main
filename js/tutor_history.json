@@ -1,0 +1,27 @@
+{
+	"meetings":
+	[
+		{
+			"subject":"CSE",
+			"course_number":"4340",
+			"course_name":"Statistics for Engineers",
+			"first_name":"Jane",
+			"last_name":"Smith",
+			"day":"12/12/2012",
+			"start_time":"5:00",
+			"end_time":"6:00",
+			"summary":"Lorem ipsum dolor sit amet, consecturer adipiscing elit."
+		},
+		{
+			"subject":"CSE",
+			"course_number":"4340",
+			"course_name":"Statistics for Engineers",
+			"first_name":"Jane",
+			"last_name":"Smith",
+			"day":"12/12/2012",
+			"start_time":"5:00",
+			"end_time":"6:00",
+			"summary":"Lorem ipsum dolor sit amet, consecturer adipiscing elit."
+		}
+	]
+}
