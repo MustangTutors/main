@@ -4,24 +4,27 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
 public class LoginActivity extends Activity {
+	public final static String EXTRA_MESSAGE = "com.example.mustangtutors.MESSAGE";
+	
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -48,7 +51,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+        
 		setContentView(R.layout.activity_login);
 		setupActionBar();
 
@@ -119,6 +122,15 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
+	public boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        }
+        catch (NumberFormatException nfe) {}
+        return false;
+    }
+	
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
 	 * If there are form errors (invalid email, missing fields, etc.), the
@@ -156,7 +168,7 @@ public class LoginActivity extends Activity {
 			mSMUIDView.setError(getString(R.string.error_field_required));
 			focusView = mSMUIDView;
 			cancel = true;
-		} else if (mSMUID.length() != 8) {
+		} else if (mSMUID.length() != 8 && !isInteger(mSMUID)) {
 			mSMUIDView.setError(getString(R.string.error_invalid_smu_id));
 			focusView = mSMUIDView;
 			cancel = true;
@@ -251,6 +263,9 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+				Intent intent = new Intent();
+				intent.putExtra(EXTRA_MESSAGE, "logged in");
+				setResult(RESULT_OK, intent);
 				finish();
 			} else {
 				mPasswordView

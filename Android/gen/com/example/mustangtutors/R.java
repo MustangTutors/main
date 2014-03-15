@@ -9,6 +9,7 @@ package com.example.mustangtutors;
 
 public final class R {
     public static final class array {
+        public static final int logged_in_menu=0x7f060001;
         public static final int logged_out_menu=0x7f060000;
     }
     public static final class attr {

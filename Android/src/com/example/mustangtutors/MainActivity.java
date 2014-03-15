@@ -23,23 +23,33 @@ public class MainActivity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] drawerStrings;
-
+    
+    // Populate the navigation drawer.
+    public void fillNavDrawer(String type) {
+    	if (type.equals("logged out")) {
+        	drawerStrings = getResources().getStringArray(R.array.logged_out_menu);
+    	}
+    	else if (type.equals("logged in")) {
+        	drawerStrings = getResources().getStringArray(R.array.logged_in_menu);
+    	}
+        // set up the drawer's list view with items and click listener
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, drawerStrings));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
-        drawerStrings = getResources().getStringArray(R.array.logged_out_menu);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        fillNavDrawer("logged out");
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerStrings));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -113,13 +123,29 @@ public class MainActivity extends Activity {
     	// Start the login activity
     	if (drawerStrings[position].equals("Login as a Tutor")) {
     		Intent intent = new Intent(this, LoginActivity.class);
-    		startActivity(intent);
+    		int requestCode = 1;
+    		startActivityForResult(intent, requestCode);
+    	}
+    	
+    	// Logout
+    	if (drawerStrings[position].equals("Logout")) {
+    		fillNavDrawer("logged out");
     	}
     	
     	// Highlight the item in the drawer, then close the drawer.
     	mDrawerList.setItemChecked(position, true);
     	mDrawerLayout.closeDrawer(mDrawerList);
     }
+    
+    // Process data received from other activities (login)
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    	if (requestCode == 1) {
+    		String value = data.getStringExtra(LoginActivity.EXTRA_MESSAGE);
+    		if (value.equals("logged in")) {
+    			fillNavDrawer("logged in");
+    		}
+    	}
+	}
 
     @Override
     public void setTitle(CharSequence title) {
