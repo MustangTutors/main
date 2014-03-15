@@ -1,0 +1,52 @@
+{
+    "Tutors": [
+        {
+            "User_ID": 1,
+            "First_Name": "Story",
+            "Last_Name": "Zanetti",
+            "Available": 2,
+            "Number_Ratings": 25,
+            "Average_Rating": 4.4
+        },
+        {
+            "User_ID": 2,
+            "First_Name": "Nick",
+            "Last_Name": "Gangloff",
+            "Available": 2,
+            "Number_Ratings": 40,
+            "Average_Rating": 1
+        },
+        {
+            "User_ID": 3,
+            "First_Name": "Darius",
+            "Last_Name": "Clark",
+            "Available": 1,
+            "Number_Ratings": 13,
+            "Average_Rating": 3.7
+        },
+        {
+            "User_ID": 4,
+            "First_Name": "Tyler",
+            "Last_Name": "Jackson",
+            "Available": 1,
+            "Number_Ratings": 76,
+            "Average_Rating": 3.2
+        },
+        {
+            "User_ID": 5,
+            "First_Name": "Bre'Shard",
+            "Last_Name": "Busby",
+            "Available": 0,
+            "Number_Ratings": 1,
+            "Average_Rating": 5
+        },
+        {
+            "User_ID": 6,
+            "First_Name": "Jessica",
+            "Last_Name": "Yeh",
+            "Available": 0,
+            "Number_Ratings": 47,
+            "Average_Rating": 2.3
+        }
+    ]
+}

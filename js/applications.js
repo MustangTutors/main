@@ -11,6 +11,6 @@ $(document).ready(function() {
         var status = button.parents('.applicationReview').find('img.applicationStatus');
         status.attr('src', 'img/denied.png');
         status.css('visibility', 'visible');
-        button.parent().html('');
+        button.parent().css('visibility', 'hidden');
     });
 });

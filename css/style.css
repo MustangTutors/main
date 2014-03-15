@@ -529,7 +529,7 @@ section#tutors h2 {
     font-size: 2em;
 }
 
-.available, .busy {
+.available, .busy, .unavailable {
     border: 2px solid black;
     border-radius: 4px;
     padding: 3px;
@@ -546,13 +546,18 @@ section#tutors h2 {
 }
 
 .available {
-    border-color: #066d18;
-    background-color: #86cd93;
+    border-color: #066D18;
+    background-color: #86CD93;
 }
 
 .busy {
-    border-color: #c2c018;
-    background-color: #f7f698;
+    border-color: #C2C018;
+    background-color: #F7F698;
+}
+
+.unavailable {
+    border-color: #464646;
+    background-color: #B3B3B3;
 }
 
 .rating {
