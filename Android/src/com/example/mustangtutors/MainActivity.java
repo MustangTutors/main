@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
@@ -22,19 +21,28 @@ public class MainActivity extends Activity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private String[] drawerImages;
+    private int[] drawerImagesInt;
     private String[] drawerStrings;
     
     // Populate the navigation drawer.
     public void fillNavDrawer(String type) {
     	if (type.equals("logged out")) {
+    		drawerImages = getResources().getStringArray(R.array.logged_out_menu_images);
         	drawerStrings = getResources().getStringArray(R.array.logged_out_menu);
     	}
     	else if (type.equals("logged in")) {
+    		drawerImages = getResources().getStringArray(R.array.logged_in_menu_images);
         	drawerStrings = getResources().getStringArray(R.array.logged_in_menu);
     	}
+    	// Convert the image names to resource IDs
+    	drawerImagesInt = new int[drawerImages.length];
+    	for (int i = 0; i < drawerImages.length; i++) {
+    		drawerImagesInt[i] = getResources().getIdentifier(drawerImages[i], "drawable", getPackageName());
+    	}
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerStrings));
+    	AdapterClass customAdapter = new AdapterClass(this, R.layout.drawer_list_item, drawerImagesInt, drawerStrings);
+        mDrawerList.setAdapter(customAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
     

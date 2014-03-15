@@ -6,10 +6,21 @@
         <item>Search for Tutors</item>
         <item>Login as a Tutor</item>
     </string-array>
+    <string-array name="logged_out_menu_images">
+        <item>ic_action_search</item>
+        <item>ic_action_accounts</item>
+    </string-array>
     <string-array name="logged_in_menu">
+        <item>[Your name here]</item>
         <item>Search for Tutors</item>
         <item>Document a Student Meeting</item>
         <item>Logout</item>
+    </string-array>
+    <string-array name="logged_in_menu_images">
+        <item>ic_action_person</item>
+        <item>ic_action_search</item>
+        <item>ic_action_new_event</item>
+        <item>ic_action_secure</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
