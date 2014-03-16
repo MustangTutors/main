@@ -38,11 +38,6 @@
                     "End_Time": "12:00"
                 },
                 {
-                    "Day": "Wednesday",
-                    "Start_Time": "11:00",
-                    "End_Time": "16:00"
-                },
-                {
                     "Day": "Thursday",
                     "Start_Time": "11:00",
                     "End_Time": "16:00"
@@ -85,11 +80,6 @@
                     "Day": "Tuesday",
                     "Start_Time": "10:00",
                     "End_Time": "12:00"
-                },
-                {
-                    "Day": "Wednesday",
-                    "Start_Time": "11:00",
-                    "End_Time": "16:00"
                 },
                 {
                     "Day": "Thursday",

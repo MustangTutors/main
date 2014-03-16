@@ -676,9 +676,14 @@ span.listLabel {
     font-weight: bold;
 }
 
-span.listContent {
+ul span.listContent {
     display: inline-block;
     width: 180px;
+}
+
+ul span.listContent {
+    display: inline-block;
+    width: 170px;
 }
 
 .viewTranscript.button {
