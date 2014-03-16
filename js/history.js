@@ -150,13 +150,13 @@ function toggleView() {
 
 	// If on Student View
 	if(view) {
-		$('#tutor_history').fadeOut(100, function() {
+		$('#tutor_history').fadeOut(200, function() {
 			$('#student_history').fadeIn(100);
 		});	
 	}
 	// Else on Tutor View
 	else {
-		$('#student_history').fadeOut(100, function() {
+		$('#student_history').fadeOut(200, function() {
 			$('#tutor_history').fadeIn(100);
 		});	
 	}
