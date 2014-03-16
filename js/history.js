@@ -27,7 +27,7 @@ $(document).ready(function(){
 	// Show share window when the share icon is clicked
 	$(document).on('click', '#share', function(){
 		// Show share window
-		$('#share_window').show();
+		$('#share_window').fadeIn(200);
 	});
 
 	// When cancel is clicked on share window
@@ -175,7 +175,7 @@ function hideAddMeetingWindow() {
 
 function closeAndClearShare() {
     // Hide share window
-    $('#share_window').hide();
+    $('#share_window').fadeOut(200);
 
     // Hide show alert
     $('#share_alert').hide();
