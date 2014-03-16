@@ -1,46 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content" >
-
-  <ImageView
-    android:id="@+id/drawer_item_icon"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="10sp"
-    android:layout_marginRight="10sp"
-    android:src="@drawable/ic_launcher" />
-
-  <TextView
-    android:id="@+id/drawer_item_text"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:textColor="#fff"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:background="?android:attr/activatedBackgroundIndicator"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:paddingTop="8sp"
-    android:paddingBottom="6sp"
-    android:paddingLeft="10sp"
-    android:paddingRight="16dp" />
-
-</LinearLayout>
-
-<!-- <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_item_icon"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="10sp"
-    android:layout_marginRight="10sp"
-    android:src="@drawable/ic_launcher" />
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_item_text"
+    android:drawableLeft="#ccc"
+    android:drawablePadding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="10dp"
     android:textColor="#fff"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"/> -->
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"/>

@@ -39,8 +39,7 @@ public final class R {
     }
     public static final class id {
         public static final int content_frame=0x7f090008;
-        public static final int drawer_item_icon=0x7f09000a;
-        public static final int drawer_item_text=0x7f09000b;
+        public static final int drawer_item_text=0x7f09000a;
         public static final int drawer_layout=0x7f090007;
         public static final int left_drawer=0x7f090009;
         public static final int login=0x7f090005;

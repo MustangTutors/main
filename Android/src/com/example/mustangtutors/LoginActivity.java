@@ -24,6 +24,8 @@ import android.widget.TextView;
  */
 public class LoginActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.mustangtutors.MESSAGE";
+	public final static String NAME = "com.example.mustangtutors.NAME";
+	public final static String USER_ID = "com.example.mustangtutors.USER_ID";
 	
 	/**
 	 * A dummy authentication store containing known user names and passwords.
@@ -263,9 +265,14 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+				// Tell the MainActivity that login was successful.
+				// Also, pass it some user data.
 				Intent intent = new Intent();
 				intent.putExtra(EXTRA_MESSAGE, "logged in");
+				intent.putExtra(NAME, "Story Zanetti");
+				intent.putExtra(USER_ID, "1");
 				setResult(RESULT_OK, intent);
+				// Return to the home page.
 				finish();
 			} else {
 				mPasswordView

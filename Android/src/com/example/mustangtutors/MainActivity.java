@@ -1,7 +1,9 @@
 package com.example.mustangtutors;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -15,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
+	private SharedPreferences sharedPref;
+	private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -34,16 +38,28 @@ public class MainActivity extends Activity {
     	else if (type.equals("logged in")) {
     		drawerImages = getResources().getStringArray(R.array.logged_in_menu_images);
         	drawerStrings = getResources().getStringArray(R.array.logged_in_menu);
+        	drawerStrings[0] = sharedPref.getString("name", "[name]");
     	}
+    	
     	// Convert the image names to resource IDs
     	drawerImagesInt = new int[drawerImages.length];
     	for (int i = 0; i < drawerImages.length; i++) {
     		drawerImagesInt[i] = getResources().getIdentifier(drawerImages[i], "drawable", getPackageName());
     	}
+    	
         // set up the drawer's list view with items and click listener
     	AdapterClass customAdapter = new AdapterClass(this, R.layout.drawer_list_item, drawerImagesInt, drawerStrings);
         mDrawerList.setAdapter(customAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        
+        if (type.equals("logged out")) {
+        	// If the user is not logged in, 'search' is 1st in menu
+        	selectItem(0);
+        }
+        else if (type.equals("logged in")) {
+        	// If the user is logged in, 'search' is 2nd in menu
+        	selectItem(1);
+        }
     }
     
     @Override
@@ -51,10 +67,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Open preferences file
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+		editor = sharedPref.edit();
+		
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        fillNavDrawer("logged out");
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -85,7 +104,12 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (savedInstanceState == null) {
-            selectItem(0);
+        	if (sharedPref.contains("user_id")) {
+                fillNavDrawer("logged in");
+        	}
+        	else {
+                fillNavDrawer("logged out");
+        	}
         }
     }
 
@@ -137,7 +161,12 @@ public class MainActivity extends Activity {
     	
     	// Logout
     	if (drawerStrings[position].equals("Logout")) {
+    		// Delete user data from preferences
+    		editor.clear().commit();
+    		
+    		// Update navigation drawer
     		fillNavDrawer("logged out");
+    		return;
     	}
     	
     	// Highlight the item in the drawer, then close the drawer.
@@ -150,6 +179,12 @@ public class MainActivity extends Activity {
     	if (requestCode == 1) {
     		String value = data.getStringExtra(LoginActivity.EXTRA_MESSAGE);
     		if (value.equals("logged in")) {
+				// Write user data to the preferences file.
+				editor.putString("user_id", data.getStringExtra(LoginActivity.USER_ID));
+				editor.putString("name", data.getStringExtra(LoginActivity.NAME));
+				editor.commit();
+				
+				// Update the navigation drawer with links for a logged in user.
     			fillNavDrawer("logged in");
     		}
     	}

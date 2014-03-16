@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AdapterClass extends ArrayAdapter<String> {
@@ -28,10 +27,9 @@ public class AdapterClass extends ArrayAdapter<String> {
 	            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    View rowView = inflater.inflate(resource, parent, false);
 
-	    ImageView image = (ImageView)rowView.findViewById(R.id.drawer_item_icon);
 	    TextView text = (TextView)rowView.findViewById(R.id.drawer_item_text);
 	    text.setText(objects[position]);
-	    image.setImageResource(icons[position]);
+	    text.setCompoundDrawablesWithIntrinsicBounds(icons[position], 0, 0, 0);
 	
 	    return rowView;
 	}
