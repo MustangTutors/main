@@ -101,7 +101,7 @@ $(document).ready(function(){
 
 	// Parse JSON for student meetings
     $.ajax({
-        url: "js/student_history.json",
+        url: "json/student_history.json",
         success: function(json) {
             json = json.meetings;
             for(var i = 0; i < json.length; i++) {
@@ -123,7 +123,7 @@ $(document).ready(function(){
 
     // Parse JSON for student meetings
     $.ajax({
-        url: "js/tutor_history.json",
+        url: "json/tutor_history.json",
         success: function(json) {
             json = json.meetings;
             for(var i = 0; i < json.length; i++) {
