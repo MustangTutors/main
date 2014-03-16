@@ -6,7 +6,10 @@ $(document).ready(function() {
         var status = button.parents('.applicationReview').find('img.applicationStatus');
         status.attr('src', 'img/approved.png');
         status.css('visibility', 'visible');
-        button.parent().html('<button class="edit button">View/Edit Profile</button>');
+        var buttonContainer = button.parent();
+        buttonContainer.html('<a href="#" class="edit button">View/Edit Profile</a>');
+        var profileURL = 'tutor.html?user_id=' + jQuery.data(buttonContainer.parents('.applicationReview')[0], 'user_id');
+        buttonContainer.find('a').attr('href', profileURL);
     });
 
     // Deny an application. Adds a 'denied' stamp and hides the buttons.
@@ -76,7 +79,7 @@ $(document).ready(function() {
                     var day = $('<li><span class="listLabel"></span><span class="listContent"></span></li>');
                     day.find('.listLabel').html(days[j]);
                     if ((k < hours.length) && (hours[k].Day === days[j])) {
-                        day.find('.listContent').html(hours[k].Start_Time + " to " + hours[k].End_Time);
+                        day.find('.listContent').html(convertTime(hours[k].Start_Time) + " to " + convertTime(hours[k].End_Time));
                         k++;
                     }
                     else {
@@ -84,6 +87,8 @@ $(document).ready(function() {
                     }
                     application.find('.reviewHours ol').append(day);
                 }
+                // Store User ID in the application.
+                jQuery.data(application[0], 'user_id', json[i].User_ID);
             }
         }
     });

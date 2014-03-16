@@ -250,6 +250,10 @@ section#login {
 
 /* Styling of buttons. */
 
+a.button {
+    text-align: center;
+}
+
 .button {
     display: inline-block;
     background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
@@ -688,7 +692,6 @@ ul span.listContent {
 
 .viewTranscript.button {
     width: 110px;
-    text-align: center;
 }
 
 .reviewButtons {

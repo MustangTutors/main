@@ -70,3 +70,13 @@ function setToggleColor() {
         toggle.siblings('span').children('span.true').css('color', '#AAA');
     }
 }
+
+// Convert from military time to standard time
+function convertTime(militaryTime) {
+    var hours24 = parseInt(militaryTime.substring(0, 2),10);
+    var hours = ((hours24 + 11) % 12) + 1;
+    var amPm = hours24 > 11 ? 'PM' : 'AM';
+    var minutes = militaryTime.substring(3);
+
+    return hours + ':' + minutes + amPm;
+}
