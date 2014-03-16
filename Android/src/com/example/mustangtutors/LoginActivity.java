@@ -49,6 +49,7 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	private TextView mError;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity {
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+		mError = (TextView) findViewById(R.id.incorrect_login);
 
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
@@ -177,6 +179,8 @@ public class LoginActivity extends Activity {
 		}
 
 		if (cancel) {
+			// Reset the error message.
+			mError.setText(R.string.no_error);
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
 			focusView.requestFocus();
@@ -256,7 +260,7 @@ public class LoginActivity extends Activity {
 			}
 
 			// TODO: register the new account here.
-			return true;
+			return false;
 		}
 
 		@Override
@@ -272,11 +276,12 @@ public class LoginActivity extends Activity {
 				intent.putExtra(NAME, "Story Zanetti");
 				intent.putExtra(USER_ID, "1");
 				setResult(RESULT_OK, intent);
+				// Reset the error message.
+				mError.setText(R.string.no_error);
 				// Return to the home page.
 				finish();
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
+				mError.setText(R.string.error_incorrect_info);
 				mPasswordView.requestFocus();
 			}
 		}

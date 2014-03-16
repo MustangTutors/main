@@ -38,16 +38,17 @@ public final class R {
         public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
-        public static final int content_frame=0x7f090008;
-        public static final int drawer_item_text=0x7f09000a;
-        public static final int drawer_layout=0x7f090007;
-        public static final int left_drawer=0x7f090009;
+        public static final int content_frame=0x7f090009;
+        public static final int drawer_item_text=0x7f09000b;
+        public static final int drawer_layout=0x7f090008;
+        public static final int incorrect_login=0x7f090006;
+        public static final int left_drawer=0x7f09000a;
         public static final int login=0x7f090005;
         public static final int login_form=0x7f090002;
         public static final int login_status=0x7f090000;
         public static final int login_status_message=0x7f090001;
         public static final int password=0x7f090004;
-        public static final int sign_in_button=0x7f090006;
+        public static final int sign_in_button=0x7f090007;
         public static final int smu_id=0x7f090003;
     }
     public static final class layout {
@@ -64,11 +65,13 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int drawer_close=0x7f050002;
         public static final int drawer_open=0x7f050001;
-        public static final int error_field_required=0x7f05000b;
-        public static final int error_incorrect_password=0x7f05000a;
+        public static final int error_field_required=0x7f05000d;
+        public static final int error_incorrect_info=0x7f05000a;
+        public static final int error_incorrect_password=0x7f05000c;
         public static final int error_invalid_password=0x7f050009;
         public static final int error_invalid_smu_id=0x7f050008;
         public static final int login_progress_signing_in=0x7f050007;
+        public static final int no_error=0x7f05000b;
         public static final int prompt_password=0x7f050005;
         /**  Strings related to login 
          */
