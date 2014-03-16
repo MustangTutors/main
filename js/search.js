@@ -1,13 +1,13 @@
 $(document).ready(function() {
-    // When you hover in and out of a tutor's box, it shows/hides more info.
-    $(document).on("mouseenter", ".tutorBox-small", function() {
-        $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-        $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
-    });
-    $(document).on("mouseleave", ".tutorBox-small", function() {
-        $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-        $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
-    });
+    
+    // $(document).on("mouseenter", ".tutorBox-small", function() {
+    //     $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    //     $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
+    // });
+    // $(document).on("mouseleave", ".tutorBox-small", function() {
+    //     $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    //     $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
+    // });
 
     // Parse JSON for Tutors
     $.ajax({
@@ -80,6 +80,9 @@ $(document).ready(function() {
             // extend-right class to the right half of tutors.
             $(".tutorBox:nth-of-type(4n-3), .tutorBox:nth-of-type(4n-2)").find(".tutorBox-extended").addClass("extend-right");
             $(".tutorBox:nth-of-type(4n), .tutorBox:nth-of-type(4n-1)").find(".tutorBox-extended").addClass("extend-left");
+        
+            // When you hover in and out of a tutor's box, it shows/hides more info.
+            $('.tutorBox-small').hoverIntent(expandInfo, contractInfo);
         }
     });
 });
@@ -109,4 +112,14 @@ function convertToStars(num) {
     }
 
     return output;
+}
+
+function expandInfo() {
+    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
+}
+
+function contractInfo() {
+    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
 }
