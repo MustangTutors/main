@@ -1010,7 +1010,24 @@ section#tutor_history {
     border-bottom: 2px solid #192942;
     margin-right: -7px;
     margin-left: -7px;
+    margin-bottom: 10px;
     padding: 10px 40px;
+    text-align: center;
+}
+
+#search_bar input {
+    width: 150px;
+    margin-left: 5px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+#find_student #results {
+    display: none;
+}
+
+#find_student #search_bar #search_send {
+    width: 50px;
 }
 
 /* End styling for Search for Student. */

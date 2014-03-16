@@ -19,8 +19,8 @@
      	<section id="find_student">
             <h2 class="heading">Search for a Student</h2>
             <article id="search_bar">
-                <label for="student_id">Enter ID of Student:</label>
-                <input type="text" name="student_id" id="search_student_id" placeholder="Student ID">
+                <label for="student_id">Enter SMU ID of Student:</label>
+                <input type="text" name="student_id" id="search_student_id" placeholder="SMU Student ID" pattern="[0-9]{8}" title="Must be an 8 digit number." required>
                 <label for="codeword">Enter code word:</label>
                 <input type="text" name="codeword" id="search_codeword" placeholder="Code word">
                 <input type="submit" class="button" id="search_send" value="Go!">
