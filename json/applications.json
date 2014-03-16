@@ -1,0 +1,102 @@
+{
+    "Applications": [
+        {
+            "User_ID": 1,
+            "First_Name": "Story",
+            "Last_Name": "Zanetti",
+            "Courses": [
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "3345",
+                    "Course_Name": "Graphical User Interfaces"
+                },
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "3330",
+                    "Course_Name": "Database Concepts"
+                },
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "2341",
+                    "Course_Name": "Data Structures"
+                },
+                {
+                    "Subject": "KNW",
+                    "Course_Number": "2300",
+                    "Course_Name": "Intro to Engineering Design"
+                }
+            ],
+            "Hours": [
+                {
+                    "Day": "Monday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                },
+                {
+                    "Day": "Tuesday",
+                    "Start_Time": "10:00",
+                    "End_Time": "12:00"
+                },
+                {
+                    "Day": "Wednesday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                },
+                {
+                    "Day": "Thursday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                }
+            ]
+        },
+        {
+            "User_ID": 2,
+            "First_Name": "Story",
+            "Last_Name": "Zanetti",
+            "Courses": [
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "3345",
+                    "Course_Name": "Graphical User Interfaces"
+                },
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "3330",
+                    "Course_Name": "Database Concepts"
+                },
+                {
+                    "Subject": "CSE",
+                    "Course_Number": "2341",
+                    "Course_Name": "Data Structures"
+                },
+                {
+                    "Subject": "KNW",
+                    "Course_Number": "2300",
+                    "Course_Name": "Intro to Engineering Design"
+                }
+            ],
+            "Hours": [
+                {
+                    "Day": "Monday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                },
+                {
+                    "Day": "Tuesday",
+                    "Start_Time": "10:00",
+                    "End_Time": "12:00"
+                },
+                {
+                    "Day": "Wednesday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                },
+                {
+                    "Day": "Thursday",
+                    "Start_Time": "11:00",
+                    "End_Time": "16:00"
+                }
+            ]
+        }
+    ]
+}
