@@ -537,8 +537,10 @@ section#tutors h2 {
     border: 2px solid black;
     border-radius: 4px;
     padding: 3px;
-    margin: 5px;
+    margin: 10px;
     float: right;
+    width: 100px;
+    text-align: center;
 }
 
 .extend-right .available, .extend-right .busy {

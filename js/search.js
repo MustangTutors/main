@@ -71,7 +71,12 @@ $(document).ready(function() {
                         break;
                 }
                 // Number of ratings
-                tutor.find('.numRatings').html(json[i].Number_Ratings);
+                if (Number(json[i].Number_Ratings) === 1) {
+                    tutor.find('.numRatings').html(json[i].Number_Ratings + ' rating');
+                }
+                else {
+                    tutor.find('.numRatings').html(json[i].Number_Ratings + ' ratings');
+                }
                 // Average rating (make stars)
                 tutor.find('.ratingStars').html(convertToStars(json[i].Average_Rating));
             }
