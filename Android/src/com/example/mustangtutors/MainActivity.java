@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private SharedPreferences sharedPref;
@@ -103,14 +104,12 @@ public class MainActivity extends Activity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
-        	if (sharedPref.contains("user_id")) {
-                fillNavDrawer("logged in");
-        	}
-        	else {
-                fillNavDrawer("logged out");
-        	}
-        }
+    	if (sharedPref.contains("user_id")) {
+            fillNavDrawer("logged in");
+    	}
+    	else {
+            fillNavDrawer("logged out");
+    	}
     }
 
     @Override
@@ -166,6 +165,11 @@ public class MainActivity extends Activity {
     		
     		// Update navigation drawer
     		fillNavDrawer("logged out");
+    		
+    		// Show a logout toast
+    		Toast.makeText(getApplicationContext(), 
+    				getString(R.string.logged_out), 
+    				Toast.LENGTH_SHORT).show();
     		return;
     	}
     	
@@ -186,6 +190,11 @@ public class MainActivity extends Activity {
 				
 				// Update the navigation drawer with links for a logged in user.
     			fillNavDrawer("logged in");
+    			
+        		// Show a login toast
+        		Toast.makeText(getApplicationContext(), 
+        				getString(R.string.logged_in), 
+        				Toast.LENGTH_SHORT).show();
     		}
     	}
 	}
