@@ -1035,6 +1035,7 @@ section#tutor_history {
 
 #find_student #results {
     display: none;
+    margin-top: 40px;
 }
 
 #find_student #search_bar #search_send {
