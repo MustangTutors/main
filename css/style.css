@@ -486,6 +486,7 @@ section#tutors h2 {
 .tutorNameAvailability > img {
     width: 12px;
     float: right;
+    margin-top: 4px;
 }
 
 .tutorBox-extended {
