@@ -17,7 +17,7 @@ $(document).ready(function() {
         }
         else {
             drop.slideDown();
-            $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(-90deg');
+            $('#welcomeMessage #welcome img[src="img/gear_arrow_light.png"]').css('-webkit-transform', 'rotate(-90deg');
             $('#settings').focus();
         }
     });
@@ -25,6 +25,7 @@ $(document).ready(function() {
     // If you click away from the settings, the dropdown hides.
     $(document).on('blur', '#settings', function() {
         $('#welcomeMessage #welcome .dropdown').slideUp();
+        $('#welcomeMessage #welcome img[src="img/gear_arrow_light.png"]').css('-webkit-transform', 'rotate(0deg');
         $('#welcomeMessage #welcome img[src="img/gear_arrow.png"]').css('-webkit-transform', 'rotate(0deg');
     });
 
