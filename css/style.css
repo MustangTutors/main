@@ -211,12 +211,12 @@ section#login {
     list-style: none;
 }
 
-#welcomeMessage img[src="img/gear.png"] {
+#welcomeMessage img[src="img/gear.png"], #welcomeMessage img[src="img/gear_light.png"] {
     width: 20px;
     margin-left: 5px;
 }
 
-#welcomeMessage img[src="img/gear_arrow.png"] {
+#welcomeMessage img[src="img/gear_arrow.png"], #welcomeMessage img[src="img/gear_arrow_light.png"] {
     position: absolute;
     transition: -webkit-transform 0.5s;
     top: 12px;

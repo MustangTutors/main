@@ -35,6 +35,8 @@ $(document).ready(function() {
             $('#settings_message').css('display', 'inline-block');
         }
         $('#settings .welcome').css('color', '#E2E0D7');
+        $('#settings img[src="img/gear.png"]').attr('src', 'img/gear_light.png');
+        $('#settings img[src="img/gear_arrow.png"]').attr('src', 'img/gear_arrow_light.png');
     });
 
     // Remove "settings" message and change settings icon back
@@ -42,6 +44,8 @@ $(document).ready(function() {
         // Make "Settings" message disappear
         $('#settings_message').hide();
         $('#settings .welcome').css('color', '#D7D4C8');
+        $('#settings img[src="img/gear_light.png"]').attr('src', 'img/gear.png');
+        $('#settings img[src="img/gear_arrow_light.png"]').attr('src', 'img/gear_arrow.png');
     });
 });
 
