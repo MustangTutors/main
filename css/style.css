@@ -1083,6 +1083,18 @@ section#rating span h3 span, .schedule {
     display: inline-block;
 }
 
+.schedule {
+    background-color: #FFF6EB;
+    height: 180px;
+    width: 295px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DDD4C9;
+}
+
 .schedule ul {
     list-style: none;
 }
