@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     	}
     	
         // set up the drawer's list view with items and click listener
-    	AdapterClass customAdapter = new AdapterClass(this, R.layout.drawer_list_item, drawerImagesInt, drawerStrings);
+    	DrawerAdapter customAdapter = new DrawerAdapter(this, R.layout.drawer_list_item, drawerImagesInt, drawerStrings);
         mDrawerList.setAdapter(customAdapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         
