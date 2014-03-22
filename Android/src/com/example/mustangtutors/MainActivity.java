@@ -106,6 +106,8 @@ public class MainActivity extends Activity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+        // Fill the navigation drawer with items, depending on whether the 
+        // user is logged in or out.
     	if (sharedPref.contains("user_id")) {
             fillNavDrawer("logged in");
     	}
@@ -113,6 +115,7 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
+    	// Populate the content area with tutors
     	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
     	tutors.add(new Tutor());
     	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
