@@ -1,5 +1,7 @@
 package com.example.mustangtutors;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -110,6 +112,12 @@ public class MainActivity extends Activity {
     	else {
             fillNavDrawer("logged out");
     	}
+    	
+//    	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+//    	tutors.add(new Tutor());
+//    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+//    	ListView listView = (ListView) findViewById(R.id.listview);
+//    	listView.setAdapter(searchAdapter);
     }
 
     @Override
