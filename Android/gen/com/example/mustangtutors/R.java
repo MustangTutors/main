@@ -42,8 +42,8 @@ public final class R {
         public static final int drawer_item_text=0x7f09000c;
         public static final int drawer_layout=0x7f090008;
         public static final int incorrect_login=0x7f090006;
-        public static final int left_drawer=0x7f09000a;
-        public static final int listview=0x7f09000b;
+        public static final int left_drawer=0x7f09000b;
+        public static final int listview=0x7f09000a;
         public static final int login=0x7f090005;
         public static final int login_form=0x7f090002;
         public static final int login_status=0x7f090000;

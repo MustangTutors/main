@@ -15,7 +15,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	private ArrayList<Tutor> tutors;
 	
 	public SearchAdapter(Context context, int resource, ArrayList<Tutor> tutors) {
-	    super(context, resource);
+	    super(context, resource, tutors);
 	    this.context = context;
 	    this.resource = resource;
 	    this.tutors = tutors;

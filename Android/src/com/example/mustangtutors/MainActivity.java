@@ -113,11 +113,11 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
-//    	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-//    	tutors.add(new Tutor());
-//    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-//    	ListView listView = (ListView) findViewById(R.id.listview);
-//    	listView.setAdapter(searchAdapter);
+    	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+    	tutors.add(new Tutor());
+    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+    	ListView listView = (ListView) findViewById(R.id.listview);
+    	listView.setAdapter(searchAdapter);
     }
 
     @Override
