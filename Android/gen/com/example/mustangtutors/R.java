@@ -61,7 +61,6 @@ public final class R {
         public static final int list_activated_background=0x7f020010;
         public static final int star=0x7f020011;
         public static final int tutor=0x7f020012;
-        public static final int tutor2=0x7f020013;
     }
     public static final class id {
         public static final int content_frame=0x7f0a0009;

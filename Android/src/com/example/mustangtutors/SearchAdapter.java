@@ -28,6 +28,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    View rowView = inflater.inflate(resource, parent, false);
 
+	    ImageView picture = (ImageView) rowView.findViewById(R.id.search_tutor_picture);
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
 	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
 	    ImageView star1 = (ImageView) rowView.findViewById(R.id.search_tutor_star_1);
@@ -36,6 +37,9 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    ImageView star4 = (ImageView) rowView.findViewById(R.id.search_tutor_star_4);
 	    ImageView star5 = (ImageView) rowView.findViewById(R.id.search_tutor_star_5);
 	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
+	    
+	    new DownloadImageTask(picture)
+        	.execute("http://mustangtutors.floccul.us/img/tutors/" + tutors.get(position).getId() + ".jpg");
 	    
 	    // Set name
 	    name.setText(tutors.get(position).getName());
