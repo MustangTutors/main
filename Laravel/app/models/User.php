@@ -11,7 +11,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-
+    protected $user_id;
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -48,5 +48,34 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	
+    /**
+    * get a user's ID if the user_id and codeword are correct
+    *
+    *  @return true if codeword correct and false if incorrect
+    */
+    public function checkCodeWord($user_id,$codeword)
+    {
+        $result=DB::select("select user_id from users where user_id = ? AND codeword = ?",array($user_id,$codeword));
+        if($result[0]->user_id == $user_id)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    /**
+    * get a user's records based on their user_id
+    *
+    * @echo these users in a JSON
+    */
+    public function getUsersRecords($user_id)
+    {
+        $result=DB::select("select * from records where user_id = ?",array($user_id));
+        echo json_encode($result);
+
+    }
 
 }
+?>
