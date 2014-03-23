@@ -117,9 +117,12 @@ public class MainActivity extends Activity {
     	
     	// Populate the content area with tutors
     	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-    	for (int i = 0; i < 10; i++) {
-    		tutors.add(new Tutor());
-    	}
+    	tutors.add(new Tutor(1, "Story Zanetti", 25, 4.4, 2));
+    	tutors.add(new Tutor(2, "Nick Gangloff", 40, 1, 2));
+    	tutors.add(new Tutor(3, "Darius Clark", 13, 3.7, 1));
+    	tutors.add(new Tutor(4, "Tyler Jackson", 76, 3.2, 1));
+    	tutors.add(new Tutor(5, "Bre'Shard Busby", 1, 5, 0));
+    	tutors.add(new Tutor(6, "Jessica Yeh", 47, 2.3, 0));
     	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
     	ListView listView = (ListView) findViewById(R.id.listview);
     	listView.setAdapter(searchAdapter);

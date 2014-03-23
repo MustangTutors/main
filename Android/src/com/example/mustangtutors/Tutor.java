@@ -18,10 +18,21 @@ public class Tutor {
 	
 	public Tutor(int id, String name, int numberRatings, double rating, int availability) {
 		super();
+		if (rating < 0) {
+			rating = 0;
+		}
+		else if (rating > 5) {
+			rating = 5;
+		}
+
+		if (availability != 0 && availability != 1 && availability != 2) {
+			availability = 0;
+		}
+		
 		this.id = id;
 		this.name = name;
 		this.numberRatings = numberRatings;
-		this.rating = rating;
+		this.rating = roundTo(rating, 0.5);
 		this.availability = availability;
 	}
 	
@@ -47,12 +58,25 @@ public class Tutor {
 		return rating;
 	}
 	public void setRating(double rating) {
-		this.rating = rating;
+		if (rating < 0) {
+			rating = 0;
+		}
+		else if (rating > 5) {
+			rating = 5;
+		}
+		this.rating = roundTo(rating, 0.5);
 	}
 	public int getAvailability() {
 		return availability;
 	}
 	public void setAvailability(int availability) {
+		if (availability != 0 && availability != 1 && availability != 2) {
+			availability = 0;
+		}
 		this.availability = availability;
+	}
+	
+	private static double roundTo(double v, double r) {
+		return Math.round(v / r) * r;
 	}
 }

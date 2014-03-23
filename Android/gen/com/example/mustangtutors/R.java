@@ -48,17 +48,20 @@ public final class R {
         public static final int border_tutor=0x7f020003;
         public static final int border_unavailable=0x7f020004;
         public static final int drawer_shadow=0x7f020005;
-        public static final int ic_action_accounts=0x7f020006;
-        public static final int ic_action_new_event=0x7f020007;
-        public static final int ic_action_not_secure=0x7f020008;
-        public static final int ic_action_person=0x7f020009;
-        public static final int ic_action_search=0x7f02000a;
-        public static final int ic_action_secure=0x7f02000b;
-        public static final int ic_drawer=0x7f02000c;
-        public static final int ic_launcher=0x7f02000d;
-        public static final int list_activated_background=0x7f02000e;
-        public static final int tutor=0x7f02000f;
-        public static final int tweed=0x7f020010;
+        public static final int emptystar=0x7f020006;
+        public static final int halfstar=0x7f020007;
+        public static final int ic_action_accounts=0x7f020008;
+        public static final int ic_action_new_event=0x7f020009;
+        public static final int ic_action_not_secure=0x7f02000a;
+        public static final int ic_action_person=0x7f02000b;
+        public static final int ic_action_search=0x7f02000c;
+        public static final int ic_action_secure=0x7f02000d;
+        public static final int ic_drawer=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int list_activated_background=0x7f020010;
+        public static final int star=0x7f020011;
+        public static final int tutor=0x7f020012;
+        public static final int tutor2=0x7f020013;
     }
     public static final class id {
         public static final int content_frame=0x7f0a0009;
@@ -76,6 +79,11 @@ public final class R {
         public static final int search_tutor_name=0x7f0a000f;
         public static final int search_tutor_number_ratings=0x7f0a0010;
         public static final int search_tutor_picture=0x7f0a000d;
+        public static final int search_tutor_star_1=0x7f0a0011;
+        public static final int search_tutor_star_2=0x7f0a0012;
+        public static final int search_tutor_star_3=0x7f0a0013;
+        public static final int search_tutor_star_4=0x7f0a0014;
+        public static final int search_tutor_star_5=0x7f0a0015;
         public static final int sign_in_button=0x7f0a0007;
         public static final int smu_id=0x7f0a0003;
     }
@@ -148,6 +156,8 @@ public final class R {
         public static final int NavigationDrawerItem=0x7f080006;
         public static final int Search=0x7f080009;
         public static final int SearchItem=0x7f08000a;
+        public static final int Star=0x7f080010;
+        public static final int StarGroup=0x7f08000f;
         public static final int TutorAvailability=0x7f08000e;
         public static final int TutorName=0x7f08000c;
         public static final int TutorNumberRatings=0x7f08000d;

@@ -71,11 +71,11 @@
     </style>
     
     <style name="TutorPicture">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">93dp</item>
-        <item name="android:paddingLeft">1.5dp</item>
-        <item name="android:paddingRight">1.5dp</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:padding">1.5dp</item>
         <item name="android:maxWidth">70dp</item>
+        <item name="android:maxHeight">90dp</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:background">@drawable/border_tutor</item>
@@ -91,8 +91,9 @@
     </style>
     
     <style name="TutorNumberRatings">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">125sp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">right</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginLeft">90dp</item>
@@ -100,13 +101,24 @@
     </style>
     
     <style name="TutorAvailability">
-        <item name="android:layout_width">105sp</item>
+        <item name="android:layout_width">100sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">1dp</item>
         <item name="android:textColor">#000000</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/border_unavailable</item>
+    </style>
+    
+    <style name="StarGroup">
+        <item name="android:layout_marginLeft">220dp</item>
+        <item name="android:layout_marginTop">52dp</item>
+    </style>
+    <style name="Star">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxWidth">15dp</item>
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
 </resources>

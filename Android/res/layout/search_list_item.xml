@@ -32,6 +32,35 @@
 		            style="@style/TutorNumberRatings"
 		            android:id="@+id/search_tutor_number_ratings" />
 	    </RelativeLayout>
+		<RelativeLayout
+		    style="@style/StarGroup"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent">
+				<ImageView
+				    style="@style/Star"
+				    android:id="@+id/search_tutor_star_1"
+				    android:src="@drawable/star" />
+				<ImageView
+				    style="@style/Star"
+				    android:id="@+id/search_tutor_star_2"
+				    android:src="@drawable/star"
+				    android:layout_marginLeft="17dp" />
+				<ImageView
+				    style="@style/Star"
+				    android:id="@+id/search_tutor_star_3"
+				    android:src="@drawable/star"
+				    android:layout_marginLeft="34dp" />
+				<ImageView
+				    style="@style/Star"
+				    android:id="@+id/search_tutor_star_4"
+				    android:src="@drawable/star"
+				    android:layout_marginLeft="51dp" />
+				<ImageView
+				    style="@style/Star"
+				    android:id="@+id/search_tutor_star_5"
+				    android:src="@drawable/star"
+				    android:layout_marginLeft="68dp" />
+	    </RelativeLayout>
 </RelativeLayout>
 
 
