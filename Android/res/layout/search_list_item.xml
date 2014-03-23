@@ -1,12 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     style="@style/SearchItem" >
+    <ImageView
+        style="@style/TutorPicture"
+        android:id="@+id/search_tutor_picture"
+        android:src="@drawable/tutor" />
     <TextView
         style="@style/TutorName"
-	    android:id="@+id/search_tutor_name"/>
+	    android:id="@+id/search_tutor_name" />
     <TextView
         style="@style/TutorNumberRatings"
-	    android:id="@+id/search_tutor_number_ratings"/>
-</RelativeLayout>
+	    android:id="@+id/search_tutor_number_ratings" />
+</LinearLayout>
 

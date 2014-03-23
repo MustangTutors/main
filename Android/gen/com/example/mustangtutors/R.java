@@ -47,6 +47,7 @@ public final class R {
         public static final int ic_drawer=0x7f020008;
         public static final int ic_launcher=0x7f020009;
         public static final int list_activated_background=0x7f02000a;
+        public static final int tutor=0x7f02000b;
     }
     public static final class id {
         public static final int content_frame=0x7f0a0009;
@@ -60,8 +61,9 @@ public final class R {
         public static final int login_status=0x7f0a0000;
         public static final int login_status_message=0x7f0a0001;
         public static final int password=0x7f0a0004;
-        public static final int search_tutor_name=0x7f0a000d;
-        public static final int search_tutor_number_ratings=0x7f0a000e;
+        public static final int search_tutor_name=0x7f0a000e;
+        public static final int search_tutor_number_ratings=0x7f0a000f;
+        public static final int search_tutor_picture=0x7f0a000d;
         public static final int sign_in_button=0x7f0a0007;
         public static final int smu_id=0x7f0a0003;
     }
@@ -134,7 +136,8 @@ public final class R {
         public static final int NavigationDrawerItem=0x7f080006;
         public static final int Search=0x7f080009;
         public static final int SearchItem=0x7f08000a;
-        public static final int TutorName=0x7f08000b;
-        public static final int TutorNumberRatings=0x7f08000c;
+        public static final int TutorName=0x7f08000c;
+        public static final int TutorNumberRatings=0x7f08000d;
+        public static final int TutorPicture=0x7f08000b;
     }
 }
