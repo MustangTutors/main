@@ -32,7 +32,17 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
 	    name.setText(tutors.get(position).getName());
 	    numberRatings.setText("Avg of " + tutors.get(position).getNumberRatings() + " ratings:");
-	    availability.setText("Available");
+	    switch (tutors.get(position).getAvailability()) {
+	    	case 2:  availability.setText("Available");
+	    			 availability.setBackgroundResource(R.drawable.border_available);
+					 break;
+	    	case 1:  availability.setText("Busy");
+			 		 availability.setBackgroundResource(R.drawable.border_busy);
+					 break;
+	    	default: availability.setText("Unavailable");
+	    			 availability.setBackgroundResource(R.drawable.border_unavailable);
+	    			 break;
+	    }
 	
 	    return rowView;
 	}
