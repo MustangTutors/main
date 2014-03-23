@@ -10,7 +10,7 @@ public class Tutor {
 	public Tutor() {
 		super();
 		this.id = 1;
-		this.name = "Tutor Name";
+		this.name = "Story Zanetti";
 		this.numberRatings = 25;
 		this.rating = 3.5;
 		this.availability = 2;

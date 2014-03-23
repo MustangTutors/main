@@ -5,6 +5,12 @@
     <color name="LightBackground">#FFF6EB</color>
     <color name="DarkerRed">#510916</color>
     <color name="DarkRed">#83192C</color>
-    <color name="LightRed">#BB5466</color>
+    <color name="LightRed">#B40527</color>
     <color name="DarkBlue">#192942</color>
+    <color name="DarkGreen">#066D18</color>
+    <color name="LightGreen">#86CD93</color>
+    <color name="DarkYellow">#C2C018</color>
+    <color name="LightYellow">#F7F698</color>
+    <color name="DarkGray">#464646</color>
+    <color name="LightGray">#B3B3B3</color>
 </resources>

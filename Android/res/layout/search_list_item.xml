@@ -1,16 +1,38 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    style="@style/SearchItem" >
-    <ImageView
-        style="@style/TutorPicture"
-        android:id="@+id/search_tutor_picture"
-        android:src="@drawable/tutor" />
-    <TextView
-        style="@style/TutorName"
-	    android:id="@+id/search_tutor_name" />
-    <TextView
-        style="@style/TutorNumberRatings"
-	    android:id="@+id/search_tutor_number_ratings" />
-</LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	style="@style/SearchItem">
+	    <LinearLayout
+		    android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+				<ImageView
+				    style="@style/TutorPicture"
+				    android:id="@+id/search_tutor_picture"
+				    android:src="@drawable/tutor" />
+				<LinearLayout 
+				    android:orientation="vertical"
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:gravity="right" >
+				    <TextView
+				        style="@style/TutorAvailability"
+				        android:id="@+id/search_tutor_availability" />
+				</LinearLayout>
+		</LinearLayout>
+		<RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent">
+			    <TextView
+			        style="@style/TutorName"
+			        android:id="@+id/search_tutor_name" />
+		        <TextView
+		            style="@style/TutorNumberRatings"
+		            android:id="@+id/search_tutor_number_ratings" />
+	    </RelativeLayout>
+</RelativeLayout>
+
+
 

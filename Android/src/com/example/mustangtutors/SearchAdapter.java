@@ -29,8 +29,10 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
 	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
+	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
 	    name.setText(tutors.get(position).getName());
-	    numberRatings.setText("Average of " + tutors.get(position).getNumberRatings() + " ratings:");
+	    numberRatings.setText("Avg of " + tutors.get(position).getNumberRatings() + " ratings:");
+	    availability.setText("Available");
 	
 	    return rowView;
 	}

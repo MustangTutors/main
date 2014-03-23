@@ -20,10 +20,16 @@ public final class R {
         public static final int Background=0x7f040001;
         public static final int DarkBackground=0x7f040000;
         public static final int DarkBlue=0x7f040006;
+        public static final int DarkGray=0x7f04000b;
+        public static final int DarkGreen=0x7f040007;
         public static final int DarkRed=0x7f040004;
+        public static final int DarkYellow=0x7f040009;
         public static final int DarkerRed=0x7f040003;
         public static final int LightBackground=0x7f040002;
+        public static final int LightGray=0x7f04000c;
+        public static final int LightGreen=0x7f040008;
         public static final int LightRed=0x7f040005;
+        public static final int LightYellow=0x7f04000a;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -37,17 +43,20 @@ public final class R {
     }
     public static final class drawable {
         public static final int border=0x7f020000;
-        public static final int drawer_shadow=0x7f020001;
-        public static final int ic_action_accounts=0x7f020002;
-        public static final int ic_action_new_event=0x7f020003;
-        public static final int ic_action_not_secure=0x7f020004;
-        public static final int ic_action_person=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int ic_action_secure=0x7f020007;
-        public static final int ic_drawer=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int list_activated_background=0x7f02000a;
-        public static final int tutor=0x7f02000b;
+        public static final int border_available=0x7f020001;
+        public static final int border_busy=0x7f020002;
+        public static final int border_unavailable=0x7f020003;
+        public static final int drawer_shadow=0x7f020004;
+        public static final int ic_action_accounts=0x7f020005;
+        public static final int ic_action_new_event=0x7f020006;
+        public static final int ic_action_not_secure=0x7f020007;
+        public static final int ic_action_person=0x7f020008;
+        public static final int ic_action_search=0x7f020009;
+        public static final int ic_action_secure=0x7f02000a;
+        public static final int ic_drawer=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int list_activated_background=0x7f02000d;
+        public static final int tutor=0x7f02000e;
     }
     public static final class id {
         public static final int content_frame=0x7f0a0009;
@@ -61,8 +70,9 @@ public final class R {
         public static final int login_status=0x7f0a0000;
         public static final int login_status_message=0x7f0a0001;
         public static final int password=0x7f0a0004;
-        public static final int search_tutor_name=0x7f0a000e;
-        public static final int search_tutor_number_ratings=0x7f0a000f;
+        public static final int search_tutor_availability=0x7f0a000e;
+        public static final int search_tutor_name=0x7f0a000f;
+        public static final int search_tutor_number_ratings=0x7f0a0010;
         public static final int search_tutor_picture=0x7f0a000d;
         public static final int sign_in_button=0x7f0a0007;
         public static final int smu_id=0x7f0a0003;
@@ -136,6 +146,7 @@ public final class R {
         public static final int NavigationDrawerItem=0x7f080006;
         public static final int Search=0x7f080009;
         public static final int SearchItem=0x7f08000a;
+        public static final int TutorAvailability=0x7f08000e;
         public static final int TutorName=0x7f08000c;
         public static final int TutorNumberRatings=0x7f08000d;
         public static final int TutorPicture=0x7f08000b;
