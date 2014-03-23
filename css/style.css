@@ -1045,6 +1045,13 @@ section#tutor_history {
     width: 50px;
 }
 
+#results .error {
+    text-align: left;
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
 /* End styling for Search for Student. */
 
 /* Styling for About Us */

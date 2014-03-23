@@ -2,7 +2,7 @@
 	"meetings":
 	[
 		{
-			"subject":"CSE",
+			"subject":"MATH",
 			"course_number":"4340",
 			"course_name":"Statistics for Engineers",
 			"first_name":"Jane",
@@ -13,7 +13,7 @@
 			"summary":"Lorem ipsum dolor sit amet, consecturer adipiscing elit."
 		},
 		{
-			"subject":"CSE",
+			"subject":"DISC",
 			"course_number":"4340",
 			"course_name":"Statistics for Engineers",
 			"first_name":"Jane",
