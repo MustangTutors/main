@@ -172,7 +172,7 @@ public class LoginActivity extends Activity {
 			mSMUIDView.setError(getString(R.string.error_field_required));
 			focusView = mSMUIDView;
 			cancel = true;
-		} else if (mSMUID.length() != 8 && !isInteger(mSMUID)) {
+		} else if (mSMUID.length() != 8) {
 			mSMUIDView.setError(getString(R.string.error_invalid_smu_id));
 			focusView = mSMUIDView;
 			cancel = true;

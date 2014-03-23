@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -17,11 +16,41 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+	<style name="MyCustomTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
+        <item name="android:windowBackground">@color/Background</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item>
+    </style>
 
+    <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/DarkBlue</item>
+        <item name="android:titleTextStyle">@style/MyTextAppearance</item>
+    </style>
+    
+    <style name="MyTextAppearance" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+	    <item name="android:textColor">#ffffff</item>
+	</style>
+	
+    <style name="NavigationDrawer">
+        <item name="android:background">@color/DarkRed</item>
+        <item name="android:divider">@color/DarkerRed</item>
+    </style>
+    
+    <style name="NavigationDrawerItem">
+        <item name="android:textColor">#FFF</item>
+        <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
+    </style>
+    
+    <style name="LoginFormPage">
+        <item name="android:padding">30dp</item>
+    </style>
+    
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
+        <item name="android:background">@color/LightBackground</item>
     </style>
 
 </resources>

@@ -1,6 +1,6 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginActivity" >
+    tools:context=".LoginActivity">
 
     <!-- Login progress -->
 
@@ -32,6 +32,7 @@
     <!-- Login form -->
 
     <ScrollView
+        style="@style/LoginFormPage"
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
