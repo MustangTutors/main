@@ -2,11 +2,8 @@
     style="@style/NavigationDrawerItem"
     android:id="@+id/drawer_item_text"
     android:drawableLeft="#ccc"
-    android:drawablePadding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="10dp"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"/>

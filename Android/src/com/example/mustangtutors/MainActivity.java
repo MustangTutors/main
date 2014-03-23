@@ -117,7 +117,9 @@ public class MainActivity extends Activity {
     	
     	// Populate the content area with tutors
     	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-    	tutors.add(new Tutor());
+    	for (int i = 0; i < 10; i++) {
+    		tutors.add(new Tutor());
+    	}
     	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
     	ListView listView = (ListView) findViewById(R.id.listview);
     	listView.setAdapter(searchAdapter);
@@ -169,8 +171,20 @@ public class MainActivity extends Activity {
     		startActivityForResult(intent, requestCode);
     	}
     	
+    	// Start the tutor profile activity
+    	if (drawerStrings[position].equals(sharedPref.getString("name", "[name]"))) {
+    		// code
+    		System.out.println("tutor profile");
+    	}
+    	
+    	// Start the meeting documentation activity
+    	else if (drawerStrings[position].equals("Document a Student Meeting")) {
+    		// code
+    		System.out.println("document meeting");
+    	}
+    	
     	// Logout
-    	if (drawerStrings[position].equals("Logout")) {
+    	else if (drawerStrings[position].equals("Logout")) {
     		// Delete user data from preferences
     		editor.clear().commit();
     		

@@ -17,12 +17,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int Background=0x7f040000;
-        public static final int DarkBlue=0x7f040005;
-        public static final int DarkRed=0x7f040003;
-        public static final int DarkerRed=0x7f040002;
-        public static final int LightBackground=0x7f040001;
-        public static final int LightRed=0x7f040004;
+        public static final int Background=0x7f040001;
+        public static final int DarkBackground=0x7f040000;
+        public static final int DarkBlue=0x7f040006;
+        public static final int DarkRed=0x7f040004;
+        public static final int DarkerRed=0x7f040003;
+        public static final int LightBackground=0x7f040002;
+        public static final int LightRed=0x7f040005;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -35,16 +36,17 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int drawer_shadow=0x7f020000;
-        public static final int ic_action_accounts=0x7f020001;
-        public static final int ic_action_new_event=0x7f020002;
-        public static final int ic_action_not_secure=0x7f020003;
-        public static final int ic_action_person=0x7f020004;
-        public static final int ic_action_search=0x7f020005;
-        public static final int ic_action_secure=0x7f020006;
-        public static final int ic_drawer=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int list_activated_background=0x7f020009;
+        public static final int border=0x7f020000;
+        public static final int drawer_shadow=0x7f020001;
+        public static final int ic_action_accounts=0x7f020002;
+        public static final int ic_action_new_event=0x7f020003;
+        public static final int ic_action_not_secure=0x7f020004;
+        public static final int ic_action_person=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_action_secure=0x7f020007;
+        public static final int ic_drawer=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int list_activated_background=0x7f02000a;
     }
     public static final class id {
         public static final int content_frame=0x7f0a0009;
@@ -128,5 +130,7 @@ public final class R {
         public static final int MyTextAppearance=0x7f080004;
         public static final int NavigationDrawer=0x7f080005;
         public static final int NavigationDrawerItem=0x7f080006;
+        public static final int Search=0x7f080009;
+        public static final int SearchItem=0x7f08000a;
     }
 }

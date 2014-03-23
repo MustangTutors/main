@@ -9,7 +9,7 @@ public class Tutor {
 	public Tutor() {
 		super();
 		this.id = 0;
-		this.name = "Unknown";
+		this.name = "Tutor Name";
 		this.rating = 0;
 		this.availability = 0;
 	}

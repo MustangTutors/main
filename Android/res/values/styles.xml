@@ -40,6 +40,11 @@
     <style name="NavigationDrawerItem">
         <item name="android:textColor">#FFF</item>
         <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
     </style>
     
     <style name="LoginFormPage">
@@ -49,6 +54,16 @@
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@drawable/border</item>
+    </style>
+    
+    <style name="Search">
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@color/Background</item>
+    </style>
+    
+    <style name="SearchItem">
         <item name="android:padding">16dp</item>
         <item name="android:background">@color/LightBackground</item>
     </style>
