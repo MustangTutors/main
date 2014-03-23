@@ -1083,6 +1083,15 @@ section#rating span h3 span, .schedule {
     display: inline-block;
 }
 
+
+#tutorpage_available {
+    margin-top: -36px;
+}
+
+#yourRating h3 {
+    margin-left: 31px;
+}
+
 .schedule {
     background-color: #FFF6EB;
     height: 180px;
@@ -1136,12 +1145,22 @@ div#commentList ul li:nth-child(odd) {
     background-color: #FEECDA;
 }
 
-#tutorpage_available {
-    margin-top: -36px;
+#editRating {
+    position: fixed;
+    width: 181px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    margin-left: 85px;
+    margin-top: -28px;
+    padding: 0px 10px 0px 0px;
+    background-color: white;
+    border-style: solid;
+    border-color: #524928;
 }
 
-#yourRating h3 {
-    margin-left: 31px;
+#editRating h3 {
+    margin-left: 23px;
 }
 
 /* End styling for Tutor Profile */
