@@ -27,8 +27,10 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    View rowView = inflater.inflate(resource, parent, false);
 
-	    TextView text = (TextView) rowView.findViewById(R.id.search_item_text);
-	    text.setText(tutors.get(position).getName());
+	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
+	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
+	    name.setText(tutors.get(position).getName());
+	    numberRatings.setText("Average of " + tutors.get(position).getNumberRatings() + " ratings:");
 	
 	    return rowView;
 	}

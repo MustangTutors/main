@@ -3,21 +3,24 @@ package com.example.mustangtutors;
 public class Tutor {
 	private int id;
 	private String name;
+	private int numberRatings;
 	private double rating;
 	private int availability;
 	
 	public Tutor() {
 		super();
-		this.id = 0;
+		this.id = 1;
 		this.name = "Tutor Name";
-		this.rating = 0;
-		this.availability = 0;
+		this.numberRatings = 25;
+		this.rating = 3.5;
+		this.availability = 2;
 	}
 	
-	public Tutor(int id, String name, double rating, int availability) {
+	public Tutor(int id, String name, int numberRatings, double rating, int availability) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.numberRatings = numberRatings;
 		this.rating = rating;
 		this.availability = availability;
 	}
@@ -33,6 +36,12 @@ public class Tutor {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getNumberRatings() {
+		return numberRatings;
+	}
+	public void setNumberRatings(int numberRatings) {
+		this.numberRatings = numberRatings;
 	}
 	public double getRating() {
 		return rating;
