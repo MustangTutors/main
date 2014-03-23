@@ -1136,5 +1136,13 @@ div#commentList ul li:nth-child(odd) {
     background-color: #FEECDA;
 }
 
+#tutorpage_available {
+    margin-top: -36px;
+}
+
+#yourRating h3 {
+    margin-left: 31px;
+}
+
 /* End styling for Tutor Profile */
 
