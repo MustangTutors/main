@@ -1157,10 +1157,15 @@ div#commentList ul li:nth-child(odd) {
     background-color: white;
     border-style: solid;
     border-color: #524928;
+    display: none;
 }
 
 #editRating h3 {
     margin-left: 23px;
+}
+
+.potential_rating span img {
+    max-width: 18px;
 }
 
 /* End styling for Tutor Profile */
