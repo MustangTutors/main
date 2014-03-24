@@ -1,13 +1,24 @@
 package com.example.mustangtutors;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	private SharedPreferences sharedPref;
 	private SharedPreferences.Editor editor;
@@ -67,6 +79,9 @@ public class MainActivity extends Activity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	StrictMode.ThreadPolicy policy = new StrictMode.
+    			ThreadPolicy.Builder().permitAll().build();
+    			StrictMode.setThreadPolicy(policy); 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -115,19 +130,56 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
-    	// Populate the content area with tutors
-    	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-    	tutors.add(new Tutor(1, "Story Zanetti", 25, 4.4, 2));
-    	tutors.add(new Tutor(2, "Nick Gangloff", 40, 1, 2));
-    	tutors.add(new Tutor(3, "Darius Clark", 13, 3.7, 1));
-    	tutors.add(new Tutor(4, "Tyler Jackson", 76, 3.2, 1));
-    	tutors.add(new Tutor(5, "Bre'Shard Busby", 1, 5, 0));
-    	tutors.add(new Tutor(6, "Jessica Yeh", 47, 2.3, 0));
-    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-    	ListView listView = (ListView) findViewById(R.id.listview);
-    	listView.setAdapter(searchAdapter);
+    	try {
+    		URL url = new URL("http://mustangtutors.floccul.us/json/searchResults.json");
+		    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		    JSONObject json = new JSONObject(readStream(con.getInputStream()));
+		    JSONArray jsonTutors = json.getJSONArray("Tutors");
+		    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+		    for (int i = 0; i < jsonTutors.length(); i++) {
+		    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
+		    	int id = tutor.getInt("User_ID");
+		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+		    	int numRatings = tutor.getInt("Number_Ratings");
+		    	double rating = tutor.getDouble("Average_Rating");
+		    	int availability = tutor.getInt("Available");
+		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
+		    }
+	    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+	    	ListView listView = (ListView) findViewById(R.id.listview);
+	    	listView.setAdapter(searchAdapter);
+		}
+    	catch (Exception e) {
+		  e.printStackTrace();
+		}
     }
 
+    private String readStream(InputStream in) {
+    	String output = "";
+		BufferedReader reader = null;
+		try {
+		    reader = new BufferedReader(new InputStreamReader(in));
+		    String line = "";
+		    while ((line = reader.readLine()) != null) {
+		        output += line + "\n";
+		    }
+		}
+		catch (IOException e) {
+		    e.printStackTrace();
+		}
+		finally {
+		    if (reader != null) {
+		        try {
+		            reader.close();
+		        }
+		        catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+	    return output;
+	} 
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
