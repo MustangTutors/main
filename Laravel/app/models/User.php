@@ -92,5 +92,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
     }
 
+   /**
+   * Get the availability status of the user of the given ID, or the current user if no ID is provided.
+   * @param $id INT the id of the user whose status is to be retrieved
+   * @echo JSON containing the availability status
+   */
+   public function getAvailability($id = -1){
+    if($id == -1) $id = Session::get('user_id', -1);
+    $result=DB::select("select available from users where user_id = ?",array($id));
+    echo json_encode($result);
+   }
+
 }
 ?>
