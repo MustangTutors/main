@@ -76,6 +76,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         echo json_encode($result);
 
     }
+    
+    /**
+    * send a user's id and codeword to a list of email addresses
+    *
+    */
+    public function sendEmailWithCodeword($user_id,$codeword,$emails){
+    
+        foreach($emails as $email)
+        {
+            echo($email);
+            Mail::later(5,'emails.codeword.codeword', array('user_id'=>$user_id,'codeword'=>$codeword), function($message) use ($email){
+                $message->to($email)->subject('email tester');
+            });
+        }
+    }
 
 }
 ?>

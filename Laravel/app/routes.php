@@ -18,7 +18,7 @@ users/history           ==>this returns all of a users records for the user
 users/history/parent    ==>this returns all of a users records for anyone (ie parent)
 tutor/{id}              ==>this returns all of a tutors info based on their user_id
 tutor/comment           ==>this adds a comment for a tutor made by the current user
-
+users/email             ==>this sends emails to the authorized users with the codeword
 
 */
 Route::get('/', function()
@@ -74,6 +74,15 @@ Route::post('tutor/comment',function()
     $date = date('Y-m-d h:m:s',time());
     $temp = new Tutor();
     $temp->addCommentForTutor($_SESSION['user_id'],$_SESSION['tutor_id'],$_POST['comment']);
+});
+
+Route::post('users/email',function()
+{
+    $temp = new User();
+    $user_id = "12345";
+    $codeword = "codeword";
+    $emails = $_POST['emails'];
+    $temp->sendEmailWithCodeword($user_id,$codeword,$emails);
 });
 
 
