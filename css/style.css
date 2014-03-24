@@ -1171,12 +1171,16 @@ div#commentList ul li:nth-child(odd) {
     margin-left: 23px;
 }
 
-.potential_rating span img {
-    max-width: 18px;
+.potential_rating {
+    color: transparent;
 }
 
 .potential_rating:hover {
-    background-color: red;
+    color: black;
+}
+
+.potential_rating span img {
+    max-width: 18px;
 }
 
 /* End styling for Tutor Profile */
