@@ -31,8 +31,13 @@ $(document).ready(function() {
 	$("img[src='img/pencil.png']").on('click', function() {
 		$("#editRating").show();
 
-		for(var f = 0; f < 5; f++) {
-			$(".potential_rating span").append(empty_star);
+		for(var f = 5; f > 0; f--) {
+			for(var j = 6-f; j > 0; j--) {
+				$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(star);
+			}
+			for(var k = 1; k < f; k++) {
+				$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(empty_star);
+			}
 		}
 	});
 
