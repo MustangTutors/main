@@ -29,16 +29,24 @@ $(document).ready(function() {
 	});
 
 	$("img[src='img/pencil.png']").on('click', function(e) {
-		$(".potential_rating span img").remove();
-		e.preventDefault();
-		$("#editRating").show();
+		if($("#editRating").is(":visible")) {
+			$(".potential_rating span img").remove();
+			$("#editRating").hide();
+			e.preventDefault();
+		}
 
-		for(var f = 5; f > 0; f--) {
-			for(var j = 6-f; j > 0; j--) {
-				$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(star);
-			}
-			for(var k = 1; k < f; k++) {
-				$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(empty_star);
+		else {
+			$(".potential_rating span img").remove();
+			e.preventDefault();
+			$("#editRating").show();
+
+			for(var f = 5; f > 0; f--) {
+				for(var j = 6-f; j > 0; j--) {
+					$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(star);
+				}
+				for(var k = 1; k < f; k++) {
+					$("#editRating div.potential_rating:nth-child("+(f+1)+") span").append(empty_star);
+				}
 			}
 		}
 	});
