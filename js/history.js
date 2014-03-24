@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	if(true){
 		toggleView();
 	}
@@ -44,8 +45,8 @@ $(document).ready(function(){
         }
 
         if(values) {
-            // Create JSON with all emails
-            createEmailJSON();
+            // Sned JSON with all emails
+            sendEmailJSON();
 
             // Close and clear share window
             closeAndClearShare();
@@ -101,44 +102,56 @@ $(document).ready(function(){
 
 	// Parse JSON for student meetings
     $.ajax({
-        url: "json/student_history.json",
+        url: "Laravel/public/users/history",
         success: function(json) {
-            json = json.meetings;
-            for(var i = 0; i < json.length; i++) {
-                // Assign json values
-                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
-                var contributor = "Tutored by: " + json[i].first_name + " " + json[i].last_name;
-                var date = json[i].day;
-                var time = json[i].start_time + " to " + json[i].end_time;
-                var summary = json[i].summary;
+            json = JSON.parse(json);
+            console.log(json);
 
-                // Create and append new node with json information
-                var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
-                					'<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
-                					'<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
-                $('#student_history').append(newArticle);
+            if(json.length === 0) {
+                $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
+            }
+            else {
+                $('#student_history span.error.none').html("");
+                for(var i = 0; i < json.length; i++) {
+                    // Assign json values
+                    var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                    var contributor = "Tutored by: " + json[i].first_name + " " + json[i].last_name;
+                    var date = json[i].day;
+                    var time = json[i].start_time + " to " + json[i].end_time;
+                    var summary = json[i].Summary;
+
+                    // Create and append new node with json information
+                    var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                                        '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                                        '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+                    $('#student_history').append(newArticle);
+                }
             }
         }
     });
 
-    // Parse JSON for student meetings
+    // Parse JSON for tutor meetings
     $.ajax({
         url: "json/tutor_history.json",
         success: function(json) {
-            json = json.meetings;
-            for(var i = 0; i < json.length; i++) {
-                // Assign json values
-                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
-                var contributor = "Student tutored: " + json[i].first_name + " " + json[i].last_name;
-                var date = json[i].day;
-                var time = json[i].start_time + " to " + json[i].end_time;
-                var summary = json[i].summary;
+            json = JSON.parse(json);
 
-                // Create and append new node with json information
-                var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
-                                    '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
-                                    '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
-                $('#tutor_history').append(newArticle);
+            if(json.length !== 0) {
+                json = json.meetings;
+                for(var i = 0; i < json.length; i++) {
+                    // Assign json values
+                    var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                    var contributor = "Student tutored: " + json[i].first_name + " " + json[i].last_name;
+                    var date = json[i].day;
+                    var time = json[i].start_time + " to " + json[i].end_time;
+                    var summary = json[i].summary;
+
+                    // Create and append new node with json information
+                    var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                                        '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                                        '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+                    $('#tutor_history').append(newArticle);
+                }
             }
         }
     });
@@ -202,6 +215,19 @@ function createEmailJSON() {
         }
     }
 
-    console.log(JSON.stringify(emailsJSON));
     return JSON.stringify(emailsJSON);
+}
+
+function sendEmailJSON() {
+    var json = createEmailJSON();
+
+    // Parse JSON for emails
+    $.ajax({
+        type: "POST",
+        url: "Laravel/public/users/email",
+        data: {
+            emails: json
+        },
+        success: function(json) {}
+    });
 }

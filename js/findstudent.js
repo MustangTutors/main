@@ -13,7 +13,7 @@ function loadMeetings () {
     // Parse JSON for student meetings
     $.ajax({
         type: "POST",
-        url: "json/student_history.json",
+        url: "",
         data: {
             smu_id: $('#search_bar #search_student_id').val(),
             codeword: $('#search_bar #search_codeword')
@@ -25,7 +25,7 @@ function loadMeetings () {
             }
             else {
                 if(json.meetings.length === 0) {
-                    $('#results span.error').html('This user has not yet attended any tutoring sessions.');
+                    $('#results span.error.none').html('This user has not yet attended any tutoring sessions.');
                 }
                 else {
                     json = json.meetings;

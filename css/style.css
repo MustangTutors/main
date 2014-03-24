@@ -1045,7 +1045,7 @@ section#tutor_history {
     width: 50px;
 }
 
-#results .error {
+.error.none {
     text-align: left;
     margin-top: 15px;
     margin-left: 30px;
