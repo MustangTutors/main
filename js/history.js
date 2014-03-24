@@ -197,10 +197,11 @@ function createEmailJSON() {
 
     for(var i = 0; i < emails.length; i++) {
         var holder = emails.eq(i).val();
-        if(holder !== "" && emailsJSON.emails.indexOf("asdf@asdf.com") === -1) {
+        if(holder !== "" && emailsJSON.emails.indexOf(holder) === -1) {
             emailsJSON.emails.push(holder);
         }
     }
 
+    console.log(JSON.stringify(emailsJSON));
     return JSON.stringify(emailsJSON);
 }
