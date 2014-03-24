@@ -159,6 +159,26 @@ public class MainActivity extends Activity {
 	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
         }
+        
+        
+        /* Example of a POST Ajax Request
+        try {
+	        request = new AjaxRequest("POST", "http://tacotruck.floccul.us/api/users/login");
+	        request.addParam("email", "asdf@asdf.com");
+	        request.addParam("password", "asdfasdf");
+	    	JSONObject json;
+            try {
+	            json = request.send();
+	            System.out.println(json);
+            } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+            }
+        } catch (MalformedURLException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+        }
+        */
 		    
     }
     
