@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -130,55 +131,36 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
-    	try {
-    		URL url = new URL("http://mustangtutors.floccul.us/json/searchResults.json");
-		    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		    JSONObject json = new JSONObject(readStream(con.getInputStream()));
-		    JSONArray jsonTutors = json.getJSONArray("Tutors");
-		    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-		    for (int i = 0; i < jsonTutors.length(); i++) {
-		    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
-		    	int id = tutor.getInt("User_ID");
-		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
-		    	int numRatings = tutor.getInt("Number_Ratings");
-		    	double rating = tutor.getDouble("Average_Rating");
-		    	int availability = tutor.getInt("Available");
-		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
-		    }
-	    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-	    	ListView listView = (ListView) findViewById(R.id.listview);
-	    	listView.setAdapter(searchAdapter);
-		}
-    	catch (Exception e) {
-		  e.printStackTrace();
-		}
+    	AjaxRequest request;
+        try {
+	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
+	    	JSONObject json;
+            try {
+	            json = request.send();
+	            JSONArray jsonTutors = json.getJSONArray("Tutors");
+			    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+			    for (int i = 0; i < jsonTutors.length(); i++) {
+			    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
+			    	int id = tutor.getInt("User_ID");
+			    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+			    	int numRatings = tutor.getInt("Number_Ratings");
+			    	double rating = tutor.getDouble("Average_Rating");
+			    	int availability = tutor.getInt("Available");
+			    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
+			    }
+		    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+		    	ListView listView = (ListView) findViewById(R.id.listview);
+		    	listView.setAdapter(searchAdapter);
+            } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+            }
+        } catch (MalformedURLException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+        }
+		    
     }
-
-    private String readStream(InputStream in) {
-    	String output = "";
-		BufferedReader reader = null;
-		try {
-		    reader = new BufferedReader(new InputStreamReader(in));
-		    String line = "";
-		    while ((line = reader.readLine()) != null) {
-		        output += line + "\n";
-		    }
-		}
-		catch (IOException e) {
-		    e.printStackTrace();
-		}
-		finally {
-		    if (reader != null) {
-		        try {
-		            reader.close();
-		        }
-		        catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		}
-	    return output;
-	} 
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
