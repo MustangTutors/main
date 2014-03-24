@@ -31,11 +31,12 @@ Route::get('users',function()
 	return View::make('users');
 });
 
-Route::get('users/available/{id}',function($id)
-{
-	$result=DB::select("select available from users where user_id = ?",array($id));
-	echo json_encode($result);
-});
+Route::get('users/available/{id?}',function($id =-1)
+{	
+	$temp = new User();
+	$temp->getAvailability($id);
+})
+->where('id','[0-9]+');
 
 Route::get('users/history',function()
 {
@@ -65,6 +66,13 @@ Route::get('tutor/{id}',function($id)
     $_SESSION['user_id'] = 3;
     $temp = new Tutor();
     $temp->getInfoForTutorsPage($_SESSION['user_id'],$id);
+})
+->where('id','[0-9]+');
+
+Route::get('tutor/search',function()
+{   
+   $temp= new Tutor();
+   $temp->searchTutors();
 });
 
 Route::post('tutor/comment',function()

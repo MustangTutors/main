@@ -51,11 +51,57 @@ class Tutor extends Eloquent{
         $result = DB::insert("insert into comments (comments.user_id,comments.tutor_id,comments.comment,comments.timeStamp) VALUES (?,?,?,?)",array($user_id,$tutor_id,$comment,$date));
     }
 
+    public function searchTutors()
+    {
+        //Prepare generic query
+        $query = "SELECT u.fName, u.lName, c.subject, c.course_number, c.course_name, u.available FROM users u inner join courses_tutored ct on u.user_id = ct.user_id inner join courses c on ct.course_id = c. course_id WHERE ";
 
-
-
-
-
+        //Append WHERE clause based on parameters
+        $params=array();    
+    
+        //First check if no parameters are set 
+        if(!(Input::has('fname') || Input::has('lname') || Input::has('subject') || Input::has('cnumber') || Input::has('cname') || Input::has('available'))){
+            $query.= "1";
+        }
+        //Add parameters to the WHERE clause and the parameter array
+        else
+        {         
+            if(Input::has('fname')){
+                $query.="u.fName = ? AND ";
+                $params[]=Input::get('fname');
+            }
+            if(Input::has('lname')){
+                $query.="u.lName = ? AND ";
+                $params[] = Input::get('lname');
+            }
+            if(Input::has('subject')){
+                $query.="c.subject = ? AND ";
+                $params[] = Input::get('subject');
+            }
+            if(Input::has('cnumber')){
+                $query.="c.course_number = ? AND ";
+                $params[] = Input::get('cnumber');
+            }
+            if(Input::has('cname')){
+                $query.="c.course_name = ? AND ";
+                $params[]=Input::get('cname');
+            }
+            if(Input::has('available')){
+                $query.="u.available = ? AND ";
+                $params[]=Input::get('available');
+            }    
+        //Remove the trailing "AND "
+        $query= substr_replace($query,"",-4);      
+        }    
+        
+        //Submit query    
+        $result=DB::select($query,$params);
+        echo json_encode($result);
+      }
+    
+    
+    
+        
 
 
 
