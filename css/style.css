@@ -1158,7 +1158,7 @@ div#commentList ul li:nth-child(odd) {
     height: 200px;
     left: 50%;
     top: 50%;
-    margin-left: 85px;
+    margin-left: -80px;
     margin-top: -28px;
     padding: 0px 10px 0px 0px;
     background-color: white;
@@ -1173,6 +1173,10 @@ div#commentList ul li:nth-child(odd) {
 
 .potential_rating span img {
     max-width: 18px;
+}
+
+.potential_rating:hover {
+    background-color: red;
 }
 
 /* End styling for Tutor Profile */

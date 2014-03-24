@@ -28,7 +28,9 @@ $(document).ready(function() {
 		$("textarea[name='commentBox']").val("");
 	});
 
-	$("img[src='img/pencil.png']").on('click', function() {
+	$("img[src='img/pencil.png']").on('click', function(e) {
+		$(".potential_rating span img").remove();
+		e.preventDefault();
 		$("#editRating").show();
 
 		for(var f = 5; f > 0; f--) {
