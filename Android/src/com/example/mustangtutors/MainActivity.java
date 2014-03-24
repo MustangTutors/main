@@ -1,12 +1,6 @@
 package com.example.mustangtutors;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -28,11 +22,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnCheckedChangeListener {
 	private SharedPreferences sharedPref;
 	private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
@@ -179,7 +176,13 @@ public class MainActivity extends Activity {
 	        e1.printStackTrace();
         }
         */
-		    
+		
+        Switch mySwitch = (Switch) findViewById(R.id.switchAvailability);
+        mySwitch.setOnCheckedChangeListener(new OnCheckedChangedListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Do Something
+            }
+        });
     }
     
     @Override
@@ -305,4 +308,16 @@ public class MainActivity extends Activity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    
+//    public void onSwitchClicked(View view) {
+//       boolean on = ((ToggleButton) view).isChecked();
+//       
+//       if(on) {
+//    	   System.out.println("on");
+//       } else {
+//    	   System.out.println("off");
+//       }
+//    }
+    
+    
 }
