@@ -28,17 +28,23 @@ $(document).ready(function() {
 		$("textarea[name='commentBox']").val("");
 	});
 
+	$("body").on('click', function() {
+		$("#editRating").hide();
+	});
+
 	$("img[src='img/pencil.png']").on('click', function(e) {
 		if($("#editRating").is(":visible")) {
 			$(".potential_rating span img").remove();
 			$("#editRating").hide();
 			e.preventDefault();
+			e.stopPropagation();
 		}
 
 		else {
 			$(".potential_rating span img").remove();
 			e.preventDefault();
 			$("#editRating").show();
+			e.stopPropagation();
 
 			for(var f = 5; f > 0; f--) {
 				for(var j = 6-f; j > 0; j--) {
