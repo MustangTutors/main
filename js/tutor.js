@@ -41,7 +41,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$(".potential_rating").on('click', function() {
+	$(".potential_rating span").on('click', function() {
+		$("span#yourRating h3 span").html($(this).html());
 		$(".potential_rating span img").remove();
 		$("#editRating").hide();
 	});
