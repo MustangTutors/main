@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         
-        Switch mySwitch =  (Switch) findViewById(R.id.switchAvailability);
+        Switch mySwitch =  (Switch) menu.findItem(R.id.mySwitch).getActionView();
         if(mySwitch != null) {
         	mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
