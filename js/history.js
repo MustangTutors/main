@@ -134,7 +134,7 @@ $(document).ready(function(){
     $.ajax({
         url: "json/tutor_history.json",
         success: function(json) {
-            json = JSON.parse(json);
+            //json = JSON.parse(json);
 
             if(json.length !== 0) {
                 json = json.meetings;

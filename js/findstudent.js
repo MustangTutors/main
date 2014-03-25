@@ -13,7 +13,7 @@ function loadMeetings () {
     // Parse JSON for student meetings
     $.ajax({
         type: "POST",
-        url: "",
+        url: "/Laravel/public/users/history/parent",
         data: {
             smu_id: $('#search_bar #search_student_id').val(),
             codeword: $('#search_bar #search_codeword')
