@@ -51,6 +51,35 @@ class Tutor extends Eloquent{
         $result = DB::insert("insert into comments (comments.user_id,comments.tutor_id,comments.comment,comments.timeStamp) VALUES (?,?,?,?)",array($user_id,$tutor_id,$comment,$date));
     }
 
+    //Create/Update a rating
+    public function rateTutor()
+    {       
+
+        //Initialize variables
+        if(isset($_SESSION['user_id']){$userid= $_SESSION['user_id'];} else{$userid = Input::get('userid',0);}
+        if(isset($_SESSION['tutor_id']){$userid= $_SESSION['tutor_id'];} else{$tutorid = Input::get('tutorid',0);}
+        if(isset($_SESSION['rating']){$userid= $_SESSION['rating'];} else{$rating = Input::get('rating',0);}
+
+        //Check if user has already rated the tutor
+        $query= "SELECT * FROM rating WHERE user_id = ? AND tutor_id = ?";
+        $result = DB::select($query,array($userid,$tutorid);
+
+        if(!empty($result)){
+            $query = "UPDATE rating SET rating=? WHERE user_id=? AND tutor_id=?";
+            $result = DB::update($query,array($rating,$userid,$tutorid);
+            echo $result
+        }   
+        else
+        {
+            $query = "INSERT INTO rating(user_id,tutor_id,rating) VALUES (?,?,?)";
+            $result = DB::insert($query,array($userid,$tutorid,$rating);
+            echo $result
+        }
+
+    }
+
+
+    //Tutor search function
     public function searchTutors()
     {
         //Prepare generic query
