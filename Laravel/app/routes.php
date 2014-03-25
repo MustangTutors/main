@@ -24,6 +24,7 @@ tutor/{id}              ==>this returns all of a tutors info based on their user
 tutor/comment           ==>this adds a comment for a tutor made by the current user
 users/email             ==>this sends emails to the authorized users with the codeword
 tutor/search            ==>this lets you search on any or all criteria and returns a json of results
+tutor/rate              ==>this adds or updates user's rating for a tutor
 
 */
 Route::get('/', function()
@@ -113,6 +114,12 @@ Route::get('tutor/search',function()
 {   
    $temp= new Tutor();
    $temp->searchTutors();
+});
+
+Route::post('tutor/rate',function()
+{
+    $temp = new Tutor();
+    $temp->rateTutor();
 });
 
 Route::post('tutor/comment',function()

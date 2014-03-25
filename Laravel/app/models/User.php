@@ -158,7 +158,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     /**
     *   Registers a new user to the DB if the ID provided doesn't already exist
-    *   @return JSON containing the data added to the DB
+    *   @echo JSON containing the data added to the DB
     */
     public function registerUser()
     {
@@ -181,7 +181,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
         
             //Obtain new user's info/ensure register succeeded
-            return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
+            $result=DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid);
+            echo json_encode($result); 
         }
    }
 }
