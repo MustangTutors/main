@@ -2,6 +2,8 @@ $(document).ready(function() {
     $("header").load("header.html", setToggleColor);
     $("footer").load("footer.html");
 
+    showAndSetAvailability();
+
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
 
@@ -84,4 +86,40 @@ function convertTime(militaryTime) {
     var minutes = militaryTime.substring(3);
 
     return hours + ':' + minutes + amPm;
+}
+
+function showAndSetAvailability() {
+    // Parse JSON for tutor meetings
+    $.ajax({
+        url: "json/user_info.json",
+        success: function(json) {
+            //json = JSON.parse(json);
+
+            if(json.length !== 0) {
+                // If the user is not a tutor, hide the toggle availability
+                if(json.tutor === 0) {
+                    $("nav li#toggleButton").hide();
+                }
+                else {
+                    if(json.available === 1) {
+                        // Set toggle to "Busy"
+                        $('label.toggle input[type="checkbox"]').prop('checked', true, setToggleColor);
+                        // If the toggle is 'checked' (slider is on the right)
+                        
+                        // Set the colors
+                        $('label.toggle span.false').css('color', '#AAA');
+                        $('label.toggle span.true').css('color', 'white');
+                    }
+                    else {
+                        // Set toggle to "Available"
+                        $('label.toggle input[type="checkbox"]').prop('checked', false, setToggleColor);
+
+                        // Set the colors
+                        $('label.toggle span.false').css('color', 'white');
+                        $('label.toggle span.true').css('color', '#AAA');
+                    }
+                }
+            }
+        }
+    });
 }

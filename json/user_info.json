@@ -1,0 +1,11 @@
+{
+	"user_id":3,
+	"smu_id":12341234,
+	"fName":"Story",
+	"lName":"Zanetti",
+	"available":2,
+	"active":0,
+	"tutor":1,
+	"admin":0,
+	"email":"storyzanetti@gmail.com"
+}
