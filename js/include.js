@@ -7,6 +7,9 @@ $(document).ready(function() {
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
 
+    // Toggle availability
+    $(document).on('change', '#toggleButton input[type="checkbox"]', toggleAvailability);
+
     // If settings icon is clicked, show dropdown
     $(document).on('click', '#welcomeMessage #welcome', function() {
         $('#settings_message').hide();
@@ -76,6 +79,16 @@ function setToggleColor() {
         toggle.siblings('span').children('span.false').css('color', 'white');
         toggle.siblings('span').children('span.true').css('color', '#AAA');
     }
+}
+
+// Toggle availability
+function toggleAvailability() {
+    // Call toggle
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/users/toggle",
+        success: function(json) {}
+    });
 }
 
 // Convert from military time to standard time
