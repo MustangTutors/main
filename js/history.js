@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    showView();
+
 	if(true){
 		toggleView();
 	}

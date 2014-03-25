@@ -98,7 +98,7 @@ function setNavigationBar() {
             // Logged in
             if(json.length !== 0) {
                 // If the user is not a tutor
-                if(json.tutor === 0) {
+                if(json.tutor === 0 || json.active === 0) {
                     // Hide the toggle availability
                     $("nav li#toggleButton").hide();
 
