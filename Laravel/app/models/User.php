@@ -142,12 +142,37 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    * @param $id INT the id of the user whose status is to be retrieved
    * @echo JSON containing the availability status
    */
-   public function getAvailability($id = -1){
+   public function getAvailability($id = -1)
+   {
     if($id == -1) $id = Session::get('user_id', -1);
     $result=DB::select("select available from users where user_id = ?",array($id));
     echo json_encode($result);
    }
-   
 
+    /**
+    *   Registers a new user to the DB if the ID provided doesn't already exist
+    *   @return JSON containing the data added to the DB
+    */
+    public function registerUser()
+    {
+        //First check if user already exists
+        $smuid = Input::get('smu_id');
+    
+        $query = "SELECT * FROM users WHERE smu_id = ?";
+        $result = DB::select($query,array($smuid));
+        if(!empty($result)){
+            echo "The ID provided has already been registered.";        
+        }   
+        $query= "INSERT INTO users(smu_id,fName,lName,available,active,tutor,admin,email,pswd,codeword) 
+                 VALUES (?,?,?,0,0,0,0,?,?,?)"
+        //Create initial codeword randomly (from stackoverflow.com)
+        $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+        
+        //Submit insert
+        $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
+    
+        //Obtain new user's info/ensure register succeeded
+        return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
+   }
 }
 ?>

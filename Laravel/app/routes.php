@@ -30,6 +30,12 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::post('users/register',function()
+{
+    $temp= new User();
+    $temp->registerUser();
+});
+
 Route::post('users/login',function()
 {   
     
@@ -48,8 +54,7 @@ Route::get('users/logout',function()
 Route::get('users',function()
 {
     $temp = new User();
-    $temp1 = $temp->getAuthIdentifier();
-	//return View::make('users');
+    $temp1 = $temp->getAuthIdentifier();	
 	echo ($temp1);
 });
 
