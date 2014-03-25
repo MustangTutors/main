@@ -119,17 +119,13 @@ function setNavigationBar() {
     $.ajax({
         url: "Laravel/public/users/current",
         success: function(json) {
-            json = JSON.parse(json);
-            console.log(json[0]);
             // Logged in
-            if(json.length !== 0) {
+            if(json !== "") {
+                json = JSON.parse(json);
                 json = json[0];
 
                 // If the user is not a tutor
                 if(json.tutor === 0 || json.active === 0) {
-                    // Hide the toggle availability
-                    $("nav li#toggleButton").hide();
-
                     // Add navigation for student user
                     var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
                                 '<li class="nav"><a href="history.html">Student History</a>'+
@@ -147,6 +143,8 @@ function setNavigationBar() {
                     }
                 }
                 else {
+                    // Show the toggle availability
+                    $("nav li#toggleButton").show();
                     if(json.available === "1") {
                         // Set toggle to "Busy"
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);

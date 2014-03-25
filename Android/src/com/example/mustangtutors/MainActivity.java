@@ -17,13 +17,13 @@ import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Menu mMenu;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -109,12 +110,12 @@ public class MainActivity extends Activity {
                 ) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
                 getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -182,8 +183,9 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        mMenu = menu;
         
-        Switch mySwitch =  (Switch) menu.findItem(R.id.mySwitch).getActionView();
+        Switch mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
         mySwitch.setTextOff("Busy");
         mySwitch.setTextOn("Available");
 		mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -207,6 +209,7 @@ public class MainActivity extends Activity {
         // If the nav drawer is open, hide action items related to the content view
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+    	menu.findItem(R.id.mySwitch).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -260,6 +263,9 @@ public class MainActivity extends Activity {
     		// Update navigation drawer
     		fillNavDrawer("logged out");
     		
+    		// Hide the toggle availability switch
+			mMenu.findItem(R.id.mySwitch).setVisible(false);
+    		
     		// Show a logout toast
     		Toast.makeText(getApplicationContext(), 
     				getString(R.string.logged_out), 
@@ -284,6 +290,10 @@ public class MainActivity extends Activity {
 				
 				// Update the navigation drawer with links for a logged in user.
     			fillNavDrawer("logged in");
+    			
+    			// Show the toggle availability switch and set it.
+    			mMenu.findItem(R.id.mySwitch).setVisible(true);
+    			// Story: [set switch state here]
     			
         		// Show a login toast
         		Toast.makeText(getApplicationContext(), 

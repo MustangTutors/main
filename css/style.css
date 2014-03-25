@@ -178,6 +178,10 @@ nav ul {
     cursor: pointer;
 }
 
+nav li#toggleButton {
+    display: none;
+}
+
 #statusLabel {
     color: white;
     position: absolute;
@@ -190,7 +194,7 @@ nav ul {
 /* Styling of login form. */
 
 #loginForm {
-    display: none;
+    display: block;
     margin-right: 25px;
     margin-top: 25px;
 }
@@ -211,7 +215,7 @@ section#login {
 /* Styling of welcome section. */
 
 #welcomeMessage {
-    display: block;
+    display: none;
     margin-right: 40px;
     margin-top: 20px;
     width: 300px;
