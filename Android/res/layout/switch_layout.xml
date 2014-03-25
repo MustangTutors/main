@@ -7,7 +7,6 @@
         style="@style/switchAvailability"
         android:id="@+id/switchAvailability"
         android:textOn="Available"
-        android:textOff="Busy"
-        android:onClick="onSwitchClicked" />
+        android:textOff="Busy" />
 
 </RelativeLayout>

@@ -29,7 +29,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class MainActivity extends Activity implements OnCheckedChangeListener {
+public class MainActivity extends Activity {
 	private SharedPreferences sharedPref;
 	private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
@@ -176,14 +176,37 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	        e1.printStackTrace();
         }
         */
-		
-        Switch mySwitch = (Switch) findViewById(R.id.switchAvailability);
-        mySwitch.setOnCheckedChangeListener(new OnCheckedChangedListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Do Something
-            }
-        });
+        
+        Switch mySwitch =  (Switch) findViewById(R.id.switchAvailability);
+        if(mySwitch != null) {
+        	mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        // The toggle is enabled
+                    	System.out.println("first");
+                    } else {
+                        // The toggle is disabled
+                    	System.out.println("second");
+                    }
+                }
+            });
+        }
+        else {
+        	System.out.println("not");
+        }
+//        if(mySwitch != null) {
+//        	mySwitch.setOnCheckedChangeListener(this);
+//        	System.out.println("yes");
+//        }
+//        else
+//        	System.out.println("none");
     }
+    
+//    @Override
+//    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//        // Do Something
+//    	System.out.println("here");
+//    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -308,16 +331,4 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    
-//    public void onSwitchClicked(View view) {
-//       boolean on = ((ToggleButton) view).isChecked();
-//       
-//       if(on) {
-//    	   System.out.println("on");
-//       } else {
-//    	   System.out.println("off");
-//       }
-//    }
-    
-    
 }
