@@ -184,35 +184,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             echo json_encode($result); 
         }
    }
-
-   /**
-     *   Registers a new user to the DB if the ID provided doesn't already exist
-     *   @return JSON containing the data added to the DB
-     */
-     public function registerUser()
-     {
-         //First check if user already exists
-         $smuid = Input::get('smu_id');
-     
-         $query = "SELECT * FROM users WHERE smu_id = ?";
-         $result = DB::select($query,array($smuid));
-         if(!empty($result)){
-             echo "The ID provided has already been registered.";        
-         }   
-         else
-         {
-             $query= "INSERT INTO users(smu_id,fName,lName,available,active,tutor,admin,email,pswd,codeword) 
-                      VALUES (?,?,?,0,0,0,0,?,?,?)";
-             //Create initial codeword randomly (from stackoverflow.com)
-             $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
-             
-             //Submit insert
-             $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
-         
-             //Obtain new user's info/ensure register succeeded
-             // return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
-         }
-    }
->>>>>>> 34aff396a23ab3f18810902ed4441e2302e8e1ee
 }
 ?>
