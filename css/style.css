@@ -1154,13 +1154,13 @@ div#commentList ul li:nth-child(odd) {
 
 #editRating {
     position: fixed;
-    width: 181px;
+    width: 186px;
     height: 200px;
     left: 50%;
     top: 50%;
     margin-left: -80px;
     margin-top: -28px;
-    padding: 0px 10px 0px 0px;
+    padding: 0px 10px 0px 10px;
     background-color: white;
     border-style: solid;
     border-color: #524928;
@@ -1168,7 +1168,7 @@ div#commentList ul li:nth-child(odd) {
 }
 
 #editRating h3 {
-    margin-left: 23px;
+    margin-left: 17px;
 }
 
 .potential_rating {
@@ -1181,6 +1181,14 @@ div#commentList ul li:nth-child(odd) {
 
 .potential_rating span img {
     max-width: 18px;
+}
+
+.potential_rating span img:first-child {
+    margin-left: 10px;
+}
+
+.potential_rating span img:last-child {
+    margin-right: 10px;
 }
 
 /* End styling for Tutor Profile */
