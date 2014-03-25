@@ -4,7 +4,7 @@
 	"fName":"Story",
 	"lName":"Zanetti",
 	"available":0,
-	"active":0,
+	"active":1,
 	"tutor":1,
 	"admin":1,
 	"email":"storyzanetti@gmail.com"

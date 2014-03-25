@@ -243,65 +243,7 @@ function showView() {
 
             // Logged in
             if(json.length !== 0) {
-                // If the user is not a tutor
-                if(json.tutor === 0 || json.active === 0) {
-                    // Hide the toggle availability
-                    $("nav li#toggleButton").hide();
-
-                    // Add navigation for student user
-                    var newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+
-                                '<li class="nav"><a href="history.html">Student History</a>'+
-                                '<ul class="dropdown"><div class="border">'+
-                                '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
-                                '<li class="nav"><a href="#">Become a Tutor</a></li>';
-                    $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                    }
-
-                }
-                else {
-                    if(json.available === 1) {
-                        // Set toggle to "Busy"
-                        $('label.toggle input[type="checkbox"]').prop('checked', true, setToggleColor);
-                        // If the toggle is 'checked' (slider is on the right)
-                        
-                        // Set the colors
-                        $('label.toggle span.false').css('color', '#AAA');
-                        $('label.toggle span.true').css('color', 'white');
-                    }
-                    else {
-                        // Set toggle to "Available"
-                        $('label.toggle input[type="checkbox"]').prop('checked', false, setToggleColor);
-
-                        // Set the colors
-                        $('label.toggle span.false').css('color', 'white');
-                        $('label.toggle span.true').css('color', '#AAA');
-                    }
-
-                    // Add navigation for tutor user
-                    var newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+ 
-                                '<li class="nav"><a href="history.html">Student History</a>'+
-                                '<ul class="dropdown"><div class="border">'+
-                                '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>';
-                    $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                    }
-                }
-            }
-            // Not logged in
-            else {
-                var reg = '<li class="nav"><a href="register.html">Register</a></li>';
-                $('nav #navigation').append(reg);
+                
             }
         }
     });

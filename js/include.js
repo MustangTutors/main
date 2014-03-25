@@ -103,17 +103,17 @@ function setNavigationBar() {
                     $("nav li#toggleButton").hide();
 
                     // Add navigation for student user
-                    var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
+                    var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
+                                '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
                                 '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
-                                '<li class="nav"><a href="#">Become a Tutor</a></li>';
+                                '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
 
                     // If admin, add navigation options for admin
                     if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+
-                                '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
                     }
 
@@ -141,13 +141,13 @@ function setNavigationBar() {
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>';
+                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
+                                '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
 
                     // If admin, add navigation options for admin
                     if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+
-                                '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
                     }
                 }
