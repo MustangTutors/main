@@ -116,25 +116,24 @@ function setNavigationBar() {
                         newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
                     }
-
                 }
                 else {
                     if(json.available === 1) {
                         // Set toggle to "Busy"
-                        $('label.toggle input[type="checkbox"]').prop('checked', true, setToggleColor);
+                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
                         // If the toggle is 'checked' (slider is on the right)
                         
                         // Set the colors
-                        $('label.toggle span.false').css('color', '#AAA');
-                        $('label.toggle span.true').css('color', 'white');
+                        $('#navigation label.toggle span.false').css('color', '#AAA');
+                        $('#navigation label.toggle span.true').css('color', 'white');
                     }
                     else {
                         // Set toggle to "Available"
-                        $('label.toggle input[type="checkbox"]').prop('checked', false, setToggleColor);
+                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
 
                         // Set the colors
-                        $('label.toggle span.false').css('color', 'white');
-                        $('label.toggle span.true').css('color', '#AAA');
+                        $('#navigation label.toggle span.false').css('color', 'white');
+                        $('#navigation label.toggle span.true').css('color', '#AAA');
                     }
 
                     // Add navigation for tutor user
@@ -154,7 +153,8 @@ function setNavigationBar() {
             }
             // Not logged in
             else {
-                var reg = '<li class="nav"><a href="register.html">Register</a></li>';
+                var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
+                        '<li class="nav"><a href="findstudent.html">Search for Student</a></li>';
                 $('nav #navigation').append(reg);
             }
         }

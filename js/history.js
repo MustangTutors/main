@@ -1,10 +1,5 @@
 $(document).ready(function(){
-
     showView();
-
-	if(true){
-		toggleView();
-	}
 
 	// When toggle view clicked, load correct view
 	$(document).on('change', '#history_view input[type="checkbox"]', toggleView);
@@ -243,7 +238,12 @@ function showView() {
 
             // Logged in
             if(json.length !== 0) {
-                
+                // If user not a tutor, don't allow to toggle views
+                if(json.tutor === 0 || json.active === 0){
+                    $('#history_view input[type="checkbox"]').prop('checked', true);
+                    toggleView();
+                    $('label#history_view').hide();
+                }
             }
         }
     });
