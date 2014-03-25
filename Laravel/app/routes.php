@@ -40,6 +40,11 @@ Route::post('users/login',function()
     
 });
 
+Route::get('users/current',function()
+{
+    $temp = new User();
+    $temp->getCurrUserInfo();
+});
 Route::get('users/logout',function()
 {
     $temp = new User();
