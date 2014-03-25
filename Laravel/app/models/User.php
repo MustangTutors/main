@@ -19,6 +19,51 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
+    //logs in a user if their id and password match
+    //also sets availability to 2 if user is a tutor
+    //echos a json of user data
+    public function loginUser($smu_id,$password)
+    {
+        //first check if user valid
+        $result = DB::select("select * from users where smu_id = ? AND pswd = ?",array($smu_id,$password));
+        if (isset($result[0]))
+        {
+            //set the session variable 
+            $_SESSION['user_id'] = $result[0]->user_id;
+            if($result[0]->tutor == 1)
+            {
+                //change availability of tutor to 2 (available)
+                DB::update("update users SET available = 2 WHERE user_id = ?",array($result[0]->user_id));
+            }
+            echo json_encode($result);
+        }else
+        {
+            echo ("balls");
+        }
+    }
+    
+    //logout a user by setting availability to 0 and clearing session variables
+    public function logoutUser()
+    {        
+        if(isset($_SESSION['user_id'])){
+            DB::update("update users SET available = 0 WHERE user_id = ?",array($_SESSION['user_id']));
+            session_destroy();
+            echo ("you are successfully logged out");
+        }else{
+            echo ("no user is logged in");
+        }
+        
+    }
+    
+    //toggle availability for a tutor
+    public function toggleAvailable(){
+        $result = DB::select("select * from users where user_id = ?",array($_SESSION['user_id']));
+        if($result[0]->available != 1)
+            DB::update("update users SET available = 1 WHERE user_id = ?",array($_SESSION['user_id']));
+        else
+            DB::update("update users SET available = 2 WHERE user_id = ?",array($_SESSION['user_id']));
+
+    }
 	/**
 	 * Get the unique identifier for the user.
 	 *
@@ -102,6 +147,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     $result=DB::select("select available from users where user_id = ?",array($id));
     echo json_encode($result);
    }
+   
 
 }
 ?>

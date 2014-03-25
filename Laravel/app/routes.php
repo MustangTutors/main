@@ -13,12 +13,16 @@
 /*
 HERES A LIST OF THE CURRENT URLs with a brief description
 
+users/login             ==>this logs in a user,changes to available,sets session data,return json of user data
+users/logout            ==>this logs out a user,clears session variables
+users/toggle            ==>this toggles a logged in users availability between 1 and 2
 users/available/{id}    ==>this returns the availability of a user based on their id
 users/history           ==>this returns all of a users records for the user
 users/history/parent    ==>this returns all of a users records for anyone (ie parent)
 tutor/{id}              ==>this returns all of a tutors info based on their user_id
 tutor/comment           ==>this adds a comment for a tutor made by the current user
 users/email             ==>this sends emails to the authorized users with the codeword
+tutor/search            ==>this lets you search on any or all criteria and returns a json of results
 
 */
 Route::get('/', function()
@@ -26,9 +30,34 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::post('users/login',function()
+{   
+    
+    $smu_id = $_POST['smu_id'];
+    $password = $_POST['password'];
+    $temp = new User();
+    $temp->loginUser($smu_id,$password);
+    
+});
+
+Route::get('users/logout',function()
+{
+    $temp = new User();
+    $temp->logoutUser();
+});
 Route::get('users',function()
 {
-	return View::make('users');
+    $temp = new User();
+    $temp1 = $temp->getAuthIdentifier();
+	//return View::make('users');
+	echo ($temp1);
+});
+
+Route::get('users/toggle',function()
+{
+    $_SESSION['user_id'] = 1;
+    $temp = new User();
+    $temp->toggleAvailable($_SESSION['user_id']);
 });
 
 Route::get('users/available/{id?}',function($id =-1)
