@@ -170,16 +170,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         if(!empty($result)){
             echo "The ID provided has already been registered.";        
         }   
-        $query= "INSERT INTO users(smu_id,fName,lName,available,active,tutor,admin,email,pswd,codeword) 
-                 VALUES (?,?,?,0,0,0,0,?,?,?)"
-        //Create initial codeword randomly (from stackoverflow.com)
-        $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+        else
+        {
+            $query= "INSERT INTO users(smu_id,fName,lName,available,active,tutor,admin,email,pswd,codeword) 
+                     VALUES (?,?,?,0,0,0,0,?,?,?)"
+            //Create initial codeword randomly (from stackoverflow.com)
+            $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+            
+            //Submit insert
+            $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
         
-        //Submit insert
-        $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
-    
-        //Obtain new user's info/ensure register succeeded
-        return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
+            //Obtain new user's info/ensure register succeeded
+            return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
+        }
    }
 }
 ?>
