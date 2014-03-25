@@ -13,6 +13,7 @@
 /*
 HERES A LIST OF THE CURRENT URLs with a brief description
 
+users/current           ==>this returns a json of all of the current user's data
 users/login             ==>this logs in a user,changes to available,sets session data,return json of user data
 users/logout            ==>this logs out a user,clears session variables
 users/toggle            ==>this toggles a logged in users availability between 1 and 2
@@ -46,6 +47,11 @@ Route::post('users/login',function()
     
 });
 
+Route::get('users/current',function()
+{
+    $temp = new User();
+    $temp->getCurrUserInfo();
+});
 Route::get('users/logout',function()
 {
     $temp = new User();
