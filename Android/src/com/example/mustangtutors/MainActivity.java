@@ -176,6 +176,12 @@ public class MainActivity extends Activity {
 	        e1.printStackTrace();
         }
         */
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
         
         Switch mySwitch =  (Switch) findViewById(R.id.switchAvailability);
         if(mySwitch != null) {
@@ -192,26 +198,9 @@ public class MainActivity extends Activity {
             });
         }
         else {
-        	System.out.println("not");
+        	System.out.println("nein");
         }
-//        if(mySwitch != null) {
-//        	mySwitch.setOnCheckedChangeListener(this);
-//        	System.out.println("yes");
-//        }
-//        else
-//        	System.out.println("none");
-    }
-    
-//    @Override
-//    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//        // Do Something
-//    	System.out.println("here");
-//    }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        
         return super.onCreateOptionsMenu(menu);
     }
 
