@@ -122,13 +122,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     *
     * @echo these users in a JSON
     */
-    public function getUsersRecords($user_id)
+    public function getUsersRecords($smu_id)
     {
-        $result=DB::select("select * from records where user_id = ?",array($user_id));
+        $result= DB::select("select records.report_id,records.user_id,records.tutor_user_id,records.Date,records.summary,records.course_name from records INNER JOIN users ON records.user_id = users.user_id WHERE users.smu_id = ?",array($smu_id));
         echo json_encode($result);
 
     }
-    
     /**
     * send a user's id and codeword to a list of email addresses
     *

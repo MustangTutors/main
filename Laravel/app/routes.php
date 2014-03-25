@@ -25,8 +25,10 @@ tutor/comment           ==>this adds a comment for a tutor made by the current u
 users/email             ==>this sends emails to the authorized users with the codeword
 tutor/search            ==>this lets you search on any or all criteria and returns a json of results
 tutor/rate              ==>this adds or updates user's rating for a tutor
-
+users/register          ==>this registers a new user
+courses/subjects        ==>this returns a json of the course subjects
 */
+
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -67,7 +69,6 @@ Route::get('users',function()
 
 Route::get('users/toggle',function()
 {
-    $_SESSION['user_id'] = 1;
     $temp = new User();
     $temp->toggleAvailable($_SESSION['user_id']);
 });
@@ -81,13 +82,14 @@ Route::get('users/available/{id?}',function($id =-1)
 
 Route::get('users/history',function()
 {
-    $_SESSION['user_id'] = 3;
+    //$_SESSION['smu_id'] = 1236;
     $temp = new User();
-    if($_SESSION['user_id']!= null)
+    if($_SESSION['smu_id']!= null)
     {
-        $temp->getUsersRecords($_SESSION['user_id']);
+        $temp->getUsersRecords($_SESSION['smu_id']);
     }
 });
+
 
 Route::post('users/history/parent',function()
 {
@@ -133,11 +135,19 @@ Route::post('tutor/comment',function()
 
 Route::post('users/email',function()
 {
+    
     $temp = new User();
     $user_id = "12345";
     $codeword = "codeword";
     $emails = $_POST['emails'];
     $temp->sendEmailWithCodeword($user_id,$codeword,$emails);
+});
+
+Route::get('courses/subjects',function()
+{
+    $temp = new Course();
+    $temp->getUniqueSubjects();
+
 });
 
 
