@@ -184,23 +184,20 @@ public class MainActivity extends Activity {
         inflater.inflate(R.menu.main, menu);
         
         Switch mySwitch =  (Switch) menu.findItem(R.id.mySwitch).getActionView();
-        if(mySwitch != null) {
-        	mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        // The toggle is enabled
-                    	System.out.println("first");
-                    } else {
-                        // The toggle is disabled
-                    	System.out.println("second");
-                    }
-                }
-            });
-        }
-        else {
-        	System.out.println("nein");
-        }
-        
+        mySwitch.setTextOff("Busy");
+        mySwitch.setTextOn("Available");
+		mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+	        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	            if (isChecked) {
+	                // The toggle is enabled
+	            	System.out.println("first");
+	            } else {
+	                // The toggle is disabled
+	            	System.out.println("second");
+	            }
+	        }
+	    });
+        	
         return super.onCreateOptionsMenu(menu);
     }
 

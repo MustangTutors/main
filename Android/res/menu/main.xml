@@ -18,6 +18,7 @@
     <item android:id="@+id/mySwitch" 
 	      android:title=""
 	      android:actionViewClass="android.widget.Switch"
-	      android:showAsAction="always">
+	      android:showAsAction="always"
+	      >
 	</item>
 </menu>
