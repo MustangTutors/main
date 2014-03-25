@@ -3,9 +3,9 @@
 	"smu_id":12341234,
 	"fName":"Story",
 	"lName":"Zanetti",
-	"available":2,
+	"available":0,
 	"active":0,
 	"tutor":1,
-	"admin":0,
+	"admin":1,
 	"email":"storyzanetti@gmail.com"
 }

@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("header").load("header.html", setToggleColor);
     $("footer").load("footer.html");
 
-    showAndSetAvailability();
+    setNavigationBar();
 
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
@@ -88,17 +88,35 @@ function convertTime(militaryTime) {
     return hours + ':' + minutes + amPm;
 }
 
-function showAndSetAvailability() {
-    // Parse JSON for tutor meetings
+function setNavigationBar() {
+    // Parse JSON for user info
     $.ajax({
         url: "json/user_info.json",
         success: function(json) {
             //json = JSON.parse(json);
 
+            // Logged in
             if(json.length !== 0) {
-                // If the user is not a tutor, hide the toggle availability
+                // If the user is not a tutor
                 if(json.tutor === 0) {
+                    // Hide the toggle availability
                     $("nav li#toggleButton").hide();
+
+                    // Add navigation for student user
+                    var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
+                                '<ul class="dropdown"><div class="border">'+
+                                '<li><a href="history.html">Your History</a></li>'+
+                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
+                                '<li class="nav"><a href="#">Become a Tutor</a></li>';
+                    $('nav #navigation').append(newNav);
+
+                    // If admin, add navigation options for admin
+                    if(json.admin === 1){
+                        newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+
+                                '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                        $('nav #navigation').append(newNav);
+                    }
+
                 }
                 else {
                     if(json.available === 1) {
@@ -118,7 +136,26 @@ function showAndSetAvailability() {
                         $('label.toggle span.false').css('color', 'white');
                         $('label.toggle span.true').css('color', '#AAA');
                     }
+
+                    // Add navigation for tutor user
+                    var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
+                                '<ul class="dropdown"><div class="border">'+
+                                '<li><a href="history.html">Your History</a></li>'+
+                                '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>';
+                    $('nav #navigation').append(newNav);
+
+                    // If admin, add navigation options for admin
+                    if(json.admin === 1){
+                        newNav = '<li class="nav"><a href="index.html">Search for Tutors</a></li>'+
+                                '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                        $('nav #navigation').append(newNav);
+                    }
                 }
+            }
+            // Not logged in
+            else {
+                var reg = '<li class="nav"><a href="register.html">Register</a></li>';
+                $('nav #navigation').append(reg);
             }
         }
     });
