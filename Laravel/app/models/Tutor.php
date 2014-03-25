@@ -67,13 +67,13 @@ class Tutor extends Eloquent{
         if(!empty($result)){
             $query = "UPDATE rating SET rating=? WHERE user_id=? AND tutor_id=?";
             $result = DB::update($query,array($rating,$userid,$tutorid);
-            echo $result
+            echo $result;
         }   
         else
         {
             $query = "INSERT INTO rating(user_id,tutor_id,rating) VALUES (?,?,?)";
             $result = DB::insert($query,array($userid,$tutorid,$rating);
-            echo $result
+            echo $result;
         }
 
     }
