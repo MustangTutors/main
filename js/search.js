@@ -1,20 +1,99 @@
 $(document).ready(function() {
-    
-    // $(document).on("mouseenter", ".tutorBox-small", function() {
-    //     $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-    //     $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
-    // });
-    // $(document).on("mouseleave", ".tutorBox-small", function() {
-    //     $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-    //     $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
-    // });
+    getTutors({});
 
-    // Parse JSON for Tutors
+    $(document).on('submit', '#searchTutorsForm', function(event) {
+        event.preventDefault();
+
+        // Put search form data into object
+        var searchData = new Object();
+        var fname = $("#search-tutorFirstName").val();
+        var lname = $("#search-tutorLastName").val();
+        var subject = $("#search-subject").val();
+        var cnumber = $("#search-courseNumber").val();
+        var cname = $("#search-courseName").val();
+        var available = $("#search-available").is(':checked');
+        if (fname !== "") {
+            searchData.fname = fname;
+        }
+        if (lname !== "") {
+            searchData.lname = lname;
+        }
+        if (subject !== null && subject !== "") {
+            searchData.subject = subject;
+        }
+        if (cnumber !== "") {
+            searchData.cnumber = cnumber;
+        }
+        if (cname !== "") {
+            searchData.cname = cname;
+        }
+        if (available !== false) {
+            searchData.available = 1;
+        }
+
+        getTutors(searchData);
+    });
+    
+});
+
+// Generate stars for the rating, given a decimal number.
+function convertToStars(num) {
+    var output = "";
+
+    if (num === null) {
+        return "N/A";
+    }
+
+    // Make sure the input is a number.
+    num = Number(num);
+
+    // Round the number to the nearest 0.5
+    num = (Math.round(num * 2) / 2).toFixed(1);
+
+    // Add to the output the right number of stars
+    var starsAdded = 0;
+    for (num; num > 0.5; num--) {
+        output += '<img src="img/star.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    if (num !== 0) {
+        output += '<img src="img/halfstar.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    for (starsAdded; starsAdded < 5; starsAdded++) {
+        output += '<img src="img/emptystar.png" alt="Rating Star">';
+    }
+
+    return output;
+}
+
+function expandInfo() {
+    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
+}
+
+function contractInfo() {
+    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
+    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
+}
+
+function getTutors(searchData) {
     $.ajax({
-        url: "json/searchResults.json",
+        url: "Laravel/public/tutor/search",
+        type: "GET",
+        data: searchData,
+        beforeSend: function() {
+            $("#tutorBoxes").html("");
+            $(".loading").show();
+        },
+        complete: function() {
+            $(".loading").hide();
+        },
         success: function(json) {
-            //json = JSON.parse(json);
-            json = json.Tutors;
+            json = JSON.parse(json);
+            if (json.length === 0) {
+                $("#tutorBoxes").html("<div class='error'>No tutors were found with those search criteria.</div>");
+            }
             for(var i = 0; i < json.length; i++) {
                 // Create and append new node
                 var tutor = $('<article class="tutorBox">' + 
@@ -40,7 +119,7 @@ $(document).ready(function() {
                                         '</div>' + 
                                     '</a>' + 
                                 '</article>');
-                $('#tutors').append(tutor);
+                $('#tutorBoxes').append(tutor);
 
                 // Add information from JSON
                 // Link to tutor profile
@@ -78,7 +157,8 @@ $(document).ready(function() {
                     tutor.find('.numRatings').html(json[i].Number_Ratings + ' ratings');
                 }
                 // Average rating (make stars)
-                tutor.find('.ratingStars').html(convertToStars(json[i].Average_Rating));
+                var stars = convertToStars(json[i].Average_Rating);
+                tutor.find('.ratingStars').html(stars);
             }
 
             // Apply the extend-left class to the left half of tutors, apply the 
@@ -90,41 +170,4 @@ $(document).ready(function() {
             $('.tutorBox-small').hoverIntent(expandInfo, contractInfo);
         }
     });
-});
-
-// Generate stars for the rating, given a decimal number.
-function convertToStars(num) {
-    var output = "";
-
-    // Make sure the input is a number.
-    num = Number(num);
-
-    // Round the number to the nearest 0.5
-    num = (Math.round(num * 2) / 2).toFixed(1);
-
-    // Add to the output the right number of stars
-    var starsAdded = 0;
-    for (num; num > 0.5; num--) {
-        output += '<img src="img/star.png" alt="Rating Star">';
-        starsAdded++;
-    }
-    if (num !== 0) {
-        output += '<img src="img/halfstar.png" alt="Rating Star">';
-        starsAdded++;
-    }
-    for (starsAdded; starsAdded < 5; starsAdded++) {
-        output += '<img src="img/emptystar.png" alt="Rating Star">';
-    }
-
-    return output;
-}
-
-function expandInfo() {
-    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:-312, width:'toggle'}, 200);
-}
-
-function contractInfo() {
-    $(this).siblings(".tutorBox-extended.extend-right").stop().animate({width:'toggle'}, 200);
-    $(this).siblings(".tutorBox-extended.extend-left").stop().animate({left:0, width:'toggle'}, 200);
 }
