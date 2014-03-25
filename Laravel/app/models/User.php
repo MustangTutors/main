@@ -180,7 +180,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
              $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
          
              //Obtain new user's info/ensure register succeeded
-             return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
+             // return json_encode(DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid)); 
          }
     }
 }

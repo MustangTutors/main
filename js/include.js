@@ -1,8 +1,11 @@
 $(document).ready(function() {
-    $("header").load("header.html", setToggleColor);
+    $("header").load("header.html", function() {
+        setToggleColor();
+        setNavigationBar();
+    });
     $("footer").load("footer.html");
 
-    setNavigationBar();
+    
 
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
@@ -59,22 +62,26 @@ $(document).ready(function() {
 function setToggleColor() {
     var which = $(this).prop('checked');
 
+    // If a toggle was clicked, use 'this', otherwise target all the toggles.
+    var toggle;
+    if (which === undefined) {
+        toggle = $('label.toggle input[type="checkbox"]');
+        console.log('poop');
+    }
+    else {
+        toggle = $(this);
+    }
+
+    which = toggle.prop('checked');
+
     // If the toggle is 'checked' (slider is on the right)
     if(which){
         // Set the colors
-        $(this).siblings('span').children('span.false').css('color', '#AAA');
-        $(this).siblings('span').children('span.true').css('color', 'white');
+        toggle.siblings('span').children('span.false').css('color', '#AAA');
+        toggle.siblings('span').children('span.true').css('color', 'white');
     }
     // If the toggle is 'unchecked' (slider is on the left)
     else {
-        // If a toggle was clicked, use 'this', otherwise target all the toggles.
-        var toggle;
-        if (which === undefined) {
-            toggle = $('label.toggle input[type="checkbox"]');
-        }
-        else {
-            toggle = $(this);
-        }
         // Set the colors
         toggle.siblings('span').children('span.false').css('color', 'white');
         toggle.siblings('span').children('span.true').css('color', '#AAA');
@@ -88,6 +95,13 @@ function toggleAvailability() {
         type: "GET",
         url: "Laravel/public/users/toggle",
         success: function(json) {}
+    });
+
+    $.ajax({
+        url: "Laravel/public/users/current",
+        success: function(json) {
+            console.log(json);
+        }
     });
 }
 
@@ -104,12 +118,14 @@ function convertTime(militaryTime) {
 function setNavigationBar() {
     // Parse JSON for user info
     $.ajax({
-        url: "json/user_info.json",
+        url: "Laravel/public/users/current",
         success: function(json) {
-            //json = JSON.parse(json);
-
+            json = JSON.parse(json);
+            console.log(json[0]);
             // Logged in
             if(json.length !== 0) {
+                json = json[0];
+
                 // If the user is not a tutor
                 if(json.tutor === 0 || json.active === 0) {
                     // Hide the toggle availability
@@ -131,30 +147,25 @@ function setNavigationBar() {
                     }
                 }
                 else {
-                    // Call toggle
-                    $.ajax({
-                        type: "GET",
-                        url: "Laravel/public/users/available" + json.user_id,
-                        success: function(json) {
-                            if(json.available === 1) {
-                                // Set toggle to "Busy"
-                                $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
-                                // If the toggle is 'checked' (slider is on the right)
-                                
-                                // Set the colors
-                                $('#navigation label.toggle span.false').css('color', '#AAA');
-                                $('#navigation label.toggle span.true').css('color', 'white');
-                            }
-                            else {
-                                // Set toggle to "Available"
-                                $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
+                    if(json.available === "1") {
+                        // Set toggle to "Busy"
+                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
+                        // If the toggle is 'checked' (slider is on the right)
+                        console.log(1);
+                        
+                        // Set the colors
+                        console.log($('#navigation label.toggle input[type="checkbox"]').prop('checked'));
+                        setToggleColor();
+                    }
+                    else {
+                        // Set toggle to "Available"
+                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
+                        console.log(2);
 
-                                // Set the colors
-                                $('#navigation label.toggle span.false').css('color', 'white');
-                                $('#navigation label.toggle span.true').css('color', '#AAA');
-                            }
-                        }
-                    });
+                        // Set the colors
+                        console.log($('#navigation label.toggle input[type="checkbox"]').prop('checked'));
+                        setToggleColor();
+                    }
 
                     // Add navigation for tutor user
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
