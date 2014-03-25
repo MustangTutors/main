@@ -131,23 +131,30 @@ function setNavigationBar() {
                     }
                 }
                 else {
-                    if(json.available === 1) {
-                        // Set toggle to "Busy"
-                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
-                        // If the toggle is 'checked' (slider is on the right)
-                        
-                        // Set the colors
-                        $('#navigation label.toggle span.false').css('color', '#AAA');
-                        $('#navigation label.toggle span.true').css('color', 'white');
-                    }
-                    else {
-                        // Set toggle to "Available"
-                        $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
+                    // Call toggle
+                    $.ajax({
+                        type: "GET",
+                        url: "Laravel/public/users/available" + json.user_id,
+                        success: function(json) {
+                            if(json.available === 1) {
+                                // Set toggle to "Busy"
+                                $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
+                                // If the toggle is 'checked' (slider is on the right)
+                                
+                                // Set the colors
+                                $('#navigation label.toggle span.false').css('color', '#AAA');
+                                $('#navigation label.toggle span.true').css('color', 'white');
+                            }
+                            else {
+                                // Set toggle to "Available"
+                                $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
 
-                        // Set the colors
-                        $('#navigation label.toggle span.false').css('color', 'white');
-                        $('#navigation label.toggle span.true').css('color', '#AAA');
-                    }
+                                // Set the colors
+                                $('#navigation label.toggle span.false').css('color', 'white');
+                                $('#navigation label.toggle span.true').css('color', '#AAA');
+                            }
+                        }
+                    });
 
                     // Add navigation for tutor user
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+

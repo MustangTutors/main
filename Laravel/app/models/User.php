@@ -67,7 +67,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         if($result[0]->available != 1)
             DB::update("update users SET available = 1 WHERE user_id = ?",array($_SESSION['user_id']));
         else
-             DB::update("update users SET available = 2 WHERE user_id = ?",array($_SESSION['user_id']));
+            DB::update("update users SET available = 2 WHERE user_id = ?",array($_SESSION['user_id']));
  
      }
 
