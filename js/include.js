@@ -66,7 +66,6 @@ function setToggleColor() {
     var toggle;
     if (which === undefined) {
         toggle = $('label.toggle input[type="checkbox"]');
-        console.log('poop');
     }
     else {
         toggle = $(this);
@@ -140,30 +139,26 @@ function setNavigationBar() {
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
 
-                    // If admin, add navigation options for admin
+                    // If admin, add navigation/search options for admin
                     if(json.admin === 1){
                         newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
+                        $("#adminSearchOptions").show();
                     }
                 }
                 else {
                     if(json.available === "1") {
                         // Set toggle to "Busy"
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
-                        // If the toggle is 'checked' (slider is on the right)
-                        console.log(1);
                         
                         // Set the colors
-                        console.log($('#navigation label.toggle input[type="checkbox"]').prop('checked'));
                         setToggleColor();
                     }
                     else {
                         // Set toggle to "Available"
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
-                        console.log(2);
 
                         // Set the colors
-                        console.log($('#navigation label.toggle input[type="checkbox"]').prop('checked'));
                         setToggleColor();
                     }
 

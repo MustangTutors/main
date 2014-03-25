@@ -37,6 +37,26 @@ h2 {
     font-weight: bold;
 }
 
+.loading {
+    display: none;
+    position: relative;
+    text-align: center;
+}
+
+.loading img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    vertical-align: middle;
+}
+
+#tutors .loading {
+    height: 200px;
+}
+
 #title {
 	width: 370px;
 	margin-top: 20px;
@@ -408,13 +428,17 @@ main#search {
     text-align: center;
 }
 
+#adminSearchOptions {
+    display: none;
+}
+
 form#searchTutorsForm, form#searchTutorsForm input[type='submit'] {
     margin-top: 20px;
 }
 
 form#searchTutorsForm input[type='text'] {
     width: 150px;
-    margin: 3px 0px;
+    margin: 3px 0px 5px 0px;
     height: 20px;
 }
 

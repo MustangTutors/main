@@ -22,14 +22,16 @@
          	<section id="searchTutors">
                 <h2 class="heading">Search</h2>
                 <form id="searchTutorsForm">
-                    <input type="text" name="tutorFirstName" id="search-tutorFirstName" placeholder="Tutor First Name">
-                    <input type="text" name="tutorLastName" id="search-tutorLastName" placeholder="Tutor Last Name">
-                    <hr>
+                    <div id="adminSearchOptions">
+                        <input type="text" name="tutorFirstName" id="search-tutorFirstName" placeholder="Tutor First Name">
+                        <input type="text" name="tutorLastName" id="search-tutorLastName" placeholder="Tutor Last Name">
+                        <hr>
+                    </div>
                     <select name="subject" id="search-subject">
-                        <option disabled selected>Subject</option>
-                        <option>Any</option>
+                        <option value="" disabled selected>Subject</option>
+                        <option value="">Any</option>
                     </select>
-                    <input type="text" name="courseNumber" id="search-courseNumber" pattern="" placeholder="Course Number">
+                    <input type="text" name="courseNumber" id="search-courseNumber" placeholder="Course Number">
                     <input type="text" name="courseName" id="search-courseName" placeholder="Course Name">
                     <input type="checkbox" name="available" id="search-available" value="1">
                     <label for="search-available">Tutor is Available</label>
@@ -39,7 +41,12 @@
 
             <section id="tutors">
                 <h2 class="heading">Tutors</h2>
-                <!-- Tutor profiles will appear here. -->
+                <div class="loading">
+                    <img src="img/loading.gif" alt="Loading">
+                </div>
+                <div id="tutorBoxes">
+                    <!-- Tutor profiles will appear here. -->
+                </div>
             </section>
         </div>
     </main>
