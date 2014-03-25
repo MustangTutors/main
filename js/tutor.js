@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 	for(var i = 0; i < 5; i++) {
 		$("span#averageRating h3 span").append(star);
-		$("span#yourRating h3 span").append(star);
+		$("span#yourRating h3 span").append(empty_star);
 	}
 
 

@@ -37,6 +37,26 @@ h2 {
     font-weight: bold;
 }
 
+.loading {
+    display: none;
+    position: relative;
+    text-align: center;
+}
+
+.loading img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    vertical-align: middle;
+}
+
+#tutors .loading {
+    height: 200px;
+}
+
 #title {
 	width: 370px;
 	margin-top: 20px;
@@ -408,13 +428,17 @@ main#search {
     text-align: center;
 }
 
+#adminSearchOptions {
+    display: none;
+}
+
 form#searchTutorsForm, form#searchTutorsForm input[type='submit'] {
     margin-top: 20px;
 }
 
 form#searchTutorsForm input[type='text'] {
     width: 150px;
-    margin: 3px 0px;
+    margin: 3px 0px 5px 0px;
     height: 20px;
 }
 
@@ -1154,13 +1178,13 @@ div#commentList ul li:nth-child(odd) {
 
 #editRating {
     position: fixed;
-    width: 181px;
+    width: 186px;
     height: 200px;
     left: 50%;
     top: 50%;
     margin-left: -80px;
     margin-top: -28px;
-    padding: 0px 10px 0px 0px;
+    padding: 0px 10px 0px 10px;
     background-color: white;
     border-style: solid;
     border-color: #524928;
@@ -1168,7 +1192,7 @@ div#commentList ul li:nth-child(odd) {
 }
 
 #editRating h3 {
-    margin-left: 23px;
+    margin-left: 17px;
 }
 
 .potential_rating {
@@ -1181,6 +1205,14 @@ div#commentList ul li:nth-child(odd) {
 
 .potential_rating span img {
     max-width: 18px;
+}
+
+.potential_rating span img:first-child {
+    margin-left: 10px;
+}
+
+.potential_rating span img:last-child {
+    margin-right: 10px;
 }
 
 /* End styling for Tutor Profile */
