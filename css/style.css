@@ -476,7 +476,7 @@ section#tutors h2 {
     text-decoration: none;
 }
 
-.tutorBox span {
+.tutorBox span, .tutorBox div {
     color: black;
 }
 

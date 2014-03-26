@@ -1,5 +1,20 @@
 $(document).ready(function() {
-    getTutors({});
+    // Load tutors
+    getTutors([]);
+
+    // Load course subjects
+    $.ajax({
+        url: "Laravel/public/courses/subjects",
+        success: function(output) {
+            json = JSON.parse(output);
+            for (var i = 0; i < json.length; i++) {
+                var subject = $(document.createElement('option'));
+                subject.attr('value', json[i].subject);
+                subject.html(json[i].subject);
+                $('#search-subject').append(subject);
+            }
+        }
+    });
 
     $(document).on('submit', '#searchTutorsForm', function(event) {
         event.preventDefault();
@@ -28,7 +43,7 @@ $(document).ready(function() {
             searchData.cname = cname;
         }
         if (available !== false) {
-            searchData.available = 1;
+            searchData.available = "2";
         }
 
         getTutors(searchData);

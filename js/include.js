@@ -178,7 +178,8 @@ function setNavigationBar() {
             // Not logged in
             else {
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
-                        '<li class="nav"><a href="findstudent.html">Search for Student</a></li>';
+                        '<li class="nav"><a href="findstudent.html">Search for Student</a></li>'+
+                        '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                 $('nav #navigation').append(reg);
             }
         }
