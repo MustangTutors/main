@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("header").load("header.html", function() {
-        setToggleColor();
+        setToggleColor("");
         setNavigationBar();
     });
     $("footer").load("footer.html");
@@ -59,13 +59,14 @@ $(document).ready(function() {
 });
 
 // Set the color of the toggle
-function setToggleColor() {
+function setToggleColor(id) {
     var which = $(this).prop('checked');
+    console.log(id);
 
     // If a toggle was clicked, use 'this', otherwise target all the toggles.
     var toggle;
     if (which === undefined) {
-        toggle = $('label.toggle input[type="checkbox"]');
+        toggle = $('label.toggle' + id + ' input[type="checkbox"]');
     }
     else {
         toggle = $(this);
@@ -94,13 +95,6 @@ function toggleAvailability() {
         type: "GET",
         url: "Laravel/public/users/toggle",
         success: function(json) {}
-    });
-
-    $.ajax({
-        url: "Laravel/public/users/current",
-        success: function(json) {
-            console.log(json);
-        }
     });
 }
 
@@ -150,14 +144,14 @@ function setNavigationBar() {
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
                         
                         // Set the colors
-                        setToggleColor();
+                        setToggleColor("#nav_toggle");
                     }
                     else {
                         // Set toggle to "Available"
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', false);
 
                         // Set the colors
-                        setToggleColor();
+                        setToggleColor("#nav_toggle");
                     }
 
                     // Add navigation for tutor user
