@@ -1,5 +1,9 @@
 package com.example.mustangtutors;
 
+import java.net.MalformedURLException;
+
+import org.json.JSONObject;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -10,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -243,8 +248,25 @@ public class LoginActivity extends Activity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
-
+			
+			AjaxRequest request;
 			try {
+		        request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/users/login");
+		        request.addParam("smu_id", "12341234");
+		        request.addParam("password", "asdfasdf");
+		    	JSONObject json;
+	            try {
+		            json = request.send();
+		            System.out.println(json);
+	            } catch (Exception e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+	            }
+	        } catch (MalformedURLException e1) {
+		        // TODO Auto-generated catch block
+		        e1.printStackTrace();
+	        }
+			/*try {
 				// Simulate network access.
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -257,9 +279,7 @@ public class LoginActivity extends Activity {
 					// Account exists, return true if the password matches.
 					return pieces[1].equals(mPassword);
 				}
-			}
-
-			// TODO: register the new account here.
+			}*/
 			return false;
 		}
 

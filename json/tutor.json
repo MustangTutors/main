@@ -1,0 +1,50 @@
+{
+    "user_id": 1,
+    "first_name": "Story",
+    "last_name": "Zanetti",
+    "availability": 2,
+    "number_of_ratings": 25,
+    "average_rating": 4.4,
+    "user_rating": 4,
+    "courses": [
+        {
+            "subject": "CSE",
+            "course_number": "3345",
+            "course_name": "Graphical User Interfaces"
+        },
+        {
+            "subject": "CSE",
+            "course_number": "3330",
+            "course_name": "Database Concepts"
+        }
+    ],
+    "hours": [
+        {
+            "day": "Monday",
+            "start_time": "11:00:00",
+            "end_time": "16:00:00"
+        },
+        {
+            "day": "Tuesday",
+            "start_time": "10:00:00",
+            "end_time": "12:00:00"
+        },
+        {
+            "day": "Thursday",
+            "start_time": "11:00:00",
+            "end_time": "16:00:00"
+        }
+    ],
+    "comments": [
+        {
+            "comment": "asdf asdf asdf",
+            "rating_from_commenter": 3,
+            "timestamp": "2014-03-11 11:11:11"
+        },
+        {
+            "comment": "asdf asdf asdf",
+            "rating_from_commenter": 5,
+            "timestamp": "2014-03-12 11:11:11"
+        }
+    ]
+}
