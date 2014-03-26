@@ -49,16 +49,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     //logout a user by setting availability to 0 and clearing session variables
-    public function logoutUser()
+    public function logoutUser($id)
     {        
-        if(isset($_SESSION['user_id'])){
-            DB::update("update users SET available = 0 WHERE user_id = ?",array($_SESSION['user_id']));
-            session_destroy();
-            echo ("you are successfully logged out");
+        //for the web version
+        if($id == '-1'){
+            if(isset($_SESSION['user_id'])){
+                DB::update("update users SET available = 0 WHERE user_id = ?",array($_SESSION['user_id']));
+                session_destroy();
+                echo ("you are successfully logged out");
+            }else{
+                echo ("no user is logged in");
+            }
+        //for the android version
         }else{
-            echo ("no user is logged in");
-        }
+            DB::update("update users SET available = 0 WHERE user_id = ?",array($id));
+            echo ("you are successfully logged out");
 
+        }
     }
     
     //toggle availability for a tutor

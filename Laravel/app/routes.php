@@ -55,10 +55,10 @@ Route::get('users/current',function()
     $temp = new User();
     $temp->getCurrUserInfo();
 });
-Route::get('users/logout',function()
+Route::get('users/logout/{id?}',function($id = '-1')
 {
     $temp = new User();
-    $temp->logoutUser();
+    $temp->logoutUser($id);
 });
 Route::get('users',function()
 {
