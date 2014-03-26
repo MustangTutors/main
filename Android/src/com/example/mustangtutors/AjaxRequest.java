@@ -35,8 +35,8 @@ public class AjaxRequest {
 		params = new ArrayList<NameValuePair>();
 	}
 	
-	public Object send() throws Exception {
-		Object output = null;
+	public String send() {
+		String output = null;
 		try {
 		    HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		    if (requestType.equals("POST")) {
@@ -48,16 +48,9 @@ public class AjaxRequest {
 		    	writer.close();
 		    	out.close();
 		    }
-		    String json = readStream(con.getInputStream());
-		    try {
-		    	output = new JSONObject(json);
-		    }
-		    catch (Exception e) {
-		    	output = new JSONArray(json);
-		    }
+		    output = readStream(con.getInputStream());
 		}
     	catch (Exception e) {
-		  throw e;
 		}
 		return output;
 	}

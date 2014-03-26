@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
 	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
 	    	JSONObject json;
             try {
-	            json = (JSONObject) request.send();
+	            json = new JSONObject(request.send());
 	            JSONArray jsonTutors = json.getJSONArray("Tutors");
 			    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
 			    for (int i = 0; i < jsonTutors.length(); i++) {
@@ -262,6 +262,14 @@ public class MainActivity extends Activity {
     	
     	// Logout
     	else if (drawerStrings[position].equals("Logout")) {
+    		// Send a logout request to the server
+    		AjaxRequest request;
+            try {
+    	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/logout/"+sharedPref.getString("user_id", ""));
+                request.send();
+            } catch (MalformedURLException e1) {
+            }
+            
     		// Delete user data from preferences
     		editor.clear().commit();
     		

@@ -257,7 +257,8 @@ public class LoginActivity extends Activity {
 		        request.addParam("password", mPassword);
 		    	JSONArray json;
 	            try {
-		            json = (JSONArray) request.send();
+	            	String output = request.send();
+		            json = new JSONArray(output);
 		            JSONObject user = (JSONObject) json.get(0);
 		            String tutor = user.getString("tutor");
 		            String active = user.getString("active");
