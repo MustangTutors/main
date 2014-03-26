@@ -203,7 +203,7 @@ section#login {
     float: right;
 }
 
-#login_email, #login_password {
+#login_id, #login_password {
     width: 120px;
     margin-right: 2px;
     margin-left: 0px;
