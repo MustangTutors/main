@@ -9,29 +9,29 @@ $(document).ready(function(){
             $(".error").html("Error: Password confirmation did not match.<br/><br/>");
         }
         else {
-            // $.ajax({
-            //     type: "POST",
-            //     url: "api/AddNewUser",
-            //     data: $(this).serialize(),
-            //     success: function(output) {
-            //         if (output === "null") {
-            //             $(".error").html("Error: That email already exists.<br/><br/>");
-            //         }
-            //         else {
-            //             $.ajax({
-            //                 type: "POST",
-            //                 url: "api/users/login",
-            //                 data: {
-            //                     email: $("#registration input[name='email']").val(),
-            //                     password: $("#registration input[name='password']").val()
-            //                 },
-            //                 success: function(data) {
-            //                     window.location.replace("index.html");
-            //                 }
-            //             });
-            //         }
-            //     }
-            // });
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/users/register",
+                data: $(this).serialize(),
+                success: function(output) {
+                    if (output === "The ID provided has already been registered." || output === "[]") {
+                        $(".error").html("Error: That SMU ID or email already exists.<br/><br/>");
+                    }
+                    else {
+                        $.ajax({
+                            type: "POST",
+                            url: "Laravel/public/users/login",
+                            data: {
+                                smu_id: $("#registrationForm input[name='smu_id']").val(),
+                                password: $("#registrationForm input[name='password']").val()
+                            },
+                            success: function(data) {
+                                window.location.replace("index.html");
+                            }
+                        });
+                    }
+                }
+            });
             $(".error").html("");
         }
     });

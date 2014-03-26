@@ -176,7 +176,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
             
             //Submit insert
-            $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),0,0,0,0,Input::get('email'),Input::get('password'),$code));
+            $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),Input::get('email'),Input::get('password'),$code));
         
             //Obtain new user's info/ensure register succeeded
             $result=DB::select("SELECT * FROM users WHERE smu_id= ?",array($smuid));
