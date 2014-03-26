@@ -2,6 +2,7 @@ package com.example.mustangtutors;
 
 import java.net.MalformedURLException;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.animation.Animator;
@@ -14,7 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +55,9 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 	private TextView mError;
+	
+	private String returnUserId;
+	private String returnName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -247,40 +250,24 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-			
 			AjaxRequest request;
 			try {
 		        request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/users/login");
-		        request.addParam("smu_id", "12341234");
-		        request.addParam("password", "asdfasdf");
-		    	JSONObject json;
+		        request.addParam("smu_id", mSMUID);
+		        request.addParam("password", mPassword);
+		    	JSONArray json;
 	            try {
-		            json = request.send();
-		            System.out.println(json);
+		            json = (JSONArray) request.send();
+		            JSONObject user = (JSONObject) json.get(0);
+		            returnUserId = user.getString("user_id");
+		            returnName = user.getString("fName") + " " + user.getString("lName");
+		            return true;
 	            } catch (Exception e) {
-		            // TODO Auto-generated catch block
-		            e.printStackTrace();
+		            return false;
 	            }
 	        } catch (MalformedURLException e1) {
-		        // TODO Auto-generated catch block
-		        e1.printStackTrace();
+		        return false;
 	        }
-			/*try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mSMUID)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}*/
-			return false;
 		}
 
 		@Override
@@ -293,8 +280,8 @@ public class LoginActivity extends Activity {
 				// Also, pass it some user data.
 				Intent intent = new Intent();
 				intent.putExtra(EXTRA_MESSAGE, "logged in");
-				intent.putExtra(NAME, "Story Zanetti");
-				intent.putExtra(USER_ID, "1");
+				intent.putExtra(NAME, returnName);
+				intent.putExtra(USER_ID, returnUserId);
 				setResult(RESULT_OK, intent);
 				// Reset the error message.
 				mError.setText(R.string.no_error);

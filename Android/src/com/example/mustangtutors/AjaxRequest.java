@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class AjaxRequest {
@@ -34,8 +35,8 @@ public class AjaxRequest {
 		params = new ArrayList<NameValuePair>();
 	}
 	
-	public JSONObject send() throws Exception {
-		JSONObject output = null;
+	public Object send() throws Exception {
+		Object output = null;
 		try {
 		    HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		    if (requestType.equals("POST")) {
@@ -47,7 +48,13 @@ public class AjaxRequest {
 		    	writer.close();
 		    	out.close();
 		    }
-		    output = new JSONObject(readStream(con.getInputStream()));
+		    String json = readStream(con.getInputStream());
+		    try {
+		    	output = new JSONObject(json);
+		    }
+		    catch (Exception e) {
+		    	output = new JSONArray(json);
+		    }
 		}
     	catch (Exception e) {
 		  throw e;

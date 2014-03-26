@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
 	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
 	    	JSONObject json;
             try {
-	            json = request.send();
+	            json = (JSONObject) request.send();
 	            JSONArray jsonTutors = json.getJSONArray("Tutors");
 			    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
 			    for (int i = 0; i < jsonTutors.length(); i++) {
