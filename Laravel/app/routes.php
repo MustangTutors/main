@@ -88,9 +88,9 @@ Route::get('users/history',function()
 {
     //$_SESSION['smu_id'] = 1236;
     $temp = new User();
-    if($_SESSION['smu_id']!= null)
+    if($_SESSION['user_id']!= null)
     {
-        $temp->getUsersRecords($_SESSION['smu_id']);
+        $temp->getUsersRecords($_SESSION['user_id']);
     }
 });
 
