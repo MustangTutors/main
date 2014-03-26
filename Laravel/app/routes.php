@@ -97,13 +97,13 @@ Route::get('users/history',function()
 
 Route::post('users/history/parent',function()
 {
-    if($_POST['user_id']!=null &&  $_POST['codeword']!=null)
+    if($_POST['smu_id']!=null &&  $_POST['codeword']!=null)
     {
         $temp = new User();
-        $result = $temp->checkCodeWord($_POST['user_id'],$_POST['codeword']);
+        $result = $temp->checkCodeWord($_POST['smu_id'],$_POST['codeword']);
         if($result)
         {
-            $temp->getUsersRecords($_POST['user_id']);
+            $temp->getUsersRecords($_POST['smu_id']);
         }
     }
 });

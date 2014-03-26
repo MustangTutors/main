@@ -102,7 +102,6 @@ $(document).ready(function(){
         url: "Laravel/public/users/history",
         success: function(json) {
             json = JSON.parse(json);
-            console.log(json);
 
             if(json.length === 0) {
                 $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
@@ -217,8 +216,6 @@ function createEmailJSON() {
 
 function sendEmailJSON() {
     var json = createEmailJSON();
-
-    console.log(json);
 
     // Parse JSON for emails
     $.ajax({

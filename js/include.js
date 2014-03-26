@@ -61,8 +61,7 @@ $(document).ready(function() {
 // Set the color of the toggle
 function setToggleColor(id) {
     var which = $(this).prop('checked');
-    console.log(id);
-
+    
     // If a toggle was clicked, use 'this', otherwise target all the toggles.
     var toggle;
     if (which === undefined) {
