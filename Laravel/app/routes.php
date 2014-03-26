@@ -67,10 +67,14 @@ Route::get('users',function()
 	echo ($temp1);
 });
 
-Route::get('users/toggle',function()
-{
+Route::get('users/toggle/{id?}',function($id = '-1')
+{        
     $temp = new User();
-    $temp->toggleAvailable($_SESSION['user_id']);
+    if($id == '-1'){
+        $temp->toggleAvailable($_SESSION['user_id']);
+    }else{
+        $temp->toggleAvailable($id);
+    }
 });
 
 Route::get('users/available/{id?}',function($id =-1)

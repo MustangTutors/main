@@ -62,15 +62,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     //toggle availability for a tutor
-    public function toggleAvailable(){
-        $result = DB::select("select * from users where user_id = ?",array($_SESSION['user_id']));
+    public function toggleAvailable($id)
+    {
+        $result = DB::select("select * from users where user_id = ?",array($id));
         if($result[0]->available != 1)
-            DB::update("update users SET available = 1 WHERE user_id = ?",array($_SESSION['user_id']));
+            DB::update("update users SET available = 1 WHERE user_id = ?",array($id));
         else
-            DB::update("update users SET available = 2 WHERE user_id = ?",array($_SESSION['user_id']));
+            DB::update("update users SET available = 2 WHERE user_id = ?",array($id));
  
      }
-
 	/**
 	 * Get the unique identifier for the user.
 	 *
