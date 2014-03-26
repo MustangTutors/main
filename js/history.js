@@ -218,6 +218,8 @@ function createEmailJSON() {
 function sendEmailJSON() {
     var json = createEmailJSON();
 
+    console.log(json);
+
     // Parse JSON for emails
     $.ajax({
         type: "POST",
