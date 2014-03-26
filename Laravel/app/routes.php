@@ -139,12 +139,8 @@ Route::post('tutor/comment',function()
 
 Route::post('users/email',function()
 {
-    
     $temp = new User();
-    $user_id = "12345";
-    $codeword = "codeword";
-    $emails = $_POST['emails'];
-    $temp->sendEmailWithCodeword($user_id,$codeword,$emails);
+    $temp->sendEmailWithCodeword();
 });
 
 Route::get('courses/subjects',function()

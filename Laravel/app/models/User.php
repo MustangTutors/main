@@ -64,7 +64,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }else{
             DB::update("update users SET available = 0 WHERE user_id = ?",array($id));
             echo ("you are successfully logged out");
-
         }
     }
     
@@ -139,14 +138,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     * send a user's id and codeword to a list of email addresses
     *
     */
-    public function sendEmailWithCodeword($user_id,$codeword,$emails){
-    
+    public function sendEmailWithCodeword()
+    {
+        $email_json = json_decode($_POST['emails']);
+        $emails = $email_json->emails;
+        $user_id = $_SESSION['user_id'];
+        $result = DB::select("select codeword from users where user_id = ?",array($user_id));
+        $codeword = $result[0]->codeword;
         foreach($emails as $email)
         {
-            echo($email);
             Mail::later(5,'emails.codeword.codeword', array('user_id'=>$user_id,'codeword'=>$codeword), function($message) use ($email){
                 $message->to($email)->subject('email tester');
-            });
+           });
         }
     }
 
