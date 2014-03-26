@@ -163,7 +163,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         //First check if user already exists
         $smuid = Input::get('smu_id');
         $email = Input::get('email');
-        if(Input::has('codeword')
+        if(Input::has('codeword'))
         {
             $code = Input::get('codeword');
         }
