@@ -162,18 +162,37 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         //First check if user already exists
         $smuid = Input::get('smu_id');
+        $email = Input::get('email');
+        if(Input::has('codeword')
+        {
+            $code = Input::get('codeword');
+        }
+        else
+        {
+            $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+        }
     
-        $query = "SELECT * FROM users WHERE smu_id = ?";
-        $result = DB::select($query,array($smuid));
-        if(!empty($result)){
+        $query = "SELECT smu_id FROM users WHERE smu_id = ?";
+        $result1 = DB::select($query,array($smuid));
+        $query = "SELECT email FROM users WHERE email = ?";
+        $result2 = DB::select($query,array($email));
+        $query = "SELECT codeword FROM users WHERE codeword = ?";
+        $result3 = DB::select($query,array($code));
+        if(!empty($result1)){            
             echo "The ID provided has already been registered.";        
         }   
+        elseif(!empty($result2)){            
+            echo "The email address provided has already been registered.";        
+        }
+        elseif(!empty($result3)){            
+            echo "Please provide a different codeword.";        
+        }
         else
         {
             $query= "INSERT INTO users(smu_id,fName,lName,available,active,tutor,admin,email,pswd,codeword) 
                      VALUES (?,?,?,0,0,0,0,?,?,?)";
             //Create initial codeword randomly (from stackoverflow.com)
-            $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+            
             
             //Submit insert
             $result=DB::insert($query,array($smuid,Input::get('fname'),Input::get('lname'),Input::get('email'),Input::get('password'),$code));

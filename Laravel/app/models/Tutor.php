@@ -123,7 +123,7 @@ class Tutor extends Eloquent{
         $query= substr_replace($query,"",-4);      
         }    
         //Remove duplicates and/or allow COUNT and AVG to work
-        $query.=" GROUP BY u.user_id";
+        $query.=" GROUP BY u.user_id ORDER BY u.available DESC";
         //Submit query          
         $result=DB::select($query,$params);
         echo json_encode($result);
