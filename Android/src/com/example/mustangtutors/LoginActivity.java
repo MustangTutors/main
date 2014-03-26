@@ -247,9 +247,9 @@ public class LoginActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected Integer doInBackground(Void... params) {
 			AjaxRequest request;
 			try {
 		        request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/users/login");
@@ -259,23 +259,28 @@ public class LoginActivity extends Activity {
 	            try {
 		            json = (JSONArray) request.send();
 		            JSONObject user = (JSONObject) json.get(0);
+		            String tutor = user.getString("tutor");
+		            String active = user.getString("active");
+		            if (tutor.equals("0") || active.equals("0")) {
+		            	return 2;
+		            }
 		            returnUserId = user.getString("user_id");
 		            returnName = user.getString("fName") + " " + user.getString("lName");
-		            return true;
+		            return 1;
 	            } catch (Exception e) {
-		            return false;
+		            return 0;
 	            }
 	        } catch (MalformedURLException e1) {
-		        return false;
+		        return 0;
 	        }
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final Integer success) {
 			mAuthTask = null;
 			showProgress(false);
 
-			if (success) {
+			if (success == 1) {
 				// Tell the MainActivity that login was successful.
 				// Also, pass it some user data.
 				Intent intent = new Intent();
@@ -288,7 +293,12 @@ public class LoginActivity extends Activity {
 				// Return to the home page.
 				finish();
 			} else {
-				mError.setText(R.string.error_incorrect_info);
+				if (success == 2) {
+					mError.setText(R.string.error_not_tutor);
+				}
+				else {
+					mError.setText(R.string.error_incorrect_info);
+				}
 				mPasswordView.requestFocus();
 			}
 		}

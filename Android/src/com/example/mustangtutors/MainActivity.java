@@ -209,7 +209,12 @@ public class MainActivity extends Activity {
         // If the nav drawer is open, hide action items related to the content view
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-    	menu.findItem(R.id.mySwitch).setVisible(false);
+    	if (sharedPref.contains("user_id")) {
+        	menu.findItem(R.id.mySwitch).setVisible(true);
+    	}
+    	else {
+        	menu.findItem(R.id.mySwitch).setVisible(false);
+    	}
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -286,6 +291,7 @@ public class MainActivity extends Activity {
 				// Write user data to the preferences file.
 				editor.putString("user_id", data.getStringExtra(LoginActivity.USER_ID));
 				editor.putString("name", data.getStringExtra(LoginActivity.NAME));
+				editor.putString("availability", "2");
 				editor.commit();
 				
 				// Update the navigation drawer with links for a logged in user.
