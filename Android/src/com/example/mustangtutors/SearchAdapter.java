@@ -31,6 +31,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    ImageView picture = (ImageView) rowView.findViewById(R.id.search_tutor_picture);
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
 	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
+	    TextView noRatings = (TextView) rowView.findViewById(R.id.search_tutor_no_rating);
 	    ImageView star1 = (ImageView) rowView.findViewById(R.id.search_tutor_star_1);
 	    ImageView star2 = (ImageView) rowView.findViewById(R.id.search_tutor_star_2);
 	    ImageView star3 = (ImageView) rowView.findViewById(R.id.search_tutor_star_3);
@@ -58,6 +59,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    // Set rating
 	    double rating = tutors.get(position).getRating();
 	    if (rating < 1) {
+	    	noRatings.setText("N/A");
 	    	star1.setVisibility(View.GONE);
 	    	star2.setVisibility(View.GONE);
 	    	star3.setVisibility(View.GONE);
