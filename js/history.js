@@ -102,7 +102,6 @@ $(document).ready(function(){
         url: "Laravel/public/users/history",
         success: function(json) {
             json = JSON.parse(json);
-            console.log(json);
 
             if(json.length === 0) {
                 $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
@@ -111,17 +110,26 @@ $(document).ready(function(){
                 $('#student_history span.error.none').html("");
                 for(var i = 0; i < json.length; i++) {
                     // Assign json values
-                    var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
-                    var contributor = "Tutored by: " + json[i].first_name + " " + json[i].last_name;
-                    var date = json[i].day;
-                    var time = json[i].start_time + " to " + json[i].end_time;
+                    var title =  "Subject " + json[i].course_name + ": Course Number";
+                    var date = json[i].date;
+                    var time = "0:00 to 0:00";
+                    //var time = json[i].start_time + " to " + json[i].end_time;
                     var summary = json[i].summary;
 
-                    // Create and append new node with json information
-                    var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
-                                        '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
-                                        '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
-                    $('#student_history').append(newArticle);
+                    $.ajax({
+                        url: "Laravel/public/users/current/" + json[i].tutor_user_id,
+                        success: function(data){
+                            data = JSON.parse(data);
+                            data = data[0];
+                            var contributor = "Tutored by: " + data.fName + " " + data.lName;
+
+                            // Create and append new node with json information
+                            var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                                                '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                                                '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+                            $('#student_history').append(newArticle);
+                        }
+                    });   
                 }
             }
         }
