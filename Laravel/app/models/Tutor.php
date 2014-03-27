@@ -131,14 +131,14 @@ class Tutor extends Eloquent{
     public function searchTutors()
     {
         //Prepare generic query
-        $query = "SELECT u.User_ID, u.fName as First_Name, u.lName as Last_Name, u.Available ,COUNT(distinct r.rating_id) as Number_Ratings, AVG(distinct r.rating) as Average_Rating FROM users u inner join courses_tutored ct on u.user_id = ct.user_id inner join courses c on ct.course_id = c.course_id left outer join rating r on r.tutor_id = u.user_id WHERE ";
+        $query = "SELECT u.User_ID, u.fName as First_Name, u.lName as Last_Name, u.Available ,COUNT(distinct r.rating_id) as Number_Ratings, AVG(distinct r.rating) as Average_Rating FROM users u inner join courses_tutored ct on u.user_id = ct.user_id inner join courses c on ct.course_id = c.course_id left outer join rating r on r.tutor_id = u.user_id WHERE u.tutor = 1 AND u.active = 1 AND ";
 
         //Append WHERE clause based on parameters
         $params=array();    
     
         //First check if no parameters are set 
         if(!(Input::has('fname') || Input::has('lname') || Input::has('subject') || Input::has('cnumber') || Input::has('cname') || Input::has('available'))){
-            $query= substr_replace($query,"",-6);            
+            $query= substr_replace($query,"",-4);            
         }
         //Add parameters to the WHERE clause and the parameter array
         else
