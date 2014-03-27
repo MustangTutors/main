@@ -818,7 +818,7 @@ section#student_history {
     width: 25px;
     position: absolute;
     right: 4%;
-    top: 3%;
+    top: 2.5%;
     cursor: pointer;
     background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
     border-width: 1px;

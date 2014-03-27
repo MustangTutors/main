@@ -114,7 +114,6 @@ Route::post('users/history/parent',function()
 
 Route::get('tutor/{id}',function($id)
 {
-    $_SESSION['user_id'] = 3;
     $temp = new Tutor();
     $temp->getInfoForTutorsPage($_SESSION['user_id'],$id);
 })
@@ -134,11 +133,9 @@ Route::post('tutor/rate',function()
 
 Route::post('tutor/comment',function()
 {
-    $_SESSION['tutor_id']= 2;
-    $_SESSION['user_id'] = 3;
     $date = date('Y-m-d h:m:s',time());
     $temp = new Tutor();
-    $temp->addCommentForTutor($_SESSION['user_id'],$_SESSION['tutor_id'],$_POST['comment']);
+    $temp->addCommentForTutor($_SESSION['user_id'],$_POST['tutor_id'],$_POST['comment']);
 });
 
 Route::post('users/email',function()
