@@ -144,6 +144,7 @@ public class MainActivity extends Activity {
 			    	double rating = tutor.getDouble("Average_Rating");
 			    	int availability = tutor.getInt("Available");
 			    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
+			    	
 			    }
 		    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
 		    	ListView listView = (ListView) findViewById(R.id.listview);
