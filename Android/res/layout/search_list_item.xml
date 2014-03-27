@@ -44,6 +44,11 @@
 		    style="@style/StarGroup"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent">
+		        <TextView
+		            style="@style/NoRatings"
+		            android:id="@+id/search_tutor_no_rating"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" />
 				<ImageView
 				    style="@style/Star"
 				    android:id="@+id/search_tutor_star_1"

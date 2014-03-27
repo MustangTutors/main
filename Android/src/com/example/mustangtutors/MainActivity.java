@@ -146,6 +146,7 @@ public class MainActivity extends Activity {
 			    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
 			    	
 			    }
+		    	tutors.add(new Tutor(7, "Test Test", 0, 0, 2));
 		    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
 		    	ListView listView = (ListView) findViewById(R.id.listview);
 		    	listView.setAdapter(searchAdapter);
