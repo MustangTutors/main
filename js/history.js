@@ -102,6 +102,7 @@ $(document).ready(function(){
         url: "Laravel/public/users/history",
         success: function(json) {
             json = JSON.parse(json);
+            console.log(json);
 
             if(json.length === 0) {
                 $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
@@ -114,7 +115,7 @@ $(document).ready(function(){
                     var contributor = "Tutored by: " + json[i].first_name + " " + json[i].last_name;
                     var date = json[i].day;
                     var time = json[i].start_time + " to " + json[i].end_time;
-                    var summary = json[i].Summary;
+                    var summary = json[i].summary;
 
                     // Create and append new node with json information
                     var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
