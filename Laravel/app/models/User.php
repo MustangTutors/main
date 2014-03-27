@@ -30,6 +30,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
          $result = DB::select("select * from users where user_id = ?",array($id));
          echo json_encode($result);    
     }
+    
      //logs in a user if their id and password match
      //also sets availability to 2 if user is a tutor
      //echos a json of user data
@@ -49,7 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             echo json_encode($result);
          }else
          {
-             echo ("balls");
+             echo ("The user was not logged in properly");
         }
     }
     

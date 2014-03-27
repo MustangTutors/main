@@ -50,10 +50,10 @@ Route::post('users/login',function()
     
 });
 
-Route::get('users/current',function()
+Route::get('users/current/{id?}',function($id = '-1')
 {
     $temp = new User();
-    $temp->getCurrUserInfo();
+    $temp->getCurrUserInfo($id);
 });
 Route::get('users/logout/{id?}',function($id = '-1')
 {
