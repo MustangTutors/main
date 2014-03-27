@@ -11,20 +11,30 @@
 */
 class Tutor extends Eloquent{
 
+    //this returns an array of all the courses a tutor tutors
+    public static function getTutorsCourses($tutor_id){
+        $result = DB::select('select subject,course_number,course_name from courses INNER JOIN courses_tutored ON courses_tutored.course_id = courses.course_id where courses_tutored.user_id = ?', array($tutor_id));
+        return $result;
+    }
+    //this returns an array of all the hours a tutor tutors
+    public static function getTutorsHours($tutor_id){
+        $result = DB::select('select day,start_time,end_time from schedule where user_id = ?', array($tutor_id));
+        return $result;
+    }
     //get tutors comments by tutor's user_id
     //return an array of the results
-    public static function getTutorsComments($user_id)
+    public static function getTutorsComments($tutor_id)
     {
-        $result = DB::select("select users.user_id as Tutor_id,comments.comment,comments.timeStamp from users INNER JOIN comments ON comments.tutor_id = users.user_id WHERE users.user_id = ?",array($user_id));
+        $result = DB::select("select * from comments where tutor_id = ?",array($tutor_id));
         return $result;
 
     }
     
-    //get tutor's general info (id,first name,last name, email,average rating)    
+    //get tutor's general info (id,first name,last name, available,#ratings,average rating)    
     //return an array of the results
     public static function getTutorsGeneralInfo($user_id)
     {
-        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName,users.lName as tutor_lName,users.email,AVG(rating.rating) as average_rating from users INNER JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
+        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName,users.lName as tutor_lName,users.available,COUNT(rating.rating) as numberOfRatings,AVG(rating.rating) as average_rating from users INNER JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
         return $result;
 
     }
@@ -38,12 +48,50 @@ class Tutor extends Eloquent{
 
     public function getInfoForTutorsPage($curr_user_id,$tutor_id)
     {
-            $result1 = Tutor::getTutorsComments($tutor_id);
             $result2 = Tutor::getTutorsGeneralInfo($tutor_id);
             $result3 = Tutor::getUsersCurrentRatingOfTutor($curr_user_id,$tutor_id);
-            $result = array_merge($result1,$result2,$result3);
-            echo json_encode($result);
+            $result4 = Tutor::getTutorsCourses($tutor_id);
+            $result5 = Tutor::getTutorsHours($tutor_id);
+            $result6 = Tutor::getTutorsComments($tutor_id);
+            $result0 = array();      
+            foreach($result2[0] as $key=>$value){
+                $result0[$key]=$value;
+            }
+            if(isset($result3[0]->current_user_rating))
+            {
+                $result0['current_user_rating'] = $result3[0]->current_user_rating;
+            }else
+            {
+                $result0['current_user_rating'] = null;
+            }
+            $iter = 0;
+            foreach($result4 as $value)
+            {
+                $result0['courses'][$iter] = $value;
+                $iter = $iter+1;
+            }
+            $iter = 0;
+            foreach($result5 as $value)
+            {
+                $result0['hours'][$iter] = $value;
+                $iter = $iter+1;
+            }
+            $iter = 0;
+            foreach($result6 as $value)
+            {
+                $result0['comments'][$iter] = $value;
+                $commenters_rating = Tutor::getUsersCurrentRatingOfTutor($value->user_id,$tutor_id);
+                if(isset($commenters_rating[0]->current_user_rating))
+                {
+                    $result0['comments'][$iter]->rating_from_commenter = $commenters_rating[0]->current_user_rating;
+                }else{
+                    $result0['comments'][$iter]->rating_from_commenter = null;
+                }
+                $iter = $iter +1;
+            }
+            echo json_encode($result0);
     }
+    
     //this inserts a new comment into the comments table
     public function addCommentForTutor($user_id,$tutor_id,$comment)
     {

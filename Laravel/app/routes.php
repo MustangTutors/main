@@ -110,7 +110,6 @@ Route::post('users/history/parent',function()
 
 Route::get('tutor/{id}',function($id)
 {
-    $_SESSION['user_id'] = 3;
     $temp = new Tutor();
     $temp->getInfoForTutorsPage($_SESSION['user_id'],$id);
 })
