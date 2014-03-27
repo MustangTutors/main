@@ -115,8 +115,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function checkCodeWord($smu_id,$codeword)
     {
         $result=DB::select("select user_id from users where smu_id = ? AND codeword = ?",array($smu_id,$codeword));
-        
-        echo json_encode($result);
+        return $result;
     }
     
     /**

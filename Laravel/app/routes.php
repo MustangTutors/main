@@ -105,6 +105,10 @@ Route::post('users/history/parent',function()
         {
             $temp->getUsersRecords($_POST['smu_id']);
         }
+	else
+	{
+		echo "incorrect codeword";
+	}
     }
 });
 
