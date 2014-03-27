@@ -103,7 +103,7 @@ Route::post('users/history/parent',function()
         $result = $temp->checkCodeWord($_POST['smu_id'],$_POST['codeword']);
         if($result)
         {
-            $temp->getUsersRecords($_POST['smu_id']);
+            $temp->getUsersRecordsParent($_POST['smu_id']);
         }
 	else
 	{
