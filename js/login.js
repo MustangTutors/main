@@ -9,8 +9,8 @@ $(document).ready(function() {
                 type: "POST",
                 url: "Laravel/public/users/login",
                 data: {
-                	smu_id: $("input#login_id").val();
-                	password: $("input#login_password").val();
+                	smu_id: $("input#login_id").val(),
+                	password: $("input#login_password").val()
                 },
                 success: function(output) {
                     if (output === "The user was not logged in properly") {
@@ -19,9 +19,10 @@ $(document).ready(function() {
                 		$("input#login_password").val("");
                     }
                     else {
+                        output = JSON.parse(output)
                     	$("form#loginForm").hide();
                     	$("div#welcomeMessage").show();
-                    	$("div#welcomeMessage span.welcome").append(output);
+                    	$("div#welcomeMessage span.welcome").append(output[0].fName);
                     }
                 }
             });
