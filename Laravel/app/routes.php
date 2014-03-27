@@ -88,9 +88,13 @@ Route::get('users/history',function()
 {
     //$_SESSION['smu_id'] = 1236;
     $temp = new User();
-    if($_SESSION['user_id']!= null)
+    if(isset($_SESSION['user_id']))
     {
         $temp->getUsersRecords($_SESSION['user_id']);
+    }
+    else
+    {
+        $temp->getUsersRecords(Input::get('user_id',0));
     }
 });
 
@@ -103,7 +107,7 @@ Route::post('users/history/parent',function()
         $result = $temp->checkCodeWord($_POST['smu_id'],$_POST['codeword']);
         if($result)
         {
-            $temp->getUsersRecords($_POST['smu_id']);
+            $temp->getUsersRecordsParent($_POST['smu_id']);
         }
 	else
 	{
