@@ -19,9 +19,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
-    public function getCurrUserInfo(){
+    public function getCurrUserInfo($user_id=0){
          
-         $id=Input::get('user_id',0);
+         $id=Input::get('user_id',$user_id);
          
          if(isset($_SESSION['user_id'])){
             $id=$_SESSION['user_id'];
@@ -131,8 +131,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     */
     public function getUsersRecords($smu_id)
     {
-        $result= DB::select("select records.report_id,records.user_id,records.tutor_user_id,records.Date,records.summary,records.course_name from records INNER JOIN users ON records.user_id = users.user_id WHERE users.smu_id = ?",array($smu_id));
-        echo json_encode($result);
+        $result= DB::select("SELECT u.user_id, c.subject, c.course_number, c.course_name, tu.fName, tu.lName, r.date AS day, r.start_time, r.end_time, r.summary FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE u.smu_id = ?",array($smu_id));
+        if(!empty($result))
+        {
+            echo json_encode($result);
+        }
+        else echo '[{"user_id":"'.$smu_id.'"}]';
 
     }
     /**
