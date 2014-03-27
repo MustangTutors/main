@@ -104,7 +104,7 @@ function convertTime(militaryTime) {
     var amPm = hours24 > 11 ? 'PM' : 'AM';
     var minutes = militaryTime.substring(3, 5);
 
-    return hours + ':' + minutes + amPm;
+    return hours + ':' + minutes + ' ' + amPm;
 }
 
 function setNavigationBar() {
