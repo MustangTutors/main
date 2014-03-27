@@ -19,23 +19,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
-    public function getCurrUserInfo($user_id)
-	{
-		if($user_id == '-1')
-		{
-    		 if(isset($_SESSION['user_id']))
-			{
-	             $result = DB::select("select * from users where user_id = ?",array($_SESSION['user_id']));
-				echo json_encode($result);
-    		}
-    	}
-    	else
-    	{
-             $result = DB::select("select * from users where user_id = ?",array($user_id));
-			echo json_encode($result);
-    	}
-	}
+    public function getCurrUserInfo(){
+         
+         $id=Input::get('user_id',0);
+         
+         if(isset($_SESSION['user_id'])){
+            $id=$_SESSION['user_id'];
+         }
 
+         $result = DB::select("select * from users where user_id = ?",array($id));
+         echo json_encode($result);    
+    }
+    
      //logs in a user if their id and password match
      //also sets availability to 2 if user is a tutor
      //echos a json of user data
@@ -171,7 +166,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    }
 
     /**
-    *   Registers a new user to the DB if the ID provided doesn't already exist
+    *   Registers a new user to the DB if the ID, email, and codeword provided don't already exist
     *   @echo JSON containing the data added to the DB
     */
     public function registerUser()
