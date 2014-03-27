@@ -17,13 +17,12 @@ import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -150,33 +149,19 @@ public class MainActivity extends Activity {
 		    	ListView listView = (ListView) findViewById(R.id.listview);
 		    	listView.setAdapter(searchAdapter);
             } catch (Exception e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
             }
         } catch (MalformedURLException e1) {
-	        // TODO Auto-generated catch block
-	        e1.printStackTrace();
         }
         
-        
-        /* Example of a POST Ajax Request
-        try {
-	        request = new AjaxRequest("POST", "http://tacotruck.floccul.us/api/users/login");
-	        request.addParam("email", "asdf@asdf.com");
-	        request.addParam("password", "asdfasdf");
-	    	JSONObject json;
-            try {
-	            json = request.send();
-	            System.out.println(json);
-            } catch (Exception e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-            }
-        } catch (MalformedURLException e1) {
-	        // TODO Auto-generated catch block
-	        e1.printStackTrace();
-        }
-        */
+    }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	// TODO
+    	// check if logged in (using Android shared preferences)
+    	// get availability from db
+    	// set checked state on toggle
     }
     
     @Override
@@ -185,20 +170,23 @@ public class MainActivity extends Activity {
         inflater.inflate(R.menu.main, menu);
         mMenu = menu;
         
-        Switch mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
+        final Switch mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
         mySwitch.setTextOff("Busy");
         mySwitch.setTextOn("Available");
-		mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-	        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-	            if (isChecked) {
-	                // The toggle is enabled
+        
+        mySwitch.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = mySwitch.isChecked();
+                if (isChecked) {
 	            	System.out.println("first");
+	            	// TODO set availability of logged in tutor to available (2)
 	            } else {
-	                // The toggle is disabled
 	            	System.out.println("second");
+	            	// TODO set availability of logged in tutor to busy (1)
 	            }
-	        }
-	    });
+            }
+        });
         	
         return super.onCreateOptionsMenu(menu);
     }
@@ -206,11 +194,12 @@ public class MainActivity extends Activity {
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
     	if (sharedPref.contains("user_id")) {
         	menu.findItem(R.id.mySwitch).setVisible(true);
+        	// TODO
+        	// check if logged in (using Android shared preferences)
+        	// get availability from db
+        	// set checked state on toggle
     	}
     	else {
         	menu.findItem(R.id.mySwitch).setVisible(false);
@@ -307,7 +296,8 @@ public class MainActivity extends Activity {
     			
     			// Show the toggle availability switch and set it.
     			mMenu.findItem(R.id.mySwitch).setVisible(true);
-    			// Story: [set switch state here]
+    			Switch mySwitch = (Switch) mMenu.findItem(R.id.mySwitch).getActionView();
+    			mySwitch.setChecked(true);
     			
         		// Show a login toast
         		Toast.makeText(getApplicationContext(), 
