@@ -131,7 +131,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     */
     public function getUsersRecords($user_id)
     {
-        $result= DB::select("SELECT r.report_id, u.user_id, r.tutor_user_id, r.date AS day, r.start_time, r.end_time, r.summary, c.course_name FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE u.user_id = ?",array($user_id));
+        $result= DB::select("SELECT c.subject, c.course_number, c.course_name, tu.fName, tu.lName, r.date AS day, r.start_time, r.end_time, r.summary FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE u.user_id = ? ORDER BY r.date DESC, r.start_time DESC",array($user_id));
 
         $endJson=array();
         $endJson['user_id']=$user_id;
@@ -149,10 +149,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       */
       public function getUsersRecordsParent($smu_id)
       {
-        $result= DB::select("SELECT r.report_id, u.user_id, r.tutor_user_id, r.date AS day, r.start_time, r.end_time, r.summary, c.course_name FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE u.smu_id = ?",array($smu_id));
+        $result=DB::select("SELECT user_id FROM users WHERE smu_id=?",array($smu_id));
+        if(isset($result[0]))$user_id=$result[0]->user_id;
+        $result= DB::select("SELECT c.subject, c.course_number, c.course_name, tu.fName, tu.lName, r.date AS day, r.start_time, r.end_time, r.summary FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE u.smu_id = ? ORDER BY r.date DESC, r.start_time DESC",array($smu_id));
 
         $endJson=array();
-        /*$endJson['user_id']=$user_id;*/
+        $endJson['user_id']=$user_id;
         if(!empty($result))
         {         
             $endJson['meetings']=$result;

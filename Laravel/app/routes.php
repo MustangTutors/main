@@ -101,7 +101,7 @@ Route::get('users/history',function()
 
 Route::post('users/history/parent',function()
 {
-    if($_POST['smu_id']!=null &&  $_POST['codeword']!=null)
+    if(isset($_POST['smu_id']) &&  isset($_POST['codeword']))
     {
         $temp = new User();
         $result = $temp->checkCodeWord($_POST['smu_id'],$_POST['codeword']);
@@ -109,10 +109,10 @@ Route::post('users/history/parent',function()
         {
             $temp->getUsersRecordsParent($_POST['smu_id']);
         }
-	else
-	{
-		echo "incorrect codeword";
-	}
+    	else
+    	{
+	    	echo "incorrect codeword";
+	    }
     }
 });
 
