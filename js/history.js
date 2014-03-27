@@ -232,17 +232,22 @@ function sendEmailJSON() {
 function showView() {
     // Parse JSON for user info
     $.ajax({
-        url: "json/user_info.json",
+        url: "Laravel/public/users/current",
         success: function(json) {
-            //json = JSON.parse(json);
+            json = JSON.parse(json);
+            json = json[0];
 
             // Logged in
             if(json.length !== 0) {
                 // If user not a tutor, don't allow to toggle views
-                if(json.tutor === 0 || json.active === 0){
+                if(json.tutor === "0" || json.active === "0"){
+                    $('label#history_view').hide();
                     $('#history_view input[type="checkbox"]').prop('checked', true);
                     toggleView();
-                    $('label#history_view').hide();
+                }
+                else {
+                    $('#history_view input[type="checkbox"]').prop('checked', false);
+                    toggleView();
                 }
             }
         }

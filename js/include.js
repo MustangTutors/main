@@ -118,7 +118,7 @@ function setNavigationBar() {
                 json = json[0];
 
                 // If the user is not a tutor
-                if(json.tutor === 0 || json.active === 0) {
+                if(json.tutor === "0" || json.active === "0") {
                     // Add navigation for student user
                     var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
                                 '<li class="nav"><a href="history.html">Student History</a>'+
@@ -129,7 +129,7 @@ function setNavigationBar() {
                     $('nav #navigation').append(newNav);
 
                     // If admin, add navigation/search options for admin
-                    if(json.admin === 1){
+                    if(json.admin === '1'){
                         newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
                         $("#adminSearchOptions").show();
@@ -162,7 +162,7 @@ function setNavigationBar() {
                     $('nav #navigation').append(newNav);
 
                     // If admin, add navigation options for admin
-                    if(json.admin === 1){
+                    if(json.admin === '1'){
                         newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                         $('nav #navigation').append(newNav);
                     }
