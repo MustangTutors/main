@@ -115,7 +115,7 @@ $(document).ready(function(){
                     var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
                     var contributor = "Tutored by: " + json[i].fName + " " + json[i].lName;
                     var date = json[i].day;
-                    var time = json[i].start_time + " to " + json[i].end_time;
+                    var time = convertTime(json[i].start_time) + " to " + convertTime(json[i].end_time);
                     var summary = json[i].summary;
 
                     // Create and append new node with json information
