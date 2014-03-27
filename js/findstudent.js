@@ -27,16 +27,16 @@ function loadMeetings () {
                 else {
                     console.log(json.user_id);
                     // Insert search result title
-                    $.ajax({
-                        type: "GET",
-                        url: "Laravel/public/users/current/" + json[0].user_id,
-                        success: function(json) {
-                            json = JSON.parse(json);
-                            json = json[0];
-                            var heading = "Results for " + json.fName + " " + json.lName + " ("+ json.smu_id +")";
-                            $('#results #results_name').html(heading);
-                        }
-                    });
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: "Laravel/public/users/current/" + json.user_id,
+                    //     success: function(json) {
+                    //         json = JSON.parse(json);
+                    //         json = json[0];
+                    //         var heading = "Results for " + json.fName + " " + json.lName + " ("+ json.smu_id +")";
+                    //         $('#results #results_name').html(heading);
+                    //     }
+                    // });
 
                     json = json.meetings;
                     for(var i = 0; i < json.length; i++) {
