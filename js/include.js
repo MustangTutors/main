@@ -168,7 +168,7 @@ function setNavigationBar() {
                 $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName);
                 $("div#welcomeMessage").show();
 
-                if(json.tutor === "0" || json.active === "0") {
+                if(Number(json.tutor) === 0 || Number(json.active) === 0) {
                     $('nav li#toggleButton').hide();
 
                     // Add navigation for student user
@@ -183,7 +183,7 @@ function setNavigationBar() {
                 else {
                     // Show the toggle availability
                     $("nav li#toggleButton").show();
-                    if(json.available === 1) {
+                    if(Number(json.available) === 1) {
                         // Set toggle to "Busy"
                         $('#navigation label.toggle input[type="checkbox"]').prop('checked', true);
                         
@@ -210,11 +210,12 @@ function setNavigationBar() {
                 
 
 
-                // If admin, add navigation options for admin
-                if(json.admin === "1"){
+                // If admin, add navigation/search options for admin
+                if(Number(json.admin) === 1){
                     var newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                     $('nav #navigation').append(newNav);
-                    //$("#adminSearchOptions").show();
+                    // Adds the tutor first name and last name options to search
+                    $("#adminSearchOptions").show();
                 }
             }
             // Not logged in
