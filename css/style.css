@@ -1126,9 +1126,9 @@ section#tutor_history {
     box-shadow: 5px 5px 5px rgba(100,100,100,0.7);
 }
 
-#about_us h2.heading {
+/*#about_us h2.heading {
     text-align: left;
-}
+}*/
 
 .bigger_text {
     font-size: 1.5em;
