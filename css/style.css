@@ -910,6 +910,10 @@ div.center {
     display: none;
 }
 
+.instructions {
+    text-align: center;
+}
+
 /* End styling for Share window. */
 
 /* End styling for Student History View. */

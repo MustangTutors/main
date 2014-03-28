@@ -168,13 +168,15 @@ function setNavigationBar() {
                 $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName);
                 $("div#welcomeMessage").show();
 
-                if(json.tutor === 0 || json.active === 0) {
+                if(json.tutor === "0" || json.active === "0") {
+                    $('nav li#toggleButton').hide();
+
                     // Add navigation for student user
                     var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
                                 '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
-                                "<li><a href='findstudent.html'>Get Student's history</a></li></div></ul></li"+
+                                '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>' +
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
                 }
@@ -200,23 +202,26 @@ function setNavigationBar() {
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
-                                "<li><a href='findstudent.html'>Get Student's History</a></li></div></ul></li>"+
+                                '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>'+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
+                                
                     $('nav #navigation').append(newNav);
                 }
                 
+
+
                 // If admin, add navigation options for admin
-                if(json.admin === 1){
-                    newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                if(json.admin === "1"){
+                    var newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
                     $('nav #navigation').append(newNav);
-                    $("#adminSearchOptions").show();
+                    //$("#adminSearchOptions").show();
                 }
             }
             // Not logged in
             else {
                 $("form#loginForm").show();
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
-                        "<li class='nav'><a href='findstudent.html'>Get Student's History</a></li>"+
+                        '<li class="nav"><a href="findstudent.html">Get Student History</a></li>'+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                 $('nav #navigation').append(reg);
             }
