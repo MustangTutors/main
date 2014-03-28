@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/include.js"></script>
     <script type="text/javascript" src="js/tutor.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,9 @@
         <div id="tutorProfilePage">
 
             <section id="profileBox">
-                <img src="img/tutors/tutor.jpg">
+                <div class="tutorPicture">
+                    <img src="img/tutors/tutor.jpg">
+                </div>
                 <div id="tutorInformation">
                     <section id="rating">
                         <h2>Story Zanetti</h2>
@@ -45,30 +48,30 @@
                 </div>
             </section>
 
-            <article class="schedule">
-                <h2>Courses</h2>
+            <article class="schedule summary">
+                <h2 class="subheading">Courses</h2>
                 <ul>
-                    <li>CSE 4340: Statistics for Engineers</li>
-                    <li>CSE 4340: Statistics for Engineers</li>
-                    <li>CSE 4340: Statistics for Engineers</li>
-                    <li>CSE 4340: Statistics for Engineers</li>
+                    <li><span class="label">CSE 4340:</span><span class="content">Statistics for Engineers</span></li>
+                    <li><span class="label">CSE 4340:</span><span class="content">Statistics for Engineers</span></li>
+                    <li><span class="label">CSE 4340:</span><span class="content">Statistics for Engineers</span></li>
+                    <li><span class="label">CSE 4340:</span><span class="content">Statistics for Engineers</span></li>
                 </ul>
             </article>
 
-            <article class="schedule">
-                <h2>Regular Hours</h2>
+            <article class="schedule summary">
+                <h2 class="subheading">Regular Hours</h2>
                 <ul>
-                    <li><span class="day">Sunday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
-                    <li><span class="day">Monday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
-                    <li><span class="day">Tuesday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
-                    <li><span class="day">Wednesday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
-                    <li><span class="day">Thursday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
-                    <li><span class="day">Friday</span>  <span>5:00PM</span>-<span>9:00PM</span></li>
+                    <li><span class="day">Sunday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
+                    <li><span class="day">Monday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
+                    <li><span class="day">Tuesday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
+                    <li><span class="day">Wednesday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
+                    <li><span class="day">Thursday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
+                    <li><span class="day">Friday</span><span>5:00 PM</span> to <span>9:00 PM</span></li>
                 </ul>
             </article>
 
             <section id="comments">
-                <h2>Comments</h2>
+                <h2 class="subheading">Comments</h2>
                 <textarea name="commentBox" rows="5" cols="50" maxlength="140" spellcheck="true"></textarea>
                 <input type="submit" name="addComment" value="Add Comment">
                 <div id="commentList">

@@ -1,5 +1,6 @@
 <section id="login">
     <form id="loginForm">
+        <div class="error">Incorrect SMU ID/password.</div>
         <input type="text" name="id" id="login_id" placeholder="SMU ID" pattern="[0-9]{8}" title="Must be an 8 digit number." required>
         <input type="password" name="password" id="login_password" placeholder="Password" pattern=".{8,}" required>
         <input type="submit" value="Login" class="button small">
@@ -16,7 +17,7 @@
                 <ul class="dropdown account">
                     <div class="border">
                         <li><a href="#">Edit Account</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="#" id="logout">Logout</a></li>
                     </div>
                 </ul>
             </li>

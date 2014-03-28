@@ -164,7 +164,10 @@ function setNavigationBar() {
                 json = JSON.parse(json);
                 json = json[0];
 
-                // If the user is not a tutor
+                // Set welcome message
+                $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName);
+                $("div#welcomeMessage").show();
+
                 if(json.tutor === 0 || json.active === 0) {
                     // Add navigation for student user
                     var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
@@ -174,13 +177,6 @@ function setNavigationBar() {
                                 '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation/search options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                        $("#adminSearchOptions").show();
-                    }
                 }
                 else {
                     // Show the toggle availability
@@ -207,16 +203,18 @@ function setNavigationBar() {
                                 '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                    }
+                }
+                
+                // If admin, add navigation options for admin
+                if(json.admin === 1){
+                    newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                    $('nav #navigation').append(newNav);
+                    $("#adminSearchOptions").show();
                 }
             }
             // Not logged in
             else {
+                $("form#loginForm").show();
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
                         '<li class="nav"><a href="findstudent.html">Search for Student</a></li>'+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';

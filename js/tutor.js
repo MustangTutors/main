@@ -1,13 +1,19 @@
 $(document).ready(function() {
+	// Get the user_id from query in URL, then get tutor info
+	var user_id = getURLParameter('user_id');
+	$.ajax({
+        type: "GET",
+        url: "Laravel/public/tutor/" + user_id,
+        success: function(output) {
+            var json = JSON.parse(output);
+            console.log(json);
+            $("span#averageRating h3 span").append(convertToStars(json.average_rating));
+			$("span#yourRating h3 span").html(convertToStars(json.current_user_rating));
+        }
+    });
 
 	var star = '<img src="img/star.png" alt="Rating Star">';
 	var empty_star = '<img src="img/emptystar.png" alt="Rating Star">';
-
-	for(var i = 0; i < 5; i++) {
-		$("span#averageRating h3 span").append(star);
-		$("span#yourRating h3 span").append(empty_star);
-	}
-
 
 	$("input[name='addComment']").on('click', function() {
 		var date = new Date();

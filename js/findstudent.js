@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(document).on('submit', 'form', function(event){
+    $(document).on('submit', 'form#search_bar', function(event){
         event.preventDefault();
         clearMeetings();
         loadMeetings();
