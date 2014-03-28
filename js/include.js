@@ -107,6 +107,22 @@ function convertTime(militaryTime) {
     return hours + ':' + minutes + ' ' + amPm;
 }
 
+// Retrieve URL parameters (GET variables)
+// From: http://stackoverflow.com/a/21903119/1330341
+// Example:
+// http://dummy.com/?technology=jquery&blog=jquerybyexample
+// var tech = GetURLParameter('technology');
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
 function setNavigationBar() {
     // Parse JSON for user info
     $.ajax({

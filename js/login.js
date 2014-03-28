@@ -9,8 +9,8 @@ $(document).ready(function() {
                 type: "POST",
                 url: "Laravel/public/users/login",
                 data: {
-                	smu_id: $("input#login_id").val();
-                	password: $("input#login_password").val();
+                	smu_id: $("input#login_id").val(),
+                	password: $("input#login_password").val()
                 },
                 success: function(output) {
                     if (output === "The user was not logged in properly") {
