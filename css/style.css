@@ -1113,18 +1113,76 @@ section#tutor_history {
 
 /* Styling for About Us */
 
-img[src="tutoring.png"] {
-    float: left;
-    padding-right: 10px;
-    padding-bottom: 5px;
+#tutoring_pic {
+    float: right;
+    margin: 30px 30px 20px 30px;
+    width: 300px;
+    transform:rotate(7deg);
+    -ms-transform:rotate(7deg); /* IE 9 */
+    -webkit-transform:rotate(7deg); /* Opera, Chrome, and Safari */
+    border-style: solid;
+    border-width: 3px;
+    border-color: #192942;
+    box-shadow: 5px 5px 5px rgba(100,100,100,0.7);
+}
+
+#about_us h2.heading {
+    text-align: left;
+}
+
+.bigger_text {
+    font-size: 1.5em;
+}
+
+#about_us article{
+    padding: 0px 20px;
 }
 
 /* End syling for About Us*/
 
 /* Styling for Contact Us */
 
-.information {
+.information h3 {
     text-align: center;
+}
+
+#tutoring_info { 
+    float: right;
+    width: 50%;
+}
+
+#company_info {
+    float: left;
+    width: 50%;
+}
+
+.information.schedule {
+    height: auto;
+    position: relative;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#company_info .information.schedule {
+    right: -20%;
+}
+
+#company_info .information.schedule .day {
+    width: 150px;
+}
+
+#company_info .information.schedule h3.subheading {
+    margin-bottom: 10px;
+}
+
+#tutoring_info .information.schedule {
+    left: 10%;
+}
+
+.clear {
+    clear:both;
 }
 
 /* End styling for Contact Us */
@@ -1185,6 +1243,9 @@ section#rating span h3 span, .schedule {
     margin-right: -140px;
     margin-left: 145px;
     vertical-align: top;
+    border-width: 1.6px;
+    border-style: solid;
+    border-color: #B0A69B;
 }
 
 .schedule ul {
