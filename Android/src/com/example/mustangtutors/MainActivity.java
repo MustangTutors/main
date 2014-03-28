@@ -17,6 +17,7 @@ import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +42,9 @@ public class MainActivity extends Activity {
     private String[] drawerImages;
     private int[] drawerImagesInt;
     private String[] drawerStrings;
+    
+    // Create switch
+    private Switch mySwitch;
     
     // Populate the navigation drawer.
     public void fillNavDrawer(String type) {
@@ -162,7 +166,20 @@ public class MainActivity extends Activity {
     	super.onResume();
     	// TODO
     	// check if logged in (using Android shared preferences)
-    	// get availability from db
+    	
+    	if(mySwitch != null)
+    	{
+    		// Set availability from DB
+            int availability = getAvailability();
+            if(availability == 2){
+            	mySwitch.setChecked(true);
+            } else if(availability == 1){
+            	mySwitch.setChecked(false);
+            } else {
+            	toggleAvailability();
+            }
+    	}
+    	
     	// set checked state on toggle
     }
     
@@ -173,49 +190,27 @@ public class MainActivity extends Activity {
         mMenu = menu;
         
         // Create switch
-        final Switch mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
+        mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
         
         // Change text of switch
         mySwitch.setTextOff("Busy");
         mySwitch.setTextOn("Available");
         
         // Set availability from DB
-        boolean available = getAvailability();
-        System.out.println(available);
-        mySwitch.setChecked(available);
+        int availability = getAvailability();
+        if(availability == 2){
+        	mySwitch.setChecked(true);
+        } else if(availability == 1){
+        	mySwitch.setChecked(false);
+        } else {
+        	toggleAvailability();
+        }
         
         // Create listener for availability
         mySwitch.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-                boolean isChecked = mySwitch.isChecked();
-                if (isChecked) {
-	            	// TODO set availability of logged in tutor to available (2)
-                	AjaxRequest request;
-                    try {
-            	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle");
-            	    	JSONObject json;
-                        try {
-            	            json = new JSONObject(request.send());
-            	            System.out.println("1 here");
-                        } catch (Exception e) {
-                        }
-                    } catch (MalformedURLException e1) {
-                    }
-	            } else {
-	            	// TODO set availability of logged in tutor to busy (1)
-	            	AjaxRequest request;
-                    try {
-            	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle");
-            	    	JSONObject json;
-                        try {
-            	            json = new JSONObject(request.send());
-            	            System.out.println("2 here");
-                        } catch (Exception e) {
-                        }
-                    } catch (MalformedURLException e1) {
-                    }
-	            }
+	        	toggleAvailability();
             }
         });
         	
@@ -230,6 +225,7 @@ public class MainActivity extends Activity {
         	// TODO
         	// check if logged in (using Android shared preferences)
         	// get availability from db
+        	
         	// set checked state on toggle
     	}
     	else {
@@ -327,7 +323,6 @@ public class MainActivity extends Activity {
     			
     			// Show the toggle availability switch and set it.
     			mMenu.findItem(R.id.mySwitch).setVisible(true);
-    			Switch mySwitch = (Switch) mMenu.findItem(R.id.mySwitch).getActionView();
     			mySwitch.setChecked(true);
     			
         		// Show a login toast
@@ -363,22 +358,36 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     
-    public boolean getAvailability(){
+    public int getAvailability(){
     	AjaxRequest request;
         try {
-	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/current");
-	    	JSONObject json;
+	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/available/"+sharedPref.getString("user_id", ""));
+	    	JSONArray json;
             try {
-	            json = new JSONObject(request.send());
-	            String availability = json.getString("available");
-	            if(availability.equals("2")){
-	            	return true;
+	            json = new JSONArray(request.send());
+	            JSONObject availability = (JSONObject) json.get(0);
+	            String available = availability.getString("available");
+	            if(available.equals("2")){
+	            	return 2;
+	            }else if(available.equals("1")){
+	            	return 1;
 	            }
             } catch (Exception e) {
             }
         } catch (MalformedURLException e1) {
         }
         
-        return false;
+        return 0;
+    }
+    
+    public void toggleAvailability(){
+    	// Toggle the availability of the current user in the database
+    	AjaxRequest request;
+        try {
+	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
+            request.send();
+            Log.d("scz","toggled");
+        } catch (MalformedURLException e1) {
+        }
     }
 }
