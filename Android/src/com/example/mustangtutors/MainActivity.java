@@ -172,20 +172,49 @@ public class MainActivity extends Activity {
         inflater.inflate(R.menu.main, menu);
         mMenu = menu;
         
+        // Create switch
         final Switch mySwitch = (Switch) menu.findItem(R.id.mySwitch).getActionView();
+        
+        // Change text of switch
         mySwitch.setTextOff("Busy");
         mySwitch.setTextOn("Available");
         
+        // Set availability from DB
+        boolean available = getAvailability();
+        System.out.println(available);
+        mySwitch.setChecked(available);
+        
+        // Create listener for availability
         mySwitch.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
                 boolean isChecked = mySwitch.isChecked();
                 if (isChecked) {
-	            	System.out.println("first");
 	            	// TODO set availability of logged in tutor to available (2)
+                	AjaxRequest request;
+                    try {
+            	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle");
+            	    	JSONObject json;
+                        try {
+            	            json = new JSONObject(request.send());
+            	            System.out.println("1 here");
+                        } catch (Exception e) {
+                        }
+                    } catch (MalformedURLException e1) {
+                    }
 	            } else {
-	            	System.out.println("second");
 	            	// TODO set availability of logged in tutor to busy (1)
+	            	AjaxRequest request;
+                    try {
+            	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle");
+            	    	JSONObject json;
+                        try {
+            	            json = new JSONObject(request.send());
+            	            System.out.println("2 here");
+                        } catch (Exception e) {
+                        }
+                    } catch (MalformedURLException e1) {
+                    }
 	            }
             }
         });
@@ -332,5 +361,24 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    
+    public boolean getAvailability(){
+    	AjaxRequest request;
+        try {
+	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/current");
+	    	JSONObject json;
+            try {
+	            json = new JSONObject(request.send());
+	            String availability = json.getString("available");
+	            if(availability.equals("2")){
+	            	return true;
+	            }
+            } catch (Exception e) {
+            }
+        } catch (MalformedURLException e1) {
+        }
+        
+        return false;
     }
 }
