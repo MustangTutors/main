@@ -107,6 +107,53 @@ function convertTime(militaryTime) {
     return hours + ':' + minutes + ' ' + amPm;
 }
 
+// Retrieve URL parameters (GET variables)
+// From: http://stackoverflow.com/a/21903119/1330341
+// Example:
+// http://dummy.com/?technology=jquery&blog=jquerybyexample
+// var tech = GetURLParameter('technology');
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
+// Generate stars for the rating, given a decimal number.
+function convertToStars(num) {
+    var output = "";
+
+    if (num === null) {
+        return "N/A";
+    }
+
+    // Make sure the input is a number.
+    num = Number(num);
+
+    // Round the number to the nearest 0.5
+    num = (Math.round(num * 2) / 2).toFixed(1);
+
+    // Add to the output the right number of stars
+    var starsAdded = 0;
+    for (num; num > 0.5; num--) {
+        output += '<img src="img/star.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    if (num !== 0) {
+        output += '<img src="img/halfstar.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    for (starsAdded; starsAdded < 5; starsAdded++) {
+        output += '<img src="img/emptystar.png" alt="Rating Star">';
+    }
+
+    return output;
+}
+
 function setNavigationBar() {
     // Parse JSON for user info
     $.ajax({
@@ -117,7 +164,10 @@ function setNavigationBar() {
                 json = JSON.parse(json);
                 json = json[0];
 
-                // If the user is not a tutor
+                // Set welcome message
+                $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName);
+                $("div#welcomeMessage").show();
+
                 if(json.tutor === 0 || json.active === 0) {
                     // Add navigation for student user
                     var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
@@ -127,13 +177,6 @@ function setNavigationBar() {
                                 '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation/search options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                        $("#adminSearchOptions").show();
-                    }
                 }
                 else {
                     // Show the toggle availability
@@ -160,16 +203,18 @@ function setNavigationBar() {
                                 '<li><a href="findstudent.html">Search for Student</a></li></div></ul></li>'+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
-
-                    // If admin, add navigation options for admin
-                    if(json.admin === 1){
-                        newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                        $('nav #navigation').append(newNav);
-                    }
+                }
+                
+                // If admin, add navigation options for admin
+                if(json.admin === 1){
+                    newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
+                    $('nav #navigation').append(newNav);
+                    $("#adminSearchOptions").show();
                 }
             }
             // Not logged in
             else {
+                $("form#loginForm").show();
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
                         '<li class="nav"><a href="findstudent.html">Search for Student</a></li>'+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';

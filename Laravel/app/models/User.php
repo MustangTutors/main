@@ -19,11 +19,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
-    public function getCurrUserInfo($user_id=0){
+    public function getCurrUserInfo($user_id=-1){
          
          $id=Input::get('user_id',$user_id);
          
-         if(isset($_SESSION['user_id'])){
+         if($user_id==-1 && isset($_SESSION['user_id'])){
             $id=$_SESSION['user_id'];
          }
 

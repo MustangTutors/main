@@ -194,9 +194,14 @@ nav li#toggleButton {
 /* Styling of login form. */
 
 #loginForm {
-    display: block;
+    display: none;
     margin-right: 25px;
-    margin-top: 25px;
+    margin-top: 6px;
+}
+
+#loginForm .error {
+    visibility: hidden;
+    color: #CC0000;
 }
 
 section#login {
@@ -713,11 +718,6 @@ span.listLabel {
 
 ul span.listContent {
     display: inline-block;
-    width: 180px;
-}
-
-ul span.listContent {
-    display: inline-block;
     width: 170px;
 }
 
@@ -1102,15 +1102,33 @@ img[src="tutoring.png"] {
 
 /* Styling for Tutor Profile */
 
-section#profileBox > img {
-    max-width: 140px;
-    max-height: 160px;
-    margin-top: 10px;
+section#profileBox {
+    background-color: #B5C4DC;
+    border-top: 2px solid #192942;
+    border-bottom: 2px solid #192942;
+    margin-right: -7px;
+    margin-left: -7px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    padding: 10px 40px;
+}
+
+#profileBox .tutorPicture {
+    display: inline-block;
+    width: 150px;
+    height: 200px;
+}
+
+#profileBox .tutorPicture img {
+    max-width: 150px;
+    max-height: 200px;
 }
 
 div#tutorInformation {
     display: inline-block;
+    vertical-align: top;
     margin-left: 10px;
+    margin-top: 20px;
 }
 
 section#rating, section#rating h2, 
@@ -1127,21 +1145,45 @@ section#rating span h3 span, .schedule {
     margin-left: 31px;
 }
 
+#averageRating img[src*='star'], #yourRating img[src*='star'] {
+    width: 25px;
+}
+
 .schedule {
     background-color: #FFF6EB;
     height: 180px;
     width: 295px;
     margin-right: -140px;
     margin-left: 145px;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #DDD4C9;
-    display: inline-table;
+    vertical-align: top;
 }
 
 .schedule ul {
     list-style: none;
+    padding: 0px 0px 0px 15px;
+}
+
+.schedule li {
+    padding-bottom: 3px;
+}
+
+.schedule .label {
+    display: inline-block;
+    font-weight: bold;
+    width: 95px;
+    vertical-align: top;
+}
+
+.schedule .day {
+    display: inline-block;
+    font-weight: bold;
+    width: 110px;
+    vertical-align: top;
+}
+
+.schedule .content {
+    display: inline-block;
+    width: 170px;
 }
 
 section#comments {
