@@ -56,6 +56,16 @@ $(document).ready(function() {
         $('#settings img[src="img/gear_light.png"]').attr('src', 'img/gear.png');
         $('#settings img[src="img/gear_arrow_light.png"]').attr('src', 'img/gear_arrow.png');
     });
+
+    // Add toggle message when user hovers over toggle switch
+    $(document).on('mouseover', '#toggleButton', toggleMessageAppear);
+
+    // Remove toggle message
+    $(document).on('mouseout', '#toggleButton', function(){
+        // Make toggle message disappear
+        $('#toggle_message').html('');
+        $('#toggle_message').hide();
+    });
 });
 
 // Set the color of the toggle
@@ -89,6 +99,7 @@ function setToggleColor(id) {
 
 // Toggle availability
 function toggleAvailability() {
+    toggleMessageAppear();
     // Call toggle
     $.ajax({
         type: "GET",
@@ -187,7 +198,7 @@ function setNavigationBar() {
                     newNav += '<li class="nav"><a href="history.html">Student History</a>'+
                               '<ul class="dropdown"><div class="border">'+
                               '<li><a href="history.html">Your History</a></li>'+
-                              '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>' +
+                              "<li><a href='findstudent.html'>Get Student's History</a></li></div></ul></li>" +
                               '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
                 }
@@ -213,7 +224,7 @@ function setNavigationBar() {
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>'+
+                                "<li><a href='findstudent.html'>Get Student's History</a></li></div></ul></li>"+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                                 
                     $('nav #navigation').append(newNav);
@@ -233,10 +244,24 @@ function setNavigationBar() {
             else {
                 $("form#loginForm").show();
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
-                        '<li class="nav"><a href="findstudent.html">Get Student History</a></li>'+
+                        "<li class='nav'><a href='findstudent.html'>Get Student's History</a></li>"+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                 $('nav #navigation').append(reg);
             }
         }
     });
+}
+
+function toggleMessageAppear(){
+    // Make toggle message appear
+    if($('#toggle_message').css('display') !== "block"){
+        if($('#toggleButton input[type="checkbox"]').prop('checked')){
+            $('#toggle_message').html('You are currently with a client.');
+            $('#toggle_message').css('display', 'inline-block');
+        } else {
+            $('#toggle_message').html('You are free to tutor someone.');
+            $('#toggle_message').css('display', 'inline-block');
+        }
+        
+    }
 }

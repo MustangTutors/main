@@ -77,10 +77,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function toggleAvailable($id)
     {
         $result = DB::select("select * from users where user_id = ?",array($id));
-        if($result[0]->available != 1)
-            DB::update("update users SET available = 1 WHERE user_id = ?",array($id));
-        else
+        if($result[0]->available != 2)
             DB::update("update users SET available = 2 WHERE user_id = ?",array($id));
+        else
+            DB::update("update users SET available = 1 WHERE user_id = ?",array($id));
  
      }
 	/**

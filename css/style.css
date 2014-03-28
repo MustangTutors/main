@@ -109,7 +109,7 @@ nav ul {
     text-decoration: none;
     text-align: center;
     color: white;
-    width: 130px;
+    width: 140px;
     box-shadow: 2px 2px 3px rgba(128,30,29,0.5);
     font-size: 0.85em;
 }
@@ -187,6 +187,11 @@ nav li#toggleButton {
     position: absolute;
     left: 3px;
     top: -25px;
+}
+
+#toggle_message {
+    top: 45px;
+    right: -5px;
 }
 
 /* End styling of navigation bar. */
@@ -801,8 +806,13 @@ article.meeting:first-of-type {
 
 .course_contributor {
     width: auto;
-    text-align: right;
     display: inline-block;
+}
+
+.contributor {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 4px;
 }
 
 .summary {
@@ -831,7 +841,7 @@ section#student_history {
     width: 25px;
     position: absolute;
     right: 4%;
-    top: 2.5%;
+    top: 8px;
     cursor: pointer;
     background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
     border-width: 1px;
@@ -852,6 +862,7 @@ section#student_history {
     color: white;
     padding: 5px;
     position: absolute;
+    z-index: 500;
 }
 
 #share_message {
