@@ -109,7 +109,7 @@ nav ul {
     text-decoration: none;
     text-align: center;
     color: white;
-    width: 130px;
+    width: 140px;
     box-shadow: 2px 2px 3px rgba(128,30,29,0.5);
     font-size: 0.85em;
 }
@@ -801,8 +801,13 @@ article.meeting:first-of-type {
 
 .course_contributor {
     width: auto;
-    text-align: right;
     display: inline-block;
+}
+
+.contributor {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 4px;
 }
 
 .summary {
@@ -852,6 +857,7 @@ section#student_history {
     color: white;
     padding: 5px;
     position: absolute;
+    z-index: 500;
 }
 
 #share_message {

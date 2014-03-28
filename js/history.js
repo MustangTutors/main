@@ -32,7 +32,8 @@ $(document).ready(function(){
 	$(document).on('click', '#share_cancel', closeAndClearShare);
 
     // When send is clicked on share window
-    $(document).on('click', '#share_send', function(){
+    $(document).on('submit', '#share_form', function(){
+        event.preventDefault();
         var values = false;
 
         for(var i = 0; i < $('.share_email input[type="email"]').length; i++){

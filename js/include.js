@@ -187,7 +187,7 @@ function setNavigationBar() {
                     newNav += '<li class="nav"><a href="history.html">Student History</a>'+
                               '<ul class="dropdown"><div class="border">'+
                               '<li><a href="history.html">Your History</a></li>'+
-                              '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>' +
+                              "<li><a href='findstudent.html'>Get Student's History</a></li></div></ul></li>" +
                               '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
                 }
@@ -213,7 +213,7 @@ function setNavigationBar() {
                     var newNav = '<li class="nav"><a href="history.html">Student History</a>'+
                                 '<ul class="dropdown"><div class="border">'+
                                 '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>'+
+                                "<li><a href='findstudent.html'>Get Student's History</a></li></div></ul></li>"+
                                 '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                                 
                     $('nav #navigation').append(newNav);
@@ -233,7 +233,7 @@ function setNavigationBar() {
             else {
                 $("form#loginForm").show();
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
-                        '<li class="nav"><a href="findstudent.html">Get Student History</a></li>'+
+                        "<li class='nav'><a href='findstudent.html'>Get Student's History</a></li>"+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                 $('nav #navigation').append(reg);
             }

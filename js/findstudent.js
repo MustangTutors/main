@@ -21,7 +21,6 @@ function loadMeetings () {
             }
             else {
                 json = JSON.parse(json);
-                console.log(json.user_id);
                 // Insert search result title
                 $.ajax({
                     type: "GET",
