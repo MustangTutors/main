@@ -56,6 +56,16 @@ $(document).ready(function() {
         $('#settings img[src="img/gear_light.png"]').attr('src', 'img/gear.png');
         $('#settings img[src="img/gear_arrow_light.png"]').attr('src', 'img/gear_arrow.png');
     });
+
+    // Add toggle message when user hovers over toggle switch
+    $(document).on('mouseover', '#toggleButton', toggleMessageAppear);
+
+    // Remove toggle message
+    $(document).on('mouseout', '#toggleButton', function(){
+        // Make toggle message disappear
+        $('#toggle_message').html('');
+        $('#toggle_message').hide();
+    });
 });
 
 // Set the color of the toggle
@@ -89,6 +99,7 @@ function setToggleColor(id) {
 
 // Toggle availability
 function toggleAvailability() {
+    toggleMessageAppear();
     // Call toggle
     $.ajax({
         type: "GET",
@@ -239,4 +250,18 @@ function setNavigationBar() {
             }
         }
     });
+}
+
+function toggleMessageAppear(){
+    // Make toggle message appear
+    if($('#toggle_message').css('display') !== "block"){
+        if($('#toggleButton input[type="checkbox"]').prop('checked')){
+            $('#toggle_message').html('You are currently with a client.');
+            $('#toggle_message').css('display', 'inline-block');
+        } else {
+            $('#toggle_message').html('You are free to tutor someone.');
+            $('#toggle_message').css('display', 'inline-block');
+        }
+        
+    }
 }

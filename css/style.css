@@ -189,6 +189,11 @@ nav li#toggleButton {
     top: -25px;
 }
 
+#toggle_message {
+    top: 45px;
+    right: -5px;
+}
+
 /* End styling of navigation bar. */
 
 /* Styling of login form. */
@@ -836,7 +841,7 @@ section#student_history {
     width: 25px;
     position: absolute;
     right: 4%;
-    top: 2.5%;
+    top: 8px;
     cursor: pointer;
     background: -webkit-gradient(linear, left top, left bottom, from(#FCF3EA), to(#E2D5C5));
     border-width: 1px;
