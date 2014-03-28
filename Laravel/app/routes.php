@@ -119,7 +119,13 @@ Route::post('users/history/parent',function()
 Route::get('tutor/{id}',function($id)
 {
     $temp = new Tutor();
-    $temp->getInfoForTutorsPage($_SESSION['user_id'],$id);
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    }
+    else {
+        $user_id = 0;
+    }
+    $temp->getInfoForTutorsPage($user_id,$id);
 })
 ->where('id','[0-9]+');
 
