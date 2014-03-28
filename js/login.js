@@ -19,7 +19,7 @@ $(document).ready(function() {
                 		$("input#login_password").val("");
                     }
                     else {
-                        output = JSON.parse(output)
+                        output = JSON.parse(output);
                     	$("form#loginForm").hide();
                     	$("div#welcomeMessage").show();
                     	$("div#welcomeMessage span.welcome").append(output[0].fName);
