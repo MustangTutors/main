@@ -171,13 +171,16 @@ function setNavigationBar() {
                 if(Number(json.tutor) === 0 || Number(json.active) === 0) {
                     $('nav li#toggleButton').hide();
 
+                    var newNav = '';
                     // Add navigation for student user
-                    var newNav = '<li class="nav"><a href="#">Become a Tutor</a></li>'+
-                                '<li class="nav"><a href="history.html">Student History</a>'+
-                                '<ul class="dropdown"><div class="border">'+
-                                '<li><a href="history.html">Your History</a></li>'+
-                                '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>' +
-                                '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
+                    if (Number(json.tutor) === 0) {
+                        newNav += '<li class="nav"><a href="#">Become a Tutor</a></li>';
+                    }
+                    newNav += '<li class="nav"><a href="history.html">Student History</a>'+
+                              '<ul class="dropdown"><div class="border">'+
+                              '<li><a href="history.html">Your History</a></li>'+
+                              '<li><a href="findstudent.html">Get Student History</a></li></div></ul></li>' +
+                              '<li class="nav"><a href="index.html">Search for Tutors</a></li>';
                     $('nav #navigation').append(newNav);
                 }
                 else {
