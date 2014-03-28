@@ -134,6 +134,14 @@ function convertToStars(num) {
     // Make sure the input is a number.
     num = Number(num);
 
+    // Make sure the number isn't too small or large.
+    if (num < 1) {
+        num = 1;
+    }
+    else if (num > 5) {
+        num = 5;
+    }
+
     // Round the number to the nearest 0.5
     num = (Math.round(num * 2) / 2).toFixed(1);
 
