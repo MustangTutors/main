@@ -21,23 +21,23 @@ function loadMeetings () {
             }
             else {
                 json = JSON.parse(json);
-                if(json.length === 0) {
+                console.log(json.user_id);
+                // Insert search result title
+                $.ajax({
+                    type: "GET",
+                    url: "Laravel/public/users/current/" + json.user_id,
+                    success: function(json) {
+                        json = JSON.parse(json);
+                        json = json[0];
+                        var heading = "Results for " + json.fName + " " + json.lName + " ("+ json.smu_id +")";
+                        $('#results #results_name').html(heading);
+                    }
+                });
+
+                if(json.meetings === undefined) {
                     $('#results span.error.none').html('This user has not yet attended any tutoring sessions.');
                 }
                 else {
-                    console.log(json.user_id);
-                    // Insert search result title
-                    // $.ajax({
-                    //     type: "GET",
-                    //     url: "Laravel/public/users/current/" + json.user_id,
-                    //     success: function(json) {
-                    //         json = JSON.parse(json);
-                    //         json = json[0];
-                    //         var heading = "Results for " + json.fName + " " + json.lName + " ("+ json.smu_id +")";
-                    //         $('#results #results_name').html(heading);
-                    //     }
-                    // });
-
                     json = json.meetings;
                     for(var i = 0; i < json.length; i++) {
                         // Assign json values
