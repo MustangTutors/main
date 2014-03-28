@@ -123,6 +123,37 @@ function getURLParameter(sParam) {
     }
 }
 
+// Generate stars for the rating, given a decimal number.
+function convertToStars(num) {
+    var output = "";
+
+    if (num === null) {
+        return "N/A";
+    }
+
+    // Make sure the input is a number.
+    num = Number(num);
+
+    // Round the number to the nearest 0.5
+    num = (Math.round(num * 2) / 2).toFixed(1);
+
+    // Add to the output the right number of stars
+    var starsAdded = 0;
+    for (num; num > 0.5; num--) {
+        output += '<img src="img/star.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    if (num !== 0) {
+        output += '<img src="img/halfstar.png" alt="Rating Star">';
+        starsAdded++;
+    }
+    for (starsAdded; starsAdded < 5; starsAdded++) {
+        output += '<img src="img/emptystar.png" alt="Rating Star">';
+    }
+
+    return output;
+}
+
 function setNavigationBar() {
     // Parse JSON for user info
     $.ajax({
