@@ -9,6 +9,21 @@ $(document).ready(function() {
             console.log(json);
             $("span#averageRating h3 span").append(convertToStars(json.average_rating));
 			$("span#yourRating h3 span").html(convertToStars(json.current_user_rating));
+
+			for(var i = 0; i < json.courses.length; i++) {
+				var index = i+1;
+				var course = "<span class='label'>";
+				course += json.courses[i].subject+" "+json.courses[i].course_number+":";
+				course += "</span>";
+				course += "<span class='content'>";
+				course += json.courses[i].course_name;
+				course += "</span>";
+				$("article#courses ul").append("<li>");
+				$("article#courses ul li:nth-child("+index+")").append(course);
+				$("article#courses ul").append("</li>");
+			}
+
+			
         }
     });
 
