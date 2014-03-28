@@ -478,7 +478,7 @@ section#tutors h2 {
 }
 
 .tutorBox.inactive {
-    background-color: #BAB6B2;
+    background-color: #C4C1BE;
 }
 
 .tutorProfileLink {
@@ -540,7 +540,7 @@ section#tutors h2 {
 }
 
 .tutorBox.inactive .tutorBox-extended {
-    background-color: #BAB6B2;
+    background-color: #C4C1BE;
 }
 
 .tutorBox-extended.extend-right {
@@ -575,7 +575,7 @@ section#tutors h2 {
     font-size: 2em;
 }
 
-.available, .busy, .unavailable {
+.available, .busy, .unavailable, .disabled {
     border: 2px solid black;
     border-radius: 4px;
     padding: 3px;
@@ -606,6 +606,11 @@ section#tutors h2 {
 .unavailable {
     border-color: #464646;
     background-color: #B3B3B3;
+}
+
+.disabled {
+    border-color: #212121;
+    background-color: #999999;
 }
 
 .rating {

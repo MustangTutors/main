@@ -118,33 +118,47 @@ function getTutors(searchData) {
                         $('#tutorBoxes').append(tutor);
 
                         // Add information from JSON
+
                         // Link to tutor profile
                         tutor.find('a').attr('href', 'tutor.html?user_id=' + json[i].User_ID);
+
                         // Tutor picture
                         tutor.find('.tutorPicture img').attr('src', 'img/tutors/' + json[i].User_ID + '.jpg');
+
                         // Tutor name
                         tutor.find('.tutorName').html(json[i].First_Name + " " + json[i].Last_Name);
-                        // Tutor availability
-                        switch(Number(json[i].Available)) {
-                            case 2:
-                                // available
-                                tutor.find('.tutorNameAvailability img').attr('src', 'img/available.png');
-                                tutor.find('.tutorBox-extended > span').addClass('available');
-                                tutor.find('.tutorBox-extended > span').html('Available');
-                                break;
-                            case 1:
-                                // busy
-                                tutor.find('.tutorNameAvailability img').attr('src', 'img/busy.png');
-                                tutor.find('.tutorBox-extended > span').addClass('busy');
-                                tutor.find('.tutorBox-extended > span').html('Busy');
-                                break;
-                            default:
-                                // unavailable
-                                tutor.find('.tutorNameAvailability img').attr('src', 'img/unavailable.png');
-                                tutor.find('.tutorBox-extended > span').addClass('unavailable');
-                                tutor.find('.tutorBox-extended > span').html('Unavailable');
-                                break;
+
+                        // Darken background if tutor is inactive (for admin search)
+                        if (Number(json[i].Active) === 0) {
+                            tutor.addClass("inactive");
+                            tutor.find('.tutorNameAvailability img').attr('src', 'img/unavailable.png');
+                            tutor.find('.tutorBox-extended > span').addClass('disabled');
+                            tutor.find('.tutorBox-extended > span').html('Disabled');
                         }
+                        else {
+                            // Tutor availability
+                            switch(Number(json[i].Available)) {
+                                case 2:
+                                    // available
+                                    tutor.find('.tutorNameAvailability img').attr('src', 'img/available.png');
+                                    tutor.find('.tutorBox-extended > span').addClass('available');
+                                    tutor.find('.tutorBox-extended > span').html('Available');
+                                    break;
+                                case 1:
+                                    // busy
+                                    tutor.find('.tutorNameAvailability img').attr('src', 'img/busy.png');
+                                    tutor.find('.tutorBox-extended > span').addClass('busy');
+                                    tutor.find('.tutorBox-extended > span').html('Busy');
+                                    break;
+                                default:
+                                    // unavailable
+                                    tutor.find('.tutorNameAvailability img').attr('src', 'img/unavailable.png');
+                                    tutor.find('.tutorBox-extended > span').addClass('unavailable');
+                                    tutor.find('.tutorBox-extended > span').html('Unavailable');
+                                    break;
+                            }
+                        }
+
                         // Number of ratings
                         if (Number(json[i].Number_Ratings) === 1) {
                             tutor.find('.numRatings').html(json[i].Number_Ratings + ' rating');
@@ -152,14 +166,11 @@ function getTutors(searchData) {
                         else {
                             tutor.find('.numRatings').html(json[i].Number_Ratings + ' ratings');
                         }
+
                         // Average rating (make stars)
                         var stars = convertToStars(json[i].Average_Rating);
                         tutor.find('.ratingStars').html(stars);
 
-                        // Darken background if tutor is inactive (for admin search)
-                        if (Number(json[i].Active) === 0) {
-                            tutor.addClass("inactive");
-                        }
                     }
 
                     // Apply the extend-left class to the left half of tutors, apply the 
