@@ -46,10 +46,14 @@ $(document).ready(function() {
 			}
 
 			for(var j = 0; j < json.comments.length; j++) {
+
+				moment(json.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
+				var newTimestamp = moment().format("YYYY-MM-DD hh:mm:ss A");
+
 				var comment = "<li><br><div>";
 				comment += json.comments[j].comment;
 				comment += "</div><br><div> Posted: ";
-				comment += json.comments[j].timeStamp;
+				comment += newTimestamp;
 				comment += "</div><br></li>";
 				$("div#commentList ul").prepend(comment)
 			}
