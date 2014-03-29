@@ -62,6 +62,8 @@ $(document).ready(function() {
 				comment += json.comments[j].comment;
 				comment += "</div><div class='comment_time'> Posted: ";
 				comment += newTimestamp;
+				comment += "</div><div class='comment_rating'> This student rated the tutor: ";
+				comment += convertToStars(json.current_user_rating);
 				comment += "</div></li>";
 				$("div#commentList ul").prepend(comment)
 			}
