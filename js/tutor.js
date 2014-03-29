@@ -15,6 +15,14 @@ $(document).ready(function() {
         success: function(output) {
             var json = JSON.parse(output);
             console.log(json);
+
+            var name = json.tutor_fName + " " + json.tutor_lName;
+            $("section#rating h2").html(name);
+
+            var profile_pic = "img/tutors/" + json.tutor_id + ".jpg";
+            console.log(profile_pic);
+            $(".tutorPicture img").attr('src', profile_pic);
+ 
             $("span#averageRating h3 span").html(convertToStars(json.average_rating));
 			$("span#yourRating h3 span").html(convertToStars(json.current_user_rating));
 
