@@ -1,6 +1,13 @@
 $(document).ready(function() {
 	// Get the user_id from query in URL, then get tutor info
 	var user_id = getURLParameter('user_id');
+
+	var star = '<img src="img/star.png" alt="Rating Star">';
+	var empty_star = '<img src="img/emptystar.png" alt="Rating Star">';
+	var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+	"Friday", "Saturday"];
+
+
 	$.ajax({
         type: "GET",
         url: "Laravel/public/tutor/" + user_id,
@@ -14,8 +21,7 @@ $(document).ready(function() {
 				var index = i+1;
 				var course = "<span class='label'>";
 				course += json.courses[i].subject+" "+json.courses[i].course_number+":";
-				course += "</span>";
-				course += "<span class='content'>";
+				course += "</span><span class='content'>";
 				course += json.courses[i].course_name;
 				course += "</span>";
 				$("article#courses ul").append("<li>");
@@ -23,12 +29,21 @@ $(document).ready(function() {
 				$("article#courses ul").append("</li>");
 			}
 
+			for(var f = 0; f < json.hours.length; f++) {
+				var day = f-1;
+				var index = f+1;
+				var hour = "<span class='day'>";
+				hour += days[json.hours[f].day-1];
+				hour += ": </span><span>";
+				hour += convertTime(json.hours[f].start_time)+" to "+convertTime(json.hours[f].end_time);
+				hour += "</span>"
+				$("article#hours ul").append("<li>");
+				$("article#hours ul li:nth-child("+index+")").append(hour);
+				$("article#hours ul").append("</li>");
+			}
 			
         }
     });
-
-	var star = '<img src="img/star.png" alt="Rating Star">';
-	var empty_star = '<img src="img/emptystar.png" alt="Rating Star">';
 
 	$("input[name='addComment']").on('click', function() {
 		var date = new Date();
