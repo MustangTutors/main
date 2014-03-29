@@ -77,8 +77,8 @@ $(document).ready(function() {
 		var fulldate = "Posted : "+moment().format("YYYY-MM-DD hh:mm:ss A");
 		var rating = $(json.current_user_rating);
 
-		var li = $("<li><div class='comment'></div><div class='comment_info'><div class='comment_time'></div>
-			<div class='comment_rating'></div></div></li>");
+		var li = $("<li><div class='comment'></div><div class='comment_info'><div class='comment_time'></div>" +
+			"<div class='comment_rating'></div></div></li>");
 		li.find('.comment').html(comment);
 		li.find('.comment_time').html(fulldate);
 		li.find('.comment_rating').html(rating);
