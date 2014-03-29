@@ -50,11 +50,11 @@ $(document).ready(function() {
 				var oldTimestamp = moment(json.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
 				var newTimestamp = oldTimestamp.format("YYYY-MM-DD hh:mm:ss A");
 
-				var comment = "<li><br><div>";
+				var comment = "<li><div class='comment'>";
 				comment += json.comments[j].comment;
-				comment += "</div><br><div> Posted: ";
+				comment += "</div><div class='comment_time'> Posted: ";
 				comment += newTimestamp;
-				comment += "</div><br></li>";
+				comment += "</div></li>";
 				$("div#commentList ul").prepend(comment)
 			}
 			
@@ -63,15 +63,14 @@ $(document).ready(function() {
 
 	$("input[name='addComment']").on('click', function() {
 
+		var comment = $("textarea[name='commentBox']").val();
 		var fulldate = "Posted : "+moment().format("YYYY-MM-DD hh:mm:ss A");
 
-		var begItem = "<li>";
-		var endItem = "</li>";
-		var begDiv = "<div>";
-		var endDiv = "</div>";
-		var comment = $("textarea[name='commentBox']").val();
-		comment = begItem+begDiv+comment+endDiv+begDiv+fulldate+endDiv+endItem;
-		$("div#commentList ul").prepend(comment);
+		var li = $("<li><div class='comment'></div><div class='comment_time'></div></li>");
+		li.find('.comment').html(comment);
+		li.find('.comment_time').html(fulldate);
+
+		$("div#commentList ul").prepend(li);
 		$("textarea[name='commentBox']").val("");
 	});
 

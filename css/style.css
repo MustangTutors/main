@@ -1329,7 +1329,7 @@ div#commentList {
     width: 526px;
     height: 200px;
     overflow: scroll;
-    background-color: white;
+    background-color: #FEECDA;
 }
 
 div#commentList ul {
@@ -1337,8 +1337,22 @@ div#commentList ul {
     display: inline;
 }
 
-div#commentList ul li:nth-child(odd) {
-    background-color: #FEECDA;
+div#commentList li .comment {
+    background-color: #DCE6F6;
+    margin: 0px 8px;
+    padding: 8px;
+    border: 1px solid rgba(25, 41, 66, 0.3);
+    border-bottom: none;
+}
+
+div#commentList li .comment_time {
+    background-color: #ecf0f6;
+    margin: 0px 8px 8px 8px;
+    padding: 4px 8px;
+    border: 1px solid rgba(25, 41, 66, 0.3);
+    border-top: none;
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 #yourRating {
