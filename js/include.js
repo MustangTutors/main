@@ -184,7 +184,7 @@ function setNavigationBar() {
                 json = json[0];
 
                 // Set welcome message
-                $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName);
+                $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName + "!");
                 $("div#welcomeMessage").show();
 
                 if(Number(json.tutor) === 0 || Number(json.active) === 0) {
