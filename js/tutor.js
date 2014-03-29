@@ -86,7 +86,7 @@ $(document).ready(function() {
 		$("div#commentList ul").prepend(li);
 		$("textarea[name='commentBox']").val("");
 
-		$.ajax {
+		$.ajax ({
 			type: 'POST',
 			url: 'Laravel/tutor/comment',
 			data: {
@@ -97,7 +97,7 @@ $(document).ready(function() {
 			success: function(output) {
 
 			}
-		}
+		});
 	});
 
 	$("body").on('click', function() {
