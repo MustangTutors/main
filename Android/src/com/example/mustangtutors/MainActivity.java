@@ -1,6 +1,5 @@
 package com.example.mustangtutors;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -132,31 +131,27 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
-    	AjaxRequest request;
+    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
+    	JSONObject json;
         try {
-	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
-	    	JSONObject json;
-            try {
-	            json = new JSONObject(request.send());
-	            JSONArray jsonTutors = json.getJSONArray("Tutors");
-			    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-			    for (int i = 0; i < jsonTutors.length(); i++) {
-			    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
-			    	int id = tutor.getInt("User_ID");
-			    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
-			    	int numRatings = tutor.getInt("Number_Ratings");
-			    	double rating = tutor.getDouble("Average_Rating");
-			    	int availability = tutor.getInt("Available");
-			    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
-			    	
-			    }
-		    	tutors.add(new Tutor(7, "Test Test", 0, 0, 2));
-		    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-		    	ListView listView = (ListView) findViewById(R.id.listview);
-		    	listView.setAdapter(searchAdapter);
-            } catch (Exception e) {
-            }
-        } catch (MalformedURLException e1) {
+            json = new JSONObject(request.send());
+            JSONArray jsonTutors = json.getJSONArray("Tutors");
+		    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+		    for (int i = 0; i < jsonTutors.length(); i++) {
+		    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
+		    	int id = tutor.getInt("User_ID");
+		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+		    	int numRatings = tutor.getInt("Number_Ratings");
+		    	double rating = tutor.getDouble("Average_Rating");
+		    	int availability = tutor.getInt("Available");
+		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
+		    	
+		    }
+	    	tutors.add(new Tutor(7, "Test Test", 0, 0, 2));
+	    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+	    	ListView listView = (ListView) findViewById(R.id.listview);
+	    	listView.setAdapter(searchAdapter);
+        } catch (Exception e) {
         }
         
     }
@@ -279,12 +274,8 @@ public class MainActivity extends Activity {
     	// Logout
     	else if (drawerStrings[position].equals("Logout")) {
     		// Send a logout request to the server
-    		AjaxRequest request;
-            try {
-    	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/logout/"+sharedPref.getString("user_id", ""));
-                request.send();
-            } catch (MalformedURLException e1) {
-            }
+    		AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/logout/"+sharedPref.getString("user_id", ""));
+            request.send();
             
     		// Delete user data from preferences
     		editor.clear().commit();
@@ -359,22 +350,18 @@ public class MainActivity extends Activity {
     }
     
     public int getAvailability(){
-    	AjaxRequest request;
+    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/available/"+sharedPref.getString("user_id", ""));
+    	JSONArray json;
         try {
-	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/available/"+sharedPref.getString("user_id", ""));
-	    	JSONArray json;
-            try {
-	            json = new JSONArray(request.send());
-	            JSONObject availability = (JSONObject) json.get(0);
-	            String available = availability.getString("available");
-	            if(available.equals("2")){
-	            	return 2;
-	            }else if(available.equals("1")){
-	            	return 1;
-	            }
-            } catch (Exception e) {
+            json = new JSONArray(request.send());
+            JSONObject availability = (JSONObject) json.get(0);
+            String available = availability.getString("available");
+            if(available.equals("2")){
+            	return 2;
+            }else if(available.equals("1")){
+            	return 1;
             }
-        } catch (MalformedURLException e1) {
+        } catch (Exception e) {
         }
         
         return 0;
@@ -382,12 +369,8 @@ public class MainActivity extends Activity {
     
     public void toggleAvailability(){
     	// Toggle the availability of the current user in the database
-    	AjaxRequest request;
-        try {
-	        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
-            request.send();
-            Log.d("scz","toggled");
-        } catch (MalformedURLException e1) {
-        }
+    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
+        request.send();
+        Log.d("scz","toggled");
     }
 }

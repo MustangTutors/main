@@ -29,7 +29,7 @@ public class AjaxRequest {
 	private URL url;
 	private List<NameValuePair> params;
 	
-	public AjaxRequest(String requestType, String url) throws MalformedURLException {
+	public AjaxRequest(String requestType, String url) {
 		setRequestType(requestType);
 		setUrl(url);
 		params = new ArrayList<NameValuePair>();
@@ -67,11 +67,11 @@ public class AjaxRequest {
 		return this.requestType;
 	}
 	
-	public void setUrl(String url) throws MalformedURLException {
+	public void setUrl(String url) {
 		try {
 	        this.url = new URL(url);
         } catch (MalformedURLException e) {
-	        throw e;
+	        this.url = null;
         }
 	}
 	
@@ -113,6 +113,7 @@ public class AjaxRequest {
 		params.clear();
 	}
 	
+	// Convert the InputStream from reading the request output into a String
 	private String readStream(InputStream in) {
     	String output = "";
 		BufferedReader reader = null;

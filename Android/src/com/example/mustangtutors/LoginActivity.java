@@ -31,13 +31,6 @@ public class LoginActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.mustangtutors.MESSAGE";
 	public final static String NAME = "com.example.mustangtutors.NAME";
 	public final static String USER_ID = "com.example.mustangtutors.USER_ID";
-	
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"12341234:asdfasdf", "12345678:ilovegui" };
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -250,30 +243,24 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 		@Override
 		protected Integer doInBackground(Void... params) {
-			AjaxRequest request;
-			try {
-		        request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/users/login");
-		        request.addParam("smu_id", mSMUID);
-		        request.addParam("password", mPassword);
-		    	JSONArray json;
-	            try {
-	            	String output = request.send();
-		            json = new JSONArray(output);
-		            JSONObject user = (JSONObject) json.get(0);
-		            String tutor = user.getString("tutor");
-		            String active = user.getString("active");
-		            if (tutor.equals("0") || active.equals("0")) {
-		            	return 2;
-		            }
-		            returnUserId = user.getString("user_id");
-		            returnName = user.getString("fName") + " " + user.getString("lName");
-		            return 1;
-	            } catch (Exception e) {
-		            return 0;
+			AjaxRequest request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/users/login");
+	        request.addParam("smu_id", mSMUID);
+	        request.addParam("password", mPassword);
+	    	JSONArray json;
+            try {
+	            json = new JSONArray(request.send());
+	            JSONObject user = (JSONObject) json.get(0);
+	            String tutor = user.getString("tutor");
+	            String active = user.getString("active");
+	            if (tutor.equals("0") || active.equals("0")) {
+	            	return 2;
 	            }
-	        } catch (MalformedURLException e1) {
-		        return 0;
-	        }
+	            returnUserId = user.getString("user_id");
+	            returnName = user.getString("fName") + " " + user.getString("lName");
+	            return 1;
+            } catch (Exception e) {
+	            return 0;
+            }
 		}
 
 		@Override
