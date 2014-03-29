@@ -1327,8 +1327,8 @@ textarea {
 
 div#commentList {
     width: 526px;
-    height: 200px;
-    overflow: scroll;
+    max-height: 200px;
+    overflow: auto;
     background-color: #FEECDA;
 }
 
