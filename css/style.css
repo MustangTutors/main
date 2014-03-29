@@ -1345,7 +1345,8 @@ div#commentList li .comment {
     border-bottom: none;
 }
 
-div#commentList li .comment_time {
+div#commentList li .comment_info {
+    position: relative;
     background-color: #ecf0f6;
     margin: 0px 8px 8px 8px;
     padding: 4px 8px;
@@ -1353,6 +1354,32 @@ div#commentList li .comment_time {
     border-top: none;
     font-size: 0.8em;
     color: rgba(0, 0, 0, 0.6);
+}
+
+.comment_time {
+    display: inline-block;
+}
+
+.comment_rating{
+    display: inline-block;
+    position: absolute;
+    font-weight: bold;
+    color: black;
+    right: 10px;
+}
+
+section#rating img[src*='star']{
+    vertical-align: middle;
+    position: relative;
+    width:25px;
+    top: -3px;
+}
+
+.comment_rating img[src*='star']{
+    width: 12px;
+    top: -2px;
+    position: relative;
+    vertical-align: middle;
 }
 
 #yourRating {
