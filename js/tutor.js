@@ -15,6 +15,14 @@ $(document).ready(function() {
         success: function(output) {
             var json = JSON.parse(output);
             console.log(json);
+
+            var name = json.tutor_fName + " " + json.tutor_lName;
+            $("section#rating h2").html(name);
+
+            var profile_pic = "img/tutors/" + json.tutor_id + ".jpg";
+            console.log(profile_pic);
+            $(".tutorPicture img").attr('src', profile_pic);
+ 
             $("span#averageRating h3 span").html(convertToStars(json.average_rating));
 			$("span#yourRating h3 span").html(convertToStars(json.current_user_rating));
 
@@ -80,14 +88,14 @@ $(document).ready(function() {
 
 	$("img[src='img/pencil.png']").on('click', function(e) {
 		if($("#editRating").is(":visible")) {
-			$(".potential_rating span img").remove();
+			$(".potential_rating img").remove();
 			$("#editRating").hide();
 			e.preventDefault();
 			e.stopPropagation();
 		}
 
 		else {
-			$(".potential_rating span img").remove();
+			$(".potential_rating img").remove();
 			e.preventDefault();
 			$("#editRating").show();
 			e.stopPropagation();
@@ -105,7 +113,7 @@ $(document).ready(function() {
 
 	$(".potential_rating span").on('click', function() {
 		$("span#yourRating h3 span").html($(this).html());
-		$(".potential_rating span img").remove();
+		$(".potential_rating img").remove();
 		$("#editRating").hide();
 	});
 });
