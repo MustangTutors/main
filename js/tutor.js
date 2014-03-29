@@ -47,8 +47,8 @@ $(document).ready(function() {
 
 			for(var j = 0; j < json.comments.length; j++) {
 
-				moment(json.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
-				var newTimestamp = moment().format("YYYY-MM-DD hh:mm:ss A");
+				var oldTimestamp = moment(json.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
+				var newTimestamp = oldTimestamp.format("YYYY-MM-DD hh:mm:ss A");
 
 				var comment = "<li><br><div>";
 				comment += json.comments[j].comment;
