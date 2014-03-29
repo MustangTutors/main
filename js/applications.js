@@ -28,7 +28,7 @@ $(document).ready(function() {
             //json = JSON.parse(json);
             json = json.Applications;
             // Define list of days
-            var days = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+            var days = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
             for(var i = 0; i < json.length; i++) {
                 // Create and append new node
                 var application = $('<article class="applicationReview meeting">' + 

@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         if(drop.css('display') === "block"){
             $('#settings').blur();
-            $('#settings_message').css('display', 'inline-block');
+            $('#settings_message').css('display', 'inline-block'); 
         }
         else {
             drop.slideDown();
@@ -183,6 +183,9 @@ function setNavigationBar() {
                 json = JSON.parse(json);
                 json = json[0];
 
+                // Show comment box on tutor profile page
+                $("#tutorProfilePage #comment_form").show();
+
                 // Set welcome message
                 $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName + "!");
                 $("div#welcomeMessage").show();
@@ -242,7 +245,9 @@ function setNavigationBar() {
             }
             // Not logged in
             else {
+                // Show the login form
                 $("form#loginForm").show();
+                // Navigation buttons
                 var reg = '<li class="nav"><a href="register.html">Register</a></li>'+
                         "<li class='nav'><a href='findstudent.html'>Get Student's History</a></li>"+
                         '<li class="nav"><a href="index.html">Search for Tutors</a></li>';

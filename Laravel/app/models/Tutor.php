@@ -34,7 +34,7 @@ class Tutor extends Eloquent{
     //return an array of the results
     public static function getTutorsGeneralInfo($user_id)
     {
-        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName,users.lName as tutor_lName,users.available,COUNT(rating.rating) as numberOfRatings,AVG(rating.rating) as average_rating from users LEFT JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
+        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName, users.lName as tutor_lName, users.available, users.active, COUNT(rating.rating) as numberOfRatings, AVG(rating.rating) as average_rating from users LEFT JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
         return $result;
 
     }
