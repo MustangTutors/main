@@ -37,7 +37,7 @@ $(document).ready(function() {
 				var index = f+1;
 				var hour = "<span class='day'>";
 				hour += days[json.hours[f].day-1];
-				hour += ": </span><span>";
+				hour += " </span><span>";
 				hour += convertTime(json.hours[f].start_time)+" to "+convertTime(json.hours[f].end_time);
 				hour += "</span>"
 				$("article#hours ul").append("<li>");
@@ -45,19 +45,21 @@ $(document).ready(function() {
 				$("article#hours ul").append("</li>");
 			}
 
-			for(var j = 0; j < json.comments.length)
+			for(var j = 0; j < json.comments.length; j++) {
+				var comment = "<li><br><div>";
+				comment += json.comments[j].comment;
+				comment += "</div><br><div> Posted: ";
+				comment += json.comments[j].timeStamp;
+				comment += "</div><br></li>";
+				$("div#commentList ul").prepend(comment)
+			}
 			
         }
     });
 
 	$("input[name='addComment']").on('click', function() {
-		var date = new Date();
 
-		var month = date.getMonth()+1;
-		var day = date.getDate();
-		var year = date.getFullYear();
-
-		var fulldate = "Posted on "+month+"/"+day+"/"+year;
+		var fulldate = "Posted : "+moment().format("YYYY-MM-DD hh:mm:ss A");
 
 		var begItem = "<li>";
 		var endItem = "</li>";
