@@ -1223,6 +1223,7 @@ section#rating span h3 span, .schedule {
 
 #tutorpage_available {
     margin-top: -36px;
+    margin-left: 30px;
 }
 
 #yourRating h3 {
@@ -1243,8 +1244,8 @@ section.tutor_info {
     margin-left: 70px;
 }
 
-#date_time {
-    margin-left: -20px;
+#hours {
+    margin-left: -15px;
 }
 
 .schedule {
