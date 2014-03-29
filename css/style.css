@@ -1223,6 +1223,7 @@ section#rating span h3 span, .schedule {
 
 #tutorpage_available {
     margin-top: -36px;
+    margin-left: 30px;
 }
 
 #yourRating h3 {
@@ -1243,8 +1244,8 @@ section.tutor_info {
     margin-left: 70px;
 }
 
-#date_time {
-    margin-left: -20px;
+#hours {
+    margin-left: -15px;
 }
 
 .schedule {
@@ -1253,7 +1254,7 @@ section.tutor_info {
     width: 320px;
     text-align: left;
     vertical-align: top;
-    border-width: 1.6px;
+    border-width: 1px;
     border-style: solid;
     border-color: #B0A69B;
 }
@@ -1289,6 +1290,7 @@ section.tutor_info {
 section#comments {
     display: block;
     position: relative;
+    margin: 30px 20px 10px 105px;
 }
 
 section#comments h2 {
@@ -1298,16 +1300,33 @@ section#comments h2 {
 textarea {
     resize: none;
     margin-top: 50px;
+    width: 100%;
+    height: 85px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B0A69B;
 }
 
-input[name="addComment"] {
-    display: block;
-    margin-bottom: 20px;
-    margin-left: 325px;
+#comment_form input.button {
+    display: inline-block;
+    background: -webkit-gradient(linear, left top, left bottom, from(#3092B0), to(#22667B));
+    color: white;
+}
+
+#comment_form input.button:hover {
+    display: inline-block;
+    background: -webkit-gradient(linear, left top, left bottom, from(#22667B), to(#3092B0));
+    color: #CCC;
+}
+
+#comment_form {
+    width: 520px;
+    text-align: right;
+    margin-bottom: 10px;
 }
 
 div#commentList {
-    width: 425px;
+    width: 526px;
     height: 200px;
     overflow: scroll;
     background-color: white;
@@ -1329,10 +1348,12 @@ div#commentList ul li:nth-child(odd) {
 #editRating {
     position: absolute;
     width: 196px;
-    padding: 15px 15px;
-    background-color: white;
+    padding: 10px 15px 5px 15px;
+    background-color: #F4F6F9;
     border-style: solid;
-    border-color: #524928;
+    border-color: #273955;
+    border-width: 1px;
+    box-shadow: 3px 3px 3px rgba(100,100,100,0.6);
     display: none;
     top: -42px;
     left: 220px;
@@ -1341,27 +1362,49 @@ div#commentList ul li:nth-child(odd) {
 #editRating h3 {
     margin: 0;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .potential_rating {
     color: transparent;
+    margin-left: 5px;
 }
 
 .potential_rating:hover {
     color: black;
+    cursor: pointer;
 }
 
-.potential_rating span img {
+.potential_rating img {
     max-width: 18px;
 }
 
-.potential_rating span img:first-child {
+.potential_rating img:first-child {
     margin-left: 10px;
 }
 
-.potential_rating span img:last-child {
+.potential_rating img:last-child {
     margin-right: 10px;
 }
 
+.rating_message {
+    position: absolute;
+    left: 115px;
+}
+
+#editRating .center{
+    text-align: center;
+    margin: 2px;
+}
+
+#rating_cancel {
+    background: -webkit-gradient(linear, left top, left bottom, from(#ca314f), to(#ac0827));
+    color: white;
+}
+
+#rating_cancel:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#ac0827), to(#ca314f));
+    color: white;
+}
 /* End styling for Tutor Profile */
 
