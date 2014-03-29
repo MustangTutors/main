@@ -45,7 +45,7 @@ $(document).ready(function() {
 				$("article#hours ul").append("</li>");
 			}
 
-			for(var j = 0; j < json.comments.length)
+			//for(var j = 0; j < json.comments.length)
 			
         }
     });
