@@ -60,7 +60,7 @@ $(document).ready(function() {
 				comment += json.comments[j].comment;
 				comment += "</div><div class='comment_info'><div class='comment_time'> Posted: ";
 				comment += newTimestamp;
-				comment += "</div><div class='comment_rating'> Tutor rated: ";
+				comment += "</div><div class='comment_rating'> Tutor rating: ";
 				comment += convertToStars(json.comments[0].rating_from_commenter);
 				comment += "</div></div></li>";
 				$("div#commentList ul").prepend(comment)

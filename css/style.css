@@ -1271,14 +1271,14 @@ section.tutor_info {
 .schedule .label {
     display: inline-block;
     font-weight: bold;
-    width: 95px;
+    width: 105px;
     vertical-align: top;
 }
 
 .schedule .day {
     display: inline-block;
     font-weight: bold;
-    width: 140px;
+    width: 115px;
     vertical-align: top;
 }
 
