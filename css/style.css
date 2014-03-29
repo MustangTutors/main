@@ -1233,12 +1233,25 @@ section#rating span h3 span, .schedule {
     width: 25px;
 }
 
+section.tutor_info {
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+}
+
+#courses {
+    margin-left: 70px;
+}
+
+#date_time {
+    margin-left: -20px;
+}
+
 .schedule {
     background-color: #FFF6EB;
     height: 180px;
-    width: 295px;
-    margin-right: -140px;
-    margin-left: 145px;
+    width: 320px;
+    text-align: left;
     vertical-align: top;
     border-width: 1.6px;
     border-style: solid;
@@ -1264,13 +1277,13 @@ section#rating span h3 span, .schedule {
 .schedule .day {
     display: inline-block;
     font-weight: bold;
-    width: 110px;
+    width: 140px;
     vertical-align: top;
 }
 
 .schedule .content {
     display: inline-block;
-    width: 170px;
+    width: 190px;
 }
 
 section#comments {
@@ -1309,23 +1322,25 @@ div#commentList ul li:nth-child(odd) {
     background-color: #FEECDA;
 }
 
+#yourRating {
+    position: relative;
+}
+
 #editRating {
-    position: fixed;
-    width: 186px;
-    height: 200px;
-    left: 50%;
-    top: 50%;
-    margin-left: -80px;
-    margin-top: -28px;
-    padding: 0px 10px 0px 10px;
+    position: absolute;
+    width: 196px;
+    padding: 15px 15px;
     background-color: white;
     border-style: solid;
     border-color: #524928;
     display: none;
+    top: -42px;
+    left: 220px;
 }
 
 #editRating h3 {
-    margin-left: 17px;
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 .potential_rating {
