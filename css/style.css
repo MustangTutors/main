@@ -1384,6 +1384,8 @@ section#rating img[src*='star']{
 
 #yourRating {
     position: relative;
+    display: inline-block;
+    top: -20px;
 }
 
 #editRating {
@@ -1396,8 +1398,8 @@ section#rating img[src*='star']{
     border-width: 1px;
     box-shadow: 3px 3px 3px rgba(100,100,100,0.6);
     display: none;
-    top: -42px;
-    left: 220px;
+    top: 23px;
+    right: -233px;
 }
 
 #editRating h3 {
