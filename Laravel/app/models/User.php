@@ -198,6 +198,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     */
     public function registerUser()
     {
+
         //First check if user already exists
         $smuid = Input::get('smu_id');
         $email = Input::get('email');
@@ -207,9 +208,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
         else
         {
-            $code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+            $code = substr(str_shuffle("abklrz32IVWZ"), 0, 1).substr(md5(time()),-10);
         }
-    
+
         $query = "SELECT smu_id FROM users WHERE smu_id = ?";
         $result1 = DB::select($query,array($smuid));
         $query = "SELECT email FROM users WHERE email = ?";
