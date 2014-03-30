@@ -183,9 +183,6 @@ function setNavigationBar() {
                 json = JSON.parse(json);
                 json = json[0];
 
-                // Show comment box on tutor profile page
-                $("#tutorProfilePage #comment_form").show();
-
                 // Set welcome message
                 $("div#welcomeMessage span.welcome").html("Welcome, " + json.fName + "!");
                 $("div#welcomeMessage").show();

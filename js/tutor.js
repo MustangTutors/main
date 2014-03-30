@@ -3,6 +3,7 @@ $(document).ready(function() {
 	var user_id = getURLParameter('user_id');
 
     // Hides the Your Rating section if the user is the same person as the tutor.
+    // Also hides the comment form.
     $.ajax({
         type: "GET",
         url: "Laravel/public/users/current",
@@ -12,6 +13,7 @@ $(document).ready(function() {
                 json = json[0];
                 if (Number(json.user_id) !== Number(user_id)) {
                     $("#tutorProfilePage #yourRating").css('display', 'inline-block');
+                    $("#tutorProfilePage #comment_form").show();
                 }
             }
         }
@@ -99,8 +101,14 @@ $(document).ready(function() {
     });
 
 	$("input[name='addComment']").on('click', function() {
+        var comment = $("textarea[name='commentBox']").val();
+        // Prevent an empty comment.
+        if (comment === "") {
+            alert("Please write a comment.");
+            return;
+        }
+
         $("div#commentList .error").remove();
-		var comment = $("textarea[name='commentBox']").val();
 		var fulldate = "Posted : "+moment().format("YYYY-MM-DD hh:mm:ss A");
 		var rating = tutorInfo.current_user_rating;
 
