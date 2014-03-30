@@ -36,15 +36,8 @@ $(document).ready(function() {
             $(".tutorPicture img").attr('src', profile_pic);
  
             $("span#averageRating h3 span").html(convertToStars(tutorInfo.average_rating));
+            $("span#averageRating h3 #num_ratings").html("Based on " + Number(tutorInfo.numberOfRatings) + " ratings");
 			$("span#yourRating h3 span").html(convertToStars(tutorInfo.current_user_rating));
-
-			var num_ratings = "<span id='num_ratings'> Based on ";
-			num_ratings += Number(tutorInfo.numberOfRatings);
-			num_ratings += " ratings</span>";
-
-			console.log()
-
-			$("span#averageRating h3 span").append(num_ratings);
 
             if (Number(tutorInfo.active) === 1) {
                 $("span#tutorpage_available").html(available[tutorInfo.available]);
@@ -78,16 +71,6 @@ $(document).ready(function() {
                     day.find('.content').html("N/A");
                 }
                 $("article#hours ul").append(day);
-				// var day = f-1;
-				// var index = f+1;
-				// var hour = "<span class='day'>";
-				// hour += days[tutorInfo.hours[f].day-1];
-				// hour += " </span><span>";
-				// hour += convertTime(tutorInfo.hours[f].start_time)+" to "+convertTime(tutorInfo.hours[f].end_time);
-				// hour += "</span>"
-				// $("article#hours ul").append("<li>");
-				// $("article#hours ul li:nth-child("+index+")").append(hour);
-				// $("article#hours ul").append("</li>");
 			}
 
             if (!tutorInfo.comments) {
@@ -194,7 +177,14 @@ $(document).ready(function() {
 			data: {
 				tutorid: user_id,
 				rating: rating
-			}
+			},
+            success: function(json) {
+                json = JSON.parse(json);
+                json = json[0];
+                tutorInfo.current_user_rating = rating;
+                $("span#averageRating h3 span").html(convertToStars(json.AVERAGE_RATING));
+                $("span#averageRating h3 #num_ratings").html("Based on " + Number(json.NUMBER_OF_RATINGS) + " ratings");
+            }
 		});
 
 		$(".potential_rating img").remove();
