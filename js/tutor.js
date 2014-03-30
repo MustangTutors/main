@@ -192,8 +192,7 @@ $(document).ready(function() {
 			type: 'POST',
 			url: 'Laravel/public/tutor/rate',
 			data: {
-				user_id: Number(user_id),
-				tutor_id: Number(tutorInfo.tutor_id),
+				tutorid: user_id,
 				rating: rating
 			}
 		});
