@@ -4,86 +4,48 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	style="@style/SearchItem">
-	    <LinearLayout
-		    android:orientation="horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent">
-				<ImageView
-				    style="@style/TutorPicture"
-				    android:layout_width="70dp"
-				    android:layout_height="90dp"
-				    android:id="@+id/search_tutor_picture"
-				    android:src="@drawable/tutor" />
-				<LinearLayout 
-				    android:orientation="vertical"
-				    android:layout_width="fill_parent"
-				    android:layout_height="fill_parent"
-				    android:gravity="right" >
-				    <TextView
-				        style="@style/TutorAvailability"
-				        android:layout_width="100sp"
-				        android:layout_height="wrap_content"
-				        android:id="@+id/search_tutor_availability" />
-				</LinearLayout>
-		</LinearLayout>
-		<RelativeLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent">
-			    <TextView
-			        style="@style/TutorName"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:id="@+id/search_tutor_name" />
-		        <TextView
-		            style="@style/TutorNumberRatings"
-			        android:layout_width="125sp"
-			        android:layout_height="wrap_content"
-		            android:id="@+id/search_tutor_number_ratings" />
-	    </RelativeLayout>
-		<RelativeLayout
-		    style="@style/StarGroup"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent">
-		        <TextView
-		            style="@style/NoRatings"
-		            android:id="@+id/search_tutor_no_rating"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content" />
-				<ImageView
-				    style="@style/Star"
-				    android:id="@+id/search_tutor_star_1"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-				    android:src="@drawable/star" />
-				<ImageView
-				    style="@style/Star"
-				    android:id="@+id/search_tutor_star_2"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-				    android:src="@drawable/star"
-				    android:layout_marginLeft="17dp" />
-				<ImageView
-				    style="@style/Star"
-				    android:id="@+id/search_tutor_star_3"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-				    android:src="@drawable/star"
-				    android:layout_marginLeft="34dp" />
-				<ImageView
-				    style="@style/Star"
-				    android:id="@+id/search_tutor_star_4"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-				    android:src="@drawable/star"
-				    android:layout_marginLeft="51dp" />
-				<ImageView
-				    style="@style/Star"
-				    android:id="@+id/search_tutor_star_5"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-				    android:src="@drawable/star"
-				    android:layout_marginLeft="68dp" />
-	    </RelativeLayout>
+	<ImageView
+	    style="@style/TutorPicture"
+	    android:layout_width="70dp"
+	    android:layout_height="90dp"
+	    android:id="@+id/search_tutor_picture"
+	    android:src="@drawable/tutor" />
+	<TextView
+        style="@style/TutorAvailability"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/search_tutor_availability" />
+    <TextView
+        style="@style/TutorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/search_tutor_picture"
+        android:id="@+id/search_tutor_name" />
+    <TextView
+        style="@style/TutorNumberRatings"
+   		android:layout_width="135sp"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/search_tutor_name"
+    	android:layout_toRightOf="@id/search_tutor_picture"
+        android:id="@+id/search_tutor_number_ratings" />
+    <TextView
+        style="@style/NoRatings"
+        android:id="@+id/search_tutor_no_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/search_tutor_number_ratings"
+        android:layout_below="@id/search_tutor_name" />
+    <RatingBar 
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/search_tutor_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/search_tutor_number_ratings"
+        android:layout_below="@id/search_tutor_name"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:isIndicator="true" />
 </RelativeLayout>
 
 
