@@ -178,7 +178,26 @@ $(document).ready(function() {
 
 	$(".potential_rating").on('click', function() {
 		$("span#yourRating h3 span").html($(this).html());
-		$("span#yourRating h3 span").css('color', 'transparent');
+        $("span#yourRating h3 span").css('color', 'transparent');
+
+        var rating = 0;
+
+        for(var num_stars = 0; num_stars < $("span#yourRating h3 span img").length; num_stars++) {
+        		if($("span#yourRating h3 span img").eq(num_stars).attr('src') === "img/star.png") {
+        			rating++;
+        		}
+        }
+
+		$.ajax ({
+			type: 'POST',
+			url: 'Laravel/public/tutor/rate',
+			data: {
+				user_id: Number(user_id),
+				tutor_id: Number(tutorInfo.tutor_id),
+				rating: rating
+			}
+		});
+
 		$(".potential_rating img").remove();
 		$("#editRating").hide();
 	});
