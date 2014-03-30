@@ -167,16 +167,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     *
     */
     public function sendEmailWithCodeword()
-    {
+    {        
         $email_json = json_decode($_POST['emails']);
         $emails = $email_json->emails;
         $user_id = $_SESSION['user_id'];
-        $result = DB::select("select codeword from users where user_id = ?",array($user_id));
+        $result = DB::select("select smu_id,codeword from users where user_id = ?",array($user_id));
         $codeword = $result[0]->codeword;
+        $smu_id = $result[0]->smu_id;
         foreach($emails as $email)
         {
-            Mail::later(5,'emails.codeword.codeword', array('user_id'=>$user_id,'codeword'=>$codeword), function($message) use ($email){
-                $message->to($email)->subject('email tester');
+            Mail::later(5,'emails.codeword.codeword', array('smu_id'=>$smu_id,'codeword'=>$codeword), function($message) use ($email){
+                $message->to($email)->subject('MUSTANG TUTORS CODEWORD');
            });
         }
     }
