@@ -25,7 +25,7 @@ class Tutor extends Eloquent{
     //return an array of the results
     public static function getTutorsComments($tutor_id)
     {
-        $result = DB::select("select * from comments where tutor_id = ?",array($tutor_id));
+        $result = DB::select("select * from comments where tutor_id = ? ORDER BY timeStamp DESC",array($tutor_id));
         return $result;
 
     }
