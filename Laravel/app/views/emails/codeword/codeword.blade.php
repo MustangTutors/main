@@ -12,7 +12,8 @@
         and click on the <span style = "color:#83192C">"Get Student's History"</span> tab.  Or you can follow this link directly to the page 
         <a style = "color:#83192C" href="http://mustangtutors.floccul.us/findstudent.html"> Get Student's Records</a> 
         Once on the page use this information to access their history.
-        <p style = "color:#3092B0">Smu Id: {{$smu_id}}\nCodeword: {{$codeword}}</p>
+        <p style="color:#3092B0">Smu Id: {{$smu_id}}</p>
+        <p style="color:#3092B0">Codeword: {{$codeword}}</p>
         </p>
         <h3>Thanks, Mustang Tutor's Staff</h3>
     </div>
