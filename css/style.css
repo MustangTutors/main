@@ -1230,6 +1230,20 @@ section#rating span h3 span, .schedule {
     margin-left: 31px;
 }
 
+#averageRating {
+    position: relative;
+}
+
+#averageRating #num_ratings {
+    position: absolute;
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+    top: 25px;
+    width: 200px;
+    left: 165px;
+}
+
 #averageRating img[src*='star'], #yourRating img[src*='star'] {
     width: 25px;
 }
@@ -1388,7 +1402,7 @@ section#rating img[src*='star']{
 #yourRating {
     position: relative;
     display: none;
-    top: -20px;
+    top: -10px;
 }
 
 #editRating {
