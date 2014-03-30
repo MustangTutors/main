@@ -6,7 +6,7 @@ $(document).ready(function(){
         var checkPass = $("#registration_confirm").val();
 
         if(password !== checkPass) {
-            $(".error").html("Error: Password confirmation did not match.<br/><br/>");
+            $("#registration .error").html("Error: Password confirmation did not match.<br/><br/>");
         }
         else {
             $.ajax({
@@ -15,13 +15,13 @@ $(document).ready(function(){
                 data: $(this).serialize(),
                 success: function(output) {
                     if (output === "The ID provided has already been registered.") {
-                        $(".error").html("Error: Someone already registered with that SMU ID.<br/><br/>");
+                        $("#registration .error").html("Error: Someone already registered with that SMU ID.<br/><br/>");
                     }
                     else if (output === "The email address provided has already been registered.") {
-                        $(".error").html("Error: Someone already registered with that email.<br/><br/>");
+                        $("#registration .error").html("Error: Someone already registered with that email.<br/><br/>");
                     }
                     else if (output === "Please provide a different codeword.") {
-                        $(".error").html("Error: Someone is already using that codeword.<br/><br/>");
+                        $("#registration .error").html("Error: Someone is already using that codeword.<br/><br/>");
                     }
                     else {
                         $.ajax({
@@ -38,7 +38,7 @@ $(document).ready(function(){
                     }
                 }
             });
-            $(".error").html("");
+            $("#registration .error").html("");
         }
     });
 });
