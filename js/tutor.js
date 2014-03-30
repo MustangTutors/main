@@ -38,6 +38,14 @@ $(document).ready(function() {
             $("span#averageRating h3 span").html(convertToStars(tutorInfo.average_rating));
 			$("span#yourRating h3 span").html(convertToStars(tutorInfo.current_user_rating));
 
+			var num_ratings = "<span id='num_ratings'> Based on ";
+			num_ratings += Number(tutorInfo.numberOfRatings);
+			num_ratings += " ratings</span>";
+
+			console.log()
+
+			$("span#averageRating h3 span").append(num_ratings);
+
             if (Number(tutorInfo.active) === 1) {
                 $("span#tutorpage_available").html(available[tutorInfo.available]);
                 $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
@@ -169,7 +177,6 @@ $(document).ready(function() {
 	});
 
 	$(".potential_rating").on('click', function() {
-		console.log("clicked");
 		$("span#yourRating h3 span").html($(this).html());
 		$("span#yourRating h3 span").css('color', 'transparent');
 		$(".potential_rating img").remove();
