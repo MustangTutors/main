@@ -33,11 +33,6 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
 	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
 	    TextView noRatings = (TextView) rowView.findViewById(R.id.search_tutor_no_rating);
-	    /*ImageView star1 = (ImageView) rowView.findViewById(R.id.search_tutor_star_1);
-	    ImageView star2 = (ImageView) rowView.findViewById(R.id.search_tutor_star_2);
-	    ImageView star3 = (ImageView) rowView.findViewById(R.id.search_tutor_star_3);
-	    ImageView star4 = (ImageView) rowView.findViewById(R.id.search_tutor_star_4);
-	    ImageView star5 = (ImageView) rowView.findViewById(R.id.search_tutor_star_5);*/
 	    RatingBar stars = (RatingBar) rowView.findViewById(R.id.search_tutor_rating);
 	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
 	    
@@ -58,68 +53,17 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    }
 	    numberRatings.setText(numberRatingsString);
 	    
+	    // Set rating
 	    float rating = (float) tutors.get(position).getRating();
 	    if (rating < 1) {
 	    	noRatings.setText("N/A");
 	    	stars.setVisibility(View.GONE);
 	    }
-	    stars.setMax(5);
-	    stars.setStepSize(0.5f);
-	    stars.setRating(rating);
-	    /*// Set rating
-	    double rating = tutors.get(position).getRating();
-	    if (rating < 1) {
-	    	noRatings.setText("N/A");
-	    	star1.setVisibility(View.GONE);
-	    	star2.setVisibility(View.GONE);
-	    	star3.setVisibility(View.GONE);
-	    	star4.setVisibility(View.GONE);
-	    	star5.setVisibility(View.GONE);
-	    }
 	    else {
-	    	// Star 1
-	    	star1.setImageResource(R.drawable.star);
-	    	// Star 2
-		    if (rating <= 1) {
-		    	star2.setImageResource(R.drawable.emptystar);
-		    }
-		    else if (rating == 1.5) {
-		    	star2.setImageResource(R.drawable.halfstar);
-		    }
-		    else if (rating >= 2) {
-		    	star2.setImageResource(R.drawable.star);
-		    }
-		    // Star 3
-		    if (rating <= 2) {
-		    	star3.setImageResource(R.drawable.emptystar);
-		    }
-		    else if (rating == 1.5) {
-		    	star3.setImageResource(R.drawable.halfstar);
-		    }
-		    else if (rating >= 3) {
-		    	star3.setImageResource(R.drawable.star);
-		    }
-		    // Star 4
-		    if (rating <= 3) {
-		    	star4.setImageResource(R.drawable.emptystar);
-		    }
-		    else if (rating == 3.5) {
-		    	star4.setImageResource(R.drawable.halfstar);
-		    }
-		    else if (rating >= 4) {
-		    	star4.setImageResource(R.drawable.star);
-		    }
-		    // Star 5
-		    if (rating <= 4) {
-		    	star5.setImageResource(R.drawable.emptystar);
-		    }
-		    else if (rating == 4.5) {
-		    	star5.setImageResource(R.drawable.halfstar);
-		    }
-		    else if (rating == 5) {
-		    	star5.setImageResource(R.drawable.star);
-		    }
-	    }*/
+		    stars.setMax(5);
+		    stars.setStepSize(0.5f);
+		    stars.setRating(rating);
+	    }
 	    
 	    // Set availability
 	    switch (tutors.get(position).getAvailability()) {
