@@ -73,18 +73,14 @@ public final class R {
         public static final int login_form=0x7f0a0002;
         public static final int login_status=0x7f0a0000;
         public static final int login_status_message=0x7f0a0001;
-        public static final int mySwitch=0x7f0a0017;
+        public static final int mySwitch=0x7f0a0013;
         public static final int password=0x7f0a0004;
         public static final int search_tutor_availability=0x7f0a000e;
         public static final int search_tutor_name=0x7f0a000f;
         public static final int search_tutor_no_rating=0x7f0a0011;
         public static final int search_tutor_number_ratings=0x7f0a0010;
         public static final int search_tutor_picture=0x7f0a000d;
-        public static final int search_tutor_star_1=0x7f0a0012;
-        public static final int search_tutor_star_2=0x7f0a0013;
-        public static final int search_tutor_star_3=0x7f0a0014;
-        public static final int search_tutor_star_4=0x7f0a0015;
-        public static final int search_tutor_star_5=0x7f0a0016;
+        public static final int search_tutor_rating=0x7f0a0012;
         public static final int sign_in_button=0x7f0a0007;
         public static final int smu_id=0x7f0a0003;
     }
@@ -158,8 +154,6 @@ public final class R {
         public static final int NoRatings=0x7f08000e;
         public static final int Search=0x7f080009;
         public static final int SearchItem=0x7f08000a;
-        public static final int Star=0x7f080011;
-        public static final int StarGroup=0x7f080010;
         public static final int TutorAvailability=0x7f08000f;
         public static final int TutorName=0x7f08000c;
         public static final int TutorNumberRatings=0x7f08000d;

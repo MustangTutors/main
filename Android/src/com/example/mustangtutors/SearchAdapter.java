@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class SearchAdapter extends ArrayAdapter<Tutor> {
@@ -32,11 +33,12 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
 	    TextView numberRatings = (TextView) rowView.findViewById(R.id.search_tutor_number_ratings);
 	    TextView noRatings = (TextView) rowView.findViewById(R.id.search_tutor_no_rating);
-	    ImageView star1 = (ImageView) rowView.findViewById(R.id.search_tutor_star_1);
+	    /*ImageView star1 = (ImageView) rowView.findViewById(R.id.search_tutor_star_1);
 	    ImageView star2 = (ImageView) rowView.findViewById(R.id.search_tutor_star_2);
 	    ImageView star3 = (ImageView) rowView.findViewById(R.id.search_tutor_star_3);
 	    ImageView star4 = (ImageView) rowView.findViewById(R.id.search_tutor_star_4);
-	    ImageView star5 = (ImageView) rowView.findViewById(R.id.search_tutor_star_5);
+	    ImageView star5 = (ImageView) rowView.findViewById(R.id.search_tutor_star_5);*/
+	    RatingBar stars = (RatingBar) rowView.findViewById(R.id.search_tutor_rating);
 	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
 	    
 	    new DownloadImageTask(picture)
@@ -56,7 +58,15 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    }
 	    numberRatings.setText(numberRatingsString);
 	    
-	    // Set rating
+	    float rating = (float) tutors.get(position).getRating();
+	    if (rating < 1) {
+	    	noRatings.setText("N/A");
+	    	stars.setVisibility(View.GONE);
+	    }
+	    stars.setMax(5);
+	    stars.setStepSize(0.5f);
+	    stars.setRating(rating);
+	    /*// Set rating
 	    double rating = tutors.get(position).getRating();
 	    if (rating < 1) {
 	    	noRatings.setText("N/A");
@@ -109,7 +119,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 		    else if (rating == 5) {
 		    	star5.setImageResource(R.drawable.star);
 		    }
-	    }
+	    }*/
 	    
 	    // Set availability
 	    switch (tutors.get(position).getAvailability()) {
