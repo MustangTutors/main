@@ -144,10 +144,16 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if (mSearchForm.getVisibility() == View.GONE) {
+					// Show the search form
 					mSearchForm.setVisibility(View.VISIBLE);
+					// Change the arrow on search bar to point up
+					mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.up, 0);
 				}
 				else {
+					// Hide the search form
 					mSearchForm.setVisibility(View.GONE);
+					// Change the arrow on search bar to point down
+					mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.down, 0);
 				}
 			}
         });

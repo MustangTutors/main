@@ -110,6 +110,7 @@
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginLeft">5dp</item>
     </style>
+    
     <style name="TutorAvailability">
         <item name="android:gravity">center</item>
         <item name="android:padding">1dp</item>

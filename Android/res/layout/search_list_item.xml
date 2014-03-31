@@ -22,29 +22,15 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/search_tutor_picture"
         android:id="@+id/search_tutor_name" />
-    <TextView
-        style="@style/TutorNumberRatings"
-   		android:layout_width="135sp"
-    	android:layout_height="wrap_content"
-    	android:layout_below="@id/search_tutor_name"
-    	android:layout_toRightOf="@id/search_tutor_picture"
-        android:id="@+id/search_tutor_number_ratings" />
-    <TextView
-        style="@style/NoRatings"
-        android:id="@+id/search_tutor_no_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/search_tutor_number_ratings"
-        android:layout_below="@id/search_tutor_name" />
     <RatingBar 
         style="?android:attr/ratingBarStyleSmall"
         android:id="@+id/search_tutor_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/search_tutor_number_ratings"
+        android:layout_toRightOf="@id/search_tutor_picture"
         android:layout_below="@id/search_tutor_name"
         android:layout_marginTop="2dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="20dp"
         android:isIndicator="true" />
 </RelativeLayout>
 
