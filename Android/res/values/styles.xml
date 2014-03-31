@@ -56,8 +56,23 @@
         <item name="android:background">@drawable/border</item>
     </style>
     
-    <style name="Search">
+    <style name="SearchPage">
         <item name="android:padding">16dp</item>
+    </style>
+    
+    <style name="SearchBar">
+        <item name="android:background">@drawable/border_search_bar</item>
+        <item name="android:drawablePadding">-30dp</item>
+        <item name="android:paddingRight">10dp</item>
+    </style>
+    
+    <style name="SearchForm">
+        <item name="android:background">@drawable/border_search</item>
+        <item name="android:padding">10dp</item>
+    </style>
+    
+    <style name="Search">
+        <item name="android:layout_marginTop">16dp</item>
         <item name="android:background">@color/Background</item>
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">10dp</item>

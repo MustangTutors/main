@@ -23,7 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -35,6 +39,8 @@ public class MainActivity extends Activity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private Menu mMenu;
+    private Button mSearchBar;
+    private RelativeLayout mSearchForm;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -131,29 +137,68 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
-    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/json/searchResults.json");
-    	JSONObject json;
+        mSearchBar = (Button) findViewById(R.id.SearchBar);
+        mSearchForm = (RelativeLayout) findViewById(R.id.SearchForm);
+        
+        mSearchBar.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mSearchForm.getVisibility() == View.GONE) {
+					mSearchForm.setVisibility(View.VISIBLE);
+				}
+				else {
+					mSearchForm.setVisibility(View.GONE);
+				}
+			}
+        });
+        
+        // Populate course subjects
+        String subjects[];
+        AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
+    	JSONArray json;
         try {
-            json = new JSONObject(request.send());
-            JSONArray jsonTutors = json.getJSONArray("Tutors");
-		    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-		    for (int i = 0; i < jsonTutors.length(); i++) {
-		    	JSONObject tutor = (JSONObject) jsonTutors.get(i);
-		    	int id = tutor.getInt("User_ID");
-		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
-		    	int numRatings = tutor.getInt("Number_Ratings");
-		    	double rating = tutor.getDouble("Average_Rating");
-		    	int availability = tutor.getInt("Available");
-		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
-		    	
-		    }
-	    	tutors.add(new Tutor(7, "Test Test", 0, 0, 2));
-	    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-	    	ListView listView = (ListView) findViewById(R.id.listview);
-	    	listView.setAdapter(searchAdapter);
+            json = new JSONArray(request.send());
+            subjects = new String[json.length()+1];
+            subjects[0] = "Subject";
+            for (int i = 0; i < json.length(); i++) {
+            	JSONObject subject = (JSONObject) json.get(i);
+            	subjects[i+1] = subject.getString("subject");
+            }
+            Spinner s = (Spinner) findViewById(R.id.SearchSubject);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, subjects);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            s.setAdapter(adapter);
         } catch (Exception e) {
         }
         
+    	// Load tutors
+	    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/search");
+        try {
+            json = new JSONArray(request.send());
+		    for (int i = 0; i < json.length(); i++) {
+		    	JSONObject tutor = (JSONObject) json.get(i);
+		    	int id = Integer.parseInt(tutor.getString("User_ID"));
+		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+		    	int numRatings = Integer.parseInt(tutor.getString("Number_Ratings"));
+		    	double rating;
+		    	if (numRatings == 0) {
+		    		rating = 0;
+		    	}
+		    	else {
+		    		rating = Double.parseDouble(tutor.getString("Average_Rating"));
+		    	}
+		    	System.out.println(rating);
+		    	int availability = Integer.parseInt(tutor.getString("Available"));
+		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
+		    }
+        } catch (Exception e) {
+        }
+
+    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+    	ListView listView = (ListView) findViewById(R.id.listview);
+    	listView.setAdapter(searchAdapter);
     }
     
     @Override
