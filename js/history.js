@@ -86,6 +86,7 @@ $(document).ready(function(){
 
 	// Change add icon to subtract icon on click
 	$(document).on('click', '.add_meeting .add', function(){
+        populateDate();
 		if($('.add_meeting .subtract.add').css('display') === "none"){
 			$('#add_icon').hide();
 			$('#subtract_icon').css('display', 'inline-block');
@@ -254,4 +255,25 @@ function showView() {
             }
         }
     });
+}
+
+function populateDate() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var day = date.getDate();
+    var month = date.getMonth();
+
+    if(day < 10){
+        day = "0" + day.toString();
+    }
+
+    if(month < 10){
+        month = "0" + month.toString();
+    }
+
+    var date = year+"-"+month+"-"+day;
+
+    console.log(date);
+
+    $('#meeting_form input[type="date"]').val(date);
 }

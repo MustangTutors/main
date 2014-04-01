@@ -44,39 +44,40 @@
                 <span id="add_message" class="hover">Add</span>
                 <span id="cancel_message" class="hover">Cancel</span>
 
-                <div id="meeting_form">
+                <form id="meeting_form">
                     <div id="form_info">
                         <div>
                             <label for="student_id">Student ID:</label>
-                            <input type="text" name="student_id" pattern="" placeholder="Enter student ID">
+                            <input type="text" name="student_id" pattern="" placeholder="Enter student ID" required>
                         </div>
                         <div>
-                            <label for="course_number">Course:</label>
-                            <select name="subject" id="search-subject">
-                                <option disabled selected>Subject</option>
-                                <option>CSE</option>
-                                <option>DISC</option>
-                                <option>MATH</option>
+                            <label for="courses">Course Tutored:</label>
+                            <select name="courses" id="course_selector">
+                                <option disabled selected>Choose a course</option>
+                                <option>CSE: Graphical User Interfaces 3345</option>
+                                <option>DISC: Blah Blah Blah 1234</option>
+                                <option>MATH: Blah Blah Blah 1234</option>
                             </select>
-                            <input type="text" name="course_number" pattern="" placeholder="Enter course number">
                         </div>
                         <div>
-                            <label>Date:</label>
+                            <label for="date">Date:</label>
+                            <input type="date" name="date" required>
                         </div>
                         <div>
-                            <label>Time:</label>
+                            <label for="time">Time:</label>
+                            <input type="time" name="time" required>
                         </div>
                     </div>
                     <hr>
                     <div id="summary">
                         <label for="summary">Comments (1-3 sentences):</label>
-                        <textarea name="summary" rows="10" cols="50"></textarea>
+                        <textarea name="summary" rows="10" cols="50" required></textarea>
                     </div>
                     <div class="center">
                         <a href="#" class="button" id="rest_meeting">Reset</a>
                         <input type="submit" class="button send" value="Add">
                     </div>
-                </div>
+                </form>
             </article>
 		</section>
 
