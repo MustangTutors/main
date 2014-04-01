@@ -28,17 +28,17 @@
             ],
             "Hours": [
                 {
-                    "Day": "Monday",
+                    "Day": 1,
                     "Start_Time": "11:00",
                     "End_Time": "16:00"
                 },
                 {
-                    "Day": "Tuesday",
+                    "Day": 3,
                     "Start_Time": "10:00",
                     "End_Time": "12:00"
                 },
                 {
-                    "Day": "Thursday",
+                    "Day": 5,
                     "Start_Time": "11:00",
                     "End_Time": "16:00"
                 }
@@ -72,17 +72,17 @@
             ],
             "Hours": [
                 {
-                    "Day": "Monday",
+                    "Day": 1,
                     "Start_Time": "11:00",
                     "End_Time": "16:00"
                 },
                 {
-                    "Day": "Tuesday",
+                    "Day": 3,
                     "Start_Time": "10:00",
                     "End_Time": "12:00"
                 },
                 {
-                    "Day": "Thursday",
+                    "Day": 5,
                     "Start_Time": "11:00",
                     "End_Time": "16:00"
                 }

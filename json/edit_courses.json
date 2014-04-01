@@ -1,0 +1,14 @@
+{
+    "User_ID": 1,
+    "Courses": [
+        {
+            "Course_ID": 1
+        },
+        {
+            "Course_ID": 2
+        },
+        {
+            "Course_ID": 3
+        }
+    ]
+}
