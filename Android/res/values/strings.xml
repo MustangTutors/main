@@ -32,5 +32,7 @@
     <string name="search_course_name">Course Name</string>
     <string name="search_available">Tutor is Available</string>
     <string name="search_submit">Go!</string>
+    <string name="search_progress">Searching...</string>
+    <string name="search_no_results">No tutors found.</string>
 
 </resources>
