@@ -1003,13 +1003,7 @@ section#tutor_history {
     color: #CCC;
 }
 
-#add_message {
-    display: none;
-    top: 10px;
-    right: -35px;
-}
-
-#cancel_message {
+#add_message, #cancel_message {
     display: none;
     top: 10px;
     right: -50px;
