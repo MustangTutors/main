@@ -67,17 +67,11 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
-            <CheckBox
-                android:id="@+id/SearchAvailable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/SearchCourseName"
-                android:text="@string/search_available"/>
             <Button
                 android:id="@+id/SearchSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/SearchAvailable"
+                android:layout_below="@id/SearchCourseName"
             	android:layout_centerHorizontal="true"
                 android:text="@string/search_submit"/>
         </RelativeLayout>

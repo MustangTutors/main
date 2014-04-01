@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -41,6 +42,10 @@ public class MainActivity extends Activity {
     private Menu mMenu;
     private Button mSearchBar;
     private RelativeLayout mSearchForm;
+    private Spinner mSearchSubject;
+    private EditText mSearchCourseNumber;
+    private EditText mSearchCourseName;
+    private Button mSearchSubmit;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -137,9 +142,15 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
+    	// Get views in search form
         mSearchBar = (Button) findViewById(R.id.SearchBar);
         mSearchForm = (RelativeLayout) findViewById(R.id.SearchForm);
+        mSearchSubject = (Spinner) findViewById(R.id.SearchSubject);
+        mSearchCourseNumber = (EditText) findViewById(R.id.SearchCourseNumber);
+        mSearchCourseName = (EditText) findViewById(R.id.SearchCourseName);
+        mSearchSubmit = (Button) findViewById(R.id.SearchSubmit);
         
+        // Set on click listener for search bar. Shows/hides search form.
         mSearchBar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -158,6 +169,22 @@ public class MainActivity extends Activity {
 			}
         });
         
+        // Set on click listener for submitting search form
+        mSearchSubmit.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		// Hide the search form
+        		mSearchForm.setVisibility(View.GONE);
+        		// Get search parameters
+        		String subject = mSearchSubject.getItemAtPosition(mSearchSubject.getSelectedItemPosition()).toString();
+        		String number = mSearchCourseNumber.getText().toString();
+        		String name = mSearchCourseName.getText().toString();
+        		// Show tutors found
+        		getTutors(subject, number, name);
+        	}
+        });
+        
+        
         // Populate course subjects
         String subjects[];
         AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
@@ -170,41 +197,15 @@ public class MainActivity extends Activity {
             	JSONObject subject = (JSONObject) json.get(i);
             	subjects[i+1] = subject.getString("subject");
             }
-            Spinner s = (Spinner) findViewById(R.id.SearchSubject);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, subjects);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            s.setAdapter(adapter);
-        } catch (Exception e) {
-        }
-        
-    	// Load tutors
-	    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/search");
-        try {
-            json = new JSONArray(request.send());
-		    for (int i = 0; i < json.length(); i++) {
-		    	JSONObject tutor = (JSONObject) json.get(i);
-		    	int id = Integer.parseInt(tutor.getString("User_ID"));
-		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
-		    	int numRatings = Integer.parseInt(tutor.getString("Number_Ratings"));
-		    	double rating;
-		    	if (numRatings == 0) {
-		    		rating = 0;
-		    	}
-		    	else {
-		    		rating = Double.parseDouble(tutor.getString("Average_Rating"));
-		    	}
-		    	System.out.println(rating);
-		    	int availability = Integer.parseInt(tutor.getString("Available"));
-		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
-		    }
+            mSearchSubject.setAdapter(adapter);
         } catch (Exception e) {
         }
 
-    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-    	ListView listView = (ListView) findViewById(R.id.listview);
-    	listView.setAdapter(searchAdapter);
+        // When the activity first loads, get all the tutors.
+    	getTutors("", "", "");
     }
     
     @Override
@@ -423,5 +424,44 @@ public class MainActivity extends Activity {
     	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
         request.send();
         Log.d("scz","toggled");
+    }
+    
+    public void getTutors(String subject, String number, String name) {
+	    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+        AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/search");
+        if (!subject.isEmpty() && !subject.equals("Subject")) {
+        	request.addParam("subject", subject);
+        }
+        if (!number.isEmpty()) {
+        	request.addParam("cnumber", number);
+        }
+        if (!name.isEmpty()) {
+        	request.addParam("cname", name);
+        }
+        JSONArray json;
+        try {
+            json = new JSONArray(request.send());
+		    for (int i = 0; i < json.length(); i++) {
+		    	JSONObject tutor = (JSONObject) json.get(i);
+		    	int id = Integer.parseInt(tutor.getString("User_ID"));
+		    	String tutorName = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+		    	int numRatings = Integer.parseInt(tutor.getString("Number_Ratings"));
+		    	double rating;
+		    	if (numRatings == 0) {
+		    		rating = 0;
+		    	}
+		    	else {
+		    		rating = Double.parseDouble(tutor.getString("Average_Rating"));
+		    	}
+		    	System.out.println(rating);
+		    	int availability = Integer.parseInt(tutor.getString("Available"));
+		    	tutors.add(new Tutor(id, tutorName, numRatings, rating, availability));
+		    }
+        } catch (Exception e) {
+        }
+
+    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
+    	ListView listView = (ListView) findViewById(R.id.listview);
+    	listView.setAdapter(searchAdapter);
     }
 }
