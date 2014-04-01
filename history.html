@@ -41,8 +41,8 @@
                 <h3 class="subheading">Add a new meeting with a student.</h3>
                 <span class="add" id="add_icon">+</span>
                 <span class="subtract add" id="subtract_icon">-</span>
-                <span id="add_message" class="hover">Add</span>
-                <span id="cancel_message" class="hover">Cancel</span>
+                <span id="add_message" class="hover">Show</span>
+                <span id="cancel_message" class="hover">Hide</span>
 
                 <form id="meeting_form">
                     <div id="form_info">
@@ -54,9 +54,10 @@
                             <label for="courses">Course Tutored:</label>
                             <select name="courses" id="course_selector">
                                 <option disabled selected>Choose a course</option>
-                                <option>CSE: Graphical User Interfaces 3345</option>
-                                <option>DISC: Blah Blah Blah 1234</option>
-                                <option>MATH: Blah Blah Blah 1234</option>
+                                <option>CSE 3345: Graphical User Interfaces</option>
+                                <option>DISC 1234: Blah Blah Blah</option>
+                                <option>MATH 1234: Blah Blah Blah</option>
+                                <option>MATH 1234: Statistics for Engineers and Scientists</option>
                             </select>
                         </div>
                         <div>
@@ -65,7 +66,9 @@
                         </div>
                         <div>
                             <label for="time">Time:</label>
-                            <input type="time" name="time" required>
+                            <input type="time" name="start_time" required>
+                            <span id="time_separator">to</span>
+                            <input type="time" name="end_time" required>
                         </div>
                     </div>
                     <hr>

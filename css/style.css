@@ -1032,10 +1032,25 @@ section#tutor_history {
     height: 100px;
     margin-top: 0;
     border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B0A69B;
 }
 
-#meeting_form input[name="student_id"] {
-    width: 197px;
+#meeting_form input[name="student_id"], #meeting_form input[name="date"] {
+    width: 221px;
+}
+
+#meeting_form select[name="courses"] {
+    width: 224px;
+}
+
+#meeting_form input[type="time"] {
+    width: 96px;
+}
+
+#meeting_form #time_separator {
+    margin-right: 1px;
 }
 
 #meeting_form label {

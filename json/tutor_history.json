@@ -1,10 +1,12 @@
 {
+	"user_id":1,
 	"meetings":
 	[
 		{
 			"subject":"CSE",
 			"course_number":"4340",
 			"course_name":"Statistics for Engineers",
+			"course_id":1,
 			"first_name":"Jane",
 			"last_name":"Smith",
 			"day":"12/12/2012",
@@ -16,6 +18,7 @@
 			"subject":"CSE",
 			"course_number":"4340",
 			"course_name":"Statistics for Engineers",
+			"course_id":1,
 			"first_name":"Jane",
 			"last_name":"Smith",
 			"day":"12/12/2012",

@@ -86,7 +86,7 @@ $(document).ready(function(){
 
 	// Change add icon to subtract icon on click
 	$(document).on('click', '.add_meeting .add', function(){
-        populateDate();
+        populateDateAndTime();
 		if($('.add_meeting .subtract.add').css('display') === "none"){
 			$('#add_icon').hide();
 			$('#subtract_icon').css('display', 'inline-block');
@@ -99,6 +99,11 @@ $(document).ready(function(){
 		}
 	});
 
+    // When Add is clicked/new meeting form is submitted
+    $(document).on('submit', '#meeeting_form', function(){
+        //var 
+    });
+
 	// Parse JSON for student meetings
     $.ajax({
         url: "Laravel/public/users/history",
@@ -106,7 +111,7 @@ $(document).ready(function(){
             json = JSON.parse(json);
             console.log(json);
 
-            if(json.length === 0) {
+            if(json.meetings === undefined) {
                 $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
             }
             else {
@@ -257,23 +262,38 @@ function showView() {
     });
 }
 
-function populateDate() {
+function populateDateAndTime() {
+    // Set date information
     var date = new Date();
     var year = date.getFullYear();
     var day = date.getDate();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
 
+    // If the day is less than 10, add a zero to the front
     if(day < 10){
         day = "0" + day.toString();
     }
 
+    // If the month is less than 10, add a zero to the front
     if(month < 10){
         month = "0" + month.toString();
     }
 
-    var date = year+"-"+month+"-"+day;
+    // Create the date string
+    var date_string = year+"-"+month+"-"+day;
 
-    console.log(date);
+    // Populate the date
+    $('#meeting_form input[type="date"]').val(date_string);
 
-    $('#meeting_form input[type="date"]').val(date);
+    // Set time information
+    var end_time = date.getHours();
+    var start_time = end_time - 1;
+
+    // Create the time strings
+    var start_time_string = start_time + ":00:00";
+    var end_time_string = end_time + ":00:00";
+
+    // Populate the time
+    $('#meeting_form input[name="start_time"]').val(start_time_string);
+    $('#meeting_form input[name="end_time"]').val(end_time_string);
 }
