@@ -163,41 +163,63 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       }
 
     /**
+    * Retrieve the application status of a user
+    * @param $user_id INT ID of the user whose application status is to be checked
+    * @return -1 if no application is found for the user, the application's pending field otherwise
+    */
+    public function checkApplicationStatus($user_id)
+    {
+        $query="SELECT pending FROM applications WHERE user_id = ?";
+        $result=DB::select($query,array($user_id));
+        if(empty($result)) return -1;
+        else return $result[0]->pending;
+    }
+
+    /**
     * Add application of the user identified by user_id and insert information into schedule and courses tutored tables   
     * @echo application status in JSON format
     */
     public function addApplication()
     {
-        /*
+        
         //this info used to test without postman because screw 32 bit ubuntu, right google?
         $testjson='{"User_ID": 1,"Courses": [{"Course_ID": 1},{"Course_ID": 2},{"Course_ID": 3}],"Hours": [{"Day": 1,"Start_Time": "11:00","End_Time": "16:00"},{"Day": 3,"Start_Time": "10:00","End_Time": "12:00"},{"Day": 5,"Start_Time": "11:00","End_Time": "16:00"}]}';
         $json=json_decode($testjson);        
-        */
-        $json=json_decode($_POST['application']);
+        
+        //$json=json_decode($_POST['application']);
 
         //Insert new tuple in applications table
-        $user_id=$json->User_ID;  
-        $query="INSERT INTO applications(user_id,pending) VALUES (?,1)";
-        DB::insert($query,array($user_id));
+        $user_id=$json->User_ID; 
+        $appstatus= self::checkApplicationStatus($user_id);
 
-        //Insert rows into schedule table
-        foreach($json->Hours as $hours)
+        if($appstatus!=-1)
         {
-            $query="INSERT INTO schedule(user_id,day,start_time,end_time) VALUES (?,?,?,?)";
-            DB::insert($query,array($user_id,$hours->Day,$hours->Start_Time,$hours->End_Time));
+            echo "You have already submitted an application.";
+        } 
+        else
+        {        
+            $query="INSERT INTO applications(user_id,pending) VALUES (?,1)";
+            DB::insert($query,array($user_id));
+    
+            //Insert rows into schedule table
+            foreach($json->Hours as $hours)
+            {
+                $query="INSERT INTO schedule(user_id,day,start_time,end_time) VALUES (?,?,?,?)";
+                DB::insert($query,array($user_id,$hours->Day,$hours->Start_Time,$hours->End_Time));
+            }
+    
+            //Insert rows into courses_tutored table
+            foreach($json->Courses as $courses)
+            {
+                $query="INSERT INTO courses_tutored(course_id,user_id) VALUES (?,?)";
+                DB::insert($query,array($courses->Course_ID,$user_id));
+            }
+    
+            //Check success of inserts
+            $query="SELECT a.user_id, c.course_name,s.day,s.start_time,s.end_time FROM applications a INNER JOIN courses_tutored ct on a.user_id =  ct.user_id INNER JOIN schedule s ON a.user_id = s.user_id INNER JOIN courses c ON ct.course_id = c.course_id WHERE a.user_id = ? GROUP BY   c.course_name, s.day ORDER BY s.day, s.start_time, c.course_name";
+            $result=DB::select($query,array($user_id));
+            echo json_encode($result);
         }
-
-        //Insert rows into courses_tutored table
-        foreach($json->Courses as $courses)
-        {
-            $query="INSERT INTO courses_tutored(course_id,user_id) VALUES (?,?)";
-            DB::insert($query,array($courses->Course_ID,$user_id));
-        }
-
-        //Check success of inserts
-        $query="SELECT a.user_id, c.course_name,s.day,s.start_time,s.end_time FROM applications a INNER JOIN courses_tutored ct on a.user_id = ct.user_id INNER JOIN schedule s ON a.user_id = s.user_id INNER JOIN courses c ON ct.course_id = c.course_id WHERE a.user_id = ? GROUP BY c.course_name, s.day ORDER BY s.day, s.start_time, c.course_name";
-        $result=DB::select($query,array($user_id));
-        echo json_encode($result);
     }
 
     /**
