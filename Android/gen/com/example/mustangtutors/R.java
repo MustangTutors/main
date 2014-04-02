@@ -13,6 +13,7 @@ public final class R {
         public static final int logged_in_menu_images=0x7f070003;
         public static final int logged_out_menu=0x7f070000;
         public static final int logged_out_menu_images=0x7f070001;
+        public static final int subjects=0x7f070004;
     }
     public static final class attr {
     }

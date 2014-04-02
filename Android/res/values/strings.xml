@@ -28,6 +28,9 @@
     <string name="logged_out">You are now logged out.</string>
     <string name="search_tutors">Search Tutors</string>
     <string name="search_subject">Subject</string>
+    <string-array name="subjects">
+        <item>Subject</item>
+    </string-array>
     <string name="search_course_number">Course Number</string>
     <string name="search_course_name">Course Name</string>
     <string name="search_available">Tutor is Available</string>

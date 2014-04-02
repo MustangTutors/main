@@ -185,13 +185,8 @@ public class MainActivity extends Activity {
         		// Hide the search form
         		hideSearchForm();
         		
-        		// Get search parameters
-        		String subject = mSearchSubject.getItemAtPosition(mSearchSubject.getSelectedItemPosition()).toString();
-        		String number = mSearchCourseNumber.getText().toString();
-        		String name = mSearchCourseName.getText().toString();
-        		
         		// Show tutors found
-        		new SearchTask().execute(subject, number, name);
+        		new SearchTask().execute((Void) null);
         	}
         });
         
@@ -200,7 +195,7 @@ public class MainActivity extends Activity {
         new PopulateSubjectsTask().execute((Void) null);
 
         // When the activity first loads, get all the tutors.
-        new SearchTask().execute("", "", "");
+        new SearchTask().execute((Void) null);
     }
     
     @Override
@@ -334,6 +329,9 @@ public class MainActivity extends Activity {
         		Toast.makeText(getApplicationContext(), 
         				getString(R.string.logged_in), 
         				Toast.LENGTH_SHORT).show();
+        		
+        		// Refresh search results to show updated availability
+        		new SearchTask().execute((Void) null);
     		}
     	}
 	}
@@ -361,6 +359,20 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    
+    private void showSearchForm() {
+		// Show the search form
+		mSearchForm.setVisibility(View.VISIBLE);
+		// Change the arrow on search bar to point up
+		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.up, 0);
+    }
+    
+    private void hideSearchForm() {
+		// Hide the search form
+		mSearchForm.setVisibility(View.GONE);
+		// Change the arrow on search bar to point down
+		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.down, 0);
     }
     
     
@@ -394,21 +406,6 @@ public class MainActivity extends Activity {
     	}
     }
     
-    private void showSearchForm() {
-		// Show the search form
-		mSearchForm.setVisibility(View.VISIBLE);
-		// Change the arrow on search bar to point up
-		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.up, 0);
-    }
-    
-    private void hideSearchForm() {
-		// Hide the search form
-		mSearchForm.setVisibility(View.GONE);
-		// Change the arrow on search bar to point down
-		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.down, 0);
-    }
-    
-    
     // AsyncTask for logging out
     public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
     	@Override
@@ -433,6 +430,9 @@ public class MainActivity extends Activity {
     		Toast.makeText(getApplicationContext(), 
     				getString(R.string.logged_out), 
     				Toast.LENGTH_SHORT).show();
+    		
+    		// Refresh the search results (to show updated availability)
+    		new SearchTask().execute((Void) null);
     	}
     }
     
@@ -479,10 +479,15 @@ public class MainActivity extends Activity {
 	        Log.d("scz","toggled");
 			return true;
 		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			new SearchTask().execute((Void) null);
+		}
 	}
     
     // AsyncTask for searching for tutors
-    public class SearchTask extends AsyncTask<String, Void, Boolean> {
+    public class SearchTask extends AsyncTask<Void, Void, Boolean> {
     	private ArrayList<Tutor> tutors;
     	
     	@Override
@@ -495,8 +500,13 @@ public class MainActivity extends Activity {
         	mSearchError.setVisibility(View.GONE);
     	}
 		@Override
-		protected Boolean doInBackground(String... params) {
-			tutors = getTutors(params[0], params[1], params[2]);
+		protected Boolean doInBackground(Void... params) {
+    		// Get search parameters
+    		String subject = mSearchSubject.getItemAtPosition(mSearchSubject.getSelectedItemPosition()).toString();
+    		String number = mSearchCourseNumber.getText().toString();
+    		String name = mSearchCourseName.getText().toString();
+    		
+			tutors = getTutors(subject, number, name);
 			if (!tutors.isEmpty()) {
 				return true;
 			}
