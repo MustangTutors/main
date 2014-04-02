@@ -1,3 +1,17 @@
+// Check if the user is logged in and an admin. If not, redirect to index.html
+$.ajax({
+    url: "Laravel/public/users/current",
+    success: function(json) {
+        json = JSON.parse(json);
+        if (json.length === 0) {
+            window.location.href = "index.html";
+        }
+        else if (json.length === 1 && Number(json[0].admin) !== 1) {
+            window.location.href = "index.html";
+        }
+    }
+});
+
 $(document).ready(function() {
     // Approve an application. Adds an 'approved' stamp and changes the buttons 
     // to be an Edit Profile button.

@@ -1,3 +1,14 @@
+// Check if the user is logged in. If not, redirect to findstudent.html
+$.ajax({
+    url: "Laravel/public/users/current",
+    success: function(json) {
+        json = JSON.parse(json);
+        if (json.length === 0) {
+            window.location.href = "findstudent.html";
+        }
+    }
+});
+
 $(document).ready(function(){
     showView();
 

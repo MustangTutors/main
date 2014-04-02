@@ -1,3 +1,14 @@
+// Check if the user is logged in. If they are, redirect to index.html
+$.ajax({
+    url: "Laravel/public/users/current",
+    success: function(json) {
+        json = JSON.parse(json);
+        if (json.length !== 0) {
+            window.location.href = "index.html";
+        }
+    }
+});
+
 $(document).ready(function(){
     $(document).on('submit', 'form', function(event){
         event.preventDefault();
