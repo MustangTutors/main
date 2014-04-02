@@ -26,6 +26,7 @@ users/email             ==>this sends emails to the authorized users with the co
 tutor/search            ==>this lets you search on any or all criteria and returns a json of results
 tutor/rate              ==>this adds or updates user's rating for a tutor
 users/register          ==>this registers a new user
+users/apply             ==>this adds application and (possibly) temporary schedule and course tutored list to db 
 courses/subjects        ==>this returns a json of the course subjects
 */
 
@@ -114,6 +115,16 @@ Route::post('users/history/parent',function()
 	    	echo "incorrect codeword";
 	    }
     }
+});
+
+Route::get('users/apply',function()
+{
+    if(isset($_POST['application']) || true)
+    {
+        $temp = new User();
+        $temp->addApplication();
+    }    
+
 });
 
 Route::get('tutor/{id}',function($id)
