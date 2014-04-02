@@ -101,32 +101,37 @@ public final class R {
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int drawer_list_item=0x7f030002;
-        public static final int search_list_item=0x7f030003;
+        public static final int activity_meeting=0x7f030002;
+        public static final int activity_tutor=0x7f030003;
+        public static final int drawer_list_item=0x7f030004;
+        public static final int search_list_item=0x7f030005;
     }
     public static final class menu {
         public static final int login=0x7f090000;
         public static final int main=0x7f090001;
+        public static final int meeting=0x7f090002;
+        public static final int tutor=0x7f090003;
     }
     public static final class string {
-        public static final int action_sign_in_short=0x7f060010;
+        public static final int action_sign_in_short=0x7f060013;
         public static final int app_name=0x7f060000;
         public static final int drawer_close=0x7f060002;
         public static final int drawer_open=0x7f060001;
-        public static final int error_field_required=0x7f060018;
-        public static final int error_incorrect_info=0x7f060014;
-        public static final int error_incorrect_password=0x7f060017;
-        public static final int error_invalid_password=0x7f060013;
-        public static final int error_invalid_smu_id=0x7f060012;
-        public static final int error_not_tutor=0x7f060015;
+        public static final int error_field_required=0x7f06001b;
+        public static final int error_incorrect_info=0x7f060017;
+        public static final int error_incorrect_password=0x7f06001a;
+        public static final int error_invalid_password=0x7f060016;
+        public static final int error_invalid_smu_id=0x7f060015;
+        public static final int error_not_tutor=0x7f060018;
+        public static final int hello_world=0x7f06000e;
         public static final int logged_in=0x7f060003;
         public static final int logged_out=0x7f060004;
-        public static final int login_progress_signing_in=0x7f060011;
-        public static final int no_error=0x7f060016;
-        public static final int prompt_password=0x7f06000f;
+        public static final int login_progress_signing_in=0x7f060014;
+        public static final int no_error=0x7f060019;
+        public static final int prompt_password=0x7f060012;
         /**  Strings related to login 
          */
-        public static final int prompt_smu_id=0x7f06000e;
+        public static final int prompt_smu_id=0x7f060011;
         public static final int search_available=0x7f060009;
         public static final int search_course_name=0x7f060008;
         public static final int search_course_number=0x7f060007;
@@ -135,7 +140,9 @@ public final class R {
         public static final int search_subject=0x7f060006;
         public static final int search_submit=0x7f06000a;
         public static final int search_tutors=0x7f060005;
-        public static final int title_activity_login=0x7f06000d;
+        public static final int title_activity_login=0x7f060010;
+        public static final int title_activity_meeting=0x7f06000d;
+        public static final int title_activity_tutor=0x7f06000f;
     }
     public static final class style {
         /** 

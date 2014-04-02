@@ -38,6 +38,8 @@ import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
+	public final static String TUTOR_ID = "com.example.mustangtutors.TUTORID";
+	
 	private Activity mContext;
 	
 	private SharedPreferences sharedPref;
@@ -286,12 +288,17 @@ public class MainActivity extends Activity {
     	if (drawerStrings[position].equals(sharedPref.getString("name", "[name]"))) {
     		// code
     		System.out.println("tutor profile");
+    		Intent intent = new Intent(this, TutorActivity.class);
+    		intent.putExtra(TUTOR_ID, sharedPref.getString("user_id", ""));
+    		startActivity(intent);
     	}
     	
     	// Start the meeting documentation activity
     	else if (drawerStrings[position].equals("Document a Student Meeting")) {
     		// code
     		System.out.println("document meeting");
+    		Intent intent = new Intent(this, MeetingActivity.class);
+    		startActivity(intent);
     	}
     	
     	// Logout
@@ -305,6 +312,16 @@ public class MainActivity extends Activity {
     	// Highlight the item in the drawer, then close the drawer.
     	mDrawerList.setItemChecked(position, true);
     	mDrawerLayout.closeDrawer(mDrawerList);
+    }
+    
+    /* The click listener for ListView in the search results */
+    private class SearchItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    		Intent intent = new Intent(mContext, TutorActivity.class);
+    		intent.putExtra(TUTOR_ID, ""+id);
+    		startActivity(intent);
+        }
     }
     
     // Process data received from other activities (login)
@@ -517,6 +534,7 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(Boolean result) {
 	    	SearchAdapter searchAdapter = new SearchAdapter(mContext, R.layout.search_list_item, tutors);
 	    	mSearchResults.setAdapter(searchAdapter);
+	        mSearchResults.setOnItemClickListener(new SearchItemClickListener());
 	    	
 	    	// Hide loading message, show tutors
 	    	mSearchProgress.setVisibility(View.GONE);

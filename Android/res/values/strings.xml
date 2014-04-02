@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Mustang Tutors</string>
+
     <string-array name="logged_out_menu">
         <item>Search for Tutors</item>
         <item>Login as a Tutor</item>
@@ -22,20 +23,26 @@
         <item>ic_action_new_event</item>
         <item>ic_action_secure</item>
     </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="logged_in">You are now logged in.</string>
     <string name="logged_out">You are now logged out.</string>
     <string name="search_tutors">Search Tutors</string>
     <string name="search_subject">Subject</string>
+
     <string-array name="subjects">
         <item>Subject</item>
     </string-array>
+
     <string name="search_course_number">Course Number</string>
     <string name="search_course_name">Course Name</string>
     <string name="search_available">Tutor is Available</string>
     <string name="search_submit">Go!</string>
     <string name="search_progress">Searching...</string>
     <string name="search_no_results">No tutors found.</string>
+    <string name="title_activity_meeting">Document a Student Meeting</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_tutor">Tutor Profile</string>
 
 </resources>

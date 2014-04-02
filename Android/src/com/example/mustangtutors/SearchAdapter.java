@@ -66,4 +66,9 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	
 	    return rowView;
 	}
+	
+	@Override
+	public long getItemId(int position) {
+		return tutors.get(position).getId();
+	}
 }
