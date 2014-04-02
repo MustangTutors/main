@@ -24,7 +24,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class AjaxRequest {
 	private String requestType;
-	private URL url;
+	private String url;
 	private List<NameValuePair> params;
 	
 	public AjaxRequest(String requestType, String url) {
@@ -36,12 +36,28 @@ public class AjaxRequest {
 	public String send() {
 		String output = null;
 		try {
-		    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			String urlWithParams = url;
+			String parameters = getQuery(params);
+			
+			// If the request type is a GET and there are parameters, modify the url
+			if (!parameters.isEmpty() && requestType.equals("GET")) {
+				urlWithParams += "?" + parameters;
+			}
+			
+			// Convert the URL from a String to a URL type
+			URL newUrl;
+			try {
+				newUrl = new URL(urlWithParams);
+	        } catch (MalformedURLException e) {
+	        	newUrl = null;
+	        }
+			
+		    HttpURLConnection con = (HttpURLConnection) newUrl.openConnection();
 		    if (requestType.equals("POST")) {
 		    	con.setDoOutput(true);
 		    	OutputStream out = con.getOutputStream();
 		    	BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-		    	writer.write(getQuery(params));
+		    	writer.write(parameters);
 		    	writer.flush();
 		    	writer.close();
 		    	out.close();
@@ -66,14 +82,10 @@ public class AjaxRequest {
 	}
 	
 	public void setUrl(String url) {
-		try {
-	        this.url = new URL(url);
-        } catch (MalformedURLException e) {
-	        this.url = null;
-        }
+        this.url = url;
 	}
 	
-	public URL getUrl() {
+	public String getUrl() {
 		return this.url;
 	}
 	

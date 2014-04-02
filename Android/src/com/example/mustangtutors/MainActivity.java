@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -22,25 +23,39 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
+	private Activity mContext;
+	
 	private SharedPreferences sharedPref;
 	private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private Menu mMenu;
+    
+    private LinearLayout mSearchProgress;
     private Button mSearchBar;
     private RelativeLayout mSearchForm;
+    private Spinner mSearchSubject;
+    private EditText mSearchCourseNumber;
+    private EditText mSearchCourseName;
+    private Button mSearchSubmit;
+    private ListView mSearchResults;
+    private TextView mSearchError;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -92,6 +107,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = this;
+        
         // Open preferences file
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 		editor = sharedPref.edit();
@@ -137,96 +154,58 @@ public class MainActivity extends Activity {
             fillNavDrawer("logged out");
     	}
     	
+    	// Get views in search form
+    	mSearchProgress = (LinearLayout) findViewById(R.id.search_status);
         mSearchBar = (Button) findViewById(R.id.SearchBar);
         mSearchForm = (RelativeLayout) findViewById(R.id.SearchForm);
+        mSearchSubject = (Spinner) findViewById(R.id.SearchSubject);
+        mSearchCourseNumber = (EditText) findViewById(R.id.SearchCourseNumber);
+        mSearchCourseName = (EditText) findViewById(R.id.SearchCourseName);
+        mSearchSubmit = (Button) findViewById(R.id.SearchSubmit);
+        mSearchError = (TextView) findViewById(R.id.SearchNoResults);
+        mSearchResults = (ListView) findViewById(R.id.listview);
         
+        // Set on click listener for search bar. Shows/hides search form.
         mSearchBar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (mSearchForm.getVisibility() == View.GONE) {
-					// Show the search form
-					mSearchForm.setVisibility(View.VISIBLE);
-					// Change the arrow on search bar to point up
-					mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.up, 0);
+					showSearchForm();
 				}
 				else {
-					// Hide the search form
-					mSearchForm.setVisibility(View.GONE);
-					// Change the arrow on search bar to point down
-					mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.down, 0);
+					hideSearchForm();
 				}
 			}
         });
         
-        // Populate course subjects
-        String subjects[];
-        AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
-    	JSONArray json;
-        try {
-            json = new JSONArray(request.send());
-            subjects = new String[json.length()+1];
-            subjects[0] = "Subject";
-            for (int i = 0; i < json.length(); i++) {
-            	JSONObject subject = (JSONObject) json.get(i);
-            	subjects[i+1] = subject.getString("subject");
-            }
-            Spinner s = (Spinner) findViewById(R.id.SearchSubject);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-            android.R.layout.simple_spinner_item, subjects);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            s.setAdapter(adapter);
-        } catch (Exception e) {
-        }
+        // Set on click listener for submitting search form
+        mSearchSubmit.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		// Hide the search form
+        		hideSearchForm();
+        		
+        		// Show tutors found
+        		new SearchTask().execute((Void) null);
+        	}
+        });
         
-    	// Load tutors
-	    ArrayList<Tutor> tutors = new ArrayList<Tutor>();
-        request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/search");
-        try {
-            json = new JSONArray(request.send());
-		    for (int i = 0; i < json.length(); i++) {
-		    	JSONObject tutor = (JSONObject) json.get(i);
-		    	int id = Integer.parseInt(tutor.getString("User_ID"));
-		    	String name = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
-		    	int numRatings = Integer.parseInt(tutor.getString("Number_Ratings"));
-		    	double rating;
-		    	if (numRatings == 0) {
-		    		rating = 0;
-		    	}
-		    	else {
-		    		rating = Double.parseDouble(tutor.getString("Average_Rating"));
-		    	}
-		    	System.out.println(rating);
-		    	int availability = Integer.parseInt(tutor.getString("Available"));
-		    	tutors.add(new Tutor(id, name, numRatings, rating, availability));
-		    }
-        } catch (Exception e) {
-        }
+        
+        // Populate course subjects
+        new PopulateSubjectsTask().execute((Void) null);
 
-    	SearchAdapter searchAdapter = new SearchAdapter(this, R.layout.search_list_item, tutors);
-    	ListView listView = (ListView) findViewById(R.id.listview);
-    	listView.setAdapter(searchAdapter);
+        // When the activity first loads, get all the tutors.
+        new SearchTask().execute((Void) null);
     }
     
     @Override
     protected void onResume() {
     	super.onResume();
-    	// TODO
-    	// check if logged in (using Android shared preferences)
-    	
     	if(mySwitch != null)
     	{
     		// Set availability from DB
-            int availability = getAvailability();
-            if(availability == 2){
-            	mySwitch.setChecked(true);
-            } else if(availability == 1){
-            	mySwitch.setChecked(false);
-            } else {
-            	toggleAvailability();
-            }
+    		new SetToggleTask().execute((Void) null);
     	}
-    	
-    	// set checked state on toggle
     }
     
     @Override
@@ -243,20 +222,13 @@ public class MainActivity extends Activity {
         mySwitch.setTextOn("Available");
         
         // Set availability from DB
-        int availability = getAvailability();
-        if(availability == 2){
-        	mySwitch.setChecked(true);
-        } else if(availability == 1){
-        	mySwitch.setChecked(false);
-        } else {
-        	toggleAvailability();
-        }
+        new SetToggleTask().execute((Void) null);
         
         // Create listener for availability
         mySwitch.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-	        	toggleAvailability();
+            	new ToggleTask().execute((Void) null);
             }
         });
         	
@@ -325,22 +297,8 @@ public class MainActivity extends Activity {
     	// Logout
     	else if (drawerStrings[position].equals("Logout")) {
     		// Send a logout request to the server
-    		AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/logout/"+sharedPref.getString("user_id", ""));
-            request.send();
+    		new LogoutTask().execute((Void) null);
             
-    		// Delete user data from preferences
-    		editor.clear().commit();
-    		
-    		// Update navigation drawer
-    		fillNavDrawer("logged out");
-    		
-    		// Hide the toggle availability switch
-			mMenu.findItem(R.id.mySwitch).setVisible(false);
-    		
-    		// Show a logout toast
-    		Toast.makeText(getApplicationContext(), 
-    				getString(R.string.logged_out), 
-    				Toast.LENGTH_SHORT).show();
     		return;
     	}
     	
@@ -371,6 +329,9 @@ public class MainActivity extends Activity {
         		Toast.makeText(getApplicationContext(), 
         				getString(R.string.logged_in), 
         				Toast.LENGTH_SHORT).show();
+        		
+        		// Refresh search results to show updated availability
+        		new SearchTask().execute((Void) null);
     		}
     	}
 	}
@@ -400,28 +361,221 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     
-    public int getAvailability(){
-    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/available/"+sharedPref.getString("user_id", ""));
-    	JSONArray json;
+    private void showSearchForm() {
+		// Show the search form
+		mSearchForm.setVisibility(View.VISIBLE);
+		// Change the arrow on search bar to point up
+		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.up, 0);
+    }
+    
+    private void hideSearchForm() {
+		// Hide the search form
+		mSearchForm.setVisibility(View.GONE);
+		// Change the arrow on search bar to point down
+		mSearchBar.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.down, 0);
+    }
+    
+    
+    // AsyncTask for populating subjects
+    public class PopulateSubjectsTask extends AsyncTask<Void, Void, Boolean> {
+    	private String subjects[];
+    	
+    	@Override
+		protected Boolean doInBackground(Void... params) {
+            AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
+        	JSONArray json;
+            try {
+                json = new JSONArray(request.send());
+                subjects = new String[json.length()+1];
+                subjects[0] = "Subject";
+                for (int i = 0; i < json.length(); i++) {
+                	JSONObject subject = (JSONObject) json.get(i);
+                	subjects[i+1] = subject.getString("subject");
+                }
+            } catch (Exception e) {
+            }
+            return true;
+		}
+    	
+    	@Override
+    	protected void onPostExecute(Boolean result) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
+            android.R.layout.simple_spinner_item, subjects);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mSearchSubject.setAdapter(adapter);
+    	}
+    }
+    
+    // AsyncTask for logging out
+    public class LogoutTask extends AsyncTask<Void, Void, Boolean> {
+    	@Override
+		protected Boolean doInBackground(Void... params) {
+    		AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/logout/"+sharedPref.getString("user_id", ""));
+            request.send();
+            return true;
+		}
+    	
+    	@Override
+    	protected void onPostExecute(Boolean result) {
+    		// Delete user data from preferences
+    		editor.clear().commit();
+    		
+    		// Update navigation drawer
+    		fillNavDrawer("logged out");
+    		
+    		// Hide the toggle availability switch
+			mMenu.findItem(R.id.mySwitch).setVisible(false);
+    		
+    		// Show a logout toast
+    		Toast.makeText(getApplicationContext(), 
+    				getString(R.string.logged_out), 
+    				Toast.LENGTH_SHORT).show();
+    		
+    		// Refresh the search results (to show updated availability)
+    		new SearchTask().execute((Void) null);
+    	}
+    }
+    
+    // AsyncTask for setting the availability switch based on current availability
+    public class SetToggleTask extends AsyncTask<Void, Void, Integer> {
+    	@Override
+		protected Integer doInBackground(Void... params) {
+        	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/available/"+sharedPref.getString("user_id", ""));
+        	JSONArray json;
+            try {
+                json = new JSONArray(request.send());
+                JSONObject availability = (JSONObject) json.get(0);
+                String available = availability.getString("available");
+                if(available.equals("2")){
+                	return 2;
+                }else if(available.equals("1")){
+                	return 1;
+                }
+            } catch (Exception e) {
+            }
+            
+            return 0;
+		}
+    	
+    	@Override
+    	protected void onPostExecute(Integer result) {
+            if(result == 2){
+            	mySwitch.setChecked(true);
+            } else if(result == 1){
+            	mySwitch.setChecked(false);
+            } else {
+            	new ToggleTask().execute((Void) null);
+            }
+    	}
+    }
+    
+    // AsyncTask for toggling availability
+    public class ToggleTask extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... params) {
+	    	// Toggle the availability of the current user in the database
+	    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
+	        request.send();
+	        Log.d("scz","toggled");
+			return true;
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			new SearchTask().execute((Void) null);
+		}
+	}
+    
+    // AsyncTask for searching for tutors
+    public class SearchTask extends AsyncTask<Void, Void, Boolean> {
+    	private ArrayList<Tutor> tutors;
+    	
+    	@Override
+    	protected void onPreExecute() {
+	    	// Hide keyboard
+    		hideSoftKeyboard(mContext);
+        	// Show loading message, hide tutors, hide error message
+        	mSearchProgress.setVisibility(View.VISIBLE);
+        	mSearchResults.setVisibility(View.GONE);
+        	mSearchError.setVisibility(View.GONE);
+    	}
+		@Override
+		protected Boolean doInBackground(Void... params) {
+    		// Get search parameters
+    		String subject = mSearchSubject.getItemAtPosition(mSearchSubject.getSelectedItemPosition()).toString();
+    		String number = mSearchCourseNumber.getText().toString();
+    		String name = mSearchCourseName.getText().toString();
+    		
+			tutors = getTutors(subject, number, name);
+			if (!tutors.isEmpty()) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+	    	SearchAdapter searchAdapter = new SearchAdapter(mContext, R.layout.search_list_item, tutors);
+	    	mSearchResults.setAdapter(searchAdapter);
+	    	
+	    	// Hide loading message, show tutors
+	    	mSearchProgress.setVisibility(View.GONE);
+	    	mSearchResults.setVisibility(View.VISIBLE);
+	    	
+	    	// Show error message if needed
+	    	if (!result) {
+	        	mSearchError.setVisibility(View.VISIBLE);
+	    	}
+		}
+	}
+    
+    public ArrayList<Tutor> getTutors(String subject, String number, String name) {
+    	ArrayList<Tutor> tutors = new ArrayList<Tutor>();
+    	
+        AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/search");
+        if (!subject.isEmpty() && !subject.equals("Subject")) {
+        	request.addParam("subject", subject);
+        }
+        if (!number.isEmpty()) {
+        	request.addParam("cnumber", number);
+        }
+        if (!name.isEmpty()) {
+        	request.addParam("cname", name);
+        }
+        JSONArray json;
         try {
             json = new JSONArray(request.send());
-            JSONObject availability = (JSONObject) json.get(0);
-            String available = availability.getString("available");
-            if(available.equals("2")){
-            	return 2;
-            }else if(available.equals("1")){
-            	return 1;
-            }
+		    for (int i = 0; i < json.length(); i++) {
+		    	JSONObject tutor = (JSONObject) json.get(i);
+		    	int id = Integer.parseInt(tutor.getString("User_ID"));
+		    	String tutorName = tutor.getString("First_Name") + " " + tutor.getString("Last_Name");
+		    	int numRatings = Integer.parseInt(tutor.getString("Number_Ratings"));
+		    	double rating;
+		    	if (numRatings == 0) {
+		    		rating = 0;
+		    	}
+		    	else {
+		    		rating = Double.parseDouble(tutor.getString("Average_Rating"));
+		    	}
+		    	System.out.println(rating);
+		    	int availability = Integer.parseInt(tutor.getString("Available"));
+		    	tutors.add(new Tutor(id, tutorName, numRatings, rating, availability));
+		    }
         } catch (Exception e) {
         }
         
-        return 0;
+        return tutors;
     }
     
-    public void toggleAvailability(){
-    	// Toggle the availability of the current user in the database
-    	AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/users/toggle/"+sharedPref.getString("user_id", ""));
-        request.send();
-        Log.d("scz","toggled");
+    public static void hideSoftKeyboard(Activity activity) {
+    	if (activity != null) {
+    		try {
+    	        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    	        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    		}
+    		catch (Exception e) {
+    			
+    		}
+    	}
     }
 }

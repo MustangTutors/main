@@ -48,7 +48,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
-                android:prompt="@string/search_subject" />
+                android:prompt="@string/search_subject"
+                android:entries="@array/subjects" />
             <EditText
                 android:id="@+id/SearchCourseNumber"
                 android:layout_width="match_parent"
@@ -67,25 +68,51 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
-            <CheckBox
-                android:id="@+id/SearchAvailable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/SearchCourseName"
-                android:text="@string/search_available"/>
             <Button
                 android:id="@+id/SearchSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/SearchAvailable"
+                android:layout_below="@id/SearchCourseName"
             	android:layout_centerHorizontal="true"
                 android:text="@string/search_submit"/>
         </RelativeLayout>
+        <LinearLayout
+	        android:id="@+id/search_status"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_gravity="center"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:orientation="vertical"
+	        android:visibility="visible" >
+	
+	        <ProgressBar
+	            style="?android:attr/progressBarStyleLarge"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="8dp" />
+	
+	        <TextView
+	            android:id="@+id/search_status_message"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="16dp"
+	            android:fontFamily="sans-serif-light"
+	            android:text="@string/search_progress"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    </LinearLayout>
+	    <TextView 
+	        style="@style/Error"
+	        android:id="@+id/SearchNoResults"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:gravity="center_horizontal|center_vertical"
+	        android:visibility="gone" />
 	    <ListView
 	        style="@style/Search"
 	        android:id="@+id/listview"
 	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"/>
+	        android:layout_height="match_parent"
+	        android:visibility="gone"/>
     </LinearLayout>
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat

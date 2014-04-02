@@ -118,5 +118,11 @@
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/border_unavailable</item>
     </style>
+    
+    <style name="Error">
+        <item name="android:text">@string/search_no_results</item>
+        <item name="android:textColor">@color/DarkerRed</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 </resources>
