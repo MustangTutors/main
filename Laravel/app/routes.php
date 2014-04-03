@@ -178,6 +178,19 @@ Route::get('admin/applications',function(){
     
 });
 
+Route::get('admin/application/approved/{tutor_id}',function($tutor_id)
+{   
+    $temp = new Admin();
+    $temp->approveTutor($tutor_id);
+
+});
+Route::get('admin/application/denied/{tutor_id}',function($tutor_id)
+{   
+    $temp = new Admin();
+    $temp->denyTutor($tutor_id);
+
+});
+
 
 
 

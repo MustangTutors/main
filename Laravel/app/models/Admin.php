@@ -40,6 +40,20 @@ WHERE applications.pending = 1",array());
         $result = DB::select('select day,start_time,end_time from schedule where user_id = ?', array($user_id));
         return $result;
     }
+    
+    //updates a tutor status to 1 since they are approved, change their pending application to 0 (not pending)
+    public function approveTutor($tutor_id)
+    {
+        $result = DB::update("UPDATE users set users.tutor = 1 WHERE user_id = ?",array($tutor_id));
+        $result = DB::update("UPDATE applications set applications.pending = 0 where user_id = ?",array($tutor_id));
+                
+    }
+    
+    //deletes an applicants application from the table
+    public function denyTutor($tutor_id)
+    {
+        $result = DB::delete("DELETE from applications where user_id = ?",array($tutor_id));
+    }
 
 
 
