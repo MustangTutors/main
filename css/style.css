@@ -1479,4 +1479,31 @@ section#rating img[src*='star']{
 /* End styling for Tutor Profile */
 
 /* Styling for Apply To Be A Tutor Page */
+section.applicant_info {
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+}
+
+section.applicant_info article h2.subheading {
+    float: left;
+    padding-left: 10px;
+}
+
+section#contact {
+    display: inline;
+}
+
+button[name="addProfilePicture"] {
+    display: block;
+    margin-left: 17px;
+}
+
+div#applicantInformation {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
 /* End styling for Apply To Be A Tutor Page */
