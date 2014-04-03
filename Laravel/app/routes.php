@@ -201,5 +201,16 @@ Route::get('schedule/update',function()
     $temp->updateHours();
 });
 
+Route::get('tutors/toggle/active/{id?}',function($id = '-1')
+{        
+    $temp = new Tutor();
+    if($id == '-1'){
+        $temp->toggleActive($_SESSION['user_id']);
+    }else{
+        $temp->toggleActive($id);
+    }
+});
+
+
 
 
