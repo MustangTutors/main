@@ -260,11 +260,11 @@ function showView() {
             if(json.length !== 0) {
                 // If user not a tutor, don't allow to toggle views
                 if(Number(json.tutor) === 0 || Number(json.active) === 0){
-                    $('label#history_view').hide();
                     $('#history_view input[type="checkbox"]').prop('checked', true);
                     toggleView();
                 }
                 else {
+                    $('label#history_view').show();
                     $('#history_view input[type="checkbox"]').prop('checked', false);
                     toggleView();
                 }

@@ -833,7 +833,7 @@ article.meeting:first-of-type {
 /* Styling for Student History View. */
 
 section#student_history {
-    display: block;
+    display: none;
     position: relative;
 }
 
@@ -951,6 +951,7 @@ section#tutor_history {
 }
 
 #history_view {
+    display: none;
     position: absolute;
     width: 250px;
     top: 27px;
