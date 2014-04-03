@@ -172,6 +172,12 @@ Route::get('courses/subjects',function()
 
 });
 
+Route::get('admin/applications',function(){
+    $temp = new Admin();
+    $temp->getApplications();
+    
+});
+
 
 
 
