@@ -190,6 +190,11 @@ Route::get('admin/application/denied/{tutor_id}',function($tutor_id)
     $temp->denyTutor($tutor_id);
 
 });
+Route::get('courses/update',function()
+{
+    $temp = new Course();
+    $temp->updateCourses();
+});
 
 
 
