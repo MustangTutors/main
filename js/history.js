@@ -11,6 +11,7 @@ $.ajax({
 
 $(document).ready(function(){
     showView();
+    fillNewMeetingCourses();
 
 	// When toggle view clicked, load correct view
 	$(document).on('change', '#history_view input[type="checkbox"]', toggleView);
@@ -111,8 +112,34 @@ $(document).ready(function(){
 	});
 
     // When Add is clicked/new meeting form is submitted
-    $(document).on('submit', '#meeeting_form', function(){
-        //var 
+    $(document).on('submit', '#meeting_form', function(){
+        event.preventDefault();
+
+        // Create JSON for new meeting
+        var newMeetingJSON = createNewMeetingJSON();
+
+        // Clear and close new meeting window
+        resetNewMeetingForm();
+        $('#subtract_icon').hide();
+        $('#add_icon').css('display', 'inline-block');
+        hideAddMeetingWindow();
+
+        // Send JSON to database
+        $.ajax({
+            type: "POST",
+            url: "",
+            date: newMeetingJSON,
+            success: function(json) {
+                
+            }
+        });
+    });
+
+    // When Reset is clicked on new meeting form
+    $(document).on('click', '#reset_meeting', function(){
+        event.preventDefault();
+
+        resetNewMeetingForm();
     });
 
 	// Parse JSON for student meetings
@@ -199,7 +226,7 @@ function showAddMeetingWindow() {
 
 function hideAddMeetingWindow() {
 	$('#tutor_history #meeting_form').slideUp();
-	$('#tutor_history article.add_meeting').animate({height: "40px"}, 400);
+	$('#tutor_history article.add_meeting').animate({height: "30px"}, 400);
 }
 
 function closeAndClearShare() {
@@ -273,6 +300,22 @@ function showView() {
     });
 }
 
+function fillNewMeetingCourses() {
+    // Parse JSON for user info
+    $.ajax({
+        url: "json/all_courses.json",
+        success: function(json) {
+            //json = JSON.parse(json);
+
+            for(var i = 0; i < json.length; i++){
+                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                var newOption = '<option value="' + json[i].course_id + '">' + title + '</option>';
+                $('#meeting_form select[name="courses"]').append(newOption);
+            }
+        }
+    });
+}
+
 function populateDateAndTime() {
     // Set date information
     var date = new Date();
@@ -307,4 +350,35 @@ function populateDateAndTime() {
     // Populate the time
     $('#meeting_form input[name="start_time"]').val(start_time_string);
     $('#meeting_form input[name="end_time"]').val(end_time_string);
+}
+
+function resetNewMeetingForm() {
+    // Reset Student ID
+    $('#meeting_form input[name="student_id"]').val("");
+
+    // Reset course selected
+    $('#meeting_form select').val("");
+
+    // Reset Date and Time
+    populateDateAndTime();
+
+    // Reset Summary
+    $('#meeting_form textarea[name="summary"]').val("");
+}
+
+function createNewMeetingJSON() {
+    var new_meeting = new Object();
+    new_meeting.student_id = $('#meeting_form input[name="student_id"]');
+    new_meeting.course_name = $('#meeting_form select option').html();
+    new_meeting.course_id = $('#meeting_form select[name="courses"]').val();
+    new_meeting.date = $('#meeting_form input[type="date"]').val();
+    new_meeting.start_time = $('#meeting_form input[name="start_time"]').val();
+    new_meeting.end_time = $('#meeting_form input[name="end_time"]').val();
+    new_meeting.comments = $('#meeting_form textarea[name="summary"]').val();
+
+    return "";
+}
+
+function addNewMeeting() {
+
 }
