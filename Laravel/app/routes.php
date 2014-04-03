@@ -195,7 +195,11 @@ Route::get('courses/update',function()
     $temp = new Course();
     $temp->updateCourses();
 });
-
+Route::get('schedule/update',function()
+{
+    $temp = new Schedule();
+    $temp->updateHours();
+});
 
 
 

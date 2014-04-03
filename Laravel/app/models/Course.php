@@ -22,7 +22,12 @@ class Course extends Eloquent{
         
         //FOR TESTING USE THE COMMENTED OUT DATA
         /*
-        $temp_course_data = array(array("Course_ID"=>3),array("Course_ID"=>1),array("Course_ID"=>2));
+        $temp_course_data = 
+        array(
+            array("Course_ID"=>3),
+            array("Course_ID"=>1),
+            array("Course_ID"=>2)
+            );
         $temp_data = array("User_ID" =>1,"Courses"=>$temp_course_data);
         $_POST['new_courses'] = json_encode($temp_data);
         */
@@ -38,8 +43,7 @@ class Course extends Eloquent{
         {
             $course_id = $course->Course_ID;
             $result = DB::insert("INSERT INTO courses_tutored (course_id,user_id) VALUES (?,?)",array($course_id,$user_id));
-        }
-        
+        } 
     }
 
 
