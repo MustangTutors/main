@@ -1506,4 +1506,16 @@ div#applicantInformation {
     margin-top: 20px;
 }
 
+#potential_courses {
+    margin-left: 70px;
+}
+
+#potential_hours {
+    margin-left: -15px;
+}
+
+select.course_dropdown {
+    display: block;
+}
+
 /* End styling for Apply To Be A Tutor Page */
