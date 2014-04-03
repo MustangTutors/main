@@ -1,0 +1,20 @@
+[
+	{
+		"course_id":1,
+		"subject":"CSE",
+		"course_number":3345,
+		"course_name":"Graphical User Interfaces"
+	},
+	{
+		"course_id":3,
+		"subject":"DISC",
+		"course_number":1234,
+		"course_name":"Blah blah blah"
+	},
+	{
+		"course_id":2,
+		"subject":"MATH",
+		"course_number":1234,
+		"course_name":"Blah blah blah"
+	}
+]

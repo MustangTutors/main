@@ -190,6 +190,26 @@ Route::get('admin/application/denied/{tutor_id}',function($tutor_id)
     $temp->denyTutor($tutor_id);
 
 });
+Route::get('courses/update',function()
+{
+    $temp = new Course();
+    $temp->updateCourses();
+});
+Route::get('schedule/update',function()
+{
+    $temp = new Schedule();
+    $temp->updateHours();
+});
+
+Route::get('tutors/toggle/active/{id?}',function($id = '-1')
+{        
+    $temp = new Tutor();
+    if($id == '-1'){
+        $temp->toggleActive($_SESSION['user_id']);
+    }else{
+        $temp->toggleActive($id);
+    }
+});
 
 
 
