@@ -1488,6 +1488,7 @@ section.applicant_info {
 section.applicant_info article h2.subheading {
     float: left;
     padding-left: 10px;
+    clear: both;
 }
 
 section#contact {
@@ -1514,8 +1515,15 @@ div#applicantInformation {
     margin-left: -15px;
 }
 
-select.course_dropdown {
-    display: block;
+div#addCourses form {
+    width: 1px;
+    margin-left: 15px;
+}
+
+div#potential_days div.potential_day {
+    width: 35%;  
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 /* End styling for Apply To Be A Tutor Page */
