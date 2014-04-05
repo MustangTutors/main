@@ -234,8 +234,20 @@ function setNavigationBar() {
 
                 // If admin, add navigation/search options for admin
                 if(Number(json.admin) === 1){
-                    var newNav = '<li class="nav"><a href="applications.html">Applications<span id="counter">2</span></a></li>';
-                    $('nav #navigation').append(newNav);
+                    // Check how many pending applications there are.
+                    $.ajax({
+                        url: "Laravel/public/admin/applications",
+                        success: function(json) {
+                            json = JSON.parse(json);
+                            var numApps = json.Applications.length;
+                            var newNav = $('<li class="nav"><a href="applications.html">Applications</a></li>');
+                            if (numApps !== 0) {
+                                newNav.find('a').append($('<span id="counter">'+numApps+'</span>'));
+                            }
+                            $('nav #navigation').append(newNav);
+                        }
+                    });
+
                     // Adds the tutor first name and last name options to search
                     $("#adminSearchOptions").show();
                 }
