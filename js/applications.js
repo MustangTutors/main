@@ -22,8 +22,15 @@ $(document).ready(function() {
         status.css('visibility', 'visible');
         var buttonContainer = button.parent();
         buttonContainer.html('<a href="#" class="edit button">View/Edit Profile</a>');
-        var profileURL = 'tutor.html?user_id=' + jQuery.data(buttonContainer.parents('.applicationReview')[0], 'user_id');
+        var userID = jQuery.data(buttonContainer.parents('.applicationReview')[0], 'user_id');
+        var profileURL = 'tutor.html?user_id=' + userID;
         buttonContainer.find('a').attr('href', profileURL);
+        $.ajax({
+            url: "Laravel/public/admin/application/approved/" + userID,
+            success: function() {
+                updateNotificationCount();
+            }
+        });
     });
 
     // Deny an application. Adds a 'denied' stamp and hides the buttons.
@@ -32,15 +39,28 @@ $(document).ready(function() {
         var status = button.parents('.applicationReview').find('img.applicationStatus');
         status.attr('src', 'img/denied.png');
         status.css('visibility', 'visible');
-        button.parent().css('visibility', 'hidden');
+        var buttonContainer = button.parent();
+        buttonContainer.css('visibility', 'hidden');
+        $.ajax({
+            url: "Laravel/public/admin/application/denied/" + userID,
+            success: function() {
+                updateNotificationCount();
+            }
+        });
     });
 
     // Parse JSON for Applications
     $.ajax({
-        url: "json/applications.json",
+        url: "Laravel/public/admin/applications",
         success: function(json) {
-            //json = JSON.parse(json);
+            json = JSON.parse(json);
             json = json.Applications;
+
+            // Show message for no applications
+            if (json.length === 0) {
+                $('#applicationsMain .error').show();
+            }
+
             // Define list of days
             var days = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
             for(var i = 0; i < json.length; i++) {
@@ -74,17 +94,17 @@ $(document).ready(function() {
 
                 // Add information from JSON
                 // Link to transcript
-                application.find('a').attr('href', 'transcripts/' + json[i].User_ID + '.pdf');
+                application.find('a').attr('href', 'transcripts/' + json[i].user_id + '.pdf');
                 // Tutor picture
-                application.find('.tutorPicture img').attr('src', 'img/tutors/' + json[i].User_ID + '.jpg');
+                application.find('.tutorPicture img').attr('src', 'img/tutors/' + json[i].user_id + '.jpg');
                 // Tutor name
                 application.find('.tutorName').html(json[i].First_Name + " " + json[i].Last_Name);
                 // Courses
                 var courses = json[i].Courses;
                 for (var j = 0; j < courses.length; j++) {
                     var course = $('<li><span class="listLabel"></span><span class="listContent"></span></li>');
-                    course.find('.listLabel').html(courses[j].Subject + " " + courses[j].Course_Number + ":");
-                    course.find('.listContent').html(courses[j].Course_Name);
+                    course.find('.listLabel').html(courses[j].subject + " " + courses[j].course_number + ":");
+                    course.find('.listContent').html(courses[j].course_name);
                     application.find('.reviewCourses ul').append(course);
                 }
                 // Regular Hours
@@ -92,8 +112,8 @@ $(document).ready(function() {
                 for (var j = 0, k = 0; j < days.length; j++) {
                     var day = $('<li><span class="listLabel"></span><span class="listContent"></span></li>');
                     day.find('.listLabel').html(days[j]);
-                    if ((k < hours.length) && (hours[k].Day === days[j])) {
-                        day.find('.listContent').html(convertTime(hours[k].Start_Time) + " to " + convertTime(hours[k].End_Time));
+                    if ((k < hours.length) && (hours[k].day === (j+1))) {
+                        day.find('.listContent').html(convertTime(hours[k].start_time) + " to " + convertTime(hours[k].end_time));
                         k++;
                     }
                     else {
@@ -102,7 +122,7 @@ $(document).ready(function() {
                     application.find('.reviewHours ol').append(day);
                 }
                 // Store User ID in the application.
-                jQuery.data(application[0], 'user_id', json[i].User_ID);
+                jQuery.data(application[0], 'user_id', json[i].user_id);
             }
         }
     });

@@ -772,6 +772,12 @@ ul span.listContent {
     color: #444;
 }
 
+#applicationsMain .error {
+    display: none;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
 /* End applications page styling. */
 
 

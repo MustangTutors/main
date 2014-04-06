@@ -5,8 +5,6 @@ $(document).ready(function() {
     });
     $("footer").load("footer.html");
 
-    
-
     // Change font color on toggle switch
     $(document).on('change', 'label.toggle input[type="checkbox"]', setToggleColor);
 
@@ -234,19 +232,11 @@ function setNavigationBar() {
 
                 // If admin, add navigation/search options for admin
                 if(Number(json.admin) === 1){
+                    var newNav = $('<li class="nav"><a href="applications.html">Applications</a></li>');
+                    $('nav #navigation').append(newNav);
+
                     // Check how many pending applications there are.
-                    $.ajax({
-                        url: "Laravel/public/admin/applications",
-                        success: function(json) {
-                            json = JSON.parse(json);
-                            var numApps = json.Applications.length;
-                            var newNav = $('<li class="nav"><a href="applications.html">Applications</a></li>');
-                            if (numApps !== 0) {
-                                newNav.find('a').append($('<span id="counter">'+numApps+'</span>'));
-                            }
-                            $('nav #navigation').append(newNav);
-                        }
-                    });
+                    updateNotificationCount();
 
                     // Adds the tutor first name and last name options to search
                     $("#adminSearchOptions").show();
@@ -278,4 +268,22 @@ function toggleMessageAppear(){
         }
         
     }
+}
+
+function updateNotificationCount() {
+    $.ajax({
+        url: "Laravel/public/admin/applications",
+        success: function(json) {
+            json = JSON.parse(json);
+            var numApps = json.Applications.length;
+            var link = $('nav #navigation a[href*="applications"]');
+            if (numApps !== 0) {
+                link.html('Applications<span id="counter">'+numApps+'</span>');
+            }
+            else {
+                link.html('Applications');
+            }
+            
+        }
+    });
 }
