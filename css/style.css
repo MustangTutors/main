@@ -1494,7 +1494,7 @@ section.applicant_info {
 section.applicant_info article h2.subheading {
     float: left;
     padding-left: 10px;
-    margin-right: 219px;
+    margin-right: 214px;
     margin-bottom: 10px;
     clear: both;
 }
@@ -1518,6 +1518,10 @@ section#contact {
 button[name="addProfilePicture"] {
     display: block;
     margin-left: 17px;
+}
+
+button[name="addTranscript"] {
+    display: block;
 }
 
 div#applicantInformation {
