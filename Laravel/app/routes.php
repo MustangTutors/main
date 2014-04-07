@@ -28,6 +28,7 @@ tutor/rate              ==>this adds or updates user's rating for a tutor
 users/register          ==>this registers a new user
 users/apply             ==>this adds application and (possibly) temporary schedule and course tutored list to db 
 courses/subjects        ==>this returns a json of the course subjects
+users/edit              ==>this updates the first name, last name, and password
 */
 
 Route::get('/', function()
@@ -117,15 +118,22 @@ Route::post('users/history/parent',function()
     }
 });
 
-Route::get('users/apply',function()
+Route::post('users/apply',function()
 {
-    if(isset($_POST['application']) || true)
+    if(isset($_POST['application']))
     {
         $temp = new User();
         $temp->addApplication();
     }    
 
 });
+
+Route::post('users/edit',function($id = -1)
+{
+    $temp=new User();
+    $temp->updateInfo($id);
+})
+->where('id','[0-9]+');
 
 Route::get('tutor/{id}',function($id)
 {
