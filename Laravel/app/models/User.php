@@ -183,10 +183,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         
         //this info used to test without postman because screw 32 bit ubuntu, right google?
-        $testjson='{"User_ID": 1,"Courses": [{"Course_ID": 1},{"Course_ID": 2},{"Course_ID": 3}],"Hours": [{"Day": 1,"Start_Time": "11:00","End_Time": "16:00"},{"Day": 3,"Start_Time": "10:00","End_Time": "12:00"},{"Day": 5,"Start_Time": "11:00","End_Time": "16:00"}]}';
-        $json=json_decode($testjson);        
+        //$testjson='{"User_ID": 1,"Courses": [{"Course_ID": 1},{"Course_ID": 2},{"Course_ID": 3}],"Hours": [{"Day": 1,"Start_Time": "11:00","End_Time": "16:00"},{"Day": 3,"Start_Time": "10:00","End_Time": "12:00"},{"Day": 5,"Start_Time": "11:00","End_Time": "16:00"}]}';
+        //$json=json_decode($testjson);        
         
-        //$json=json_decode($_POST['application']);
+        $json=json_decode($_POST['application']);
 
         //Insert new tuple in applications table
         $user_id=$json->User_ID; 
