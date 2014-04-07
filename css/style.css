@@ -1526,6 +1526,16 @@ div#addCourses form {
     margin-left: 15px;
 }
 
+div#addCourses form span{
+    display: inline-flex;
+    margin-bottom: 10px;
+}
+
+div#addCourses form span input{
+    width: 200px;
+    margin-left: 10px;
+}
+
 div#potential_days div.potential_day {
     width: 35%;  
     margin-left: 20px;
