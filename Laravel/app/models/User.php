@@ -248,14 +248,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    * @echo JSON containing the updated user tuple.
    */
    public function updateInfo($id = -1){
-    if($id == -1) $id = Session::get('user_id', -1);
+    if($id == -1)$id = Session::get('user_id', -1);
     $fname = Input::get('fName');
     $lname = Input::get('lname');
     $password = Input::get('password');
-    $result=DB::update("UPDATE users SET fname = ?, lname = ?, password = ? WHERE user_id = ?",array($fname,$lname,$password,$id));
-    $result=DB:select("SELECT * FROM users WHERE user_id = ?",array($id));
+    DB::update("UPDATE users SET fname = ?, lname = ?, password = ? WHERE user_id = ?",array($fname,$lname,$password,$id));
+    $result=DB::select("SELECT * FROM users WHERE user_id = ?",array($id));
     echo json_encode($result);
    }
+    
 
    /**
    * Get the availability status of the user of the given ID, or the current user if no ID is provided.
