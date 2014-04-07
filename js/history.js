@@ -116,7 +116,8 @@ $(document).ready(function(){
         event.preventDefault();
 
         // Create JSON for new meeting
-        var newMeetingJSON = createNewMeetingJSON();
+        var new_meeting = createNewMeetingJSON();
+        var newMeetingJSON = JSON.stringify(new_meeting);
 
         // Clear and close new meeting window
         resetNewMeetingForm();
@@ -130,7 +131,9 @@ $(document).ready(function(){
             url: "",
             date: newMeetingJSON,
             success: function(json) {
-                
+                new_meeting.first_name = json.first_name;
+                new_meeting.last_name = json.last_name;
+                addNewMeeting(new_meeting);
             }
         });
     });
@@ -366,19 +369,29 @@ function resetNewMeetingForm() {
     $('#meeting_form textarea[name="summary"]').val("");
 }
 
-function createNewMeetingJSON() {
+function createNewMeetingObject() {
     var new_meeting = new Object();
     new_meeting.student_id = $('#meeting_form input[name="student_id"]');
-    new_meeting.course_name = $('#meeting_form select option').html();
+    new_meeting.title = $('#meeting_form select option').html();
     new_meeting.course_id = $('#meeting_form select[name="courses"]').val();
-    new_meeting.date = $('#meeting_form input[type="date"]').val();
+    new_meeting.day = $('#meeting_form input[type="date"]').val();
     new_meeting.start_time = $('#meeting_form input[name="start_time"]').val();
     new_meeting.end_time = $('#meeting_form input[name="end_time"]').val();
-    new_meeting.comments = $('#meeting_form textarea[name="summary"]').val();
+    new_meeting.summary = $('#meeting_form textarea[name="summary"]').val();
 
-    return "";
+    return new_meeting;
 }
 
-function addNewMeeting() {
+function addNewMeeting(new_meeting) {
+    var title = new_meeting.title;
+    var contributor = "Student tutored: " + new_meeting.first_name + " " + new_meeting.last_name;
+    var date = new_meeting.day;
+    var time = new_meeting.start_time + " to " + new_meeting.end_time;
+    var summary = new_meeting.summary;
 
+    // Create and append new node with json information
+    var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
+                        '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
+                        '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
+    // $('#tutor_history').append(newArticle);
 }
