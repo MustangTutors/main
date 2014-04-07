@@ -1494,7 +1494,21 @@ section.applicant_info {
 section.applicant_info article h2.subheading {
     float: left;
     padding-left: 10px;
+    margin-right: 219px;
+    margin-bottom: 10px;
     clear: both;
+}
+
+section.applicant_info article#potential_hours {
+    width: 397px;
+    height: 249px;
+    margin-left: 20px;
+}
+
+section.applicant_info article#potential_courses {
+    height: 249px;
+    width: 422px;
+    margin-left: 14px;
 }
 
 section#contact {
@@ -1513,14 +1527,6 @@ div#applicantInformation {
     margin-top: 20px;
 }
 
-#potential_courses {
-    margin-left: 70px;
-}
-
-#potential_hours {
-    margin-left: -15px;
-}
-
 div#addCourses form {
     width: 1px;
     margin-left: 15px;
@@ -1532,14 +1538,13 @@ div#addCourses form span{
 }
 
 div#addCourses form span input{
-    width: 200px;
+    width: 305px;
     margin-left: 10px;
 }
 
-div#potential_days div.potential_day {
-    width: 35%;  
-    margin-left: 20px;
-    margin-top: 5px;
+article#potential_hours li span.potential_day{
+    display: inline-block;
+    width: 115px;
 }
 
 /* End styling for Apply To Be A Tutor Page */
