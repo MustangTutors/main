@@ -128,7 +128,7 @@ Route::post('users/apply',function()
 
 });
 
-Route::post('users/edit',function($id = -1)
+Route::post('users/edit/{id}',function($id = -1)
 {
     $temp=new User();
     $temp->updateInfo($id);
