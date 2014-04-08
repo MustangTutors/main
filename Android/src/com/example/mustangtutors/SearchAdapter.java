@@ -24,10 +24,16 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	}
 	
 	@Override
-	public View getView(int position, View coverView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 	    LayoutInflater inflater = (LayoutInflater) context
 	            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    View rowView = inflater.inflate(resource, parent, false);
+	    View rowView;
+	    if (convertView == null) {
+	    	rowView = inflater.inflate(resource, parent, false);
+	    }
+	    else {
+	    	rowView = convertView;
+	    }
 
 	    ImageView picture = (ImageView) rowView.findViewById(R.id.search_tutor_picture);
 	    TextView name = (TextView) rowView.findViewById(R.id.search_tutor_name);
