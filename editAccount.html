@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mustang Tutors</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/toggle-switch.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/include.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+
+<body>
+    <header></header>
+
+
+    <main id="editMain">
+        <section id="editAccount">
+            <h2 class="heading">Edit Your Account</h2>
+            <form id="editAccountForm">
+                <div>
+                    <label for="edit_first">First Name: *</label>
+                    <input type="text" name="fname" id="edit_first" placeholder="Enter first name" required>
+                </div>
+                <div>
+                    <label for="edit_last">Last Name: *</label>
+                    <input type="text" name="lname" id="edit_last" placeholder="Enter last name" required>
+                </div>
+                <div>
+                    <label for="edit_new_password">New Password:</label>
+                    <input type="password" name="password" id="edit_new_password" placeholder="Enter new password" pattern=".{8,}" title="At least 8 characters">
+                </div>
+                <div>
+                    <label for="edit_password_confirm">Confirm New Password:</label>
+                    <input type="password" name="confirm_password" id="edit_password_confirm" placeholder="Confirm new password" pattern=".{8,}" title="At least 8 characters">
+                </div>
+                <div id="current_password_info">
+                    <p>In order to update any of your account information, please enter your current password to confirm your identity.</p>
+                </div>
+                <div>
+                    <label for="edit_current_password">Current Password: *</label>
+                    <input type="password" name="current_password" id="edit_current_password" placeholder="Enter your current password" pattern=".{8,}" title="At least 8 characters">
+                </div>
+                <div id="register">
+                    <button id="submitEdit" class="button">Update</button>
+                </div>
+                <span class="error"></span>
+            </form>
+        </section>
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>

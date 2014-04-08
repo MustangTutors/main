@@ -679,6 +679,51 @@ section#tutors h2 {
 /* End registration page styling. */
 
 
+/* Start edit account styling */
+
+#editMain {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#editAccount {
+    width: 500px;
+    margin: 0px auto;
+    background-color: #fff6eb;
+    border: 2px solid #b0a69b;
+}
+
+#editAccountForm label {
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+}
+
+#editAccountForm input {
+    width: 225px;
+    margin: 5px 0px 5px 10px;
+    height: 20px;
+}
+
+#editAccountForm div {
+    text-align: center;
+}
+
+#editAccountForm #submitEdit {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#editAccountForm #current_password_info p {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-style: italic;
+}
+
+/* End edit account styling */
+
+
 /* Begin applications page styling. */
 
 #applicationsMain > h2 {
