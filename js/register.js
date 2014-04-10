@@ -10,7 +10,7 @@ $.ajax({
 });
 
 $(document).ready(function(){
-    $(document).on('submit', 'form', function(event){
+    $(document).on('submit', 'form#registrationForm', function(event){
         event.preventDefault();
 
         var password = $("#registration_password").val();
