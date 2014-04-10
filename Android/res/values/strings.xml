@@ -44,5 +44,12 @@
     <string name="title_activity_meeting">Document a Student Meeting</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tutor">Tutor Profile</string>
+    
+    <string name="new_meeting_title">Add a Meeting</string>
+    <string name="student_id">Student ID:</string>
+    <string name="course_tutored">Course Tutored:</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="comments">Comments (1-3 sentences):</string>
 
 </resources>

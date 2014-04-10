@@ -72,41 +72,52 @@ public final class R {
         public static final int up=0x7f020018;
     }
     public static final class id {
-        public static final int SearchBar=0x7f0a000a;
-        public static final int SearchCourseName=0x7f0a000e;
-        public static final int SearchCourseNumber=0x7f0a000d;
-        public static final int SearchForm=0x7f0a000b;
-        public static final int SearchNoResults=0x7f0a0012;
-        public static final int SearchSubject=0x7f0a000c;
-        public static final int SearchSubmit=0x7f0a000f;
-        public static final int content_frame=0x7f0a0009;
-        public static final int drawer_item_text=0x7f0a0015;
-        public static final int drawer_layout=0x7f0a0008;
-        public static final int incorrect_login=0x7f0a0006;
-        public static final int left_drawer=0x7f0a0014;
-        public static final int listview=0x7f0a0013;
-        public static final int login=0x7f0a0005;
-        public static final int login_form=0x7f0a0002;
-        public static final int login_status=0x7f0a0000;
-        public static final int login_status_message=0x7f0a0001;
-        public static final int mySwitch=0x7f0a001a;
-        public static final int password=0x7f0a0004;
-        public static final int search_status=0x7f0a0010;
-        public static final int search_status_message=0x7f0a0011;
-        public static final int search_tutor_availability=0x7f0a0017;
-        public static final int search_tutor_name=0x7f0a0018;
-        public static final int search_tutor_picture=0x7f0a0016;
-        public static final int search_tutor_rating=0x7f0a0019;
-        public static final int sign_in_button=0x7f0a0007;
-        public static final int smu_id=0x7f0a0003;
+        public static final int SearchBar=0x7f0a0014;
+        public static final int SearchCourseName=0x7f0a0018;
+        public static final int SearchCourseNumber=0x7f0a0017;
+        public static final int SearchForm=0x7f0a0015;
+        public static final int SearchNoResults=0x7f0a001c;
+        public static final int SearchSubject=0x7f0a0016;
+        public static final int SearchSubmit=0x7f0a0019;
+        public static final int content_frame=0x7f0a0013;
+        public static final int course_tutored_label=0x7f0a0005;
+        public static final int date_label=0x7f0a0007;
+        public static final int drawer_item_text=0x7f0a001f;
+        public static final int drawer_layout=0x7f0a0012;
+        public static final int incorrect_login=0x7f0a0010;
+        public static final int left_drawer=0x7f0a001e;
+        public static final int listview=0x7f0a001d;
+        public static final int login=0x7f0a000f;
+        public static final int login_form=0x7f0a000c;
+        public static final int login_status=0x7f0a000a;
+        public static final int login_status_message=0x7f0a000b;
+        public static final int meeting_info_container=0x7f0a0001;
+        public static final int meeting_info_course=0x7f0a0004;
+        public static final int meeting_info_date=0x7f0a0006;
+        public static final int meeting_info_student=0x7f0a0002;
+        public static final int meeting_info_time=0x7f0a0008;
+        public static final int mySwitch=0x7f0a0024;
+        public static final int new_meeting_title=0x7f0a0000;
+        public static final int password=0x7f0a000e;
+        public static final int search_status=0x7f0a001a;
+        public static final int search_status_message=0x7f0a001b;
+        public static final int search_tutor_availability=0x7f0a0021;
+        public static final int search_tutor_name=0x7f0a0022;
+        public static final int search_tutor_picture=0x7f0a0020;
+        public static final int search_tutor_rating=0x7f0a0023;
+        public static final int sign_in_button=0x7f0a0011;
+        public static final int smu_id=0x7f0a000d;
+        public static final int student_id_label=0x7f0a0003;
+        public static final int time_label=0x7f0a0009;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_meeting=0x7f030002;
-        public static final int activity_tutor=0x7f030003;
-        public static final int drawer_list_item=0x7f030004;
-        public static final int search_list_item=0x7f030005;
+        public static final int activity_add_meeting=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_meeting=0x7f030003;
+        public static final int activity_tutor=0x7f030004;
+        public static final int drawer_list_item=0x7f030005;
+        public static final int search_list_item=0x7f030006;
     }
     public static final class menu {
         public static final int login=0x7f090000;
@@ -115,25 +126,29 @@ public final class R {
         public static final int tutor=0x7f090003;
     }
     public static final class string {
-        public static final int action_sign_in_short=0x7f060013;
+        public static final int action_sign_in_short=0x7f060019;
         public static final int app_name=0x7f060000;
+        public static final int comments=0x7f060015;
+        public static final int course_tutored=0x7f060012;
+        public static final int date=0x7f060013;
         public static final int drawer_close=0x7f060002;
         public static final int drawer_open=0x7f060001;
-        public static final int error_field_required=0x7f06001b;
-        public static final int error_incorrect_info=0x7f060017;
-        public static final int error_incorrect_password=0x7f06001a;
-        public static final int error_invalid_password=0x7f060016;
-        public static final int error_invalid_smu_id=0x7f060015;
-        public static final int error_not_tutor=0x7f060018;
+        public static final int error_field_required=0x7f060021;
+        public static final int error_incorrect_info=0x7f06001d;
+        public static final int error_incorrect_password=0x7f060020;
+        public static final int error_invalid_password=0x7f06001c;
+        public static final int error_invalid_smu_id=0x7f06001b;
+        public static final int error_not_tutor=0x7f06001e;
         public static final int hello_world=0x7f06000e;
         public static final int logged_in=0x7f060003;
         public static final int logged_out=0x7f060004;
-        public static final int login_progress_signing_in=0x7f060014;
-        public static final int no_error=0x7f060019;
-        public static final int prompt_password=0x7f060012;
+        public static final int login_progress_signing_in=0x7f06001a;
+        public static final int new_meeting_title=0x7f060010;
+        public static final int no_error=0x7f06001f;
+        public static final int prompt_password=0x7f060018;
         /**  Strings related to login 
          */
-        public static final int prompt_smu_id=0x7f060011;
+        public static final int prompt_smu_id=0x7f060017;
         public static final int search_available=0x7f060009;
         public static final int search_course_name=0x7f060008;
         public static final int search_course_number=0x7f060007;
@@ -142,7 +157,9 @@ public final class R {
         public static final int search_subject=0x7f060006;
         public static final int search_submit=0x7f06000a;
         public static final int search_tutors=0x7f060005;
-        public static final int title_activity_login=0x7f060010;
+        public static final int student_id=0x7f060011;
+        public static final int time=0x7f060014;
+        public static final int title_activity_login=0x7f060016;
         public static final int title_activity_meeting=0x7f06000d;
         public static final int title_activity_tutor=0x7f06000f;
     }
@@ -193,5 +210,7 @@ public final class R {
         public static final int TutorName=0x7f08000f;
         public static final int TutorNumberRatings=0x7f080010;
         public static final int TutorPicture=0x7f08000e;
+        public static final int meeting_info_label=0x7f080014;
+        public static final int new_meeting_title=0x7f080015;
     }
 }

@@ -116,7 +116,7 @@ $(document).ready(function(){
         event.preventDefault();
 
         // Create JSON for new meeting
-        var new_meeting = createNewMeetingJSON();
+        var new_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
 
         // Clear and close new meeting window
@@ -129,10 +129,10 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "",
-            date: newMeetingJSON,
+            data: newMeetingJSON,
             success: function(json) {
-                new_meeting.first_name = json.first_name;
-                new_meeting.last_name = json.last_name;
+                new_meeting.first_name = json.fName;
+                new_meeting.last_name = json.lName;
                 addNewMeeting(new_meeting);
             }
         });
@@ -150,7 +150,6 @@ $(document).ready(function(){
         url: "Laravel/public/users/history",
         success: function(json) {
             json = JSON.parse(json);
-            console.log(json);
 
             if(json.meetings === undefined) {
                 $('#student_history span.error.none').html("You have not yet attended any tutoring sessions.");
@@ -371,9 +370,9 @@ function resetNewMeetingForm() {
 
 function createNewMeetingObject() {
     var new_meeting = new Object();
-    new_meeting.student_id = $('#meeting_form input[name="student_id"]');
-    new_meeting.title = $('#meeting_form select option').html();
+    new_meeting.student_id = $('#meeting_form input[name="student_id"]').val();
     new_meeting.course_id = $('#meeting_form select[name="courses"]').val();
+    new_meeting.title = $('#meeting_form select option[value="' + new_meeting.course_id + '"]').html();
     new_meeting.day = $('#meeting_form input[type="date"]').val();
     new_meeting.start_time = $('#meeting_form input[name="start_time"]').val();
     new_meeting.end_time = $('#meeting_form input[name="end_time"]').val();
@@ -393,5 +392,5 @@ function addNewMeeting(new_meeting) {
     var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
                         '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
                         '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
-    // $('#tutor_history').append(newArticle);
+    newArticle.insertBefore($('#tutor_history article[class="meeting"]').eq(0));
 }
