@@ -21,11 +21,16 @@ public class TutorActivity extends Activity {
 	    Intent intent = getIntent();
 	    String message = intent.getStringExtra(MainActivity.TUTOR_ID);
 	    
+	    // Send an AJAX Request to the server to retrieve information on tutor
+	    String url = "http://mustangtutors.floccul.us/Laravel/public/tutor/" + message;
+	    AjaxRequest ajax = new AjaxRequest("GET", url);
+	    String response = ajax.send();
+	    
 	    // Temporary stuff. Just display the tutor user id on the page.
 	    // Create the text view
 	    TextView textView = new TextView(this);
 	    textView.setTextSize(40);
-	    textView.setText(message);
+	    textView.setText(response);
 
 	    // Set the text view as the activity layout
 	    setContentView(textView);
