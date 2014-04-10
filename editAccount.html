@@ -24,7 +24,7 @@
             <form id="editAccountForm">
                 <div>
                     <label for="edit_first">First Name: *</label>
-                    <input type="text" name="fname" id="edit_first" placeholder="Enter first name" required>
+                    <input type="text" name="fName" id="edit_first" placeholder="Enter first name" required>
                 </div>
                 <div>
                     <label for="edit_last">Last Name: *</label>
@@ -43,10 +43,11 @@
                 </div>
                 <div>
                     <label for="edit_current_password">Current Password: *</label>
-                    <input type="password" name="current_password" id="edit_current_password" placeholder="Enter your current password" pattern=".{8,}" title="At least 8 characters">
+                    <input type="password" name="current_password" id="edit_current_password" placeholder="Enter your current password" pattern=".{8,}" title="At least 8 characters" required>
                 </div>
                 <div id="register">
-                    <button id="submitEdit" class="button">Update</button>
+                    <a href="#" class="reset button deny">Reset</a>
+                    <button id="submitEdit" class="button approve">Update</button>
                 </div>
                 <span class="error"></span>
             </form>

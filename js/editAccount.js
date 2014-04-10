@@ -3,6 +3,7 @@ $(document).ready(function(){
     var user = {};
     $.ajax({
         url: "Laravel/public/users/current",
+        async: false,
         success: function(json) {
             json = JSON.parse(json);
             if (json.length === 0) {
@@ -12,6 +13,16 @@ $(document).ready(function(){
             $("#edit_first").val(user['fName']);
             $("#edit_last").val(user['lName']);
         }
+    });
+
+    $(document).on('click', 'form#editAccountForm .reset', function(event) {
+        event.preventDefault();
+
+        $("#edit_first").val(user['fName']);
+        $("#edit_last").val(user['lName']);
+        $("#edit_new_password").val("");
+        $("#edit_password_confirm").val("");
+        $("#edit_current_password").val("");
     });
 
     $(document).on('submit', 'form#editAccountForm', function(event){
@@ -40,14 +51,12 @@ $(document).ready(function(){
                     $("#editAccount .error").html("Error: The current password is incorrect.<br/><br/>");
                 }
                 else {
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: "",
-                    //     data: $(this).serialize(),
-                    //     success: function(output) {
-                            
-                    //     }
-                    // });
+                    var json = JSON.parse(output);
+                    $.ajax({
+                        type: "POST",
+                        url: "Laravel/public/users/edit/" + json[0].user_id,
+                        data: $(this).serialize()
+                    });
 
                     // Clear the error message
                     $("#editAccount .error").html("");
@@ -55,6 +64,8 @@ $(document).ready(function(){
                     $("#edit_new_password").val("");
                     $("#edit_password_confirm").val("");
                     $("#edit_current_password").val("");
+                    // Update the name on the nav bar
+                    $("#settings .welcome").html("Welcome, " + $("#edit_first").val() + "!");
                     // Display a success message
                     alert("Your account information has been updated!");
                 }
