@@ -1,55 +1,64 @@
-// // Check if the user is logged in. If they are not, redirect to index.html
-// $.ajax({
-//     url: "Laravel/public/users/current",
-//     success: function(json) {
-//         json = JSON.parse(json);
-//         if (json.length === 0) {
-//             window.location.href = "index.html";
-//         }
-//     }
-// });
+$(document).ready(function(){
+    // Check if the user is logged in. If they are not, redirect to index.html
+    var user = {};
+    $.ajax({
+        url: "Laravel/public/users/current",
+        success: function(json) {
+            json = JSON.parse(json);
+            if (json.length === 0) {
+                window.location.href = "index.html";
+            }
+            user = json[0];
+            $("#edit_first").val(user['fName']);
+            $("#edit_last").val(user['lName']);
+        }
+    });
 
-// $(document).ready(function(){
-//     $(document).on('submit', 'form', function(event){
-//         event.preventDefault();
+    $(document).on('submit', 'form#editAccountForm', function(event){
+        event.preventDefault();
 
-//         var password = $("#registration_password").val();
-//         var checkPass = $("#registration_confirm").val();
+        var password = $("#edit_new_password").val();
+        // If the new password field is not blank, check that it matches the confirmation
+        if (password !== "") {
+            var checkPass = $("#edit_password_confirm").val();
+            if(password !== checkPass) {
+                $("#editAccount .error").html("Error: Password confirmation did not match.<br/><br/>");
+                return;
+            }
+        }
 
-//         if(password !== checkPass) {
-//             $("#registration .error").html("Error: Password confirmation did not match.<br/><br/>");
-//         }
-//         else {
-//             $.ajax({
-//                 type: "POST",
-//                 url: "Laravel/public/users/register",
-//                 data: $(this).serialize(),
-//                 success: function(output) {
-//                     if (output === "The ID provided has already been registered.") {
-//                         $("#registration .error").html("Error: Someone already registered with that SMU ID.<br/><br/>");
-//                     }
-//                     else if (output === "The email address provided has already been registered.") {
-//                         $("#registration .error").html("Error: Someone already registered with that email.<br/><br/>");
-//                     }
-//                     else if (output === "Please provide a different codeword.") {
-//                         $("#registration .error").html("Error: Someone is already using that codeword.<br/><br/>");
-//                     }
-//                     else {
-//                         $.ajax({
-//                             type: "POST",
-//                             url: "Laravel/public/users/login",
-//                             data: {
-//                                 smu_id: $("#registrationForm input[name='smu_id']").val(),
-//                                 password: $("#registrationForm input[name='password']").val()
-//                             },
-//                             success: function(data) {
-//                                 window.location.replace("index.html");
-//                             }
-//                         });
-//                     }
-//                 }
-//             });
-//             $("#registration .error").html("");
-//         }
-//     });
-// });
+        // Check that the inputted current password matches the logged in user's password
+        $.ajax({
+            type: "POST",
+            url: "Laravel/public/users/login",
+            data: {
+                smu_id: user['smu_id'],
+                password: $("input#edit_current_password").val()
+            },
+            success: function(output) {
+                if (output === "The user was not logged in properly") {
+                    $("#editAccount .error").html("Error: The current password is incorrect.<br/><br/>");
+                }
+                else {
+                    // $.ajax({
+                    //     type: "POST",
+                    //     url: "",
+                    //     data: $(this).serialize(),
+                    //     success: function(output) {
+                            
+                    //     }
+                    // });
+
+                    // Clear the error message
+                    $("#editAccount .error").html("");
+                    // Clear fields in form
+                    $("#edit_new_password").val("");
+                    $("#edit_password_confirm").val("");
+                    $("#edit_current_password").val("");
+                    // Display a success message
+                    alert("Your account information has been updated!");
+                }
+            }
+        });
+    });
+});
