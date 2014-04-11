@@ -249,4 +249,11 @@ Route::post('tutors/addMeeting/{id?}', function($id = '-1')
 
 });
 
+Route::get('courses/showAll', function()
+{
+    $temp = new Course();
+
+    $temp->showCourses();
+    
+});
 

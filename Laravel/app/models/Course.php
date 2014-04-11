@@ -12,7 +12,7 @@ class Course extends Eloquent{
 
     public function getUniqueSubjects()
     {
-        $result = DB::select("select DISTINCT courses.subject from courses");
+        $result = DB::select("select DISTINCT courses.subject from courses order by courses.subject");
         echo json_encode($result);
     }
 
@@ -44,6 +44,12 @@ class Course extends Eloquent{
             $course_id = $course->Course_ID;
             $result = DB::insert("INSERT INTO courses_tutored (course_id,user_id) VALUES (?,?)",array($course_id,$user_id));
         } 
+    }
+
+    public function showCourses()
+    {
+        $result = DB::select("Select * from courses order by subject, course_number");
+        echo json_encode($result);
     }
 
 
