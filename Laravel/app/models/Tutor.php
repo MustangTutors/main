@@ -220,10 +220,30 @@ FROM rating where tutor_id = ?";
         echo json_encode($endJson);
     }
 
-    
+    public function documentMeeting($tutor_id)
+    {
+        $json=json_decode($_POST['post_meeting']);
+        $smu_id=$json->student_id;
+        $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
+        if(isset($result[0])) {
+            $userid=$result[0]->user_id;
+            $courseid=$json->course_id;
+            $date=$json->day;
+            $startTime=$json->start_time;
+            $endTime=$json->end_time;
+            $Summary=$json->summary;
+
+
+            $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
+            $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
+
+            echo json_encode($result);
+
+        }
+        else{
+            echo "not a valid smu id";
+        }
+    }
         
-
-
-
 }
 ?>

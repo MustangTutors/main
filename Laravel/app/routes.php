@@ -235,4 +235,18 @@ Route::get('tutors/history',function()
 });
 
 
+Route::post('tutors/addMeeting/{id?}', function($id = '-1')
+{
+    $temp = new Tutor();
+    if(isset($_SESSION['user_id']) && $id == '-1')
+    {
+        $temp->documentMeeting($_SESSION['user_id']);
+    }
+    else
+    {
+        $temp->documentMeeting($id);
+    }
+
+});
+
 
