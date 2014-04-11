@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class TutorActivity extends Activity {
 	
+    Tutor tutor;
+	
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -36,7 +38,6 @@ public class TutorActivity extends Activity {
 	    String url = "http://mustangtutors.floccul.us/Laravel/public/tutor/" + message;
 	    AjaxRequest request = new AjaxRequest("GET", url);
 	    
-	    Tutor tutor;
 	    JSONObject user;
         try {
             user = new JSONObject(request.send());
@@ -61,7 +62,7 @@ public class TutorActivity extends Activity {
 	    // Create the text view
 	    TextView textView = new TextView(this);
 	    //textView.setTextSize(40);
-	    textView.setText(fullName);
+	    textView.setText(tutor.getName());
 
 	    // Set the text view as the activity layout
 	    setContentView(textView);
