@@ -1,14 +1,25 @@
 package com.example.mustangtutors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class TutorActivity extends Activity {
+	
+	private int id;
+	private String firstName;
+	private String lastName;
+	private String fullName;
+	private int numberRatings;
+	private double rating;
+	private int availability;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +34,34 @@ public class TutorActivity extends Activity {
 	    
 	    // Send an AJAX Request to the server to retrieve information on tutor
 	    String url = "http://mustangtutors.floccul.us/Laravel/public/tutor/" + message;
-	    AjaxRequest ajax = new AjaxRequest("GET", url);
-	    String response = ajax.send();
+	    AjaxRequest request = new AjaxRequest("GET", url);
+	    
+	    Tutor tutor;
+	    JSONObject user;
+        try {
+            user = new JSONObject(request.send());
+            
+            id = Integer.parseInt(message);
+            firstName = user.getString("tutor_fName");
+            lastName = user.getString("tutor_lName");
+            numberRatings = Integer.parseInt(user.getString("numberOfRatings"));
+            rating = Double.parseDouble(user.getString("average_rating"));
+            availability = Integer.parseInt(user.getString("available"));
+
+            fullName = firstName + " " + lastName;
+            
+            tutor = new Tutor(id, fullName, numberRatings, rating, availability);
+            
+            Log.d("BJB", fullName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	    
 	    // Temporary stuff. Just display the tutor user id on the page.
 	    // Create the text view
 	    TextView textView = new TextView(this);
-	    textView.setTextSize(40);
-	    textView.setText(response);
+	    //textView.setTextSize(40);
+	    textView.setText(fullName);
 
 	    // Set the text view as the activity layout
 	    setContentView(textView);
