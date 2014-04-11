@@ -1,16 +1,138 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MeetingActivity" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-</RelativeLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    tools:context=".MeetingActivity"
+	    style="@style/new_meeting_container"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+    >
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"> 
+	    
+	    <LinearLayout
+	        android:id="@+id/meeting_info_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
+	        android:orientation="vertical">
+	     	
+	        <LinearLayout
+	            android:id="@+id/meeting_info_student"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView
+	                android:id="@+id/student_id_label"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.4"
+	                android:text="@string/student_id"
+	                style="@style/meeting_info_label"></TextView>
+	            
+	            <EditText
+	                android:id="@+id/student_id"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.6"
+	                android:inputType="number"></EditText>
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:id="@+id/meeting_info_course"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView
+	                android:id="@+id/course_tutored_label"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.4"
+	                android:text="@string/course_tutored"
+	                style="@style/meeting_info_label"></TextView>
+	            
+	            <Spinner
+	                android:id="@+id/course_tutored"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.6"></Spinner>
+	            
+	        </LinearLayout>
+            
+            <Button
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:onClick="showDatePickerDialog"
+                style="@style/time_button"></Button>
+            
+            <LinearLayout 
+                android:id="@+id/meeting_info_time"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+                
+	            <Button
+	                android:id="@+id/start_time"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.5"
+	                android:text="@string/start_time"
+	                android:onClick="showTimePickerDialog"
+	                style="@style/time_button"></Button>
+	            
+	            <Button
+	                android:id="@+id/end_time"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.5"
+	                android:text="@string/end_time"
+	                android:onClick="showTimePickerDialog"
+	                style="@style/time_button"></Button>
+                
+            </LinearLayout>
+            
+	    </LinearLayout>
+	    
+	    <TextView
+	        android:id="@+id/comments_label"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/comments"></TextView>
+	    
+	    <EditText
+	        android:id="@+id/comments"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="textMultiLine"></EditText>
+	    
+	    <LinearLayout 
+	        android:id="@+id/buttons_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        
+	       <Button
+	            android:id="@+id/reset"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/reset"
+	            android:layout_weight="0.5"
+	            style="@style/button"></Button>
+	        
+	        <Button
+	            android:id="@+id/submit"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:text="@string/submit"
+	            android:layout_weight="0.5"
+	            style="@style/button"></Button>
+	        
+	    </LinearLayout>
+	
+	</LinearLayout>
+</ScrollView>
