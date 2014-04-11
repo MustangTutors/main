@@ -202,7 +202,24 @@ FROM rating where tutor_id = ?";
  
      }
 
-    
+    /**
+    * get a tutor's records based on their user_id
+    *
+    * @echo these users in a JSON
+    */
+    public function getTutorRecords($user_id)
+    {
+        $result= DB::select("SELECT c.subject, c.course_number, c.course_name, c.course_id, u.fName first_name, u.lName last_name, r.date AS day, r.start_time, r.end_time, r.summary FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE r.tutor_user_id = ? ORDER BY r.date DESC, r.start_time DESC",array($user_id));
+
+        $endJson=array();
+        $endJson['user_id']=$user_id;
+        if(!empty($result))
+        {         
+            $endJson['meetings']=$result;
+        }
+        echo json_encode($endJson);
+    }
+
     
         
 
