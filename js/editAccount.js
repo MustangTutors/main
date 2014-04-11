@@ -55,7 +55,11 @@ $(document).ready(function(){
                     $.ajax({
                         type: "POST",
                         url: "Laravel/public/users/edit/" + json[0].user_id,
-                        data: $(this).serialize()
+                        data: {
+                            fName: $("input#edit_first").val(),
+                            lname: $("input#edit_last").val(),
+                            password: $("input#edit_new_password").val()
+                        }
                     });
 
                     // Clear the error message

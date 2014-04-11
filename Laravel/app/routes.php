@@ -217,8 +217,43 @@ Route::get('tutors/toggle/active/{id?}',function($id = '-1')
     }else{
         $temp->toggleActive($id);
     }
+
+});
+
+Route::get('tutors/history',function()
+{
+    //$_SESSION['smu_id'] = 1236;
+    $temp = new Tutor();
+    if(isset($_SESSION['user_id']))
+    {
+        $temp->getTutorRecords($_SESSION['user_id']);
+    }
+    else
+    {
+        $temp->getTutorRecords(Input::get('user_id',0));
+    }
 });
 
 
+Route::post('tutors/addMeeting/{id?}', function($id = '-1')
+{
+    $temp = new Tutor();
+    if(isset($_SESSION['user_id']) && $id == '-1')
+    {
+        $temp->documentMeeting($_SESSION['user_id']);
+    }
+    else
+    {
+        $temp->documentMeeting($id);
+    }
 
+});
+
+Route::get('courses/showAll', function()
+{
+    $temp = new Course();
+
+    $temp->showCourses();
+    
+});
 

@@ -252,7 +252,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     $fname = Input::get('fName');
     $lname = Input::get('lname');
     $password = Input::get('password');
-    DB::update("UPDATE users SET fname = ?, lname = ?, password = ? WHERE user_id = ?",array($fname,$lname,$password,$id));
+    DB::update("UPDATE users SET fname = ?, lname = ?, pswd = ? WHERE user_id = ?",array($fname,$lname,$password,$id));
     $result=DB::select("SELECT * FROM users WHERE user_id = ?",array($id));
     echo json_encode($result);
    }

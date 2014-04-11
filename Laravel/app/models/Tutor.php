@@ -202,11 +202,48 @@ FROM rating where tutor_id = ?";
  
      }
 
-    
-    
+    /**
+    * get a tutor's records based on their user_id
+    *
+    * @echo these users in a JSON
+    */
+    public function getTutorRecords($user_id)
+    {
+        $result= DB::select("SELECT c.subject, c.course_number, c.course_name, c.course_id, u.fName first_name, u.lName last_name, r.date AS day, r.start_time, r.end_time, r.summary FROM records r INNER JOIN users u ON r.user_id = u.user_id INNER JOIN users tu ON r.tutor_user_id = tu.user_id INNER JOIN courses c on r.course_id = c.course_id  WHERE r.tutor_user_id = ? ORDER BY r.date DESC, r.start_time DESC",array($user_id));
+
+        $endJson=array();
+        $endJson['user_id']=$user_id;
+        if(!empty($result))
+        {         
+            $endJson['meetings']=$result;
+        }
+        echo json_encode($endJson);
+    }
+
+    public function documentMeeting($tutor_id)
+    {
+        $json=json_decode($_POST['post_meeting']);
+        $smu_id=$json->student_id;
+        $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
+        if(isset($result[0])) {
+            $userid=$result[0]->user_id;
+            $courseid=$json->course_id;
+            $date=$json->day;
+            $startTime=$json->start_time;
+            $endTime=$json->end_time;
+            $Summary=$json->summary;
+
+
+            $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
+            $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
+
+            echo json_encode($result);
+
+        }
+        else{
+            echo "not a valid smu id";
+        }
+    }
         
-
-
-
 }
 ?>
