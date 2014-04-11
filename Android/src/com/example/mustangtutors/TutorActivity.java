@@ -51,13 +51,13 @@ public class TutorActivity extends Activity {
 
             fullName = firstName + " " + lastName;
             
-            tutor = new Tutor(id, fullName, numberRatings, rating, availability);
-            
             Log.d("BJB", fullName);
         } catch (Exception e) {
             e.printStackTrace();
         }
 	    
+        tutor = new Tutor(id, fullName, numberRatings, rating, availability);
+        
 	    // Temporary stuff. Just display the tutor user id on the page.
 	    // Create the text view
 	    TextView textView = new TextView(this);
