@@ -1597,3 +1597,11 @@ article#potential_hours li span.potential_day{
 }
 
 /* End styling for Apply To Be A Tutor Page */
+
+/* Styling for Admin Edit of Tutor Profile*/
+
+h2.subheading a, article.schedule button{
+    float: right;
+}
+
+/* End stylying for Admin Edit of Tutor Profile*/

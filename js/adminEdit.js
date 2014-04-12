@@ -25,6 +25,8 @@ $(document).ready(function() {
 	var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	var available = ["Unavailable", "Busy", "Available"];
 
+	$("article.schedule").css("height", "225px");
+
     var tutorInfo;
 	$.ajax({
         type: "GET",

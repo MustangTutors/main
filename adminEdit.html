@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/lib/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/include.js"></script>
-    <script type="text/javascript" src="js/tutor.js"></script>
+    <script type="text/javascript" src="js/adminEdit.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
 
 </head>
@@ -54,15 +54,19 @@
 
             <section class="tutor_info">
                 <article id="courses" class="schedule summary">
-                    <h2 class="subheading">Courses Taught</h2>
+                    <h2 class="subheading">Courses Taught<a href="#"><img src="img/pencil.png" alt="edit icon"></a></h2>
                     <ul></ul>
+                    <button type="button" name="cancelCourseChanges">Cancel</button>
+                    <button type="button" name="saveCourseChanges">Save</button>
                 </article>
             </section>
 
             <section class="tutor_info">
                 <article id="hours" class="schedule summary">
-                    <h2 class="subheading">Regular Hours</h2>
+                    <h2 class="subheading">Regular Hours<a href="#"><img src="img/pencil.png" alt="edit icon"></a></h2>
                     <ul></ul>
+                    <button type="button" name="cancelHourChanges">Cancel</button>                    
+                    <button type="button" name="saveHourChanges">Save</button>
                 </article>
             </section>
 
