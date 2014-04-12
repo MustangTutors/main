@@ -1,8 +1,10 @@
-{
-	"student_id":12341234,
-	"course_id":1,
-	"day":"2014-12-12",
-	"start_time":"19:00:00",
-	"end_time":"20:00:00",
-	"summary":"The student did not understand any of the material. She's really dumb."
+{"post_meeting":
+	{
+		"student_id":12341234,
+		"course_id":1,
+		"day":"2014-12-12",
+		"start_time":"19:00:00",
+		"end_time":"20:00:00",
+		"summary":"The student did not understand any of the material. She's really dumb."
+	}
 }

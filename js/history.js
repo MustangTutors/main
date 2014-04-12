@@ -116,8 +116,10 @@ $(document).ready(function(){
         event.preventDefault();
 
         // Create JSON for new meeting
-        var new_meeting = createNewMeetingObject();
+        var new_meeting = new Object();
+        new_meeting.post_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
+        console.log(newMeetingJSON);
 
         // Clear and close new meeting window
         resetNewMeetingForm();
@@ -128,12 +130,14 @@ $(document).ready(function(){
         // Send JSON to database
         $.ajax({
             type: "POST",
-            url: "",
+            url: "Laravel/public/tutors/addMeeting",
             data: newMeetingJSON,
             success: function(json) {
-                new_meeting.first_name = json.fName;
-                new_meeting.last_name = json.lName;
-                addNewMeeting(new_meeting);
+                json = JSON.parse();
+
+                new_meeting.post_meeting.first_name = json.fName;
+                new_meeting.post_meeting.last_name = json.lname;
+                addNewMeeting(new_meeting.post_meeting);
             }
         });
     });
@@ -177,18 +181,22 @@ $(document).ready(function(){
 
     // Parse JSON for tutor meetings
     $.ajax({
-        url: "json/tutor_history.json",
+        url: "Laravel/public/tutors/history",
         success: function(json) {
-            //json = JSON.parse(json);
+            json = JSON.parse(json);
 
-            if(json.length !== 0) {
+            if(json.meetings === undefined){
+                $('#tutor_history span.error.none').html("You have not yet tutored any students yet.");
+            }
+            else {
+                $('#tutor_history span.error.none').html("");
                 json = json.meetings;
                 for(var i = 0; i < json.length; i++) {
                     // Assign json values
                     var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
                     var contributor = "Student tutored: " + json[i].first_name + " " + json[i].last_name;
                     var date = json[i].day;
-                    var time = json[i].start_time + " to " + json[i].end_time;
+                    var time = convertTime(json[i].start_time) + " to " + convertTime(json[i].end_time);
                     var summary = json[i].summary;
 
                     // Create and append new node with json information
@@ -392,5 +400,14 @@ function addNewMeeting(new_meeting) {
     var newArticle = $('<article class="meeting"><div class="course_contributor"><h3 class="subheading">' + title + '</h3>' +
                         '<span class="contributor">' + contributor + '</span></div><div class="date_time"><span class="date">' + date + '</span>' +
                         '<br><span class="time">' + time + '</span></div><span class="summary">' + summary + '</span></article>');
-    newArticle.insertBefore($('#tutor_history article[class="meeting"]').eq(0));
+
+    var most_recent = $('#tutor_history article[class="meeting"]').eq(0);
+
+    if(most_recent.length === 0){
+        $('#tutor_history span.error.none').html("");
+        $('#tutor_history').append(newArticle);
+    }
+    else {
+        newArticle.insertBefore(most_recent);
+    }
 }
