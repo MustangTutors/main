@@ -8,9 +8,60 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TutorActivity" >
 
-    <TextView
+	<ImageView
+	    style="@style/TutorPicture"
+	    android:layout_width="70dp"
+	    android:layout_height="90dp"
+	    android:id="@+id/tutor_picture"/>
+	<TextView
+        style="@style/TutorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_toRightOf="@id/tutor_picture"
+        android:id="@+id/tutor_name" />
+	<TextView
+        style="@style/TutorAvailability"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tutor_availability" />
+    <RatingBar 
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/tutor_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tutor_picture"
+        android:layout_below="@id/tutor_name"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="20dp"
+        android:isIndicator="true" />
+    
+    <TextView
+        android:id="@+id/course_heading"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tutor_picture"
+        android:text="@string/course_heading"/>
+    <LinearLayout
+        android:id="@+id/tutor_courses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/course_heading"
+        android:orientation="vertical"/>
+    
+    <TextView
+        android:id="@+id/hour_heading"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tutor_courses"
+        android:text="@string/hour_heading"/>
+    <LinearLayout
+        android:id="@+id/tutor_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hour_heading"
+        android:orientation="vertical"/>
 
 </RelativeLayout>

@@ -163,13 +163,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       }
 
     /**
-    * Retrieve the application status of a user
+    * Retrieve the most recent application status of a user
     * @param $user_id INT ID of the user whose application status is to be checked
     * @return -1 if no application is found for the user, the application's pending field otherwise
     */
     public function checkApplicationStatus($user_id)
     {
-        $query="SELECT pending FROM applications WHERE user_id = ?";
+        $query="SELECT application_id, pending FROM applications WHERE user_id = ? ORDER BY application_id DESC";
         $result=DB::select($query,array($user_id));
         if(empty($result)) return -1;
         else return $result[0]->pending;
@@ -192,7 +192,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $user_id=$json->User_ID; 
         $appstatus= self::checkApplicationStatus($user_id);
 
-        if($appstatus!=-1)
+        if($appstatus!=-1 && $appstatus!=0)
         {
             echo "You have already submitted an application.";
         } 
@@ -251,8 +251,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     if($id == -1)$id = Session::get('user_id', -1);
     $fname = Input::get('fName');
     $lname = Input::get('lname');
-    $password = Input::get('password');
-    DB::update("UPDATE users SET fname = ?, lname = ?, pswd = ? WHERE user_id = ?",array($fname,$lname,$password,$id));
+    $password = Input::get('password',"");
+    $query = "UPDATE users SET fname = ?, lname = ?";
+    $params=array($fname,$lname);
+    if(!empty($password))
+    {
+        $query.=", pswd = ?";
+        array_push($params,$password);
+    }
+    $query.=" WHERE user_id = ?";
+    array_push($params,$id);
+    DB::update($query,$params);
     $result=DB::select("SELECT * FROM users WHERE user_id = ?",array($id));
     echo json_encode($result);
    }

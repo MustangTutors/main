@@ -1,14 +1,19 @@
 package com.example.mustangtutors;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class TutorActivity extends Activity {
@@ -20,8 +25,9 @@ public class TutorActivity extends Activity {
 	private String lastName;
 	private String fullName;
 	private int numberRatings;
-	private double rating;
+	private float rating;
 	private int availability;
+	private ArrayList<Course> courses;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,26 +52,62 @@ public class TutorActivity extends Activity {
             firstName = user.getString("tutor_fName");
             lastName = user.getString("tutor_lName");
             numberRatings = Integer.parseInt(user.getString("numberOfRatings"));
-            rating = Double.parseDouble(user.getString("average_rating"));
+            rating = Float.parseFloat(user.getString("average_rating"));
             availability = Integer.parseInt(user.getString("available"));
-
+            
             fullName = firstName + " " + lastName;
             
-            Log.d("BJB", fullName);
+            JSONArray jsonCourses = user.getJSONArray("courses");
+            
+            for(int i = 0; i < jsonCourses.length(); i++) {
+            	JSONObject newCourse = (JSONObject)jsonCourses.get(i);
+            	String courseSubject = newCourse.getString("subject");
+            	String courseNumber = newCourse.getString("course_number");
+            	String courseName = newCourse.getString("course_name");
+            	courses.add(new Course(courseSubject, courseNumber, courseName));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 	    
         tutor = new Tutor(id, fullName, numberRatings, rating, availability);
         
-	    // Temporary stuff. Just display the tutor user id on the page.
-	    // Create the text view
-	    TextView textView = new TextView(this);
-	    //textView.setTextSize(40);
-	    textView.setText(tutor.getName());
-
-	    // Set the text view as the activity layout
-	    setContentView(textView);
+        ImageView tutorPicture = (ImageView)findViewById(R.id.tutor_picture);
+        TextView tutorName = (TextView)findViewById(R.id.tutor_name);
+        RatingBar tutorRating = (RatingBar)findViewById(R.id.tutor_rating);
+        TextView tutorAvailability = (TextView)findViewById(R.id.tutor_availability);
+             
+        tutorName.setText(fullName);
+        
+        new DownloadImageTask(tutorPicture)
+    	.execute("http://mustangtutors.floccul.us/img/tutors/" + id + ".jpg");
+        
+        tutorRating.setRating(rating);
+        
+        switch (tutor.getAvailability()) {
+	    	case 2:  tutorAvailability.setText("Available");
+	    			 tutorAvailability.setBackgroundResource(R.drawable.border_available);
+	    			 break;
+	    	case 1:  tutorAvailability.setText("Busy");
+			 		 tutorAvailability.setBackgroundResource(R.drawable.border_busy);
+					 break;
+	    	default: tutorAvailability.setText("Unavailable");
+	    			 tutorAvailability.setBackgroundResource(R.drawable.border_unavailable);
+	    			 break;
+        }
+        
+        LinearLayout courselayout = (LinearLayout)findViewById(R.id.tutor_courses);
+        LinearLayout hourlayout = (LinearLayout)findViewById(R.id.tutor_hours);
+        
+        for(int i = 0; i < courses.size(); i++) {
+        	TextView courseview = new TextView(this);
+        	courseview.setLayoutParams(new LinearLayout.LayoutParams
+        			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        	courseview.setText(courses.get(i).toString());
+        	courselayout.addView(courseview);
+        }
+        
 	}
 
 	/**
