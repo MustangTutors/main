@@ -86,7 +86,7 @@ public final class R {
         public static final int course_tutored=0x7f0a001b;
         public static final int course_tutored_label=0x7f0a001a;
         public static final int date=0x7f0a001c;
-        public static final int drawer_item_text=0x7f0a0025;
+        public static final int drawer_item_text=0x7f0a0029;
         public static final int drawer_layout=0x7f0a0008;
         public static final int end_time=0x7f0a001f;
         public static final int incorrect_login=0x7f0a0006;
@@ -100,21 +100,25 @@ public final class R {
         public static final int meeting_info_course=0x7f0a0019;
         public static final int meeting_info_student=0x7f0a0016;
         public static final int meeting_info_time=0x7f0a001d;
-        public static final int mySwitch=0x7f0a002a;
+        public static final int mySwitch=0x7f0a002e;
         public static final int password=0x7f0a0004;
         public static final int reset=0x7f0a0023;
         public static final int search_status=0x7f0a0010;
         public static final int search_status_message=0x7f0a0011;
-        public static final int search_tutor_availability=0x7f0a0027;
-        public static final int search_tutor_name=0x7f0a0028;
-        public static final int search_tutor_picture=0x7f0a0026;
-        public static final int search_tutor_rating=0x7f0a0029;
+        public static final int search_tutor_availability=0x7f0a002b;
+        public static final int search_tutor_name=0x7f0a002c;
+        public static final int search_tutor_picture=0x7f0a002a;
+        public static final int search_tutor_rating=0x7f0a002d;
         public static final int sign_in_button=0x7f0a0007;
         public static final int smu_id=0x7f0a0003;
         public static final int start_time=0x7f0a001e;
         public static final int student_id=0x7f0a0018;
         public static final int student_id_label=0x7f0a0017;
         public static final int submit=0x7f0a0024;
+        public static final int tutor_availability=0x7f0a0027;
+        public static final int tutor_name=0x7f0a0026;
+        public static final int tutor_picture=0x7f0a0025;
+        public static final int tutor_rating=0x7f0a0028;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
