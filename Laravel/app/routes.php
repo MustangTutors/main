@@ -27,6 +27,7 @@ tutor/search            ==>this lets you search on any or all criteria and retur
 tutor/rate              ==>this adds or updates user's rating for a tutor
 users/register          ==>this registers a new user
 users/apply             ==>this adds application and (possibly) temporary schedule and course tutored list to db 
+users/apply/status/{id} ==>this echos the most recent application status of a user
 courses/subjects        ==>this returns a json of the course subjects
 users/edit              ==>this updates the first name, last name, and password
 */
@@ -127,6 +128,15 @@ Route::post('users/apply',function()
     }    
 
 });
+
+Route::get('users/apply/status/{id}',function($id = -1)
+{
+    if($id==-1 && isset($_SESSION['user_id'])) $id = $_SESSION['user_id'];
+    $temp = new User();
+    $status = $temp->checkApplicationStatus($id);
+    echo $status;
+})
+->where('id','[0-9]+');
 
 Route::post('users/edit/{id}',function($id = -1)
 {
