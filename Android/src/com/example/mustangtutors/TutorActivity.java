@@ -1,5 +1,8 @@
 package com.example.mustangtutors;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -7,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -22,6 +27,7 @@ public class TutorActivity extends Activity {
 	private int numberRatings;
 	private float rating;
 	private int availability;
+	private ArrayList<Course> courses;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +54,18 @@ public class TutorActivity extends Activity {
             numberRatings = Integer.parseInt(user.getString("numberOfRatings"));
             rating = Float.parseFloat(user.getString("average_rating"));
             availability = Integer.parseInt(user.getString("available"));
-
+            
             fullName = firstName + " " + lastName;
+            
+            JSONArray jsonCourses = user.getJSONArray("courses");
+            
+            for(int i = 0; i < jsonCourses.length(); i++) {
+            	JSONObject newCourse = (JSONObject)jsonCourses.get(i);
+            	String courseSubject = newCourse.getString("subject");
+            	String courseNumber = newCourse.getString("course_number");
+            	String courseName = newCourse.getString("course_name");
+            	courses.add(new Course(courseSubject, courseNumber, courseName));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,6 +95,17 @@ public class TutorActivity extends Activity {
 	    	default: tutorAvailability.setText("Unavailable");
 	    			 tutorAvailability.setBackgroundResource(R.drawable.border_unavailable);
 	    			 break;
+        }
+        
+        LinearLayout courselayout = (LinearLayout)findViewById(R.id.tutor_courses);
+        LinearLayout hourlayout = (LinearLayout)findViewById(R.id.tutor_hours);
+        
+        for(int i = 0; i < courses.size(); i++) {
+        	TextView courseview = new TextView(this);
+        	courseview.setLayoutParams(new LinearLayout.LayoutParams
+        			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        	courseview.setText(courses.get(i).toString());
+        	courselayout.addView(courseview);
         }
         
 	}

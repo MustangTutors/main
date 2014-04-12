@@ -35,5 +35,33 @@
         android:layout_marginTop="2dp"
         android:layout_marginLeft="20dp"
         android:isIndicator="true" />
+    
+    <TextView
+        android:id="@+id/course_heading"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tutor_picture"
+        android:text="@string/course_heading"/>
+    <LinearLayout
+        android:id="@+id/tutor_courses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/course_heading"
+        android:orientation="vertical"/>
+    
+    <TextView
+        android:id="@+id/hour_heading"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tutor_courses"
+        android:text="@string/hour_heading"/>
+    <LinearLayout
+        android:id="@+id/tutor_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hour_heading"
+        android:orientation="vertical"/>
 
 </RelativeLayout>
