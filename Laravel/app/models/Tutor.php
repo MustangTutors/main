@@ -223,7 +223,6 @@ FROM rating where tutor_id = ?";
     public function documentMeeting($tutor_id)
     {
         $json=json_decode($_POST['post_meeting']);
-        echo $json->student_id;
         $smu_id=$json->student_id;
         $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
         if(isset($result[0])) {

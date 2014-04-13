@@ -117,9 +117,8 @@ $(document).ready(function(){
 
         // Create JSON for new meeting
         var new_meeting = new Object();
-        new_meeting.post_meeting = createNewMeetingObject();
+        new_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
-        console.log(newMeetingJSON);
 
         // Clear and close new meeting window
         resetNewMeetingForm();
@@ -131,13 +130,14 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "Laravel/public/tutors/addMeeting",
-            data: newMeetingJSON,
+            data: {post_meeting : newMeetingJSON},
             success: function(json) {
-                json = JSON.parse();
+                console.log(json);
+                json = JSON.parse(json);
 
-                new_meeting.post_meeting.first_name = json.fName;
-                new_meeting.post_meeting.last_name = json.lname;
-                addNewMeeting(new_meeting.post_meeting);
+                new_meeting.first_name = json.fName;
+                new_meeting.last_name = json.lname;
+                addNewMeeting(new_meeting);
             }
         });
     });
