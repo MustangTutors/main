@@ -313,9 +313,9 @@ function showView() {
 function fillNewMeetingCourses() {
     // Parse JSON for user info
     $.ajax({
-        url: "json/all_courses.json",
+        url: "Laravel/public/courses/showAll",
         success: function(json) {
-            //json = JSON.parse(json);
+            json = JSON.parse(json);
 
             for(var i = 0; i < json.length; i++){
                 var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
