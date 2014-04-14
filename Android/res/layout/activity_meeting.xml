@@ -130,7 +130,7 @@
 	            android:layout_height="wrap_content"
 	            android:text="@string/reset"
 	            android:layout_weight="0.5"
-	            style="@style/button"></Button>
+	            style="@style/reset_button"></Button>
 	        
 	        <Button
 	            android:id="@+id/submit"
@@ -138,7 +138,7 @@
 	            android:layout_height="wrap_content"
 	            android:text="@string/submit"
 	            android:layout_weight="0.5"
-	            style="@style/button"></Button>
+	            style="@style/send_button"></Button>
 	        
 	    </LinearLayout>
 	
