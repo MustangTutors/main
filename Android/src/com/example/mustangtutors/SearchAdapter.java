@@ -55,6 +55,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 		    stars.setMax(5);
 		    stars.setStepSize(0.5f);
 		    stars.setRating(rating);
+		    stars.setVisibility(View.VISIBLE);
 	    }
 	    
 	    // Set availability

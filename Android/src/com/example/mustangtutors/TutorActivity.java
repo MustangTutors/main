@@ -28,6 +28,7 @@ public class TutorActivity extends Activity {
 	private float rating;
 	private int availability;
 	private ArrayList<Course> courses;
+	private ArrayList<Hours> hours;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,17 @@ public class TutorActivity extends Activity {
             	String courseNumber = newCourse.getString("course_number");
             	String courseName = newCourse.getString("course_name");
             	courses.add(new Course(courseSubject, courseNumber, courseName));
+            }
+            
+            JSONArray jsonHours = user.getJSONArray("hours");
+            hours = new ArrayList<Hours>();
+            
+            for(int i = 0; i < jsonHours.length(); i++) {
+            	JSONObject newHours = (JSONObject)jsonHours.get(i);
+            	String day = newHours.getString("day");
+            	String startTime = newHours.getString("start_time");
+            	String endTime = newHours.getString("end_time");
+            	hours.add(new Hours(day, startTime, endTime));
             }
 
         } catch (Exception e) {
