@@ -65,11 +65,13 @@ public final class R {
         public static final int ic_drawer=0x7f020011;
         public static final int ic_launcher=0x7f020012;
         public static final int list_activated_background=0x7f020013;
-        public static final int star=0x7f020014;
-        public static final int sub_box_background=0x7f020015;
-        public static final int sub_box_title_background=0x7f020016;
-        public static final int tutor=0x7f020017;
-        public static final int up=0x7f020018;
+        public static final int reset_button_background=0x7f020014;
+        public static final int send_button_background=0x7f020015;
+        public static final int star=0x7f020016;
+        public static final int sub_box_background=0x7f020017;
+        public static final int sub_box_title_background=0x7f020018;
+        public static final int tutor=0x7f020019;
+        public static final int up=0x7f02001a;
     }
     public static final class id {
         public static final int SearchBar=0x7f0a000a;
@@ -231,11 +233,12 @@ public final class R {
         public static final int TutorName=0x7f08000f;
         public static final int TutorNumberRatings=0x7f080011;
         public static final int TutorPicture=0x7f08000e;
-        public static final int betweener=0x7f08001a;
-        public static final int button=0x7f080017;
+        public static final int betweener=0x7f08001b;
         public static final int meeting_info_label=0x7f080015;
-        public static final int new_meeting_container=0x7f080019;
+        public static final int new_meeting_container=0x7f08001a;
         public static final int new_meeting_title=0x7f080016;
-        public static final int time_button=0x7f080018;
+        public static final int reset_button=0x7f080018;
+        public static final int send_button=0x7f080017;
+        public static final int time_button=0x7f080019;
     }
 }
