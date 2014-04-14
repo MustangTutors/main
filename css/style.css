@@ -1596,6 +1596,14 @@ article#potential_hours li span.potential_day{
     width: 115px;
 }
 
+img[src="img/add.png"] {
+    max-width: 30px;
+    max-height: 30px;
+    margin-left: 295px;
+    margin-top: -40px;
+    position: absolute;
+}
+
 /* End styling for Apply To Be A Tutor Page */
 
 /* Styling for Admin Edit of Tutor Profile*/
