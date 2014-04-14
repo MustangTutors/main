@@ -58,6 +58,7 @@ public class TutorActivity extends Activity {
             fullName = firstName + " " + lastName;
             
             JSONArray jsonCourses = user.getJSONArray("courses");
+            courses = new ArrayList<Course>();
             
             for(int i = 0; i < jsonCourses.length(); i++) {
             	JSONObject newCourse = (JSONObject)jsonCourses.get(i);

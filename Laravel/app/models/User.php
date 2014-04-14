@@ -214,6 +214,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 $query="INSERT INTO courses_tutored(course_id,user_id) VALUES (?,?)";
                 DB::insert($query,array($courses->Course_ID,$user_id));
             }
+
+            if(Input::hasFile('photo'))
+            {
+                $extension = Input::file('photo')->getClientOriginalExtension();
+                $filename=$user_id.$extension;
+                Input::file('photo')->move('../../../img/tutors',$filename);
+            }
     
             //Check success of inserts
             $query="SELECT a.user_id, c.course_name,s.day,s.start_time,s.end_time FROM applications a INNER JOIN courses_tutored ct on a.user_id =  ct.user_id INNER JOIN schedule s ON a.user_id = s.user_id INNER JOIN courses c ON ct.course_id = c.course_id WHERE a.user_id = ? GROUP BY   c.course_name, s.day ORDER BY s.day, s.start_time, c.course_name";

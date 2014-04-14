@@ -1565,8 +1565,9 @@ button[name="addProfilePicture"] {
     margin-left: 17px;
 }
 
-button[name="addTranscript"] {
-    display: block;
+input[name="transcriptUpload"] {
+    position: absolute;
+    margin-left: -70px;
 }
 
 div#applicantInformation {
