@@ -46,13 +46,16 @@ WHERE applications.pending = 1",array());
     {
         $result = DB::update("UPDATE users set users.tutor = 1 WHERE user_id = ?",array($tutor_id));
         $result = DB::update("UPDATE applications set applications.pending = 0 where user_id = ?",array($tutor_id));
-                
+        $result = DB::update("UPDATE users set users.active = 1 WHERE user_id = ?",array($tutor_id));
     }
     
     //deletes an applicants application from the table
     public function denyTutor($tutor_id)
     {
-        $result = DB::delete("DELETE from applications where user_id = ?",array($tutor_id));
+        $result = DB::delete("DELETE from courses_tutored where user_id = ?",array($tutor_id));
+        $result = DB::delete("DELETE from schedule where user_id = ?",array($tutor_id));
+        $result = DB::update("UPDATE applications set applications.pending = 0 WHERE user_id = ?",array($tutor_id));
+
     }
 
 
