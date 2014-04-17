@@ -1,5 +1,7 @@
 package com.example.mustangtutors;
 
+import android.util.Log;
+
 public class Hours {
 	String mDay;
 	String mStartTime;
@@ -12,7 +14,7 @@ public class Hours {
 	}
 	
 	public String toString() {
-		return mDay + "\t" + mStartTime + " to " + mEndTime;
+		return mDay + ": \t" + mStartTime + " to " + mEndTime;
 	}
 	
 	private String convertDay(String day) {
@@ -34,7 +36,6 @@ public class Hours {
 	    int hours = ((hours24 + 11) % 12) + 1;
 	    String amPm = hours24 > 11 ? "PM" : "AM";
 	    String minutes = militaryTime.substring(3, 5);
-
-	    return hours + ':' + minutes + ' ' + amPm;
+	    return hours + ":" + minutes + " " + amPm;
 	}
 }
