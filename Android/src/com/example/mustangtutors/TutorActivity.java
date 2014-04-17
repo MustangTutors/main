@@ -118,7 +118,17 @@ public class TutorActivity extends Activity {
         	courseview.setLayoutParams(new LinearLayout.LayoutParams
         			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         	courseview.setText(courses.get(i).toString());
+        	courseview.setPadding(100, 0, 0, 0);
         	courselayout.addView(courseview);
+        }
+        
+        for(int i = 0; i < hours.size(); i++) {
+        	TextView hourview = new TextView(this);
+        	hourview.setLayoutParams(new LinearLayout.LayoutParams
+        			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        	hourview.setText(hours.get(i).toString());
+        	hourview.setPadding(100, 0, 0, 0);
+        	hourlayout.addView(hourview);
         }
         
 	}
