@@ -5,32 +5,48 @@ import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.mustangtutors.MainActivity.SearchTask;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MeetingActivity extends FragmentActivity {
 	
 	private static Button mDate;
 	private static Button mStartTime;
 	private static Button mEndTime;
+	private EditText mSmuId;
+	private EditText mSummary;
+	
+	private static String mDay;
+	private static String mMonth;
+	private static String mYear;
+	private static String sHour;
+	private static String sMinute;
+	private static String eHour;
+	private static String eMinute;
+	
+	private Button mSend;
+	private Button mReset;
 	
 	private Activity mContext;
 	
@@ -43,8 +59,6 @@ public class MeetingActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
 		
-		Log.d("scz", "here2");
-		
 		mContext = this;
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -52,6 +66,41 @@ public class MeetingActivity extends FragmentActivity {
 		mStartTime = (Button) findViewById(R.id.start_time);
 		mEndTime = (Button) findViewById(R.id.end_time);
 		mCourses = (Spinner) findViewById(R.id.course_tutored);
+		
+		mSmuId = (EditText) findViewById(R.id.student_id);
+		mSummary = (EditText) findViewById(R.id.comments);
+		
+		mSend = (Button) findViewById(R.id.submit);
+		mReset = (Button) findViewById(R.id.reset);
+		
+		// Set on click listener for submitting new meeting form
+		mSend.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Send info for new meeting
+				if(valid()){
+					resetMeetingForm();
+					new AddTask().execute((Void) null);
+				}
+				else {
+					CharSequence text = "Incomplete information.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(mContext, text, duration);
+					toast.show();
+				}
+			}
+		});
+		
+		mReset.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				resetMeetingForm();
+			}
+		});
+		
+		new PopulateCoursesTask().execute((Void) null);
 	}
 
 	/**
@@ -61,6 +110,31 @@ public class MeetingActivity extends FragmentActivity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	private void resetMeetingForm() {
+		mSmuId.setText("");
+		mSummary.setText("");
+		mCourses.setSelection(0);
+		mDate.setText("Date");
+		mStartTime.setText("Start Time");
+		mEndTime.setText("End Time");
+	}
+	
+	private boolean valid() {
+		String id = mSmuId.getText().toString();
+		String sum = mSummary.getText().toString();
+		String date = mDate.getText().toString();
+		String stime = mStartTime.getText().toString();
+		String etime = mEndTime.getText().toString();
+		int cour = mCourses.getSelectedItemPosition();
+		
+		if(!id.equals("") && !sum.equals("") && !date.equals("Date") 
+				&& !stime.equals("Start Time") && !etime.equals("End Time") && cour != 0){
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -106,6 +180,13 @@ public class MeetingActivity extends FragmentActivity {
 			// Do something with the time chosen by the user
 			String amPM = "";
 			
+			if(hourOfDay < 10){
+				sHour = "0" + hourOfDay;
+			}
+			else {
+				sHour = "" + hourOfDay;
+			}
+			
 			if(hourOfDay == 0){
 				hourOfDay = 12;
 			}
@@ -122,6 +203,7 @@ public class MeetingActivity extends FragmentActivity {
 			if(minute < 10){
 				min = "0" + minute;
 			}
+			sMinute = min;
 			
 			String time = hourOfDay + ":" + min + " " + amPM;
 			
@@ -153,6 +235,13 @@ public class MeetingActivity extends FragmentActivity {
 		// Do something with the time chosen by the user
 		String amPM = "";
 		
+		if(hourOfDay < 10){
+			eHour = "0" + hourOfDay;
+		}
+		else {
+			eHour = "" + hourOfDay;
+		}
+		
 		if(hourOfDay > 12){
 			hourOfDay = hourOfDay - 12;
 			amPM = "PM";
@@ -165,6 +254,8 @@ public class MeetingActivity extends FragmentActivity {
 		if(minute < 10){
 			min = "0" + minute;
 		}
+		eMinute = min;
+		
 		
 		String time = hourOfDay + ":" + min + " " + amPM;
 		
@@ -196,7 +287,24 @@ public class MeetingActivity extends FragmentActivity {
 		
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user
+			if(day < 10){
+				mDay = "0" + day;
+			}
+			else {
+				mDay = "" + day;
+			}
+			
 			month = month + 1;
+			
+			if(month < 10){
+				mMonth = "0" + month;
+			}
+			else {
+				mMonth = "" + month;
+			}
+			
+			mYear = "" + year;
+			
 			dateString = month + "/" + day + "/" + year;
 			mDate.setText(dateString);
 		}
@@ -213,11 +321,9 @@ public class MeetingActivity extends FragmentActivity {
     	@Override
 		protected Boolean doInBackground(Void... params) {
             AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/showAll");
-            Log.d("scz", "here");
         	JSONArray json;
             try {
                 json = new JSONArray(request.send());
-                Log.d("scz", json.toString());
                 courses = new String[json.length()+1];
                 mCourseId = new String[json.length()+1];
                 courses[0] = "Select a Course";
@@ -235,7 +341,6 @@ public class MeetingActivity extends FragmentActivity {
     	
     	@Override
     	protected void onPostExecute(Boolean result) {
-    		Log.d("scz", "here1");
     		if(result){
     			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, courses);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -244,22 +349,45 @@ public class MeetingActivity extends FragmentActivity {
     	}
     }
     
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class AddTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			AjaxRequest request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting");
-	        request.addParam("smu_id", "12341234");
-			request.addParam("course_id", "1");
-			request.addParam("day", "2014-12-12");
-			request.addParam("start_time", "19:00:00");
-			request.addParam("end_time", "20:00:00");
-			request.addParam("summary", "Words words words.");
+			
+			String id = mSmuId.getText().toString();
+			String sum = mSummary.getText().toString();
+			String date = mYear + "-" + mDay + "-" + mMonth;
+			String stime = sHour + ":" + sMinute + ":00";
+			String etime = eHour + ":" + eMinute + ":00";
+			int cour = mCourses.getSelectedItemPosition();
+			
+			JSONObject json = new JSONObject();
+			try {
+				json.put("student_id", id);
+				json.put("course_id", mCourseId[cour]);
+				json.put("day", date);
+				json.put("start_time", stime);
+				json.put("end_time", etime);
+				json.put("summary", sum);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+	        request.addParam("post_meeting", json.toString());
             try {
 	            request.send();
             } catch (Exception e) {
             }
             
             return true;
+		}
+		
+		protected void onPostExecute(Boolean result){
+			CharSequence text = "Meeting Added";
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(mContext, text, duration);
+			toast.show();
 		}
 
 		@Override
