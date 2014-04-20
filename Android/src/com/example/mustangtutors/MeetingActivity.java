@@ -2,10 +2,16 @@ package com.example.mustangtutors;
 
 import java.util.Calendar;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -14,8 +20,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 public class MeetingActivity extends FragmentActivity {
@@ -23,16 +31,27 @@ public class MeetingActivity extends FragmentActivity {
 	private static Button mDate;
 	private static Button mStartTime;
 	private static Button mEndTime;
+	
+	private Activity mContext;
+	
+	private Spinner mCourses;
+	private String[] mCourseId;
+	private String[] courses;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
+		
+		Log.d("scz", "here2");
+		
+		mContext = this;
 		// Show the Up button in the action bar.
 		setupActionBar();
 		mDate = (Button) findViewById(R.id.date);
 		mStartTime = (Button) findViewById(R.id.start_time);
 		mEndTime = (Button) findViewById(R.id.end_time);
+		mCourses = (Spinner) findViewById(R.id.course_tutored);
 	}
 
 	/**
@@ -186,5 +205,67 @@ public class MeetingActivity extends FragmentActivity {
 	public void showDatePickerDialog(View v) {
 	    DatePickerFragment newFragment = new DatePickerFragment();
 	    newFragment.show(getFragmentManager(), "datePicker");
+	}
+	
+	// AsyncTask for populating courses
+    public class PopulateCoursesTask extends AsyncTask<Void, Void, Boolean> {
+    	
+    	@Override
+		protected Boolean doInBackground(Void... params) {
+            AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/courses/showAll");
+            Log.d("scz", "here");
+        	JSONArray json;
+            try {
+                json = new JSONArray(request.send());
+                Log.d("scz", json.toString());
+                courses = new String[json.length()+1];
+                mCourseId = new String[json.length()+1];
+                courses[0] = "Select a Course";
+                mCourseId[0] = "";
+                for (int i = 0; i < json.length(); i++) {
+                	JSONObject course = (JSONObject) json.get(i);
+                	courses[i+1] = course.getString("subject") + " " + course.getString("course_number") + ": " + course.getString("course_name");
+                	mCourseId[i+1] = "" + course.getString("course_id");
+                }
+            } catch (Exception e) {
+            	return false;
+            }
+            return true;
+		}
+    	
+    	@Override
+    	protected void onPostExecute(Boolean result) {
+    		Log.d("scz", "here1");
+    		if(result){
+    			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, courses);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mCourses.setAdapter(adapter);
+    		}
+    	}
+    }
+    
+    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			AjaxRequest request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting");
+	        request.addParam("smu_id", "12341234");
+			request.addParam("course_id", "1");
+			request.addParam("day", "2014-12-12");
+			request.addParam("start_time", "19:00:00");
+			request.addParam("end_time", "20:00:00");
+			request.addParam("summary", "Words words words.");
+            try {
+	            request.send();
+            } catch (Exception e) {
+            }
+            
+            return true;
+		}
+
+		@Override
+		protected void onCancelled() {
+//			mAuthTask = null;
+//			showProgress(false);
+		}
 	}
 }

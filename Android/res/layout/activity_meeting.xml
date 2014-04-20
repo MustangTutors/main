@@ -36,7 +36,10 @@
 	                android:layout_width="0dp"
 	                android:layout_height="wrap_content"
 	                android:layout_weight="0.6"
-	                android:inputType="number"></EditText>
+	                android:hint="@string/prompt_smu_id"
+	                android:inputType="number"
+	                android:maxLines="1"
+	                android:singleLine="true"></EditText>
 	            
 	        </LinearLayout>
 	        
@@ -110,7 +113,8 @@
 	        android:id="@+id/comments_label"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/comments"></TextView>
+	        android:text="@string/comments"
+	        style="@style/comments_label"></TextView>
 	    
 	    <EditText
 	        android:id="@+id/comments"
