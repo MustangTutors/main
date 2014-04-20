@@ -27,6 +27,7 @@ $(document).ready(function() {
         url: "Laravel/public/courses/showAll",
         success: function(courses) {
             courses = JSON.parse(courses);
+            $("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
                 option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -51,6 +52,7 @@ $(document).ready(function() {
             url: "Laravel/public/courses/showAll",
             success: function(courses) {
                 courses = JSON.parse(courses);
+                $("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
                     option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -59,7 +61,7 @@ $(document).ready(function() {
                 }
             }
         });
-        
+
 		e.stopPropagation();
 
 		var height = $("div#addCourses").height();
