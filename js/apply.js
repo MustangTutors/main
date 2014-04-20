@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 	var user_id = getURLParameter('user_id');
+    var fname;
+    var lname;
 
 	$.ajax({
         type: "GET",
@@ -8,7 +10,10 @@ $(document).ready(function() {
         success: function(userInfo) {
             userInfo = JSON.parse(userInfo);
 
-            var name = userInfo[0].fName + " " + userInfo[0].lName;
+            fname = userInfo[0].fName;
+            lname = userInfo[0].lName;
+
+            var name = fname + " " + lname;
             var email = userInfo[0].email;
 
             $("section#contact h2:nth-child(odd)").html(name);
@@ -17,21 +22,46 @@ $(document).ready(function() {
         }
     });
 
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/courses/showAll",
+        success: function(courses) {
+            courses = JSON.parse(courses);
+            $("option").remove();
+            for(var i = 0; i < courses.length; i++) {
+                var option = "<option>";
+                option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += "</option>";
+                $("select.course_dropdown").append(option);
+            }
+        }
+    });
+
 	$("img[src='img/add.png']").on("click", function(e) {
 
 		e.preventDefault();
+
 		$("div#addCourses form").append(
 			"<span class='potential_course'>" +
                 "<select class='course_dropdown'>" +
-                    "<option>CSE 2341: Data Structures</option>" +
-                    "<option>CSE 1342: Programming Concepts</option>" +
-                    "<option>PHIL 1318: Contemporary Moral Problems</option>" +
-                    "<option>STAT 4340: Statistics for Engineers</option>" +
-                    "<option>MATH 1338: Calculus II</option>" +
-                    "<option>EE 1301: Modern Electronic Technology</option>" +
-                 	"</select>" +
-            "</span>"
+                 	"</select></span>"
 		);
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/courses/showAll",
+            success: function(courses) {
+                courses = JSON.parse(courses);
+                $("option").remove();
+                for(var i = 0; i < courses.length; i++) {
+                    var option = "<option>";
+                    option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    option += "</option>";
+                    $("select.course_dropdown").append(option);
+                }
+            }
+        });
+
 		e.stopPropagation();
 
 		var height = $("div#addCourses").height();
@@ -43,6 +73,11 @@ $(document).ready(function() {
 		
 	});
 
+    var application = {};
 
+    application.User_ID = user_id;
+    application.First_Name = fname;
+    application.Last_Name = lname;
+    application.Courses = new Array();
 
 });
