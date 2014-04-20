@@ -17,6 +17,20 @@ $(document).ready(function() {
         }
     });
 
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/courses/showAll",
+        success: function(courses) {
+            courses = JSON.parse(courses);
+            for(var i = 0; i < courses.length; i++) {
+                var option = "<option>";
+                option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += "</option>";
+                $("select.course_dropdown").append(option);
+            }
+        }
+    });
+
 	$("img[src='img/add.png']").on("click", function(e) {
 
 		e.preventDefault();
