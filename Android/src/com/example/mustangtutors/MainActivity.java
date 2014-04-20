@@ -10,12 +10,16 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -414,28 +418,38 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			AjaxRequest request = new AjaxRequest("GET",
-			        "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
-			JSONArray json;
-			try {
-				json = new JSONArray(request.send());
-				subjects = new String[json.length() + 1];
-				subjects[0] = "Subject";
-				for (int i = 0; i < json.length(); i++) {
-					JSONObject subject = (JSONObject) json.get(i);
-					subjects[i + 1] = subject.getString("subject");
+			if (internetConnected()) {
+				AjaxRequest request = new AjaxRequest("GET",
+				        "http://mustangtutors.floccul.us/Laravel/public/courses/subjects");
+				JSONArray json;
+				try {
+					json = new JSONArray(request.send());
+					subjects = new String[json.length() + 1];
+					subjects[0] = "Subject";
+					for (int i = 0; i < json.length(); i++) {
+						JSONObject subject = (JSONObject) json.get(i);
+						subjects[i + 1] = subject.getString("subject");
+					}
+				} catch (Exception e) {
 				}
-			} catch (Exception e) {
+				return true;
 			}
-			return true;
+			else {
+				return false;
+			}
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-			        android.R.layout.simple_spinner_item, subjects);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			mSearchSubject.setAdapter(adapter);
+			if (result == true) {
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
+				        android.R.layout.simple_spinner_item, subjects);
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				mSearchSubject.setAdapter(adapter);
+			}
+			else {
+				showInternetError();
+			}
 		}
 	}
 
@@ -644,5 +658,31 @@ public class MainActivity extends Activity {
 
 			}
 		}
+	}
+
+	public boolean internetConnected() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		if (networkInfo != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void showInternetError() {
+		String errorTitle = "No Internet Connection";
+		String errorMessage = "Please check your Internet connection.";
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+		        mContext);
+		alertDialogBuilder.setTitle(errorTitle);
+		alertDialogBuilder.setMessage(errorMessage).setCancelable(false)
+		        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+				        dialog.cancel();
+			        }
+		        });
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
 	}
 }
