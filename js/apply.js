@@ -80,4 +80,22 @@ $(document).ready(function() {
     application.Last_Name = lname;
     application.Courses = new Array();
 
+    var selected_courses = $("select.course_dropdown");
+
+    for(var i = 0; i < selected_courses.length; i++) {
+        var new_course = selected_courses.eq(0).val();
+
+        var regex_subject = /([A-Z]+)/;
+        var subject = regex_subject.exec(new_course);
+        application.Courses[i].Subject = subject[0];
+
+        var regex_course_number = /(\d)+/;
+        var course_number = regex_course_number.exec(new_course);
+        application.Courses[i].Course_Number = course_number[0];
+
+        var regex_course_name = /\d+ ([A-Za-z ]+)/;
+        var course_name = regex_course_name.exec(new_course);
+        application.Courses[i].Course_Name = course_name[1];
+    }
+
 });
