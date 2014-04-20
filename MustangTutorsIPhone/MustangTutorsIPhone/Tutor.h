@@ -16,7 +16,9 @@
 @property(nonatomic,getter = getAverageRating)double averageRating;
 @property(nonatomic,getter = isAvailable)BOOL available;
 @property(nonatomic,getter = getNumberOfRatings)NSInteger numberOfRatings;
-@property(strong,nonatomic,getter = getComments)NSDictionary * comments;
--(instancetype)initWithDictionary:(NSMutableArray *) dict;
+@property(strong,nonatomic,getter = getComments)NSMutableArray * comments;
+@property(strong,nonatomic,getter = getHours)NSMutableArray * hours;
+@property(strong,nonatomic,getter = getCourses)NSMutableArray * courses;
+-(instancetype)initWithDictionary:(NSMutableDictionary *) dict;
 -(void)toggleAvailability;
 @end

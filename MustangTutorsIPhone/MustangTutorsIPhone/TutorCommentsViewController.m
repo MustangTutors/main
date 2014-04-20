@@ -11,11 +11,47 @@
 
 @interface TutorCommentsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *Name_CommentsLabel;
-@property (weak, nonatomic) IBOutlet UIScrollView *commentsScrollView;
-
+@property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentTimeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *previousButton;
+@property (nonatomic)NSInteger currentComment;
 @end
 
 @implementation TutorCommentsViewController
+- (IBAction)nextCommentButton:(UIButton *)sender {
+    [self setCurrentComment:(self.currentComment +1)];
+    if((self.currentComment +1) <=[[self.tutor getComments] count])
+    {
+        [self setCommentInfoWithInteger:[self currentComment]];
+        
+        if((self.currentComment +1) ==[[self.tutor getComments] count]){
+            [self.nextButton setEnabled:NO];
+            [self.nextButton setTitle:@"" forState:UIControlStateDisabled];
+        }
+        if([self.previousButton isEnabled] == NO)
+        {
+            [self.previousButton setEnabled:YES];
+        }
+    }
+}
+- (IBAction)previousCommentButton:(UIButton *)sender {
+    [self setCurrentComment:(self.currentComment -1)];
+    if(self.currentComment >= 0)
+    {
+        [self setCommentInfoWithInteger:[self currentComment]];
+        
+        if(self.currentComment == 0){
+            [self.previousButton setEnabled:NO];
+            [self.previousButton setTitle:@"" forState:UIControlStateDisabled];
+        }
+        if([self.nextButton isEnabled] == NO)
+        {
+            [self.nextButton setEnabled:YES];
+        }
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,10 +69,48 @@
     
     TabBarViewController * tabBar = (TabBarViewController *)self.tabBarController;
     self.tutor = tabBar.tutor;
-
-    [self.Name_CommentsLabel setText:[NSString stringWithFormat:@"%@'s Comments",[self.tutor getFullName]]];
+    [self setInitialValues];
 }
 
+-(void)setInitialValues
+{
+    [self.Name_CommentsLabel setText:[NSString stringWithFormat:@"%@'s Comments",[self.tutor getFullName]]];
+    if([[self.tutor getComments] objectAtIndex:0] != NULL)
+    {
+        [self setCommentInfoWithInteger:0];
+    }
+    [self.previousButton setEnabled:NO];
+    [self.previousButton setTitle:@"" forState:UIControlStateDisabled];
+    [self setCurrentComment:0];
+    if([[self.tutor getComments] objectAtIndex:1] == NULL)
+    {
+        [self.nextButton setEnabled:NO];
+        [self.nextButton setTitle:@"" forState:UIControlStateDisabled];
+    }
+
+
+}
+-(void)setCommentInfoWithInteger:(NSInteger)comNumber
+{
+    [self.commentTextLabel setText:[NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"comment" ]]];
+    
+    NSString * dateString = [NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"timeStamp"]];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    //[formatter setTimeStyle:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDate * comDate = [formatter dateFromString:dateString];
+    [formatter setDateFormat:@"MM-dd-yyyy"];
+    NSString * comDateString = [formatter stringFromDate:comDate];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    NSString * comTimeString = [formatter stringFromDate:comDate];
+    [self.commentDateLabel setText:[NSString stringWithFormat:@"Date: %@",comDateString]];
+    [self.commentTimeLabel setText:[NSString stringWithFormat:@"    At: %@",comTimeString]];
+    
+    //[self.commentDateLabel setText:[NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"timeStamp"]]];
+
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

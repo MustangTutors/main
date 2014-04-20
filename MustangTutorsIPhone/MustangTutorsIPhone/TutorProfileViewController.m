@@ -7,6 +7,7 @@
 //
 
 #import "TutorProfileViewController.h"
+#import "LoginViewController.h"
 #import "UIImageView+AFNetworking.h"
 #include <tgmath.h>
 #import "TabBarViewController.h"
@@ -33,6 +34,21 @@
         // Custom initialization
     }
     return self;
+}
+- (IBAction)logOut:(UIButton *)sender {
+    
+    
+    LoginViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    UIStoryboardSegue * logoutSegue = [UIStoryboardSegue segueWithIdentifier:@"logoutSegue" source:self destination:vc performHandler:^{
+        NSLog(@"ballsack");
+    
+    }];
+                                        //alloc]initWithIdentifier:@"logoutSegue" source:self destination:vc];
+    //[self performSegueWithIdentifier:@"logoutSegue" sender:self];
+    //[self prepareForSegue:logoutSegue sender:self];
+    [logoutSegue perform];
+
+    
 }
 -(void)setExtraInitialStates
 {
@@ -68,6 +84,10 @@
         [self.nameLabel setText:[self.tutor getFullName]];
         [self.numberOfRatingsLabel setText:[NSString stringWithFormat:@"Average Rating of %d ratings",[self.tutor getNumberOfRatings]]];
         [self setStarValues:[self.tutor getAverageRating]];
+        NSLog(@"%@",[responseObject objectForKey:@"comments"]);
+        [self.tutor setComments:[responseObject objectForKey:@"comments"]];
+        [self.tutor setHours:[responseObject objectForKey:@"hours"]];
+        [self.tutor setCourses:[responseObject objectForKey:@"courses"]];
         
     }] resume];
     if([self.tutor isAvailable] == YES)

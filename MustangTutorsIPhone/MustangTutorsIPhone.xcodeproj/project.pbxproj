@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB40E23B18FF5A3D00AE9967 /* MeetingReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E23A18FF5A3D00AE9967 /* MeetingReportViewController.m */; };
+		DB40E24518FF78E400AE9967 /* Meeting.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24418FF78E400AE9967 /* Meeting.m */; };
+		DB40E24818FF7B8800AE9967 /* MeetingCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24718FF7B8800AE9967 /* MeetingCourseViewController.m */; };
+		DB40E24B18FF7D4F00AE9967 /* MeetingDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24A18FF7D4F00AE9967 /* MeetingDateViewController.m */; };
+		DB40E24E18FF7DBC00AE9967 /* MeetingCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24D18FF7DBC00AE9967 /* MeetingCommentViewController.m */; };
 		DB502EEB18FA5A5700FC3104 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502ED918FA5A5700FC3104 /* AFHTTPRequestOperation.m */; };
 		DB502EEC18FA5A5700FC3104 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502EDB18FA5A5700FC3104 /* AFHTTPRequestOperationManager.m */; };
 		DB502EED18FA5A5700FC3104 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502EDD18FA5A5700FC3104 /* AFHTTPSessionManager.m */; };
@@ -45,6 +50,11 @@
 		DBD8931918EE3C93009F7BD7 /* MustangTutorsIPhoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD8931818EE3C93009F7BD7 /* MustangTutorsIPhoneTests.m */; };
 		DBD8932318EE4573009F7BD7 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD8932218EE4573009F7BD7 /* Storyboard.storyboard */; };
 		DBD8932618EE492C009F7BD7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD8932518EE492C009F7BD7 /* LoginViewController.m */; };
+		DBF05BAE18FCF351004B1B3B /* TutorHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF05BAD18FCF351004B1B3B /* TutorHoursViewController.m */; };
+		DBF05BB118FCFA89004B1B3B /* ScheduleTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF05BB018FCFA89004B1B3B /* ScheduleTimeTableViewCell.m */; };
+		DBF05BB718FDFA0A004B1B3B /* TutorClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF05BB618FDFA0A004B1B3B /* TutorClassesViewController.m */; };
+		DBF05BBA18FDFB6A004B1B3B /* ClassesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF05BB918FDFB6A004B1B3B /* ClassesTableViewCell.m */; };
+		DBF05BBD18FE53BE004B1B3B /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF05BBC18FE53BE004B1B3B /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +68,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB40E23918FF5A3D00AE9967 /* MeetingReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingReportViewController.h; sourceTree = "<group>"; };
+		DB40E23A18FF5A3D00AE9967 /* MeetingReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingReportViewController.m; sourceTree = "<group>"; };
+		DB40E24318FF78E400AE9967 /* Meeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meeting.h; sourceTree = "<group>"; };
+		DB40E24418FF78E400AE9967 /* Meeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meeting.m; sourceTree = "<group>"; };
+		DB40E24618FF7B8800AE9967 /* MeetingCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingCourseViewController.h; sourceTree = "<group>"; };
+		DB40E24718FF7B8800AE9967 /* MeetingCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingCourseViewController.m; sourceTree = "<group>"; };
+		DB40E24918FF7D4F00AE9967 /* MeetingDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDateViewController.h; sourceTree = "<group>"; };
+		DB40E24A18FF7D4F00AE9967 /* MeetingDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateViewController.m; sourceTree = "<group>"; };
+		DB40E24C18FF7DBC00AE9967 /* MeetingCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingCommentViewController.h; sourceTree = "<group>"; };
+		DB40E24D18FF7DBC00AE9967 /* MeetingCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingCommentViewController.m; sourceTree = "<group>"; };
 		DB502ED818FA5A5700FC3104 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		DB502ED918FA5A5700FC3104 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		DB502EDA18FA5A5700FC3104 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -123,6 +143,16 @@
 		DBD8932218EE4573009F7BD7 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		DBD8932418EE492C009F7BD7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DBD8932518EE492C009F7BD7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		DBF05BAC18FCF351004B1B3B /* TutorHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorHoursViewController.h; sourceTree = "<group>"; };
+		DBF05BAD18FCF351004B1B3B /* TutorHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorHoursViewController.m; sourceTree = "<group>"; };
+		DBF05BAF18FCFA89004B1B3B /* ScheduleTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTimeTableViewCell.h; sourceTree = "<group>"; };
+		DBF05BB018FCFA89004B1B3B /* ScheduleTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTimeTableViewCell.m; sourceTree = "<group>"; };
+		DBF05BB518FDFA0A004B1B3B /* TutorClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorClassesViewController.h; path = ../TutorClassesViewController.h; sourceTree = "<group>"; };
+		DBF05BB618FDFA0A004B1B3B /* TutorClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorClassesViewController.m; path = ../TutorClassesViewController.m; sourceTree = "<group>"; };
+		DBF05BB818FDFB6A004B1B3B /* ClassesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassesTableViewCell.h; sourceTree = "<group>"; };
+		DBF05BB918FDFB6A004B1B3B /* ClassesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassesTableViewCell.m; sourceTree = "<group>"; };
+		DBF05BBB18FE53BE004B1B3B /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		DBF05BBC18FE53BE004B1B3B /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +181,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB40E23C18FF5AFC00AE9967 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB40E23D18FF5B1200AE9967 /* TutorViewControllers */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E23D18FF5B1200AE9967 /* TutorViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB502F1818FC7F5300FC3104 /* TabBarViewController.h */,
+				DB502F1918FC7F5300FC3104 /* TabBarViewController.m */,
+				DB40E24118FF5CE900AE9967 /* ProfileViewControllers */,
+				DB40E24018FF5C4500AE9967 /* CommentsViewControllers */,
+				DB40E23F18FF5B7600AE9967 /* CoursesViewControllers */,
+				DB40E23E18FF5B6300AE9967 /* ScheduleViewControllers */,
+				DB40E24218FF5D3100AE9967 /* MeetingViewControllers */,
+			);
+			name = TutorViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E23E18FF5B6300AE9967 /* ScheduleViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DBF05BAF18FCFA89004B1B3B /* ScheduleTimeTableViewCell.h */,
+				DBF05BB018FCFA89004B1B3B /* ScheduleTimeTableViewCell.m */,
+				DBF05BAC18FCF351004B1B3B /* TutorHoursViewController.h */,
+				DBF05BAD18FCF351004B1B3B /* TutorHoursViewController.m */,
+			);
+			name = ScheduleViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E23F18FF5B7600AE9967 /* CoursesViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DBF05BB818FDFB6A004B1B3B /* ClassesTableViewCell.h */,
+				DBF05BB918FDFB6A004B1B3B /* ClassesTableViewCell.m */,
+				DBF05BB518FDFA0A004B1B3B /* TutorClassesViewController.h */,
+				DBF05BB618FDFA0A004B1B3B /* TutorClassesViewController.m */,
+			);
+			name = CoursesViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E24018FF5C4500AE9967 /* CommentsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB502F1518FC79A300FC3104 /* TutorCommentsViewController.h */,
+				DB502F1618FC79A300FC3104 /* TutorCommentsViewController.m */,
+			);
+			name = CommentsViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E24118FF5CE900AE9967 /* ProfileViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB502F0E18FA5D2000FC3104 /* TutorProfileViewController.h */,
+				DB502F0F18FA5D2000FC3104 /* TutorProfileViewController.m */,
+			);
+			name = ProfileViewControllers;
+			sourceTree = "<group>";
+		};
+		DB40E24218FF5D3100AE9967 /* MeetingViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB40E23918FF5A3D00AE9967 /* MeetingReportViewController.h */,
+				DB40E23A18FF5A3D00AE9967 /* MeetingReportViewController.m */,
+				DB40E24618FF7B8800AE9967 /* MeetingCourseViewController.h */,
+				DB40E24718FF7B8800AE9967 /* MeetingCourseViewController.m */,
+				DB40E24918FF7D4F00AE9967 /* MeetingDateViewController.h */,
+				DB40E24A18FF7D4F00AE9967 /* MeetingDateViewController.m */,
+				DB40E24C18FF7DBC00AE9967 /* MeetingCommentViewController.h */,
+				DB40E24D18FF7DBC00AE9967 /* MeetingCommentViewController.m */,
+			);
+			name = MeetingViewControllers;
+			sourceTree = "<group>";
+		};
 		DB502ED718FA5A5700FC3104 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +313,8 @@
 			children = (
 				DB502F1118FB173200FC3104 /* Tutor.h */,
 				DB502F1218FB173200FC3104 /* Tutor.m */,
+				DB40E24318FF78E400AE9967 /* Meeting.h */,
+				DB40E24418FF78E400AE9967 /* Meeting.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -251,12 +360,9 @@
 				DBD8930118EE3C92009F7BD7 /* MustangTutorsIPhone.xcdatamodeld */,
 				DBD892F618EE3C92009F7BD7 /* Supporting Files */,
 				DBD8932218EE4573009F7BD7 /* Storyboard.storyboard */,
-				DB502F1818FC7F5300FC3104 /* TabBarViewController.h */,
-				DB502F1918FC7F5300FC3104 /* TabBarViewController.m */,
-				DB502F1518FC79A300FC3104 /* TutorCommentsViewController.h */,
-				DB502F1618FC79A300FC3104 /* TutorCommentsViewController.m */,
-				DB502F0E18FA5D2000FC3104 /* TutorProfileViewController.h */,
-				DB502F0F18FA5D2000FC3104 /* TutorProfileViewController.m */,
+				DB40E23C18FF5AFC00AE9967 /* ViewControllers */,
+				DBF05BBB18FE53BE004B1B3B /* SearchViewController.h */,
+				DBF05BBC18FE53BE004B1B3B /* SearchViewController.m */,
 				DBD8932418EE492C009F7BD7 /* LoginViewController.h */,
 				DBD8932518EE492C009F7BD7 /* LoginViewController.m */,
 			);
@@ -392,14 +498,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB502F0B18FA5A6700FC3104 /* UIProgressView+AFNetworking.m in Sources */,
+				DBF05BAE18FCF351004B1B3B /* TutorHoursViewController.m in Sources */,
+				DB40E24B18FF7D4F00AE9967 /* MeetingDateViewController.m in Sources */,
 				DB502F0918FA5A6700FC3104 /* UIButton+AFNetworking.m in Sources */,
 				DB502F0C18FA5A6700FC3104 /* UIRefreshControl+AFNetworking.m in Sources */,
 				DB502F0818FA5A6700FC3104 /* UIAlertView+AFNetworking.m in Sources */,
 				DBD8932618EE492C009F7BD7 /* LoginViewController.m in Sources */,
+				DBF05BB718FDFA0A004B1B3B /* TutorClassesViewController.m in Sources */,
+				DBF05BB118FCFA89004B1B3B /* ScheduleTimeTableViewCell.m in Sources */,
 				DB502F1318FB173200FC3104 /* Tutor.m in Sources */,
 				DB502F1018FA5D2000FC3104 /* TutorProfileViewController.m in Sources */,
+				DBF05BBA18FDFB6A004B1B3B /* ClassesTableViewCell.m in Sources */,
 				DB502EEF18FA5A5700FC3104 /* AFSecurityPolicy.m in Sources */,
 				DBD8930318EE3C92009F7BD7 /* MustangTutorsIPhone.xcdatamodeld in Sources */,
+				DB40E24518FF78E400AE9967 /* Meeting.m in Sources */,
 				DB502EEC18FA5A5700FC3104 /* AFHTTPRequestOperationManager.m in Sources */,
 				DB502EF018FA5A5700FC3104 /* AFURLConnectionOperation.m in Sources */,
 				DB502F1718FC79A300FC3104 /* TutorCommentsViewController.m in Sources */,
@@ -408,13 +520,17 @@
 				DB502F0718FA5A6700FC3104 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				DBD892FC18EE3C92009F7BD7 /* main.m in Sources */,
 				DB502EF118FA5A5700FC3104 /* AFURLRequestSerialization.m in Sources */,
+				DB40E24E18FF7DBC00AE9967 /* MeetingCommentViewController.m in Sources */,
+				DB40E24818FF7B8800AE9967 /* MeetingCourseViewController.m in Sources */,
 				DB502EED18FA5A5700FC3104 /* AFHTTPSessionManager.m in Sources */,
+				DBF05BBD18FE53BE004B1B3B /* SearchViewController.m in Sources */,
 				DB502EEE18FA5A5700FC3104 /* AFNetworkReachabilityManager.m in Sources */,
 				DB502EF218FA5A5700FC3104 /* AFURLResponseSerialization.m in Sources */,
 				DB502F1A18FC7F5300FC3104 /* TabBarViewController.m in Sources */,
 				DB502F0D18FA5A6700FC3104 /* UIWebView+AFNetworking.m in Sources */,
 				DB502EF318FA5A5700FC3104 /* AFURLSessionManager.m in Sources */,
 				DB502F0618FA5A6700FC3104 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				DB40E23B18FF5A3D00AE9967 /* MeetingReportViewController.m in Sources */,
 				DBD8930018EE3C92009F7BD7 /* MustangTutorsAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

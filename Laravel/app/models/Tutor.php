@@ -244,6 +244,52 @@ FROM rating where tutor_id = ?";
             echo "not a valid smu id";
         }
     }
-        
+    //I modified the tutors info page to include the course Id for the iphone stuff
+    public function getInfoForTutorsPageWithCourseId($curr_user_id,$tutor_id)
+    {
+            $result2 = Tutor::getTutorsGeneralInfo($tutor_id);
+            $result3 = Tutor::getUsersCurrentRatingOfTutor($curr_user_id,$tutor_id);
+            $result4 = Tutor::getTutorsCourses($tutor_id);
+            $result5 = Tutor::getTutorsHours($tutor_id);
+            $result6 = Tutor::getTutorsComments($tutor_id);
+            $result0 = array();      
+            foreach($result2[0] as $key=>$value){
+                $result0[$key]=$value;
+            }
+            if(isset($result3[0]->current_user_rating))
+            {
+                $result0['current_user_rating'] = $result3[0]->current_user_rating;
+            }else
+            {
+                $result0['current_user_rating'] = null;
+            }
+            $iter = 0;
+            foreach($result4 as $value)
+            {
+                $result0['courses'][$iter] = $value;
+                $iter = $iter+1;
+            }
+            $iter = 0;
+            foreach($result5 as $value)
+            {
+                $result0['hours'][$iter] = $value;
+                $iter = $iter+1;
+            }
+            $iter = 0;
+            foreach($result6 as $value)
+            {
+                $result0['comments'][$iter] = $value;
+                $commenters_rating = Tutor::getUsersCurrentRatingOfTutor($value->user_id,$tutor_id);
+                if(isset($commenters_rating[0]->current_user_rating))
+                {
+                    $result0['comments'][$iter]->rating_from_commenter = $commenters_rating[0]->current_user_rating;
+                }else{
+                    $result0['comments'][$iter]->rating_from_commenter = null;
+                }
+                $iter = $iter +1;
+            }
+            echo json_encode($result0);
+    }
+
 }
 ?>
