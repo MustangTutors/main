@@ -1446,6 +1446,10 @@ div#commentList li .comment_info {
     right: 10px;
 }
 
+#rating {
+    position: relative;
+}
+
 section#rating img[src*='star']{
     vertical-align: middle;
     position: relative;
@@ -1476,8 +1480,8 @@ section#rating img[src*='star']{
     border-width: 1px;
     box-shadow: 3px 3px 3px rgba(100,100,100,0.6);
     display: none;
-    top: 23px;
-    right: -233px;
+    top: 150px;
+    right: -100px;
 }
 
 #editRating h3 {
@@ -1603,6 +1607,10 @@ img[src="img/add.png"] {
     margin-left: 295px;
     margin-top: -40px;
     position: absolute;
+}
+
+button#submitApplication {
+    margin-left: 755px;
 }
 
 /* End styling for Apply To Be A Tutor Page */

@@ -1,5 +1,22 @@
 $(document).ready(function() {
 
+	var user_id = getURLParameter('user_id');
+
+	$.ajax({
+        type: "GET",
+        url: "Laravel/public/users/current/" + user_id,
+        success: function(userInfo) {
+            userInfo = JSON.parse(userInfo);
+
+            var name = userInfo[0].fName + " " + userInfo[0].lName;
+            var email = userInfo[0].email;
+
+            $("section#contact h2:nth-child(odd)").html(name);
+            $("section#contact h2:nth-child(even)").html(email);
+
+        }
+    });
+
 	$("img[src='img/add.png']").on("click", function(e) {
 
 		e.preventDefault();
@@ -25,5 +42,7 @@ $(document).ready(function() {
 		}
 		
 	});
+
+
 
 });

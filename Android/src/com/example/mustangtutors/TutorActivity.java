@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,7 +54,9 @@ public class TutorActivity extends Activity {
             firstName = user.getString("tutor_fName");
             lastName = user.getString("tutor_lName");
             numberRatings = Integer.parseInt(user.getString("numberOfRatings"));
-            rating = Float.parseFloat(user.getString("average_rating"));
+            if (numberRatings > 0) {
+                rating = Float.parseFloat(user.getString("average_rating"));
+            }
             availability = Integer.parseInt(user.getString("available"));
             
             fullName = firstName + " " + lastName;
@@ -84,7 +87,7 @@ public class TutorActivity extends Activity {
             e.printStackTrace();
         }
 	    
-        tutor = new Tutor(id, fullName, numberRatings, rating, availability);
+        tutor = new Tutor(id, fullName, numberRatings, rating, availability, null);
         
         ImageView tutorPicture = (ImageView)findViewById(R.id.tutor_picture);
         TextView tutorName = (TextView)findViewById(R.id.tutor_name);
@@ -96,7 +99,12 @@ public class TutorActivity extends Activity {
         new DownloadImageTask(tutorPicture)
     	.execute("http://mustangtutors.floccul.us/img/tutors/" + id + ".jpg");
         
-        tutorRating.setRating(rating);
+        if (numberRatings > 0) {
+            tutorRating.setRating(rating);
+        }
+        else {
+        	tutorRating.setVisibility(View.GONE);
+        }
         
         switch (tutor.getAvailability()) {
 	    	case 2:  tutorAvailability.setText("Available");
