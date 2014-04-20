@@ -41,6 +41,7 @@ $(document).ready(function() {
         status.css('visibility', 'visible');
         var buttonContainer = button.parent();
         buttonContainer.css('visibility', 'hidden');
+        var userID = jQuery.data(buttonContainer.parents('.applicationReview')[0], 'user_id');
         $.ajax({
             url: "Laravel/public/admin/application/denied/" + userID,
             success: function() {

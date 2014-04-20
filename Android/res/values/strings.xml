@@ -58,4 +58,6 @@
     <string name="course_heading">Courses</string>
     <string name="hour_heading">Hours</string>
 
+    <string name="to">-</string>
+    
 </resources>

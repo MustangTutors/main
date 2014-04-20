@@ -142,11 +142,20 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
     
-    <style name="button">
+    <style name="send_button">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@drawable/send_button_background</item>
+    </style>
+    
+    <style name="reset_button">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@drawable/reset_button_background</item>
     </style>
     
     <style name="time_button">
@@ -160,6 +169,10 @@
         <item name="android:layout_margin">15dp</item>
         <item name="android:padding">16dp</item>
         <item name="android:background">@drawable/border</item>
+    </style>
+    
+    <style name="betweener">
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

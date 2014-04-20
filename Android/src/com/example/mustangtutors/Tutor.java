@@ -2,6 +2,8 @@ package com.example.mustangtutors;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+
 public class Tutor {
 	private int id;
 	private String name;
@@ -10,6 +12,7 @@ public class Tutor {
 	private int availability;
 	private ArrayList<Course> courses;
 	private ArrayList<Hours> hours;
+	private Bitmap image;
 	
 	public Tutor() {
 		this.id = 1;
@@ -19,9 +22,10 @@ public class Tutor {
 		this.availability = 2;
 		this.courses = new ArrayList<Course>();
 		this.hours = new ArrayList<Hours>();
+		this.image = null;
 	}
 	
-	public Tutor(int id, String name, int numberRatings, double rating, int availability) {
+	public Tutor(int id, String name, int numberRatings, double rating, int availability, Bitmap image) {
 		if (rating < 0) {
 			rating = 0;
 		}
@@ -40,6 +44,7 @@ public class Tutor {
 		this.availability = availability;
 		this.courses = new ArrayList<Course>();
 		this.hours = new ArrayList<Hours>();
+		this.image = image;
 	}
 	
 	public int getId() {
@@ -89,6 +94,14 @@ public class Tutor {
 			availability = 0;
 		}
 		this.availability = availability;
+	}
+	
+	public Bitmap getImage() {
+		return image;
+	}
+	
+	public void setImage(Bitmap image) {
+		this.image = image;
 	}
 	
 	public void addCourse(String subject, String courseNumber, String courseName) {

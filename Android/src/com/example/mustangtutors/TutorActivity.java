@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ public class TutorActivity extends Activity {
 	private float rating;
 	private int availability;
 	private ArrayList<Course> courses;
+	private ArrayList<Hours> hours;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,15 @@ public class TutorActivity extends Activity {
             firstName = user.getString("tutor_fName");
             lastName = user.getString("tutor_lName");
             numberRatings = Integer.parseInt(user.getString("numberOfRatings"));
-            rating = Float.parseFloat(user.getString("average_rating"));
+            if (numberRatings > 0) {
+                rating = Float.parseFloat(user.getString("average_rating"));
+            }
             availability = Integer.parseInt(user.getString("available"));
             
             fullName = firstName + " " + lastName;
             
             JSONArray jsonCourses = user.getJSONArray("courses");
+            courses = new ArrayList<Course>();
             
             for(int i = 0; i < jsonCourses.length(); i++) {
             	JSONObject newCourse = (JSONObject)jsonCourses.get(i);
@@ -66,12 +71,23 @@ public class TutorActivity extends Activity {
             	String courseName = newCourse.getString("course_name");
             	courses.add(new Course(courseSubject, courseNumber, courseName));
             }
+            
+            JSONArray jsonHours = user.getJSONArray("hours");
+            hours = new ArrayList<Hours>();
+            
+            for(int i = 0; i < jsonHours.length(); i++) {
+            	JSONObject newHours = (JSONObject)jsonHours.get(i);
+            	String day = newHours.getString("day");
+            	String startTime = newHours.getString("start_time");
+            	String endTime = newHours.getString("end_time");
+            	hours.add(new Hours(day, startTime, endTime));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 	    
-        tutor = new Tutor(id, fullName, numberRatings, rating, availability);
+        tutor = new Tutor(id, fullName, numberRatings, rating, availability, null);
         
         ImageView tutorPicture = (ImageView)findViewById(R.id.tutor_picture);
         TextView tutorName = (TextView)findViewById(R.id.tutor_name);
@@ -83,7 +99,12 @@ public class TutorActivity extends Activity {
         new DownloadImageTask(tutorPicture)
     	.execute("http://mustangtutors.floccul.us/img/tutors/" + id + ".jpg");
         
-        tutorRating.setRating(rating);
+        if (numberRatings > 0) {
+            tutorRating.setRating(rating);
+        }
+        else {
+        	tutorRating.setVisibility(View.GONE);
+        }
         
         switch (tutor.getAvailability()) {
 	    	case 2:  tutorAvailability.setText("Available");
@@ -105,7 +126,17 @@ public class TutorActivity extends Activity {
         	courseview.setLayoutParams(new LinearLayout.LayoutParams
         			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         	courseview.setText(courses.get(i).toString());
+        	courseview.setPadding(100, 0, 0, 0);
         	courselayout.addView(courseview);
+        }
+        
+        for(int i = 0; i < hours.size(); i++) {
+        	TextView hourview = new TextView(this);
+        	hourview.setLayoutParams(new LinearLayout.LayoutParams
+        			(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        	hourview.setText(hours.get(i).toString());
+        	hourview.setPadding(100, 0, 0, 0);
+        	hourlayout.addView(hourview);
         }
         
 	}

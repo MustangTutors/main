@@ -40,9 +40,6 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    RatingBar stars = (RatingBar) rowView.findViewById(R.id.search_tutor_rating);
 	    TextView availability = (TextView) rowView.findViewById(R.id.search_tutor_availability);
 	    
-	    new DownloadImageTask(picture)
-        	.execute("http://mustangtutors.floccul.us/img/tutors/" + tutors.get(position).getId() + ".jpg");
-	    
 	    // Set name
 	    name.setText(tutors.get(position).getName());
 	    
@@ -55,6 +52,7 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 		    stars.setMax(5);
 		    stars.setStepSize(0.5f);
 		    stars.setRating(rating);
+		    stars.setVisibility(View.VISIBLE);
 	    }
 	    
 	    // Set availability
@@ -69,6 +67,9 @@ public class SearchAdapter extends ArrayAdapter<Tutor> {
 	    			 availability.setBackgroundResource(R.drawable.border_unavailable);
 	    			 break;
 	    }
+	    
+	    // Set tutor profile picture
+	    picture.setImageBitmap(tutors.get(position).getImage());
 	
 	    return rowView;
 	}

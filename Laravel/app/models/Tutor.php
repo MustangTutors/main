@@ -13,7 +13,7 @@ class Tutor extends Eloquent{
 
     //this returns an array of all the courses a tutor tutors
     public static function getTutorsCourses($tutor_id){
-        $result = DB::select('select subject,course_number,course_name from courses INNER JOIN courses_tutored ON courses_tutored.course_id = courses.course_id where courses_tutored.user_id = ?', array($tutor_id));
+        $result = DB::select('select courses.course_id,subject,course_number,course_name from courses INNER JOIN courses_tutored ON courses_tutored.course_id = courses.course_id where courses_tutored.user_id = ?', array($tutor_id));
         return $result;
     }
     //this returns an array of all the hours a tutor tutors
