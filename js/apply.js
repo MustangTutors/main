@@ -73,6 +73,16 @@ $(document).ready(function() {
 		
 	});
 
+    var days = $("article#potential_hours ul li input[type='checkbox']");
+    var start_times = $("article#potential_hours ul li input.start_time");
+    var end_times = $("article#potential_hours ul li input.end_time");
+
+
+    //for(var i = 0; i < dates.length; i++) {
+
+    //}
+
+
     var application = {};
 
     application.User_ID = user_id;
