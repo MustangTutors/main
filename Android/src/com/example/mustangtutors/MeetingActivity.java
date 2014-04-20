@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -242,4 +243,29 @@ public class MeetingActivity extends FragmentActivity {
     		}
     	}
     }
+    
+    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			AjaxRequest request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting");
+	        request.addParam("smu_id", "12341234");
+			request.addParam("course_id", "1");
+			request.addParam("day", "2014-12-12");
+			request.addParam("start_time", "19:00:00");
+			request.addParam("end_time", "20:00:00");
+			request.addParam("summary", "Words words words.");
+            try {
+	            request.send();
+            } catch (Exception e) {
+            }
+            
+            return true;
+		}
+
+		@Override
+		protected void onCancelled() {
+//			mAuthTask = null;
+//			showProgress(false);
+		}
+	}
 }
