@@ -103,7 +103,7 @@ $(document).ready(function() {
         e.preventDefault();
 
         $("article#courses ul").append(
-            "<li class='potential_course'>" +
+            "<li class='potential_course new_dropdown'>" +
                 "<select id='potential" + potential + "' class='course_dropdown'>" +
                     "</select></li>"
         );
@@ -135,5 +135,12 @@ $(document).ready(function() {
             $("section.tutor_info article").height(new_height+30);
         }
         
+    });
+
+    $("button[name='cancelCourseChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        $("li.new_dropdown").remove();
+        $("section.tutor_info article").height(225);
     });
 });
