@@ -180,6 +180,11 @@ function getTutors(searchData) {
                 
                     // When you hover in and out of a tutor's box, it shows/hides more info.
                     $('.tutorBox-small').hoverIntent(expandInfo, contractInfo);
+
+                    // Replace broken tutor images
+                    $('img').error(function(){
+                        $(this).attr('src', 'img/tutors/tutor.png');
+                    });
                 }
             });
         }

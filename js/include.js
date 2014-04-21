@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    // Replace broken tutor images
+    $('img').error(function(){
+        $(this).attr('src', 'img/tutors/tutor.png');
+    });
+    
     $("header").load("header.html", function() {
         setToggleColor("");
         setNavigationBar();
