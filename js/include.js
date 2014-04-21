@@ -191,7 +191,7 @@ function setNavigationBar() {
                     var newNav = '';
                     // Add navigation for student user
                     if (Number(json.tutor) === 0) {
-                        newNav += '<li class="nav"><a href="#">Become a Tutor</a></li>';
+                        newNav += '<li class="nav"><a href="apply.html">Become a Tutor</a></li>';
                     }
                     newNav += '<li class="nav"><a href="history.html">Student History</a>'+
                               '<ul class="dropdown"><div class="border">'+
