@@ -1621,4 +1621,12 @@ h2.subheading a, article.schedule button{
     float: right;
 }
 
+article.admin_edit span.label {
+    width: 115px;
+}
+
+article.admin_edit input[type="checkbox"] {
+    margin-left: -10px;
+}
+
 /* End stylying for Admin Edit of Tutor Profile*/
