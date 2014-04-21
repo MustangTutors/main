@@ -10,12 +10,10 @@
 #import "MeetingCommentViewController.h"
 
 @interface MeetingDateViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *setDate;
-@property (weak, nonatomic) IBOutlet UIButton *setStartTime;
-@property (weak, nonatomic) IBOutlet UIButton *setEndTime;
 @property (weak, nonatomic) IBOutlet UILabel *startLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endLabel;
+@property (weak, nonatomic) IBOutlet UILabel *warningMessage;
 
 @end
 
@@ -94,12 +92,11 @@
 */
 
 -(IBAction)startTimePressed:(id)sender{
-    if(self.endTimePicker.hidden == NO){
-        self.endTimePicker.alpha = 0;
-    }
-    if(self.meetingDatePicker.hidden == NO){
-        self.meetingDatePicker.alpha = 0;
-    }
+    self.endTimePicker.hidden = YES;
+    self.endTimePicker.alpha = 0;
+    self.meetingDatePicker.hidden = YES;
+    self.meetingDatePicker.alpha = 0;
+
     if(self.startTimePicker.hidden){
         [UIView animateWithDuration:1 animations:^{
             self.startTimePicker.hidden = NO;
@@ -116,17 +113,20 @@
             NSDateFormatter * df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"h:mm a"];
             [self.startLabel setText:[df stringFromDate:[self.startTimePicker date]]];
+            if(![[self.dateLabel text]isEqualToString:@"date"] && ![[self.endLabel text]isEqualToString:@"end"])
+            {
+                [self.warningMessage setHidden:YES];
+            }
+
         }];
     }
     
 }
 -(IBAction)endTimePressed:(id)sender{
-    if(self.startTimePicker.hidden == NO){
-        self.startTimePicker.alpha = 0;
-    }
-    if(self.meetingDatePicker.hidden == NO){
-        self.meetingDatePicker.alpha = 0;
-    }
+    self.startTimePicker.hidden = YES;
+    self.startTimePicker.alpha = 0;
+    self.meetingDatePicker.hidden = YES;
+    self.meetingDatePicker.alpha = 0;
 
     if(self.endTimePicker.hidden){
         [UIView animateWithDuration:1 animations:^{
@@ -144,17 +144,32 @@
             NSDateFormatter * df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"h:mm a"];
             [self.endLabel setText:[df stringFromDate:[self.endTimePicker date]]];
+            if(![[self.startLabel text]isEqualToString:@"start"] && ![[self.dateLabel text]isEqualToString:@"date"])
+            {
+                [self.warningMessage setHidden:YES];
+            }
+
         }];
     }
     
 }
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([[self.dateLabel text]isEqualToString:@"date"] || [[self.startLabel text]isEqualToString:@"start"] || [[self.endLabel text]isEqualToString:@"end"])
+    {
+        [self.warningMessage setHidden:NO];
+        return NO;
+    }else{
+        [self.warningMessage setHidden:YES];
+        return YES;
+    }
+}
+
 -(IBAction)datePressed:(id)sender{
-    if(self.endTimePicker.hidden == NO){
-        self.endTimePicker.alpha = 0;
-    }
-    if(self.startTimePicker.hidden == NO){
-        self.startTimePicker.alpha = 0;
-    }
+    self.startTimePicker.hidden = YES;
+    self.startTimePicker.alpha = 0;
+    self.endTimePicker.hidden = YES;
+    self.endTimePicker.alpha = 0;
 
     if(self.meetingDatePicker.hidden){
         [UIView animateWithDuration:1 animations:^{
@@ -172,6 +187,11 @@
             NSDateFormatter * df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"MMMM dd, yyyy"];
             [self.dateLabel setText:[df stringFromDate:[self.meetingDatePicker date]]];
+            
+            if(![[self.startLabel text]isEqualToString:@"start"] && ![[self.endLabel text]isEqualToString:@"end"])
+               {
+                   [self.warningMessage setHidden:YES];
+               }
         }];
     }
     

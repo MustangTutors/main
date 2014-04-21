@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SearchViewController : UIViewController
-
+#import "Search.h"
+@interface SearchViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@property (strong,nonatomic)NSMutableArray * subjects;
+@property (strong,nonatomic)Search * search;
 @end

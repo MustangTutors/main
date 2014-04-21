@@ -11,31 +11,25 @@
 #import "TabBarViewController.h"
 @interface MeetingReportViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *smuIdField;
+@property (weak, nonatomic) IBOutlet UILabel *warningMessage;
 @end
 
 @implementation MeetingReportViewController
-- (IBAction)goToCourseChoice:(UIBarButtonItem *)sender {
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"%d",[self.meetingDocument getSmuId]);
+        // Make sure your segue name in storyboard is the same as this line
+        if ([[segue identifier] isEqualToString:@"segueToMeetingCourse"])
+        {
+            [self.meetingDocument setSmuId:[[self.smuIdField text]integerValue]];
 
-    // Make sure your segue name in storyboard is the same as this line
-    if ([[segue identifier] isEqualToString:@"segueToMeetingCourse"])
-    {
-        [self.meetingDocument setSmuId:[[self.smuIdField text]integerValue]];
-
-        NSLog(@"%d",[self.meetingDocument getSmuId]);
-
-        // Get reference to the destination view controller
-        MeetingCourseViewController * vc = (MeetingCourseViewController *)[segue destinationViewController];
+            // Get reference to the destination view controller
+            MeetingCourseViewController * vc = (MeetingCourseViewController *)[segue destinationViewController];
         
-        // Pass any objects to the view controller here, like...
-        [vc setMeetingDocument:self.meetingDocument];
-        vc.tutor = self.tutor;
-        
-    }
+            // Pass any objects to the view controller here, like...
+            [vc setMeetingDocument:self.meetingDocument];
+            vc.tutor = self.tutor;
+        }
     
 
 }
@@ -68,6 +62,10 @@
 
 }
 -(void)dismissKeyboard {
+    if(![[self.smuIdField text]isEqualToString:@""])
+    {
+        [self.warningMessage setHidden:YES];
+    }
     [self.smuIdField resignFirstResponder];
 }
 
@@ -88,5 +86,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([[self.smuIdField text]isEqualToString:@""])
+    {
+        [self.warningMessage setHidden:NO];
+        return NO;
+    }else{
+        [self.warningMessage setHidden:YES];
+        return YES;
+    }
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+    [self.smuIdField setText:@""];
+}
 
 @end

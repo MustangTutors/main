@@ -21,6 +21,8 @@
     // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"segueToMeetingDate"])
     {
+        NSInteger courseID = [[[[self.tutor getCourses]objectAtIndex:[self.coursePickerView  selectedRowInComponent:0]]objectForKey:@"course_id"]integerValue];
+        [self.meetingDocument setCourseId:courseID];
         // Get reference to the destination view controller
         MeetingDateViewController * vc = (MeetingDateViewController *)[segue destinationViewController];
         

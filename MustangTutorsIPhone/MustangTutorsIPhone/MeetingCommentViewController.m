@@ -7,76 +7,94 @@
 //
 
 #import "MeetingCommentViewController.h"
-
 @interface MeetingCommentViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 
 @end
 
 @implementation MeetingCommentViewController
 
-- (IBAction)submitMeeting:(UIButton *)sender {
-    [self.meetingDocument setComment:[self.commentTextView text]];
-    
-    NSLog(@"Student ID:%d, Course Tutored:%@, Date:%@, start time:%@, end time:%@, Comment:%@",[self.meetingDocument getSmuId],[self.meetingDocument courseName],[self.meetingDocument date],[self.meetingDocument startTime],[self.meetingDocument endTime],[self.meetingDocument comment]);
-    //get user info from login credentials
-    NSString *url = [NSString stringWithFormat:@"http://local.mustangtutors.com/Laravel/public/tutors/meeting/%d",[self.tutor getUserId]];
-    
-    // Initialize Session Configuration
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    // Initialize Session Manager
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
-    
-    // Configure Manager
-    AFJSONResponseSerializer * serializer = [AFJSONResponseSerializer serializer];
-    NSMutableSet * set = [NSMutableSet setWithSet:serializer.acceptableContentTypes];
-    [set addObject:@"text/html"];
-    [serializer setAcceptableContentTypes:set];
-    [manager setResponseSerializer:serializer];
-    
-    // Send Request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    request.HTTPMethod = @"POST";
-    NSMutableDictionary * post_meeting = [[NSMutableDictionary alloc]
-                                          init];
-    [post_meeting setObject:[NSString stringWithFormat:@"%d",[self.meetingDocument getSmuId]] forKey:@"student_id"];
-    
-    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-    [post_meeting setObject:@"1" forKey:@"course_id"];
-    [post_meeting setObject:[formatter stringFromDate:[self.meetingDocument date]] forKey:@"day"];
-    [formatter setDateFormat:@"HH:mm:ss"];
-
-    [post_meeting setObject: [formatter stringFromDate:[self.meetingDocument startTime]] forKey:@"start_time"];
-    [post_meeting setObject:[formatter stringFromDate:[self.meetingDocument endTime]] forKey:@"end_time"];
-    [post_meeting setObject:[self.commentTextView text] forKey:@"summary"];
-
-    NSLog(@"GOOOO%@",post_meeting);
-    /*[request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if(error) {
-            NSLog(@"%@", error);
-        }
-        //process the tutor info here
-        NSLog(@"JSON: %@", responseObject);
-        NSLog(@"%@", [responseObject class]);
-        if([[responseObject objectAtIndex:0] objectForKey:@"smu_id"] != NULL)
-        {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"segueMeetingToProfile"])
+    {
             
-            self.tutor = [[Tutor alloc]initWithDictionary:[responseObject objectAtIndex:0]];
-            [self.tutor setAvailable:YES];
-            [self performSegueWithIdentifier:@"segueToTutorProfile" sender:self];
-        }else
-        {
-            NSLog(@"balls");
-        }
-        
-    }] resume];*/
+    }
+}
+- (IBAction)submitMeeting:(UIButton *)sender {
+    if(![[self.commentTextView text]isEqualToString:@"Your Summary Goes Here"])
+    {
+        [self.warningLabel setHidden:YES];
+        [self.meetingDocument setComment:[self.commentTextView text]];
+    
+        //add new meeting report
+    
+        // Initialize Session Manager
+        AFHTTPSessionManager * manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:@"http://local.mustangtutors.com"]];
+    
+        // Configure Manager
+        AFJSONResponseSerializer * serializer = [AFJSONResponseSerializer serializer];
+        NSMutableSet * set = [NSMutableSet setWithSet:serializer.acceptableContentTypes];
+        [set addObject:@"text/html"];
+        [serializer setAcceptableContentTypes:set];
+        [manager setResponseSerializer:serializer];
+    
+        //create post data dictionary
+        NSMutableDictionary * post_meeting = [[NSMutableDictionary alloc]
+                                          init];
+        //store smu id and course id of student tutored and course tutored
+        [post_meeting setObject:[NSString stringWithFormat:@"%d",[self.meetingDocument getSmuId]] forKey:@"student_id"];
+        [post_meeting setObject:[NSString stringWithFormat:@"%d",[self.meetingDocument getCourseId]] forKey:@"course_id"];
+
+        //format date format to match sequel pro DATE type
+        NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        [post_meeting setObject:[formatter stringFromDate:[self.meetingDocument date]] forKey:@"day"];
+    
+        //format start_time and end_time format to match SQLPRO TIME type
+        [formatter setDateFormat:@"HH:mm:ss"];
+        [post_meeting setObject: [formatter stringFromDate:[self.meetingDocument startTime]] forKey:@"start_time"];
+        [post_meeting setObject:[formatter stringFromDate:[self.meetingDocument endTime]] forKey:@"end_time"];
+    
+        //store summary of meeting
+        [post_meeting setObject:[self.commentTextView text] forKey:@"summary"];
+
+        //make post request
+        [manager POST:[NSString stringWithFormat:@"/Laravel/public/iphone/tutors/addMeeting/%d",[self.tutor getUserId]] parameters:post_meeting success:^(NSURLSessionDataTask *task, id responseObject) {
+            //success nslog the respone from server
+            NSLog(@"JSON:%@",responseObject);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"%@", task.response);
+            NSLog(@"%@", error);
+
+        }];
+
+        [self performSelector:@selector(patchSelector) withObject:nil afterDelay:1];
+
+        UIAlertView * successMessage = [[UIAlertView alloc] initWithTitle:nil message:@"Report Successfully Documented" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [successMessage show];
+        [self timedAlert:successMessage];
+    }else
+    {
+        [self.warningLabel setHidden:NO];
+    }
 
 }
+-(void)timedAlert:(UIAlertView *)alert
+{
+    [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:2];
+}
+
+-(void)dismissAlert:(UIAlertView *) alertView
+{
+    [alertView dismissWithClickedButtonIndex:nil animated:YES];
+}
+
+-(void)patchSelector{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -99,6 +117,10 @@
     
 }
 -(void)dismissKeyboard {
+    if(![[self.commentTextView text]isEqualToString:@"Your Summary Goes Here"])
+    {
+        [self.warningLabel setHidden:YES];
+    }
     [self.commentTextView resignFirstResponder];
 }
 

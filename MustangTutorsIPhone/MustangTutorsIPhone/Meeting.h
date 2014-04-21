@@ -15,4 +15,5 @@
 @property(nonatomic,getter = getSmuId)NSInteger smuId;
 @property(nonatomic,strong)NSString * courseName;
 @property(nonatomic,strong)NSString * comment;
+@property(nonatomic,getter = getCourseId) NSInteger courseId;
 @end

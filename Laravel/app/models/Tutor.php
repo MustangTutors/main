@@ -244,51 +244,42 @@ FROM rating where tutor_id = ?";
             echo "not a valid smu id";
         }
     }
-    //I modified the tutors info page to include the course Id for the iphone stuff
-    public function getInfoForTutorsPageWithCourseId($curr_user_id,$tutor_id)
+    public function documentMeetingIphone($tutor_id)
     {
-            $result2 = Tutor::getTutorsGeneralInfo($tutor_id);
-            $result3 = Tutor::getUsersCurrentRatingOfTutor($curr_user_id,$tutor_id);
-            $result4 = Tutor::getTutorsCourses($tutor_id);
-            $result5 = Tutor::getTutorsHours($tutor_id);
-            $result6 = Tutor::getTutorsComments($tutor_id);
-            $result0 = array();      
-            foreach($result2[0] as $key=>$value){
-                $result0[$key]=$value;
-            }
-            if(isset($result3[0]->current_user_rating))
-            {
-                $result0['current_user_rating'] = $result3[0]->current_user_rating;
-            }else
-            {
-                $result0['current_user_rating'] = null;
-            }
-            $iter = 0;
-            foreach($result4 as $value)
-            {
-                $result0['courses'][$iter] = $value;
-                $iter = $iter+1;
-            }
-            $iter = 0;
-            foreach($result5 as $value)
-            {
-                $result0['hours'][$iter] = $value;
-                $iter = $iter+1;
-            }
-            $iter = 0;
-            foreach($result6 as $value)
-            {
-                $result0['comments'][$iter] = $value;
-                $commenters_rating = Tutor::getUsersCurrentRatingOfTutor($value->user_id,$tutor_id);
-                if(isset($commenters_rating[0]->current_user_rating))
-                {
-                    $result0['comments'][$iter]->rating_from_commenter = $commenters_rating[0]->current_user_rating;
-                }else{
-                    $result0['comments'][$iter]->rating_from_commenter = null;
-                }
-                $iter = $iter +1;
-            }
-            echo json_encode($result0);
+        header('Content-type: application/json');
+        //echo json_encode(array("in here"));
+        //echo json_encode(array($_POST));
+       // die();
+        //$json=json_decode($_POST['post_meeting']);
+        $smu_id=$_POST['student_id'];
+        $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
+        if(isset($result[0])) {
+            $userid=$result[0]->user_id;
+            $courseid = $_POST['course_id'];
+            $date = $_POST['day'];
+            $startTime = $_POST['start_time'];
+            $endTime = $_POST['end_time'];
+            $Summary = $_POST['summary'];
+       // echo json_encode(array($smu_id));
+        //echo json_encode(array($userid));
+        //echo json_encode(array($courseid));
+        //echo json_encode(array($tutor_id));
+        //echo json_encode(array($date));
+        //echo json_encode(array($startTime));
+        //echo json_encode(array($endTime));
+        //echo json_encode(array($Summary));
+
+
+            $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
+            $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
+
+            //echo json_encode($_POST['student_id']);
+            echo json_encode($result);
+
+        }
+        else{
+            echo "not a valid smu id";
+        }
     }
 
 }

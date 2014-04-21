@@ -33,6 +33,7 @@
 		DB502F1318FB173200FC3104 /* Tutor.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502F1218FB173200FC3104 /* Tutor.m */; };
 		DB502F1718FC79A300FC3104 /* TutorCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502F1618FC79A300FC3104 /* TutorCommentsViewController.m */; };
 		DB502F1A18FC7F5300FC3104 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB502F1918FC7F5300FC3104 /* TabBarViewController.m */; };
+		DBC4EBC51904E644004AF248 /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC4EBC41904E644004AF248 /* Search.m */; };
 		DBD892EE18EE3C92009F7BD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD892ED18EE3C92009F7BD7 /* Foundation.framework */; };
 		DBD892F018EE3C92009F7BD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD892EF18EE3C92009F7BD7 /* CoreGraphics.framework */; };
 		DBD892F218EE3C92009F7BD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD892F118EE3C92009F7BD7 /* UIKit.framework */; };
@@ -122,6 +123,8 @@
 		DB502F1618FC79A300FC3104 /* TutorCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorCommentsViewController.m; sourceTree = "<group>"; };
 		DB502F1818FC7F5300FC3104 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		DB502F1918FC7F5300FC3104 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		DBC4EBC31904E644004AF248 /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
+		DBC4EBC41904E644004AF248 /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
 		DBD892EA18EE3C92009F7BD7 /* MustangTutorsIPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MustangTutorsIPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBD892ED18EE3C92009F7BD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBD892EF18EE3C92009F7BD7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -315,6 +318,8 @@
 				DB502F1218FB173200FC3104 /* Tutor.m */,
 				DB40E24318FF78E400AE9967 /* Meeting.h */,
 				DB40E24418FF78E400AE9967 /* Meeting.m */,
+				DBC4EBC31904E644004AF248 /* Search.h */,
+				DBC4EBC41904E644004AF248 /* Search.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 				DBD8932618EE492C009F7BD7 /* LoginViewController.m in Sources */,
 				DBF05BB718FDFA0A004B1B3B /* TutorClassesViewController.m in Sources */,
 				DBF05BB118FCFA89004B1B3B /* ScheduleTimeTableViewCell.m in Sources */,
+				DBC4EBC51904E644004AF248 /* Search.m in Sources */,
 				DB502F1318FB173200FC3104 /* Tutor.m in Sources */,
 				DB502F1018FA5D2000FC3104 /* TutorProfileViewController.m in Sources */,
 				DBF05BBA18FDFB6A004B1B3B /* ClassesTableViewCell.m in Sources */,

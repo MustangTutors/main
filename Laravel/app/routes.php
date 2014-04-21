@@ -270,6 +270,13 @@ Route::post('tutors/addMeeting/{id?}', function($id = '-1')
     }
 
 });
+Route::post('iphone/tutors/addMeeting/{id?}', function($id = '-1')
+{
+    $temp = new Tutor();
+    $temp->documentMeetingIphone($id);
+
+});
+
 
 Route::get('courses/showAll', function()
 {
