@@ -110,8 +110,8 @@ $(document).ready(function() {
             if(days.eq(i).is(":checked")) {
                 application.Hours[hour_index] = {};
                 application.Hours[hour_index].Day = i+1;
-                application.Hours[i].Start_Time = start_times.eq(i).val();
-                application.Hours[i].End_Time = end_times.eq(i).val();
+                application.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                application.Hours[hour_index].End_Time = end_times.eq(i).val();
                 hour_index++;
             }
         }

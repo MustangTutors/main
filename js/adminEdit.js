@@ -77,30 +77,8 @@ $(document).ready(function() {
                 }
                 $("article#hours ul").append(day);
 			}
-
-            if (!tutorInfo.comments) {
-                $("div#commentList ul").html("<div class='error'>This tutor doesn't have any comments yet.</div>");
-            }
-            else {
-                for(var j = 0; j < tutorInfo.comments.length; j++) {
-
-                    var oldTimestamp = moment(tutorInfo.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
-                    var newTimestamp = oldTimestamp.format("YYYY-MM-DD hh:mm:ss A");
-
-                    var comment = "<li><div class='comment'>";
-                    comment += tutorInfo.comments[j].comment;
-                    comment += "</div><div class='comment_info'><div class='comment_time'> Posted: ";
-                    comment += newTimestamp;
-                    comment += "</div><div class='comment_rating'>";
-                    if (tutorInfo.comments[j].rating_from_commenter !== null) {
-                        comment += "Tutor rating: " + convertToStars(tutorInfo.comments[j].rating_from_commenter);
-                    }
-                    comment += "</div></div></li>";
-                    $("div#commentList ul").append(comment);
-                }
-            }
-			
-        }
     });
+
+    
 
 });
