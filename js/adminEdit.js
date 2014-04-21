@@ -65,19 +65,6 @@ $(document).ready(function() {
 				$("article#courses ul li:nth-child("+index+")").append(course);
 				$("article#courses ul").append("</li>");
 			}
-
-			/*for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
-                var day = $('<li><span class="day"></span><span class="content"></span></li>');
-                day.find('.day').html(days[dayIndex]);
-                if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
-                    day.find('.content').html(convertTime(tutorInfo.hours[tutorDayIndex].start_time)+" to "+convertTime(tutorInfo.hours[tutorDayIndex].end_time));
-                    tutorDayIndex++;
-                }
-                else {
-                    day.find('.content').html("N/A");
-                }
-                $("article#hours ul").append(day);
-			}*/
         }
     });
 
@@ -142,5 +129,11 @@ $(document).ready(function() {
 
         $("li.new_dropdown").remove();
         $("section.tutor_info article").height(295);
+    });
+
+    $("button[name='cancelHourChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        $("input[type='time']").val("00:00");
     });
 });
