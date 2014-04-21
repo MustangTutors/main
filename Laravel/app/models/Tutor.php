@@ -237,7 +237,9 @@ FROM rating where tutor_id = ?";
             $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
             $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
 
-            echo json_encode($result);
+            //echo json_encode($result);
+            echo $tutor_id;
+            echo $result[0];
 
         }
         else{
