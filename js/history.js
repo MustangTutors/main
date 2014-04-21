@@ -135,8 +135,8 @@ $(document).ready(function(){
                 console.log(json);
                 json = JSON.parse(json);
 
-                new_meeting.first_name = json.fName;
-                new_meeting.last_name = json.lname;
+                new_meeting.first_name = json[0].fName;
+                new_meeting.last_name = json[0].lname;
                 addNewMeeting(new_meeting);
             }
         });
@@ -390,10 +390,11 @@ function createNewMeetingObject() {
 }
 
 function addNewMeeting(new_meeting) {
+    console.log(new_meeting);
     var title = new_meeting.title;
     var contributor = "Student tutored: " + new_meeting.first_name + " " + new_meeting.last_name;
     var date = new_meeting.day;
-    var time = new_meeting.start_time + " to " + new_meeting.end_time;
+    var time = convertTime(new_meeting.start_time) + " to " + convertTime(new_meeting.end_time);
     var summary = new_meeting.summary;
 
     // Create and append new node with json information
