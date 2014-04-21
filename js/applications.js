@@ -125,6 +125,11 @@ $(document).ready(function() {
                 // Store User ID in the application.
                 jQuery.data(application[0], 'user_id', json[i].user_id);
             }
+            
+            // Replace broken tutor images
+            $('img').error(function(){
+                $(this).attr('src', 'img/tutors/tutor.png');
+            });
         }
     });
 });
