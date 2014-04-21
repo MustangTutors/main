@@ -27,6 +27,8 @@ $(document).ready(function() {
 
 	$("article.schedule").css("height", "295px");
 
+    var list_of_course_ids = [];
+
     var tutorInfo;
 	$.ajax({
         type: "GET",
@@ -64,6 +66,8 @@ $(document).ready(function() {
 				$("article#courses ul").append("<li>");
 				$("article#courses ul li:nth-child("+index+")").append(course);
 				$("article#courses ul").append("</li>");
+                list_of_course_ids[i] = tutorInfo.courses[i].course_id;
+                console.log(list_of_course_ids[i]);
 			}
         }
     });
@@ -144,16 +148,29 @@ $(document).ready(function() {
         courses.User_ID = user_id;
         courses.Courses = [];
 
+        var checkbox_courses = $("span.label input[type='checkbox']");
+        var course_index = 0;
+
+        for(var i = 0; i < checkbox_courses.length; i++) {
+            if(checkbox_courses.eq(i).is(":checked")) {
+                courses.Courses[course_index] = {};
+                courses.Courses[course_index].Course_ID = list_of_course_ids[i];
+                course_index++;
+            }
+        }
+
         var selected_courses = $("select.course_dropdown");
 
         for(var i = 0; i < selected_courses.length; i++) {
             var new_course = selected_courses.eq(i).val();
 
-            courses.Courses[i] = {};
+            courses.Courses[course_index] = {};
 
             var regex_id = /(\d)/;
             var course_id = regex_id.exec(new_course);
-            courses.Courses[i].Course_ID = course_id[0];
+            courses.Courses[course_index].Course_ID = course_id[0];
+            course_index++;
+            console.log(courses);
 
         }
 
