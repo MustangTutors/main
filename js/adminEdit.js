@@ -56,6 +56,7 @@ $(document).ready(function() {
 			for(var i = 0; i < tutorInfo.courses.length; i++) {
 				var index = i+1;
 				var course = "<span class='label'>";
+                course += "<input type='checkbox'>";
 				course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
 				course += "</span><span class='content'>";
 				course += tutorInfo.courses[i].course_name;
@@ -77,8 +78,6 @@ $(document).ready(function() {
                 }
                 $("article#hours ul").append(day);
 			}
+        }
     });
-
-    
-
 });
