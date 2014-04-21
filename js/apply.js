@@ -30,7 +30,7 @@ $(document).ready(function() {
             $("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
-                option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
                 option += "</option>";
                 $("select.course_dropdown").append(option);
             }
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 $("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
-                    option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
                     option += "</option>";
                     $("select.course_dropdown").append(option);
                 }
@@ -73,39 +73,53 @@ $(document).ready(function() {
 		
 	});
 
-    var days = $("article#potential_hours ul li input[type='checkbox']");
-    var start_times = $("article#potential_hours ul li input.start_time");
-    var end_times = $("article#potential_hours ul li input.end_time");
+    $("button[type='submit']").on("submit", function() {
+        var application = {};
+
+        application.User_ID = user_id;
+        application.Courses = new Array();
+        application.Hours = new Array();
+
+        var selected_courses = $("select.course_dropdown");
+
+        for(var i = 0; i < selected_courses.length; i++) {
+            var new_course = selected_courses.eq(0).val();
+
+            /*var regex_subject = /([A-Z]+)/;
+            var subject = regex_subject.exec(new_course);
+            application.Courses[i].Subject = subject[0];
+
+            var regex_course_number = /(\d)+/;
+            var course_number = regex_course_number.exec(new_course);
+            application.Courses[i].Course_Number = course_number[0];
+
+            var regex_course_name = /\d+ ([A-Za-z ]+)/;
+            var course_name = regex_course_name.exec(new_course);
+            application.Courses[i].Course_Name = course_name[1];*/
+
+            var regex_id = /(\d)/;
+            var course_id = regex_id.exec(new_course);
+            application.Courses[i].Course_ID = course_id[0];
+            console.log(application.Courses[i].Course_ID);
+
+        }
+
+        var days = $("article#potential_hours ul li input[type='checkbox']");
+        var start_times = $("article#potential_hours ul li input.start_time");
+        var end_times = $("article#potential_hours ul li input.end_time");
+
+        var hour_index = 0;
 
 
-    //for(var i = 0; i < dates.length; i++) {
+        for(var i = 0; i < days.length; i++) {
+            if(days.eq(i).is(":checked")) {
+                application.Hours[hour_index].Day = i+1;
+                application.Hours[i].Start_Time = start_times.eq(i).val();
+                application.Hours[i].End_Time = end_times.eq(i).val();
+                hour_index++;
+            }
+        }
+    });
 
-    //}
-
-
-    var application = {};
-
-    application.User_ID = user_id;
-    application.First_Name = fname;
-    application.Last_Name = lname;
-    application.Courses = new Array();
-
-    var selected_courses = $("select.course_dropdown");
-
-    for(var i = 0; i < selected_courses.length; i++) {
-        var new_course = selected_courses.eq(0).val();
-
-        var regex_subject = /([A-Z]+)/;
-        var subject = regex_subject.exec(new_course);
-        application.Courses[i].Subject = subject[0];
-
-        var regex_course_number = /(\d)+/;
-        var course_number = regex_course_number.exec(new_course);
-        application.Courses[i].Course_Number = course_number[0];
-
-        var regex_course_name = /\d+ ([A-Za-z ]+)/;
-        var course_name = regex_course_name.exec(new_course);
-        application.Courses[i].Course_Name = course_name[1];
-    }
 
 });
