@@ -136,4 +136,66 @@ $(document).ready(function() {
 
         $("input[type='time']").val("00:00");
     });
+
+    $("button[name='saveCourseChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        var courses = {};
+        courses.User_ID = user_id;
+        courses.Courses = new Array();
+
+        var selected_courses = $("select.new_dropdown");
+
+        for(var i = 0; i < selected_courses.length; i++) {
+            var new_course = selected_courses.eq(0).val();
+
+            courses.Courses[i] = {};
+
+            var regex_id = /(\d)/;
+            var course_id = regex_id.exec(new_course);
+            courses.Courses[i].Course_ID = course_id[0];
+
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/courses/update",
+            data: {
+                new_courses: courses
+            }
+        });
+    });
+
+    $("button[name='saveHourChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        var hours = {};
+        hours.User_ID = user_id;
+        hours.Hours = new Array();
+
+        var days = $("article#hours ul li input[type='checkbox']");
+        var start_times = $("article#hours ul li input.start_time");
+        var end_times = $("article#hours ul li input.end_time");
+
+        var hour_index = 0;
+
+
+        for(var i = 0; i < days.length; i++) {
+            if(days.eq(i).is(":checked")) {
+                hours.Hours[hour_index] = {};
+                hours.Hours[hour_index].Day = i+1;
+                hours.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                hours.Hours[hour_index].End_Time = end_times.eq(i).val();
+                hour_index++;
+            }
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/schedule/update",
+            data: {
+                new_hours: hours
+            }
+        });
+    });
 });
