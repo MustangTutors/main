@@ -79,7 +79,7 @@ $(document).ready(function() {
 		
 	});
 
-    $("button[type='submit']").on("submit", function() {
+    $("button[type='submit']").on("click", function() {
         var application = {};
 
         application.User_ID = user_id;
@@ -91,22 +91,11 @@ $(document).ready(function() {
         for(var i = 0; i < selected_courses.length; i++) {
             var new_course = selected_courses.eq(0).val();
 
-            /*var regex_subject = /([A-Z]+)/;
-            var subject = regex_subject.exec(new_course);
-            application.Courses[i].Subject = subject[0];
-
-            var regex_course_number = /(\d)+/;
-            var course_number = regex_course_number.exec(new_course);
-            application.Courses[i].Course_Number = course_number[0];
-
-            var regex_course_name = /\d+ ([A-Za-z ]+)/;
-            var course_name = regex_course_name.exec(new_course);
-            application.Courses[i].Course_Name = course_name[1];*/
+            application.Courses[i] = {};
 
             var regex_id = /(\d)/;
             var course_id = regex_id.exec(new_course);
             application.Courses[i].Course_ID = course_id[0];
-            console.log(application.Courses[i].Course_ID);
 
         }
 
@@ -119,12 +108,25 @@ $(document).ready(function() {
 
         for(var i = 0; i < days.length; i++) {
             if(days.eq(i).is(":checked")) {
+                application.Hours[hour_index] = {};
                 application.Hours[hour_index].Day = i+1;
                 application.Hours[i].Start_Time = start_times.eq(i).val();
                 application.Hours[i].End_Time = end_times.eq(i).val();
                 hour_index++;
             }
         }
+
+        $.ajax({
+            type: "POST",
+            url: "Laravel/public/users/apply",
+            data: {
+                application: application
+            },
+            success: function(output) {
+                console.log("Sent something");
+            }
+        });
+
     });
 
 
