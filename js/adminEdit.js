@@ -142,12 +142,12 @@ $(document).ready(function() {
 
         var courses = {};
         courses.User_ID = user_id;
-        courses.Courses = new Array();
+        courses.Courses = [];
 
-        var selected_courses = $("select.new_dropdown");
+        var selected_courses = $("select.course_dropdown");
 
         for(var i = 0; i < selected_courses.length; i++) {
-            var new_course = selected_courses.eq(0).val();
+            var new_course = selected_courses.eq(i).val();
 
             courses.Courses[i] = {};
 
@@ -157,13 +157,14 @@ $(document).ready(function() {
 
         }
 
-        $.ajax({
-            type: "GET",
+        /*$.ajax({
+            type: "POST",
             url: "Laravel/public/courses/update",
             data: {
                 new_courses: JSON.stringify(courses)
             }
-        });
+        });*/
+        console.log(JSON.stringify(courses));
     });
 
     $("button[name='saveHourChanges']").on("click", function(e) {
@@ -171,7 +172,7 @@ $(document).ready(function() {
 
         var hours = {};
         hours.User_ID = user_id;
-        hours.Hours = new Array();
+        hours.Hours = [];
 
         var days = $("article#hours ul li input[type='checkbox']");
         var start_times = $("article#hours ul li input.start_time");
@@ -190,12 +191,13 @@ $(document).ready(function() {
             }
         }
 
-        $.ajax({
-            type: "GET",
+        /*$.ajax({
+            type: "POST",
             url: "Laravel/public/schedule/update",
             data: {
                 new_hours: JSON.stringify(hours)
             }
-        });
+        });*/
+        console.log(hours);
     });
 });
