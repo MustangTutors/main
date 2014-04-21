@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +22,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 		mContext = this;
 
 		// Open preferences file
-		sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		editor = sharedPref.edit();
 
 		mTitle = mDrawerTitle = getTitle();
