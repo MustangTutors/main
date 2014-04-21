@@ -80,4 +80,60 @@ $(document).ready(function() {
 			}
         }
     });
+
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/courses/showAll",
+        success: function(courses) {
+            courses = JSON.parse(courses);
+            //$("option").remove();
+            for(var i = 0; i < courses.length; i++) {
+                var option = "<option>";
+                option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += "</option>";
+                $("select.course_dropdown").append(option);
+            }
+        }
+    });
+
+    var potential = 0;
+
+    $("img[src='img/add.png']").on("click", function(e) {
+
+        e.preventDefault();
+
+        $("article#courses ul").append(
+            "<li class='potential_course'>" +
+                "<select id='potential" + potential + "' class='course_dropdown'>" +
+                    "</select></li>"
+        );
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/courses/showAll",
+            success: function(courses) {
+                courses = JSON.parse(courses);
+                //$("option").remove();
+                for(var i = 0; i < courses.length; i++) {
+                    var option = "<option>";
+                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    option += "</option>";
+                    var identifier = 'select#potential' + (potential-1);
+                    $(identifier).append(option);
+                }
+            }
+        });
+
+        potential++;
+
+        e.stopPropagation();
+
+        var height = $("article#courses ul").height();
+
+        if(height > 143) {
+            var new_height = $("section.tutor_info article").height();
+            $("section.tutor_info article").height(new_height+30);
+        }
+        
+    });
 });
