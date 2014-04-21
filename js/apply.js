@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 	$.ajax({
         type: "GET",
-        url: "Laravel/public/users/current/" + user_id,
+        url: "Laravel/public/users/current/",
         success: function(userInfo) {
             userInfo = JSON.parse(userInfo);
 
@@ -27,7 +27,6 @@ $(document).ready(function() {
         url: "Laravel/public/courses/showAll",
         success: function(courses) {
             courses = JSON.parse(courses);
-            //$("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
                 option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -120,7 +119,7 @@ $(document).ready(function() {
             type: "POST",
             url: "Laravel/public/users/apply",
             data: {
-                application: application
+                application: JSON.stringify(application)
             },
             success: function(output) {
                 console.log("Sent something");
