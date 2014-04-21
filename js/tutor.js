@@ -25,6 +25,7 @@ $(document).ready(function() {
 	var available = ["Unavailable", "Busy", "Available"];
 
     var tutorInfo;
+
 	$.ajax({
         type: "GET",
         url: "Laravel/public/tutor/" + user_id,

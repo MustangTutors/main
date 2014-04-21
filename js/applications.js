@@ -113,7 +113,7 @@ $(document).ready(function() {
                 for (var j = 0, k = 0; j < days.length; j++) {
                     var day = $('<li><span class="listLabel"></span><span class="listContent"></span></li>');
                     day.find('.listLabel').html(days[j]);
-                    if ((k < hours.length) && (hours[k].day === (j+1))) {
+                    if ((k < hours.length) && (Number(hours[k].day) === (j+1))) {
                         day.find('.listContent').html(convertTime(hours[k].start_time) + " to " + convertTime(hours[k].end_time));
                         k++;
                     }
@@ -125,6 +125,11 @@ $(document).ready(function() {
                 // Store User ID in the application.
                 jQuery.data(application[0], 'user_id', json[i].user_id);
             }
+            
+            // Replace broken tutor images
+            $('img').error(function(){
+                $(this).attr('src', 'img/tutors/tutor.png');
+            });
         }
     });
 });

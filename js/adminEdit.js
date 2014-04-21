@@ -25,7 +25,7 @@ $(document).ready(function() {
 	var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	var available = ["Unavailable", "Busy", "Available"];
 
-	$("article.schedule").css("height", "225px");
+	$("article.schedule").css("height", "295px");
 
     var tutorInfo;
 	$.ajax({
@@ -56,6 +56,7 @@ $(document).ready(function() {
 			for(var i = 0; i < tutorInfo.courses.length; i++) {
 				var index = i+1;
 				var course = "<span class='label'>";
+                course += "<input type='checkbox'>";
 				course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
 				course += "</span><span class='content'>";
 				course += tutorInfo.courses[i].course_name;
@@ -64,43 +65,137 @@ $(document).ready(function() {
 				$("article#courses ul li:nth-child("+index+")").append(course);
 				$("article#courses ul").append("</li>");
 			}
-
-			for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
-                var day = $('<li><span class="day"></span><span class="content"></span></li>');
-                day.find('.day').html(days[dayIndex]);
-                if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
-                    day.find('.content').html(convertTime(tutorInfo.hours[tutorDayIndex].start_time)+" to "+convertTime(tutorInfo.hours[tutorDayIndex].end_time));
-                    tutorDayIndex++;
-                }
-                else {
-                    day.find('.content').html("N/A");
-                }
-                $("article#hours ul").append(day);
-			}
-
-            if (!tutorInfo.comments) {
-                $("div#commentList ul").html("<div class='error'>This tutor doesn't have any comments yet.</div>");
-            }
-            else {
-                for(var j = 0; j < tutorInfo.comments.length; j++) {
-
-                    var oldTimestamp = moment(tutorInfo.comments[j].timeStamp, "YYYY-MM-DD HH:mm:ss");
-                    var newTimestamp = oldTimestamp.format("YYYY-MM-DD hh:mm:ss A");
-
-                    var comment = "<li><div class='comment'>";
-                    comment += tutorInfo.comments[j].comment;
-                    comment += "</div><div class='comment_info'><div class='comment_time'> Posted: ";
-                    comment += newTimestamp;
-                    comment += "</div><div class='comment_rating'>";
-                    if (tutorInfo.comments[j].rating_from_commenter !== null) {
-                        comment += "Tutor rating: " + convertToStars(tutorInfo.comments[j].rating_from_commenter);
-                    }
-                    comment += "</div></div></li>";
-                    $("div#commentList ul").append(comment);
-                }
-            }
-			
         }
     });
 
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/courses/showAll",
+        success: function(courses) {
+            courses = JSON.parse(courses);
+            //$("option").remove();
+            for(var i = 0; i < courses.length; i++) {
+                var option = "<option>";
+                option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += "</option>";
+                $("select.course_dropdown").append(option);
+            }
+        }
+    });
+
+    var potential = 0;
+
+    $("img[src='img/add.png']").on("click", function(e) {
+
+        e.preventDefault();
+
+        $("article#courses ul").append(
+            "<li class='potential_course new_dropdown'>" +
+                "<select id='potential" + potential + "' class='course_dropdown'>" +
+                    "</select></li>"
+        );
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/courses/showAll",
+            success: function(courses) {
+                courses = JSON.parse(courses);
+                //$("option").remove();
+                for(var i = 0; i < courses.length; i++) {
+                    var option = "<option>";
+                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    option += "</option>";
+                    var identifier = 'select#potential' + (potential-1);
+                    $(identifier).append(option);
+                }
+            }
+        });
+
+        potential++;
+
+        e.stopPropagation();
+
+        var height = $("article#courses ul").height();
+
+        if(height > 143) {
+            var new_height = $("section.tutor_info article").height();
+            $("section.tutor_info article").height(new_height+30);
+        }
+        
+    });
+
+    $("button[name='cancelCourseChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        $("li.new_dropdown").remove();
+        $("section.tutor_info article").height(295);
+    });
+
+    $("button[name='cancelHourChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        $("input[type='time']").val("00:00");
+    });
+
+    $("button[name='saveCourseChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        var courses = {};
+        courses.User_ID = user_id;
+        courses.Courses = new Array();
+
+        var selected_courses = $("select.new_dropdown");
+
+        for(var i = 0; i < selected_courses.length; i++) {
+            var new_course = selected_courses.eq(0).val();
+
+            courses.Courses[i] = {};
+
+            var regex_id = /(\d)/;
+            var course_id = regex_id.exec(new_course);
+            courses.Courses[i].Course_ID = course_id[0];
+
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/courses/update",
+            data: {
+                new_courses: JSON.stringify(courses)
+            }
+        });
+    });
+
+    $("button[name='saveHourChanges']").on("click", function(e) {
+        e.preventDefault();
+
+        var hours = {};
+        hours.User_ID = user_id;
+        hours.Hours = new Array();
+
+        var days = $("article#hours ul li input[type='checkbox']");
+        var start_times = $("article#hours ul li input.start_time");
+        var end_times = $("article#hours ul li input.end_time");
+
+        var hour_index = 0;
+
+
+        for(var i = 0; i < days.length; i++) {
+            if(days.eq(i).is(":checked")) {
+                hours.Hours[hour_index] = {};
+                hours.Hours[hour_index].Day = i+1;
+                hours.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                hours.Hours[hour_index].End_Time = end_times.eq(i).val();
+                hour_index++;
+            }
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/schedule/update",
+            data: {
+                new_hours: JSON.stringify(hours)
+            }
+        });
+    });
 });

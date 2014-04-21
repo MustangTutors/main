@@ -5,15 +5,15 @@ import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.example.mustangtutors.MainActivity.SearchTask;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
@@ -53,11 +53,15 @@ public class MeetingActivity extends FragmentActivity {
 	private Spinner mCourses;
 	private String[] mCourseId;
 	private String[] courses;
+	
+	private SharedPreferences sharedPref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
+		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		
 		mContext = this;
 		// Show the Up button in the action bar.
@@ -79,7 +83,6 @@ public class MeetingActivity extends FragmentActivity {
 			public void onClick(View v) {
 				// Send info for new meeting
 				if(valid()){
-					resetMeetingForm();
 					new AddTask().execute((Void) null);
 				}
 				else {
@@ -352,11 +355,13 @@ public class MeetingActivity extends FragmentActivity {
     public class AddTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			AjaxRequest request = new AjaxRequest("POST", "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting");
+			String url = "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting/" + sharedPref.getString("user_id", "");
+			System.out.println(url);
+			AjaxRequest request = new AjaxRequest("POST", url);
 			
 			String id = mSmuId.getText().toString();
 			String sum = mSummary.getText().toString();
-			String date = mYear + "-" + mDay + "-" + mMonth;
+			String date = mYear + "-" + mMonth + "-" + mDay;
 			String stime = sHour + ":" + sMinute + ":00";
 			String etime = eHour + ":" + eMinute + ":00";
 			int cour = mCourses.getSelectedItemPosition();
@@ -372,7 +377,8 @@ public class MeetingActivity extends FragmentActivity {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
+			String asdf = json.toString();
+			System.out.println(asdf);
 	        request.addParam("post_meeting", json.toString());
             try {
 	            request.send();
@@ -383,6 +389,8 @@ public class MeetingActivity extends FragmentActivity {
 		}
 		
 		protected void onPostExecute(Boolean result){
+			resetMeetingForm();
+			
 			CharSequence text = "Meeting Added";
 			int duration = Toast.LENGTH_SHORT;
 

@@ -35,7 +35,7 @@
                         </span>
                         <span id="yourRating">
                             <h3>Your rating: <span></span>
-                                <a href="#"><img src="img/pencil.png" alt="edit icon"></a>
+                                <a href=""><img src="img/pencil.png" alt="edit icon"></a>
                             </h3>
                         </span>
                             <div id="editRating">
@@ -52,34 +52,107 @@
                 </div>
             </section>
 
-            <section class="tutor_info">
-                <article id="courses" class="schedule summary">
-                    <h2 class="subheading">Courses Taught<a href="#"><img src="img/pencil.png" alt="edit icon"></a></h2>
+            <section class="tutor_info admin_tutor_info">
+                <article id="courses" class="schedule summary admin_edit">
+                    <h2 class="subheading">Courses Taught<a href=""><img src="img/pencil.png" alt="edit icon"></a></h2>
                     <ul></ul>
+                    <a href=""><img src="img/add.png" alt="add course icon"></a>
                     <button type="button" name="cancelCourseChanges">Cancel</button>
                     <button type="button" name="saveCourseChanges">Save</button>
                 </article>
             </section>
 
-            <section class="tutor_info">
-                <article id="hours" class="schedule summary">
-                    <h2 class="subheading">Regular Hours<a href="#"><img src="img/pencil.png" alt="edit icon"></a></h2>
-                    <ul></ul>
+            <section class="tutor_info admin_tutor_info">
+                <article id="hours" class="schedule summary admin_edit">
+                    <h2 class="subheading">Regular Hours<a href=""><img src="img/pencil.png" alt="edit icon"></a></h2>
+                    <ul>
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="sunday">
+                                <label for="sunday">Sunday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="monday">
+                                <label for="monday">Monday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="tuesday">
+                                <label for="tuesday">Tuesday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="wednesday">
+                                <label for="wednesday">Wednesday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="thursday">
+                                <label for="thursday">Thursday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="friday">
+                                <label for="friday">Friday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="potential_day">
+                                <input type="checkbox" id="saturday">
+                                <label for="saturday">Saturday</label>
+                            </span>
+                            <span class="start_end">
+                                <input type="time" class="start_time" value="00:00">
+                                <span> to </span>
+                                <input type="time" class="end_time" value="00:00">
+                            </span>
+                        </li>
+                    </ul>
                     <button type="button" name="cancelHourChanges">Cancel</button>                    
                     <button type="button" name="saveHourChanges">Save</button>
                 </article>
-            </section>
-
-            <section id="comments">
-                <h2 class="subheading">Comments</h2>
-                <div id="comment_form">
-                    <textarea name="commentBox" rows="5" cols="50" maxlength="140" spellcheck="true"></textarea>
-                    <input type="submit" class="button" name="addComment" value="Add Comment">
-                </div>
-                <div id="commentList">
-                    <ul>
-                    </ul>
-                </div>
             </section>
 
         </div>

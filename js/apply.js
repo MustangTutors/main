@@ -1,15 +1,28 @@
+// Check if the user is logged in. If not, redirect to findstudent.html
+$.ajax({
+    url: "Laravel/public/users/current",
+    success: function(json) {
+        json = JSON.parse(json);
+        if (json.length === 0) {
+            window.location.href = "index.html";
+        }
+    }
+});
+
 $(document).ready(function() {
 
-	var user_id = getURLParameter('user_id');
+	//var user_id = getURLParameter('user_id');
+    var user_id;
     var fname;
     var lname;
 
 	$.ajax({
         type: "GET",
-        url: "Laravel/public/users/current/" + user_id,
+        url: "Laravel/public/users/current",
         success: function(userInfo) {
             userInfo = JSON.parse(userInfo);
 
+            user_id = userInfo[0].user_id;
             fname = userInfo[0].fName;
             lname = userInfo[0].lName;
 
@@ -27,15 +40,16 @@ $(document).ready(function() {
         url: "Laravel/public/courses/showAll",
         success: function(courses) {
             courses = JSON.parse(courses);
-            $("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
-                option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
                 option += "</option>";
                 $("select.course_dropdown").append(option);
             }
         }
     });
+
+    var potential = 0;
 
 	$("img[src='img/add.png']").on("click", function(e) {
 
@@ -43,7 +57,7 @@ $(document).ready(function() {
 
 		$("div#addCourses form").append(
 			"<span class='potential_course'>" +
-                "<select class='course_dropdown'>" +
+                "<select id='potential" + potential + "' class='course_dropdown'>" +
                  	"</select></span>"
 		);
 
@@ -52,15 +66,19 @@ $(document).ready(function() {
             url: "Laravel/public/courses/showAll",
             success: function(courses) {
                 courses = JSON.parse(courses);
-                $("option").remove();
+                //$("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
-                    option += courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
                     option += "</option>";
-                    $("select.course_dropdown").append(option);
+                    var identifier = 'select#potential' + (potential-1);
+                    $(identifier).append(option);
+                    console.log(potential);
                 }
             }
         });
+
+        potential++;
 
 		e.stopPropagation();
 
@@ -73,39 +91,55 @@ $(document).ready(function() {
 		
 	});
 
-    var days = $("article#potential_hours ul li input[type='checkbox']");
-    var start_times = $("article#potential_hours ul li input.start_time");
-    var end_times = $("article#potential_hours ul li input.end_time");
+    $("button[type='submit']").on("click", function() {
+        var application = {};
+
+        application.User_ID = user_id;
+        application.Courses = new Array();
+        application.Hours = new Array();
+
+        var selected_courses = $("select.course_dropdown");
+
+        for(var i = 0; i < selected_courses.length; i++) {
+            var new_course = selected_courses.eq(i).val();
+
+            application.Courses[i] = {};
+
+            var regex_id = /(\d)/;
+            var course_id = regex_id.exec(new_course);
+            application.Courses[i].Course_ID = course_id[0];
+
+        }
+
+        var days = $("article#potential_hours ul li input[type='checkbox']");
+        var start_times = $("article#potential_hours ul li input.start_time");
+        var end_times = $("article#potential_hours ul li input.end_time");
+
+        var hour_index = 0;
 
 
-    //for(var i = 0; i < dates.length; i++) {
+        for(var i = 0; i < days.length; i++) {
+            if(days.eq(i).is(":checked")) {
+                application.Hours[hour_index] = {};
+                application.Hours[hour_index].Day = i+1;
+                application.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                application.Hours[hour_index].End_Time = end_times.eq(i).val();
+                hour_index++;
+            }
+        }
 
-    //}
+        $.ajax({
+            type: "POST",
+            url: "Laravel/public/users/apply",
+            data: {
+                application: JSON.stringify(application)
+            },
+            success: function(output) {
+                console.log("Sent something");
+            }
+        });
 
+    });
 
-    var application = {};
-
-    application.User_ID = user_id;
-    application.First_Name = fname;
-    application.Last_Name = lname;
-    application.Courses = new Array();
-
-    var selected_courses = $("select.course_dropdown");
-
-    for(var i = 0; i < selected_courses.length; i++) {
-        var new_course = selected_courses.eq(0).val();
-
-        var regex_subject = /([A-Z]+)/;
-        var subject = regex_subject.exec(new_course);
-        application.Courses[i].Subject = subject[0];
-
-        var regex_course_number = /(\d)+/;
-        var course_number = regex_course_number.exec(new_course);
-        application.Courses[i].Course_Number = course_number[0];
-
-        var regex_course_name = /\d+ ([A-Za-z ]+)/;
-        var course_name = regex_course_name.exec(new_course);
-        application.Courses[i].Course_Name = course_name[1];
-    }
 
 });

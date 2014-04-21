@@ -1621,4 +1621,43 @@ h2.subheading a, article.schedule button{
     float: right;
 }
 
+article.admin_edit span.label {
+    width: 115px;
+}
+
+article.admin_edit input[type="checkbox"] {
+    margin-left: -10px;
+}
+
+section.admin_tutor_info article#hours.admin_edit {
+    width: 397px;
+    height: 249px;
+    margin-left: 20px;
+}
+
+section.admin_tutor_info article#courses.admin_edit {
+    height: 249px;
+    width: 422px;
+    margin-left: 14px;
+}
+
+article#hours.admin_edit li span.potential_day{
+    display: inline-block;
+    width: 115px;
+}
+
+section.tutor_info {
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+}
+
+section.admin_tutor_info img[src="img/add.png"] {
+    max-width: 30px;
+    max-height: 30px;
+    margin-left: 390px;
+    margin-top: -40px;
+    position: absolute;
+}
+
 /* End stylying for Admin Edit of Tutor Profile*/
