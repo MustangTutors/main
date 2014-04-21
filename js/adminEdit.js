@@ -25,7 +25,7 @@ $(document).ready(function() {
 	var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	var available = ["Unavailable", "Busy", "Available"];
 
-	$("article.schedule").css("height", "225px");
+	$("article.schedule").css("height", "295px");
 
     var tutorInfo;
 	$.ajax({
@@ -66,7 +66,7 @@ $(document).ready(function() {
 				$("article#courses ul").append("</li>");
 			}
 
-			for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
+			/*for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
                 var day = $('<li><span class="day"></span><span class="content"></span></li>');
                 day.find('.day').html(days[dayIndex]);
                 if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
                     day.find('.content').html("N/A");
                 }
                 $("article#hours ul").append(day);
-			}
+			}*/
         }
     });
 
@@ -141,6 +141,6 @@ $(document).ready(function() {
         e.preventDefault();
 
         $("li.new_dropdown").remove();
-        $("section.tutor_info article").height(225);
+        $("section.tutor_info article").height(295);
     });
 });
