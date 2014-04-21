@@ -27,7 +27,7 @@ $(document).ready(function() {
         url: "Laravel/public/courses/showAll",
         success: function(courses) {
             courses = JSON.parse(courses);
-            $("option").remove();
+            //$("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
                 option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -37,13 +37,15 @@ $(document).ready(function() {
         }
     });
 
+    var potential = 0;
+
 	$("img[src='img/add.png']").on("click", function(e) {
 
 		e.preventDefault();
 
 		$("div#addCourses form").append(
 			"<span class='potential_course'>" +
-                "<select class='course_dropdown'>" +
+                "<select id='potential" + potential + "' class='course_dropdown'>" +
                  	"</select></span>"
 		);
 
@@ -52,15 +54,19 @@ $(document).ready(function() {
             url: "Laravel/public/courses/showAll",
             success: function(courses) {
                 courses = JSON.parse(courses);
-                $("option").remove();
+                //$("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
                     option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
                     option += "</option>";
-                    $("select.course_dropdown").append(option);
+                    var identifier = 'select#potential' + (potential-1);
+                    $(identifier).append(option);
+                    console.log(potential);
                 }
             }
         });
+
+        potential++;
 
 		e.stopPropagation();
 
