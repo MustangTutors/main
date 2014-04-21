@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 	$.ajax({
         type: "GET",
-        url: "Laravel/public/users/current/",
+        url: "Laravel/public/users/current",
         success: function(userInfo) {
             userInfo = JSON.parse(userInfo);
 
