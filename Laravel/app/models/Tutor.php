@@ -34,7 +34,7 @@ class Tutor extends Eloquent{
     //return an array of the results
     public static function getTutorsGeneralInfo($user_id)
     {
-        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName, users.lName as tutor_lName, users.available, users.active, COUNT(rating.rating) as numberOfRatings, AVG(rating.rating) as average_rating from users LEFT JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
+        $result = DB::select("select users.user_id as tutor_id, users.fName as tutor_fName, users.lName as tutor_lName, users.available, users.active, COUNT(rating.rating) as numberOfRatings, ROUND(AVG(rating.rating),2) as average_rating from users LEFT JOIN rating ON users.user_id = rating.tutor_id where users.user_id = ?",array($user_id));
         return $result;
 
     }
@@ -117,7 +117,7 @@ class Tutor extends Eloquent{
             $result = DB::update($query,array($rating,$userid,$tutorid));
             
             //Query to echo a json of the average rating and the total number of ratings after the update
-            $query = "SELECT AVG(rating.rating) as AVERAGE_RATING,COUNT(rating.rating)as NUMBER_OF_RATINGS
+            $query = "SELECT ROUND(AVG(rating.rating),2) as AVERAGE_RATING,COUNT(rating.rating)as NUMBER_OF_RATINGS
 FROM rating where tutor_id = ?";
             $result = DB::select($query,array($tutorid));
             echo json_encode($result);
@@ -128,7 +128,7 @@ FROM rating where tutor_id = ?";
             $result = DB::insert($query,array($userid,$tutorid,$rating));
             
             //Query to echo a json of the average rating and the total number of ratings after the update
-            $query = "SELECT AVG(rating.rating) as AVERAGE_RATING,COUNT(rating.rating)as NUMBER_OF_RATINGS
+            $query = "SELECT ROUND(AVG(rating.rating),2) as AVERAGE_RATING,COUNT(rating.rating)as NUMBER_OF_RATINGS
 FROM rating where tutor_id = ?";
             $result = DB::select($query,array($tutorid));
             echo json_encode($result);
@@ -141,7 +141,7 @@ FROM rating where tutor_id = ?";
     public function searchTutors()
     {
         //Prepare generic query
-        $query = "SELECT u.User_ID, u.fName as First_Name, u.lName as Last_Name, u.Available, u.Active, COUNT(distinct r.rating_id) as Number_Ratings, AVG(distinct r.rating) as Average_Rating FROM users u inner join courses_tutored ct on u.user_id = ct.user_id inner join courses c on ct.course_id = c.course_id left outer join rating r on r.tutor_id = u.user_id WHERE u.tutor = 1 AND ";
+        $query = "SELECT u.User_ID, u.fName as First_Name, u.lName as Last_Name, u.Available, u.Active, COUNT(distinct r.rating_id) as Number_Ratings, ROUND(AVG(distinct r.rating),2) as Average_Rating FROM users u inner join courses_tutored ct on u.user_id = ct.user_id inner join courses c on ct.course_id = c.course_id left outer join rating r on r.tutor_id = u.user_id WHERE u.tutor = 1 AND ";
         
         if (!Input::has('admin')) {
             $query.="u.active = 1 AND ";
