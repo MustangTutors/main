@@ -101,7 +101,7 @@ $(document).ready(function() {
         var selected_courses = $("select.course_dropdown");
 
         for(var i = 0; i < selected_courses.length; i++) {
-            var new_course = selected_courses.eq(0).val();
+            var new_course = selected_courses.eq(i).val();
 
             application.Courses[i] = {};
 
