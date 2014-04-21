@@ -75,7 +75,7 @@ $(document).ready(function() {
                                             '<div class="tutorPicture">' + 
                                                 '<img src="" alt="Tutor Headshot">' + 
                                             '</div>' + 
-                                            '<a href="#" class="viewTranscript button">View Transcript</a>' + 
+                                            //'<a href="#" class="viewTranscript button">View Transcript</a>' + 
                                         '</div>' + 
                                         '<div class="reviewCourses summary">' + 
                                             '<h3 class="subheading">Courses</h3>' + 
@@ -95,7 +95,7 @@ $(document).ready(function() {
 
                 // Add information from JSON
                 // Link to transcript
-                application.find('a').attr('href', 'transcripts/' + json[i].user_id + '.pdf');
+                //application.find('a').attr('href', 'transcripts/' + json[i].user_id + '.pdf');
                 // Tutor picture
                 application.find('.tutorPicture img').attr('src', 'img/tutors/' + json[i].user_id + '.jpg');
                 // Tutor name
