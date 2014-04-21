@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	var user_id = getURLParameter('user_id');
+	//var user_id = getURLParameter('user_id');
+    var user_id;
     var fname;
     var lname;
 
@@ -10,6 +11,7 @@ $(document).ready(function() {
         success: function(userInfo) {
             userInfo = JSON.parse(userInfo);
 
+            user_id = userInfo[0].user_id;
             fname = userInfo[0].fName;
             lname = userInfo[0].lName;
 
