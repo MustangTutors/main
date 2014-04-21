@@ -161,7 +161,7 @@ $(document).ready(function() {
             type: "GET",
             url: "Laravel/public/courses/update",
             data: {
-                new_courses: courses
+                new_courses: JSON.stringify(courses)
             }
         });
     });
@@ -194,7 +194,7 @@ $(document).ready(function() {
             type: "GET",
             url: "Laravel/public/schedule/update",
             data: {
-                new_hours: hours
+                new_hours: JSON.stringify(hours)
             }
         });
     });
