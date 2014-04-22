@@ -149,6 +149,17 @@ $(document).ready(function() {
         
     });
 
+    $("article#courses img[src='img/pencil.png']").on("click", function(e) {
+        e.preventDefault();
+        $("section.tutor_info").addClass("admin_tutor_info");
+        $("article#courses .edit_button").show();
+        $("input[type='checkbox']").show();
+    });
+
+    $("article#hourse img[src='img/pencil.png']").on("click", function(e) {
+        e.preventDefault();
+    });
+
     $("button[name='cancelCourseChanges']").on("click", function(e) {
         e.preventDefault();
 
