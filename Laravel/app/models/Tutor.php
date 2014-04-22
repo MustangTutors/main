@@ -225,7 +225,7 @@ FROM rating where tutor_id = ?";
         $json=json_decode($_POST['post_meeting']);
         $smu_id=$json->student_id;
         $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
-        if(isset($result[0]) && $tutor_id!=$result[0]) {
+        if(isset($result[0]) && $tutor_id!=$result[0]->user_id) {
             $userid=$result[0]->user_id;
             $courseid=$json->course_id;
             $date=$json->day;
@@ -237,7 +237,9 @@ FROM rating where tutor_id = ?";
             $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
             $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
 
-            echo json_encode($result);
+            //echo json_encode($result);
+            echo $tutor_id;
+            echo $result[0];
 
         }
         else{

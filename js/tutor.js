@@ -39,7 +39,13 @@ $(document).ready(function() {
             $(".tutorPicture img").attr('src', profile_pic);
  
             $("span#averageRating h3 span").html(convertToStars(tutorInfo.average_rating));
-            $("span#averageRating h3 #num_ratings").html("Based on " + Number(tutorInfo.numberOfRatings) + " ratings");
+            var num_ratings = Number(tutorInfo.numberOfRatings);
+            if (num_ratings !== 0) {
+                $("span#averageRating h3 #num_ratings").html("Based on " + num_ratings + " ratings");
+            }
+            else {
+                $("span#averageRating h3 #num_ratings").html("");
+            }
 			$("span#yourRating h3 span").html(convertToStars(tutorInfo.current_user_rating));
 
             if (Number(tutorInfo.active) === 1) {
@@ -51,18 +57,23 @@ $(document).ready(function() {
                 $("span#tutorpage_available").addClass("disabled");
             }
 
-			for(var i = 0; i < tutorInfo.courses.length; i++) {
-				var index = i+1;
-				var course = "<span class='label'>";
-				course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
-				course += "</span><span class='content'>";
-				course += tutorInfo.courses[i].course_name;
-				course += "</span>";
-				$("article#courses ul").append("<li>");
-				$("article#courses ul li:nth-child("+index+")").append(course);
-				$("article#courses ul").append("</li>");
-			}
+            if (tutorInfo.courses) {
+                for(var i = 0; i < tutorInfo.courses.length; i++) {
+                    var index = i+1;
+                    var course = "<span class='label'>";
+                    course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
+                    course += "</span><span class='content'>";
+                    course += tutorInfo.courses[i].course_name;
+                    course += "</span>";
+                    $("article#courses ul").append("<li>");
+                    $("article#courses ul li:nth-child("+index+")").append(course);
+                    $("article#courses ul").append("</li>");
+                }
+            }
 
+            if (!tutorInfo.hours) {
+                tutorInfo.hours = [];
+            }
 			for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
                 var day = $('<li><span class="day"></span><span class="content"></span></li>');
                 day.find('.day').html(days[dayIndex]);
@@ -192,7 +203,14 @@ $(document).ready(function() {
                 json = json[0];
                 tutorInfo.current_user_rating = rating;
                 $("span#averageRating h3 span").html(convertToStars(json.AVERAGE_RATING));
-                $("span#averageRating h3 #num_ratings").html("Based on " + Number(json.NUMBER_OF_RATINGS) + " ratings");
+
+                var num_ratings = json(tutorInfo.NUMBER_OF_RATINGS);
+                if (num_ratings !== 0) {
+                    $("span#averageRating h3 #num_ratings").html("Based on " + num_ratings + " ratings");
+                }
+                else {
+                    $("span#averageRating h3 #num_ratings").html("");
+                }
             }
 		});
 
