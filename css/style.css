@@ -1531,6 +1531,11 @@ section#rating img[src*='star']{
     background: -webkit-gradient(linear, left top, left bottom, from(#ac0827), to(#ca314f));
     color: white;
 }
+
+button#edit {
+    float: right;
+    margin-top: 188px;
+}
 /* End styling for Tutor Profile */
 
 /* Styling for Apply To Be A Tutor Page */
