@@ -57,18 +57,23 @@ $(document).ready(function() {
                 $("span#tutorpage_available").addClass("disabled");
             }
 
-			for(var i = 0; i < tutorInfo.courses.length; i++) {
-				var index = i+1;
-				var course = "<span class='label'>";
-				course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
-				course += "</span><span class='content'>";
-				course += tutorInfo.courses[i].course_name;
-				course += "</span>";
-				$("article#courses ul").append("<li>");
-				$("article#courses ul li:nth-child("+index+")").append(course);
-				$("article#courses ul").append("</li>");
-			}
+            if (tutorInfo.courses) {
+                for(var i = 0; i < tutorInfo.courses.length; i++) {
+                    var index = i+1;
+                    var course = "<span class='label'>";
+                    course += tutorInfo.courses[i].subject+" "+tutorInfo.courses[i].course_number+":";
+                    course += "</span><span class='content'>";
+                    course += tutorInfo.courses[i].course_name;
+                    course += "</span>";
+                    $("article#courses ul").append("<li>");
+                    $("article#courses ul li:nth-child("+index+")").append(course);
+                    $("article#courses ul").append("</li>");
+                }
+            }
 
+            if (!tutorInfo.hours) {
+                tutorInfo.hours = [];
+            }
 			for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
                 var day = $('<li><span class="day"></span><span class="content"></span></li>');
                 day.find('.day').html(days[dayIndex]);

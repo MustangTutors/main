@@ -23,7 +23,7 @@ $(document).ready(function() {
         var buttonContainer = button.parent();
         buttonContainer.html('<a href="#" class="edit button">View/Edit Profile</a>');
         var userID = jQuery.data(buttonContainer.parents('.applicationReview')[0], 'user_id');
-        var profileURL = 'tutor.html?user_id=' + userID;
+        var profileURL = 'adminEdit.html?user_id=' + userID;
         buttonContainer.find('a').attr('href', profileURL);
         $.ajax({
             url: "Laravel/public/admin/application/approved/" + userID,
