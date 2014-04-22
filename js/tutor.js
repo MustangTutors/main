@@ -2,6 +2,8 @@ $(document).ready(function() {
 	// Get the user_id from query in URL, then get tutor info
 	var user_id = getURLParameter('user_id');
 
+    var is_admin = 0;
+
     // Hides the Your Rating section if the user is the same person as the tutor.
     // Also hides the comment form.
     $.ajax({
@@ -15,6 +17,7 @@ $(document).ready(function() {
                     $("#tutorProfilePage #yourRating").css('display', 'inline-block');
                     $("#tutorProfilePage #comment_form").show();
                 }
+                is_admin = Number(json.admin);
             }
         }
     });
@@ -110,6 +113,11 @@ $(document).ready(function() {
             }
 
             $("a#edit_link").attr("href", "adminEdit.html?user_id=" + user_id);
+
+            if(is_admin !== 1) {
+                $("a#edit_link").hide();
+                $("button#edit").hide();
+            }
 			
         }
     });

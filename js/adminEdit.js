@@ -3,6 +3,9 @@ $(document).ready(function() {
 	// Get the user_id from query in URL, then get tutor info
 	var user_id = getURLParameter('user_id');
 
+    $("section.tutor_info").removeClass("admin_tutor_info");
+    $(".edit_button").hide();
+
     // Hides the Your Rating section if the user is the same person as the tutor.
     // Also hides the comment form.
     $.ajax({
@@ -34,6 +37,7 @@ $(document).ready(function() {
         type: "GET",
         url: "Laravel/public/tutor/" + user_id,
         success: function(output) {
+
             tutorInfo = JSON.parse(output);
 
             var name = tutorInfo.tutor_fName + " " + tutorInfo.tutor_lName;
@@ -67,8 +71,25 @@ $(document).ready(function() {
 				$("article#courses ul li:nth-child("+index+")").append(course);
 				$("article#courses ul").append("</li>");
                 list_of_course_ids[i] = tutorInfo.courses[i].course_id;
-                console.log(list_of_course_ids[i]);
 			}
+
+            if (!tutorInfo.hours) {
+                tutorInfo.hours = [];
+            }
+            for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
+                var day = $('<li><span class="day"></span><span class="content"></span></li>');
+                day.find('.day').html(days[dayIndex]);
+                if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
+                    day.find('.content').html(convertTime(tutorInfo.hours[tutorDayIndex].start_time)+" to "+convertTime(tutorInfo.hours[tutorDayIndex].end_time));
+                    tutorDayIndex++;
+                }
+                else {
+                    day.find('.content').html("N/A");
+                }
+                $("article#hours ul").append(day);
+            }
+
+            $("input[type='checkbox']").hide();
         }
     });
 
