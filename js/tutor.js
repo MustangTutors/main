@@ -108,6 +108,8 @@ $(document).ready(function() {
                     $("div#commentList ul").append(comment);
                 }
             }
+
+            $("a#edit_link").attr("href", "adminEdit.html?user_id=" + user_id);
 			
         }
     });
