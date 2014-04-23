@@ -125,7 +125,8 @@ public class MainActivity extends Activity {
 		mContext = this;
 
 		// Open preferences file
-		sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		sharedPref = PreferenceManager
+		        .getDefaultSharedPreferences(getApplicationContext());
 		editor = sharedPref.edit();
 
 		mTitle = mDrawerTitle = getTitle();
@@ -436,8 +437,7 @@ public class MainActivity extends Activity {
 				} catch (Exception e) {
 				}
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -445,12 +445,12 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result == true) {
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-				        android.R.layout.simple_spinner_item, subjects);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				        mContext, android.R.layout.simple_spinner_item,
+				        subjects);
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				mSearchSubject.setAdapter(adapter);
-			}
-			else {
+			} else {
 				showInternetError();
 			}
 		}
@@ -493,9 +493,14 @@ public class MainActivity extends Activity {
 	public class SetToggleTask extends AsyncTask<Void, Void, Integer> {
 		@Override
 		protected Integer doInBackground(Void... params) {
+			String id = sharedPref.getString("user_id", "");
+			if (id.isEmpty()) {
+				return -1;
+			}
+			
 			AjaxRequest request = new AjaxRequest("GET",
 			        "http://mustangtutors.floccul.us/Laravel/public/users/available/"
-			                + sharedPref.getString("user_id", ""));
+			                + id);
 			JSONArray json;
 			try {
 				json = new JSONArray(request.send());
@@ -518,7 +523,7 @@ public class MainActivity extends Activity {
 				mySwitch.setChecked(true);
 			} else if (result == 1) {
 				mySwitch.setChecked(false);
-			} else {
+			} else if (result == 0) {
 				new ToggleTask().execute((Void) null);
 			}
 		}
@@ -574,7 +579,7 @@ public class MainActivity extends Activity {
 			if (mSearchCourseName != null) {
 				name = mSearchCourseName.getText().toString();
 			}
-			
+
 			tutors = getTutors(subject, number, name);
 			if (!tutors.isEmpty()) {
 				return true;
