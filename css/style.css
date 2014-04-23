@@ -1677,4 +1677,9 @@ div#active_toggle {
     margin-top: 188px;
 }
 
+span#course_confirmation, span#hour_confirmation {
+    color: red;
+    display: none;
+}
+
 /* End stylying for Admin Edit of Tutor Profile*/

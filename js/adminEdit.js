@@ -325,6 +325,9 @@ $(document).ready(function() {
             }
         });
         console.log(JSON.stringify(courses));
+        $("span#course_confirmation").show();
+        $("button[name='saveCourseChanges']").css("margin-top", -20);
+        $("button[name='cancelCourseChanges']").css("margin-top", -20);
     });
 
     $("button[name='saveHourChanges']").on("click", function(e) {
@@ -359,5 +362,16 @@ $(document).ready(function() {
             }
         });
         console.log(hours);
+        $("span#hour_confirmation").show();
+        $("button[name='saveHourChanges']").css("margin-top", -20);
+        $("button[name='cancelHourChanges']").css("margin-top", -20);
     });
+
+    $(document).on('change', '#toggleButton input[type="checkbox"]', function() {
+        $.ajax({
+            type: "GET",
+            url: "Laravel/public/tutors/toggle/active/" + user_id
+        });
+    });
+
 });
