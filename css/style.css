@@ -1665,4 +1665,16 @@ section.admin_tutor_info img[src="img/add.png"] {
     position: absolute;
 }
 
+span#activeLabel {
+    color: white;
+    position: absolute;
+    left: 3px;
+    top: -25px;
+}
+
+div#active_toggle {
+    float: right;
+    margin-top: 188px;
+}
+
 /* End stylying for Admin Edit of Tutor Profile*/
