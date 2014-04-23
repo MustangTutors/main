@@ -31,6 +31,9 @@ $(document).ready(function() {
 	$("article.schedule").css("height", "295px");
 
     var list_of_course_ids = [];
+    var list_of_days = [];
+    var list_of_start_times = [];
+    var list_of_end_times = [];
 
     var tutorInfo;
 	$.ajax({
@@ -81,6 +84,9 @@ $(document).ready(function() {
                 day.find('.day').html(days[dayIndex]);
                 if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
                     day.find('.content').html(convertTime(tutorInfo.hours[tutorDayIndex].start_time)+" to "+convertTime(tutorInfo.hours[tutorDayIndex].end_time));
+                    list_of_days[tutorDayIndex] = Number(tutorInfo.hours[tutorDayIndex].day);
+                    list_of_start_times[tutorDayIndex] = tutorInfo.hours[tutorDayIndex].start_time;
+                    list_of_end_times = tutorInfo.hours[tutorDayIndex].end_time;
                     tutorDayIndex++;
                 }
                 else {
@@ -156,8 +162,95 @@ $(document).ready(function() {
         $("input[type='checkbox']").show();
     });
 
-    $("article#hourse img[src='img/pencil.png']").on("click", function(e) {
+    $("article#hours img[src='img/pencil.png']").on("click", function(e) {
         e.preventDefault();
+        $("section.tutor_info").addClass("admin_tutor_info");
+        $("article#hours .edit_button").show();
+        $("article#hours ul").html(
+
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="sunday">' +
+                                    '<label for="sunday">Sunday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="monday">' +
+                                '<label for="monday">Monday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="tuesday">' +
+                                '<label for="tuesday">Tuesday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="wednesday">' +
+                                '<label for="wednesday">Wednesday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="thursday">' +
+                                '<label for="thursday">Thursday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="friday">' +
+                                '<label for="friday">Friday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>' +
+                
+                        '<li>' +
+                            '<span class="potential_day">' +
+                                '<input type="checkbox" id="saturday">' +
+                                '<label for="saturday">Saturday</label>' +
+                            '</span>' +
+                            '<span class="start_end">' +
+                                '<input type="time" class="start_time" value="00:00">' +
+                                '<span> to </span>' +
+                                '<input type="time" class="end_time" value="00:00">' +
+                            '</span>' +
+                        '</li>');
     });
 
     $("button[name='cancelCourseChanges']").on("click", function(e) {
