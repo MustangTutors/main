@@ -202,6 +202,7 @@ public class MainActivity extends Activity {
 				hideSearchForm();
 
 				// Show tutors found
+				Log.d("JY", "search submit on click listener");
 				new SearchTask().execute((Void) null);
 			}
 		});
@@ -210,6 +211,7 @@ public class MainActivity extends Activity {
 		new PopulateSubjectsTask().execute((Void) null);
 
 		// When the activity first loads, get all the tutors.
+		Log.d("JY", "on create");
 		new SearchTask().execute((Void) null);
 	}
 
@@ -366,6 +368,7 @@ public class MainActivity extends Activity {
 				        .show();
 
 				// Refresh search results to show updated availability
+				Log.d("JY", "log in");
 				new SearchTask().execute((Void) null);
 			}
 		}
@@ -480,6 +483,7 @@ public class MainActivity extends Activity {
 			        getString(R.string.logged_out), Toast.LENGTH_SHORT).show();
 
 			// Refresh the search results (to show updated availability)
+			Log.d("JY", "logout");
 			new SearchTask().execute((Void) null);
 		}
 	}
@@ -535,6 +539,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
+			Log.d("JY", "toggle");
 			new SearchTask().execute((Void) null);
 		}
 	}
@@ -556,11 +561,20 @@ public class MainActivity extends Activity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// Get search parameters
-			String subject = mSearchSubject.getItemAtPosition(
-			        mSearchSubject.getSelectedItemPosition()).toString();
-			String number = mSearchCourseNumber.getText().toString();
-			String name = mSearchCourseName.getText().toString();
-
+			String subject = "";
+			String number = "";
+			String name = "";
+			if (mSearchSubject != null) {
+				subject = mSearchSubject.getItemAtPosition(
+				        mSearchSubject.getSelectedItemPosition()).toString();
+			}
+			if (mSearchCourseNumber != null) {
+				number = mSearchCourseNumber.getText().toString();
+			}
+			if (mSearchCourseName != null) {
+				name = mSearchCourseName.getText().toString();
+			}
+			
 			tutors = getTutors(subject, number, name);
 			if (!tutors.isEmpty()) {
 				return true;
