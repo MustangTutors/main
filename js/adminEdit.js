@@ -31,9 +31,9 @@ $(document).ready(function() {
 	$("article.schedule").css("height", "295px");
 
     var list_of_course_ids = [];
-    var list_of_days = [];
-    var list_of_start_times = [];
-    var list_of_end_times = [];
+    var list_of_days = [null, null, null, null, null, null, null];
+    var list_of_start_times = [null, null, null, null, null, null, null];
+    var list_of_end_times = [null, null, null, null, null, null, null];
 
     var tutorInfo;
 	$.ajax({
@@ -80,13 +80,18 @@ $(document).ready(function() {
                 tutorInfo.hours = [];
             }
             for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
+                console.log(dayIndex);
                 var day = $('<li><span class="day"></span><span class="content"></span></li>');
                 day.find('.day').html(days[dayIndex]);
                 if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
                     day.find('.content').html(convertTime(tutorInfo.hours[tutorDayIndex].start_time)+" to "+convertTime(tutorInfo.hours[tutorDayIndex].end_time));
-                    list_of_days[tutorDayIndex] = Number(tutorInfo.hours[tutorDayIndex].day);
-                    list_of_start_times[tutorDayIndex] = tutorInfo.hours[tutorDayIndex].start_time;
-                    list_of_end_times = tutorInfo.hours[tutorDayIndex].end_time;
+                    
+                    list_of_days[dayIndex] = Number(tutorInfo.hours[tutorDayIndex].day);
+                    
+                    list_of_start_times[dayIndex] = tutorInfo.hours[tutorDayIndex].start_time;
+
+                    list_of_end_times[dayIndex] = tutorInfo.hours[tutorDayIndex].end_time;
+
                     tutorDayIndex++;
                 }
                 else {
@@ -160,6 +165,7 @@ $(document).ready(function() {
         $("section.tutor_info").addClass("admin_tutor_info");
         $("article#courses .edit_button").show();
         $("input[type='checkbox']").show();
+        $("span.label input[type='checkbox']").prop("checked", true);
     });
 
     $("article#hours img[src='img/pencil.png']").on("click", function(e) {
@@ -251,6 +257,18 @@ $(document).ready(function() {
                                 '<input type="time" class="end_time" value="00:00">' +
                             '</span>' +
                         '</li>');
+
+        var days = $("article#hours ul li input[type='checkbox']");
+        var start_times = $("article#hours ul li input.start_time");
+        var end_times = $("article#hours ul li input.end_time");
+
+        for(var i = 0; i < list_of_days.length; i++) {
+            if(list_of_days[i] !== null) {
+                days.eq(i).prop("checked", true);
+                //start_times.eq(i).val(list_of_start_times[i+1]);
+                //end_times.eq(i).val(list_of_end_times[i+1]);
+            }
+        }
     });
 
     $("button[name='cancelCourseChanges']").on("click", function(e) {
