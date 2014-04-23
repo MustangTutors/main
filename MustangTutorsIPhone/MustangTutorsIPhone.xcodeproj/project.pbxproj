@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB15453F1905D798009EDF21 /* TutorArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DB15453E1905D798009EDF21 /* TutorArray.m */; };
+		DB154542190626D9009EDF21 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB154541190626D9009EDF21 /* SearchResultsViewController.m */; };
+		DB154545190629ED009EDF21 /* SearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB154544190629ED009EDF21 /* SearchResultTableViewCell.m */; };
+		DB15454819065961009EDF21 /* SearchResultProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB15454719065961009EDF21 /* SearchResultProfileViewController.m */; };
 		DB40E23B18FF5A3D00AE9967 /* MeetingReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E23A18FF5A3D00AE9967 /* MeetingReportViewController.m */; };
 		DB40E24518FF78E400AE9967 /* Meeting.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24418FF78E400AE9967 /* Meeting.m */; };
 		DB40E24818FF7B8800AE9967 /* MeetingCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB40E24718FF7B8800AE9967 /* MeetingCourseViewController.m */; };
@@ -69,6 +73,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB15453D1905D798009EDF21 /* TutorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorArray.h; sourceTree = "<group>"; };
+		DB15453E1905D798009EDF21 /* TutorArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorArray.m; sourceTree = "<group>"; };
+		DB154540190626D9009EDF21 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
+		DB154541190626D9009EDF21 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
+		DB154543190629ED009EDF21 /* SearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTableViewCell.h; sourceTree = "<group>"; };
+		DB154544190629ED009EDF21 /* SearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewCell.m; sourceTree = "<group>"; };
+		DB15454619065961009EDF21 /* SearchResultProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultProfileViewController.h; sourceTree = "<group>"; };
+		DB15454719065961009EDF21 /* SearchResultProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultProfileViewController.m; sourceTree = "<group>"; };
 		DB40E23918FF5A3D00AE9967 /* MeetingReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingReportViewController.h; sourceTree = "<group>"; };
 		DB40E23A18FF5A3D00AE9967 /* MeetingReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingReportViewController.m; sourceTree = "<group>"; };
 		DB40E24318FF78E400AE9967 /* Meeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meeting.h; sourceTree = "<group>"; };
@@ -184,6 +196,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB1545491906CF25009EDF21 /* SearchViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB15454619065961009EDF21 /* SearchResultProfileViewController.h */,
+				DB15454719065961009EDF21 /* SearchResultProfileViewController.m */,
+				DB154540190626D9009EDF21 /* SearchResultsViewController.h */,
+				DB154541190626D9009EDF21 /* SearchResultsViewController.m */,
+				DB154543190629ED009EDF21 /* SearchResultTableViewCell.h */,
+				DB154544190629ED009EDF21 /* SearchResultTableViewCell.m */,
+				DBF05BBB18FE53BE004B1B3B /* SearchViewController.h */,
+				DBF05BBC18FE53BE004B1B3B /* SearchViewController.m */,
+			);
+			name = SearchViewControllers;
+			sourceTree = "<group>";
+		};
 		DB40E23C18FF5AFC00AE9967 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +222,7 @@
 		DB40E23D18FF5B1200AE9967 /* TutorViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DB1545491906CF25009EDF21 /* SearchViewControllers */,
 				DB502F1818FC7F5300FC3104 /* TabBarViewController.h */,
 				DB502F1918FC7F5300FC3104 /* TabBarViewController.m */,
 				DB40E24118FF5CE900AE9967 /* ProfileViewControllers */,
@@ -320,6 +348,8 @@
 				DB40E24418FF78E400AE9967 /* Meeting.m */,
 				DBC4EBC31904E644004AF248 /* Search.h */,
 				DBC4EBC41904E644004AF248 /* Search.m */,
+				DB15453D1905D798009EDF21 /* TutorArray.h */,
+				DB15453E1905D798009EDF21 /* TutorArray.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -366,8 +396,6 @@
 				DBD892F618EE3C92009F7BD7 /* Supporting Files */,
 				DBD8932218EE4573009F7BD7 /* Storyboard.storyboard */,
 				DB40E23C18FF5AFC00AE9967 /* ViewControllers */,
-				DBF05BBB18FE53BE004B1B3B /* SearchViewController.h */,
-				DBF05BBC18FE53BE004B1B3B /* SearchViewController.m */,
 				DBD8932418EE492C009F7BD7 /* LoginViewController.h */,
 				DBD8932518EE492C009F7BD7 /* LoginViewController.m */,
 			);
@@ -513,6 +541,7 @@
 				DBF05BB118FCFA89004B1B3B /* ScheduleTimeTableViewCell.m in Sources */,
 				DBC4EBC51904E644004AF248 /* Search.m in Sources */,
 				DB502F1318FB173200FC3104 /* Tutor.m in Sources */,
+				DB15454819065961009EDF21 /* SearchResultProfileViewController.m in Sources */,
 				DB502F1018FA5D2000FC3104 /* TutorProfileViewController.m in Sources */,
 				DBF05BBA18FDFB6A004B1B3B /* ClassesTableViewCell.m in Sources */,
 				DB502EEF18FA5A5700FC3104 /* AFSecurityPolicy.m in Sources */,
@@ -523,6 +552,7 @@
 				DB502F1718FC79A300FC3104 /* TutorCommentsViewController.m in Sources */,
 				DB502F0A18FA5A6700FC3104 /* UIImageView+AFNetworking.m in Sources */,
 				DB502EEB18FA5A5700FC3104 /* AFHTTPRequestOperation.m in Sources */,
+				DB154542190626D9009EDF21 /* SearchResultsViewController.m in Sources */,
 				DB502F0718FA5A6700FC3104 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				DBD892FC18EE3C92009F7BD7 /* main.m in Sources */,
 				DB502EF118FA5A5700FC3104 /* AFURLRequestSerialization.m in Sources */,
@@ -530,12 +560,14 @@
 				DB40E24818FF7B8800AE9967 /* MeetingCourseViewController.m in Sources */,
 				DB502EED18FA5A5700FC3104 /* AFHTTPSessionManager.m in Sources */,
 				DBF05BBD18FE53BE004B1B3B /* SearchViewController.m in Sources */,
+				DB15453F1905D798009EDF21 /* TutorArray.m in Sources */,
 				DB502EEE18FA5A5700FC3104 /* AFNetworkReachabilityManager.m in Sources */,
 				DB502EF218FA5A5700FC3104 /* AFURLResponseSerialization.m in Sources */,
 				DB502F1A18FC7F5300FC3104 /* TabBarViewController.m in Sources */,
 				DB502F0D18FA5A6700FC3104 /* UIWebView+AFNetworking.m in Sources */,
 				DB502EF318FA5A5700FC3104 /* AFURLSessionManager.m in Sources */,
 				DB502F0618FA5A6700FC3104 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				DB154545190629ED009EDF21 /* SearchResultTableViewCell.m in Sources */,
 				DB40E23B18FF5A3D00AE9967 /* MeetingReportViewController.m in Sources */,
 				DBD8930018EE3C92009F7BD7 /* MustangTutorsAppDelegate.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "SearchResultsViewController.h"
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *subjectText;
@@ -21,6 +22,19 @@
 @end
 
 @implementation SearchViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"segueToSearchResults"])
+    {
+        // Get reference to the destination view controller
+        SearchResultsViewController * sr = (SearchResultsViewController *)[segue destinationViewController];
+        [sr setSearchResults:self.tutorResults];
+    }
+}
+
+
 - (IBAction)beginEditSubject:(UITextField *)sender {
     self.subjectPicker.hidden = NO;
     self.subjectPicker.alpha = 1;
@@ -56,6 +70,8 @@
     
     //get user info from login credentials
     NSString *url = @"http://local.mustangtutors.com/Laravel/public/tutor/search";
+    url = [NSString stringWithFormat:@"%@?%@",url,[self.search postString]];
+    
     
     // Initialize Session Configuration
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -71,17 +87,15 @@
     [manager setResponseSerializer:serializer];
     
     // Send Request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    request.HTTPMethod = @"GET";
-    //just subject search
-    [request setHTTPBody:[[self.search postString] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if(error) {
             NSLog(@"%@", error);
         }
         //process the tutor info here
         NSLog(@"JSON: %@", responseObject);
+        self.tutorResults = [[TutorArray alloc]initWithTutorArray:responseObject];
+        NSLog(@"Toot Results: %@",self.tutorResults);
         
     }] resume];
 

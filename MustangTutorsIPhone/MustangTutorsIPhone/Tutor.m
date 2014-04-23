@@ -21,7 +21,7 @@
     {
         
         if(_tutorInfo == nil) {
-            _tutorInfo = [NSMutableDictionary dictionary];
+            _tutorInfo = [[NSMutableDictionary alloc]init];;
         }
         [_tutorInfo setObject:[dict objectForKey:@"fName"] forKey:@"First_Name"];
         [_tutorInfo setObject:[dict objectForKey:@"lName"] forKey:@"Last_Name"];
@@ -37,6 +37,35 @@
         [self setAvailable];
     }
     return self;
+}
+-(instancetype)initWithDictionaryForSearch:(NSDictionary *)dict
+{
+    self = [super init];
+    if(self)
+    {
+        if(_tutorInfo == nil) {
+            _tutorInfo = [[NSMutableDictionary alloc]init];
+        }
+        [_tutorInfo setObject:[dict objectForKey:@"First_Name"] forKey:@"First_Name"];
+        [_tutorInfo setObject:[dict objectForKey:@"Last_Name"] forKey:@"Last_Name"];
+        [_tutorInfo setObject:[dict objectForKey:@"Number_Ratings"] forKey:@"numberOfRatings"];
+        [_tutorInfo setObject:[dict objectForKey:@"User_ID"] forKey:@"userId"];
+        [_tutorInfo setObject:[dict objectForKey:@"Active"] forKey:@"active"];
+        [_tutorInfo setObject:[dict objectForKey:@"Average_Rating"] forKey:@"averageRating"];
+        [_tutorInfo setObject:[dict objectForKey:@"Available"] forKey:@"available"];
+        self.userId =[[_tutorInfo objectForKey:@"userId"] integerValue];
+        [self setNumberOfRatings:[[_tutorInfo objectForKey:@"numberOfRatings"]integerValue]];
+        if(self.numberOfRatings == 0)
+        {
+            self.averageRating = 0.0;
+        }else{
+            self.averageRating = [[_tutorInfo objectForKey:@"averageRating"]doubleValue];
+        }
+        [self setFullName];
+        [self setAvailable];
+    }
+    return self;
+
 }
 -(void)toggleAvailability
 {

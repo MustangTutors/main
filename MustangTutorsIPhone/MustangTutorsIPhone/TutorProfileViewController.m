@@ -35,6 +35,10 @@
     }
     return self;
 }
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:(BOOL)animated];    // Call the super class implementation.
+    
+}
 - (IBAction)logOut:(UIButton *)sender {
     
     

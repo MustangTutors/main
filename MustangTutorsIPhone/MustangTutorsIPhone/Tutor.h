@@ -20,5 +20,6 @@
 @property(strong,nonatomic,getter = getHours)NSMutableArray * hours;
 @property(strong,nonatomic,getter = getCourses)NSMutableArray * courses;
 -(instancetype)initWithDictionary:(NSMutableDictionary *) dict;
+-(instancetype)initWithDictionaryForSearch:(NSMutableDictionary *)dict;
 -(void)toggleAvailability;
 @end

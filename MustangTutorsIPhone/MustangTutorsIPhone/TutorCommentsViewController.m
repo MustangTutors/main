@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *Name_CommentsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton *previousButton;
 @property (nonatomic)NSInteger currentComment;
@@ -100,15 +99,11 @@
     
     //[formatter setTimeStyle:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSDate * comDate = [formatter dateFromString:dateString];
-    [formatter setDateFormat:@"MM-dd-yyyy"];
+    [formatter setDateFormat:@"MMMM dd, yyyy"];
     NSString * comDateString = [formatter stringFromDate:comDate];
-    [formatter setDateFormat:@"HH:mm:ss"];
+    [formatter setDateFormat:@"h:mm a"];
     NSString * comTimeString = [formatter stringFromDate:comDate];
-    [self.commentDateLabel setText:[NSString stringWithFormat:@"Date: %@",comDateString]];
-    [self.commentTimeLabel setText:[NSString stringWithFormat:@"    At: %@",comTimeString]];
-    
-    //[self.commentDateLabel setText:[NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"timeStamp"]]];
-
+    [self.commentDateLabel setText:[NSString stringWithFormat:@"Date: %@ at %@",comDateString,comTimeString]];
     
 }
 - (void)didReceiveMemoryWarning
