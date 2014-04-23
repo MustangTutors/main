@@ -114,17 +114,14 @@ $(document).ready(function(){
     // When Add is clicked/new meeting form is submitted
     $(document).on('submit', '#meeting_form', function(){
         event.preventDefault();
+        $("#meeting_form span.error").html("");
 
         // Create JSON for new meeting
         var new_meeting = new Object();
         new_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
 
-        // Clear and close new meeting window
-        resetNewMeetingForm();
-        $('#subtract_icon').hide();
-        $('#add_icon').css('display', 'inline-block');
-        hideAddMeetingWindow();
+        
 
         // Send JSON to database
         $.ajax({
@@ -133,11 +130,24 @@ $(document).ready(function(){
             data: {post_meeting : newMeetingJSON},
             success: function(json) {
                 console.log(json);
-                json = JSON.parse(json);
 
-                new_meeting.first_name = json.fName;
-                new_meeting.last_name = json.lname;
-                addNewMeeting(new_meeting);
+                if(json !== "not a valid smu id"){
+
+                    // Clear and close new meeting window
+                    resetNewMeetingForm();
+                    $('#subtract_icon').hide();
+                    $('#add_icon').css('display', 'inline-block');
+                    hideAddMeetingWindow();
+
+                    json = JSON.parse(json);
+                    new_meeting.first_name = json[0].fName;
+                    new_meeting.last_name = json[0].lname;
+                    addNewMeeting(new_meeting);
+                }
+                else {
+                    $("article.add_meeting").height("360px");
+                    $("#meeting_form span.error").html("You cannot add a meeting with yourself.");
+                }
             }
         });
     });
@@ -363,6 +373,8 @@ function populateDateAndTime() {
 }
 
 function resetNewMeetingForm() {
+    $("#meeting_form span.error").html("");
+    
     // Reset Student ID
     $('#meeting_form input[name="student_id"]').val("");
 
@@ -390,10 +402,11 @@ function createNewMeetingObject() {
 }
 
 function addNewMeeting(new_meeting) {
+    console.log(new_meeting);
     var title = new_meeting.title;
     var contributor = "Student tutored: " + new_meeting.first_name + " " + new_meeting.last_name;
     var date = new_meeting.day;
-    var time = new_meeting.start_time + " to " + new_meeting.end_time;
+    var time = convertTime(new_meeting.start_time) + " to " + convertTime(new_meeting.end_time);
     var summary = new_meeting.summary;
 
     // Create and append new node with json information

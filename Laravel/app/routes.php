@@ -220,12 +220,12 @@ Route::get('admin/application/denied/{tutor_id}',function($tutor_id)
     $temp->denyTutor($tutor_id);
 
 });
-Route::get('courses/update',function()
+Route::post('courses/update',function()
 {
     $temp = new Course();
     $temp->updateCourses();
 });
-Route::get('schedule/update',function()
+Route::post('schedule/update',function()
 {
     $temp = new Schedule();
     $temp->updateHours();

@@ -1531,6 +1531,11 @@ section#rating img[src*='star']{
     background: -webkit-gradient(linear, left top, left bottom, from(#ac0827), to(#ca314f));
     color: white;
 }
+
+button#edit {
+    float: right;
+    margin-top: 188px;
+}
 /* End styling for Tutor Profile */
 
 /* Styling for Apply To Be A Tutor Page */
@@ -1658,6 +1663,23 @@ section.admin_tutor_info img[src="img/add.png"] {
     margin-left: 390px;
     margin-top: -40px;
     position: absolute;
+}
+
+span#activeLabel {
+    color: white;
+    position: absolute;
+    left: 3px;
+    top: -25px;
+}
+
+div#active_toggle {
+    float: right;
+    margin-top: 188px;
+}
+
+span#course_confirmation, span#hour_confirmation {
+    color: red;
+    display: none;
 }
 
 /* End stylying for Admin Edit of Tutor Profile*/
