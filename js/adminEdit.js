@@ -317,13 +317,13 @@ $(document).ready(function() {
 
         }
 
-        /*$.ajax({
+        $.ajax({
             type: "POST",
             url: "Laravel/public/courses/update",
             data: {
                 new_courses: JSON.stringify(courses)
             }
-        });*/
+        });
         console.log(JSON.stringify(courses));
     });
 
@@ -351,13 +351,13 @@ $(document).ready(function() {
             }
         }
 
-        /*$.ajax({
+        $.ajax({
             type: "POST",
             url: "Laravel/public/schedule/update",
             data: {
                 new_hours: JSON.stringify(hours)
             }
-        });*/
+        });
         console.log(hours);
     });
 });
