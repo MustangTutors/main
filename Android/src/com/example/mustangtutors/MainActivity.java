@@ -205,6 +205,9 @@ public class MainActivity extends Activity {
 				// Show tutors found
 				Log.d("JY", "search submit on click listener");
 				new SearchTask().execute((Void) null);
+
+				// Set availability from DB
+				new SetToggleTask().execute((Void) null);
 			}
 		});
 
