@@ -125,7 +125,8 @@ public class MainActivity extends Activity {
 		mContext = this;
 
 		// Open preferences file
-		sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		sharedPref = PreferenceManager
+		        .getDefaultSharedPreferences(getApplicationContext());
 		editor = sharedPref.edit();
 
 		mTitle = mDrawerTitle = getTitle();
@@ -202,7 +203,11 @@ public class MainActivity extends Activity {
 				hideSearchForm();
 
 				// Show tutors found
+				Log.d("JY", "search submit on click listener");
 				new SearchTask().execute((Void) null);
+
+				// Set availability from DB
+				new SetToggleTask().execute((Void) null);
 			}
 		});
 
@@ -210,6 +215,7 @@ public class MainActivity extends Activity {
 		new PopulateSubjectsTask().execute((Void) null);
 
 		// When the activity first loads, get all the tutors.
+		Log.d("JY", "on create");
 		new SearchTask().execute((Void) null);
 	}
 
@@ -366,6 +372,7 @@ public class MainActivity extends Activity {
 				        .show();
 
 				// Refresh search results to show updated availability
+				Log.d("JY", "log in");
 				new SearchTask().execute((Void) null);
 			}
 		}
@@ -433,8 +440,7 @@ public class MainActivity extends Activity {
 				} catch (Exception e) {
 				}
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -442,12 +448,12 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result == true) {
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-				        android.R.layout.simple_spinner_item, subjects);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				        mContext, android.R.layout.simple_spinner_item,
+				        subjects);
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				mSearchSubject.setAdapter(adapter);
-			}
-			else {
+			} else {
 				showInternetError();
 			}
 		}
@@ -480,6 +486,7 @@ public class MainActivity extends Activity {
 			        getString(R.string.logged_out), Toast.LENGTH_SHORT).show();
 
 			// Refresh the search results (to show updated availability)
+			Log.d("JY", "logout");
 			new SearchTask().execute((Void) null);
 		}
 	}
@@ -489,9 +496,14 @@ public class MainActivity extends Activity {
 	public class SetToggleTask extends AsyncTask<Void, Void, Integer> {
 		@Override
 		protected Integer doInBackground(Void... params) {
+			String id = sharedPref.getString("user_id", "");
+			if (id.isEmpty()) {
+				return -1;
+			}
+			
 			AjaxRequest request = new AjaxRequest("GET",
 			        "http://mustangtutors.floccul.us/Laravel/public/users/available/"
-			                + sharedPref.getString("user_id", ""));
+			                + id);
 			JSONArray json;
 			try {
 				json = new JSONArray(request.send());
@@ -514,7 +526,7 @@ public class MainActivity extends Activity {
 				mySwitch.setChecked(true);
 			} else if (result == 1) {
 				mySwitch.setChecked(false);
-			} else {
+			} else if (result == 0) {
 				new ToggleTask().execute((Void) null);
 			}
 		}
@@ -535,6 +547,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
+			Log.d("JY", "toggle");
 			new SearchTask().execute((Void) null);
 		}
 	}
@@ -556,10 +569,19 @@ public class MainActivity extends Activity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// Get search parameters
-			String subject = mSearchSubject.getItemAtPosition(
-			        mSearchSubject.getSelectedItemPosition()).toString();
-			String number = mSearchCourseNumber.getText().toString();
-			String name = mSearchCourseName.getText().toString();
+			String subject = "";
+			String number = "";
+			String name = "";
+			if (mSearchSubject != null) {
+				subject = mSearchSubject.getItemAtPosition(
+				        mSearchSubject.getSelectedItemPosition()).toString();
+			}
+			if (mSearchCourseNumber != null) {
+				number = mSearchCourseNumber.getText().toString();
+			}
+			if (mSearchCourseName != null) {
+				name = mSearchCourseName.getText().toString();
+			}
 
 			tutors = getTutors(subject, number, name);
 			if (!tutors.isEmpty()) {
