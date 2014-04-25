@@ -41,7 +41,7 @@
     [self.nameLabel setText:[self.tutor getFullName]];
     [self.numberOfRatingsLabel setText:[NSString stringWithFormat:@"Average Rating of %d ratings",[self.tutor getNumberOfRatings]]];
     [self setStarValues:[self.tutor getAverageRating]];
-    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://local.mustangtutors.com/img/tutors/%d.jpg",[self.tutor getUserId]];
+    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[self.tutor getUserId]];
     [self setImageView:self.tutorImageView withString:tutorProfileImagePath];
     if(![self.tutor isAvailable])
     {
@@ -68,9 +68,9 @@
 }
 -(void)setStarValues:(double)numStars
 {
-    NSString * starImagePath = @"http://local.mustangtutors.com/img/star.png";
-    NSString * halfStarImagePath =@"http://local.mustangtutors.com/img/halfstar.png";
-    NSString * emptyStarImagePath =@"http://local.mustangtutors.com/img/emptystar.png";
+    NSString * starImagePath = @"http://mustangtutors.floccul.us/img/star.png";
+    NSString * halfStarImagePath =@"http://mustangtutors.floccul.us/img/halfstar.png";
+    NSString * emptyStarImagePath =@"http://mustangtutors.floccul.us/img/emptystar.png";
     
     //set fifth star
     //if 5

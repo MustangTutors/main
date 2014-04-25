@@ -58,8 +58,7 @@
     if (![context save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
-    [self loadText];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     [self clickedBackground];
     
     
@@ -68,7 +67,7 @@
     
     
     //get user info from login credentials
-    NSString *url = @"http://local.mustangtutors.com/Laravel/public/users/login";
+    NSString *url = @"http://mustangtutors.floccul.us/Laravel/public/users/login";
     
     // Initialize Session Configuration
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -132,17 +131,8 @@
     self.devices = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     //[self.tableView reloadData];
-    [self setImageView:self.logoImageView withString:@"http://local.mustangtutors.com/img/logo.png"];
-    [self setImageView:self.titleImageView withString:@"http://local.mustangtutors.com/img/mustangtutors-blue.png"];
 }
 
--(void)loadText
-{
-    
-    NSManagedObject *device = [self.devices objectAtIndex:0];
-    [self.welcomeValueLabel setText:[NSString stringWithFormat:@"%@", [device valueForKey:@"smuId"]]];
-    [self.welcomeLabel setText:@"Welcome"];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -270,6 +260,10 @@
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [self setImageView:self.logoImageView withString:@"http://mustangtutors.floccul.us/img/logo.png"];
+    [self setImageView:self.titleImageView withString:@"http://mustangtutors.floccul.us/img/mustangtutors-blue.png"];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

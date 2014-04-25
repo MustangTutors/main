@@ -8,17 +8,27 @@
 
 #import "TutorCommentsViewController.h"
 #import "TabBarViewController.h"
-
+#import "LoginViewController.h"
 @interface TutorCommentsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *Name_CommentsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton *previousButton;
 @property (nonatomic)NSInteger currentComment;
+@property (weak, nonatomic) IBOutlet UITextView *commentTextTextView;
 @end
 
 @implementation TutorCommentsViewController
+- (IBAction)logoutButton:(UIButton *)sender
+{
+        LoginViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        UIStoryboardSegue * logoutSegue = [UIStoryboardSegue segueWithIdentifier:@"logoutSegue" source:self destination:vc performHandler:^{
+            NSLog(@"ballsack");
+            
+        }];
+    
+
+}
 - (IBAction)nextCommentButton:(UIButton *)sender {
     [self setCurrentComment:(self.currentComment +1)];
     if((self.currentComment +1) <=[[self.tutor getComments] count])
@@ -69,6 +79,7 @@
     TabBarViewController * tabBar = (TabBarViewController *)self.tabBarController;
     self.tutor = tabBar.tutor;
     [self setInitialValues];
+    self.commentTextTextView.editable = NO;
 }
 
 -(void)setInitialValues
@@ -91,7 +102,7 @@
 }
 -(void)setCommentInfoWithInteger:(NSInteger)comNumber
 {
-    [self.commentTextLabel setText:[NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"comment" ]]];
+    [self.commentTextTextView setText:[NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"comment" ]]];
     
     NSString * dateString = [NSString stringWithFormat:@"%@",[[[self.tutor getComments] objectAtIndex:comNumber] objectForKey:@"timeStamp"]];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
@@ -99,7 +110,7 @@
     
     //[formatter setTimeStyle:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSDate * comDate = [formatter dateFromString:dateString];
-    [formatter setDateFormat:@"MMMM dd, yyyy"];
+    [formatter setDateFormat:@"MMM. dd, yyyy"];
     NSString * comDateString = [formatter stringFromDate:comDate];
     [formatter setDateFormat:@"h:mm a"];
     NSString * comTimeString = [formatter stringFromDate:comDate];

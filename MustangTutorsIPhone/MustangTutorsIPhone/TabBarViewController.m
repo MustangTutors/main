@@ -28,6 +28,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSArray *items = self.tabBar.items;
+    
+    for (UITabBarItem *tbi in items) {
+        UIImage *image = tbi.image;
+        tbi.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tbi.selectedImage = tbi.image;
+    }
 }
 
 - (void)didReceiveMemoryWarning

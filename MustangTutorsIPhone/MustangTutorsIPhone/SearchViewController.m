@@ -31,7 +31,27 @@
         // Get reference to the destination view controller
         SearchResultsViewController * sr = (SearchResultsViewController *)[segue destinationViewController];
         [sr setSearchResults:self.tutorResults];
+
     }
+}
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* tView = (UILabel*)view;
+    if (!tView){
+        tView = [[UILabel alloc] init];
+        // Setup label properties - frame, font, colors etc
+        tView.textColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
+    }
+    // Fill the label text here
+    if(row != [self.subjects count])
+    {
+        NSString * currSubject = [self.subjects objectAtIndex:row];
+        NSLog(@"%@",currSubject);
+        [tView setText:[self.subjects objectAtIndex:row]];
+    }else
+        [tView setText:@"Any"];
+    
+    [tView sizeToFit];
+    return tView;
 }
 
 
@@ -46,7 +66,7 @@
     
     NSMutableDictionary * postParams = [[NSMutableDictionary alloc]init];
     
-    if(![[self.subjectText text]isEqualToString:@""])
+    if(![[self.subjectText text]isEqualToString:@""] && ![[self.subjectText text]isEqualToString:@"Any"])
         [postParams setObject:[self.subjectText text] forKey:@"subject"];
     NSLog(@"SubJuh: %@",[postParams objectForKey:@"subject"]);
     if(![[self.courseNumberText text]isEqualToString:@""])
@@ -69,7 +89,7 @@
 
     
     //get user info from login credentials
-    NSString *url = @"http://local.mustangtutors.com/Laravel/public/tutor/search";
+    NSString *url = @"http://mustangtutors.floccul.us/Laravel/public/tutor/search";
     url = [NSString stringWithFormat:@"%@?%@",url,[self.search postString]];
     
     
@@ -96,6 +116,8 @@
         NSLog(@"JSON: %@", responseObject);
         self.tutorResults = [[TutorArray alloc]initWithTutorArray:responseObject];
         NSLog(@"Toot Results: %@",self.tutorResults);
+        [self performSegueWithIdentifier:@"segueToSearchResults" sender:self];
+
         
     }] resume];
 
@@ -135,15 +157,19 @@
     NSLog(@"Num Rows:%d",[self.subjects count]);
 
     //set number of rows
-    return [self.subjects count];
+    return [self.subjects count]+1;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     //set item per row
-    NSString * currSubject = [self.subjects objectAtIndex:row];
-    NSLog(@"%@",currSubject);
-    return [self.subjects objectAtIndex:row];
+    if(row != [self.subjects count])
+    {
+        NSString * currSubject = [self.subjects objectAtIndex:row];
+        NSLog(@"%@",currSubject);
+        return [self.subjects objectAtIndex:row];
+    }else
+        return @"Any";
 }
 - (void)viewDidLoad
 {
@@ -156,11 +182,13 @@
     
     self.subjectPicker.showsSelectionIndicator = YES;
     self.subjectText.inputView = self.subjectPicker;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0 green:.62 blue:.984 alpha:1],NSForegroundColorAttributeName,nil];
 
+    [self.navigationController.navigationBar setTitleTextAttributes:dic];
     
     //get the subjects Info
     
-    NSString *url = @"http://local.mustangtutors.com/Laravel/public/courses/subjects";
+    NSString *url = @"http://mustangtutors.floccul.us/Laravel/public/courses/subjects";
     
     // Initialize Session Configuration
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -205,7 +233,16 @@
     
 }
 -(void)dismissKeyboard {
-    [self.subjectText setText:[self.subjects objectAtIndex:[self.subjectPicker selectedRowInComponent:0]]];
+    if(self.subjectPicker.hidden == NO)
+    {
+        if([self.subjectPicker selectedRowInComponent:0] != [self.subjects count])
+        {
+            [self.subjectText setText:[self.subjects objectAtIndex:[self.subjectPicker selectedRowInComponent:0]]];
+        }else
+        {
+            [self.subjectText setText:@"Any"];
+        }
+    }
     [self.subjectText resignFirstResponder];
     [self.courseNameText resignFirstResponder];
     [self.courseNumberText resignFirstResponder];

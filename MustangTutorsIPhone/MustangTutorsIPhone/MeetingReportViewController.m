@@ -9,6 +9,7 @@
 #import "MeetingReportViewController.h"
 #import "MeetingCourseViewController.h"
 #import "TabBarViewController.h"
+#import "LoginViewController.h"
 @interface MeetingReportViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *smuIdField;
 @property (weak, nonatomic) IBOutlet UILabel *warningMessage;
@@ -51,6 +52,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0 green:.62 blue:.984 alpha:1],NSForegroundColorAttributeName,nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:dic];
+
     TabBarViewController * tabBar = (TabBarViewController *)self.tabBarController;
     self.tutor = tabBar.tutor;
 
@@ -86,17 +91,30 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)logoutButton:(UIButton *)sender
+{
+        LoginViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        UIStoryboardSegue * logoutSegue = [UIStoryboardSegue segueWithIdentifier:@"logoutSegue" source:self destination:vc performHandler:^{
+            NSLog(@"ballsack");
+            
+        }];
+        
+
+
+}
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if([[self.smuIdField text]isEqualToString:@""])
-    {
-        [self.warningMessage setHidden:NO];
-        return NO;
-    }else{
-        [self.warningMessage setHidden:YES];
-        return YES;
-    }
+    if(![identifier isEqualToString: @"logoutSegue"]){
+        if([[self.smuIdField text]isEqualToString:@""])
+        {
+            [self.warningMessage setHidden:NO];
+            return NO;
+        }else{
+            [self.warningMessage setHidden:YES];
+            return YES;
+        }
+    }else return YES;
 }
 -(void)viewDidAppear:(BOOL)animated
 {

@@ -31,7 +31,7 @@
         //add new meeting report
     
         // Initialize Session Manager
-        AFHTTPSessionManager * manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:@"http://local.mustangtutors.com"]];
+        AFHTTPSessionManager * manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:@"http://mustangtutors.floccul.us"]];
     
         // Configure Manager
         AFJSONResponseSerializer * serializer = [AFJSONResponseSerializer serializer];

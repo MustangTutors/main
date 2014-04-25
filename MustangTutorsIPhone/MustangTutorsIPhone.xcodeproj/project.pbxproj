@@ -214,6 +214,7 @@
 		DB40E23C18FF5AFC00AE9967 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DB1545491906CF25009EDF21 /* SearchViewControllers */,
 				DB40E23D18FF5B1200AE9967 /* TutorViewControllers */,
 			);
 			name = ViewControllers;
@@ -222,7 +223,6 @@
 		DB40E23D18FF5B1200AE9967 /* TutorViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DB1545491906CF25009EDF21 /* SearchViewControllers */,
 				DB502F1818FC7F5300FC3104 /* TabBarViewController.h */,
 				DB502F1918FC7F5300FC3104 /* TabBarViewController.m */,
 				DB40E24118FF5CE900AE9967 /* ProfileViewControllers */,

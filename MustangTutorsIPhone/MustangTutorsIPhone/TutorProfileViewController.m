@@ -58,7 +58,7 @@
 {
     //get the Tutor Info
     
-    NSString *url = [NSString stringWithFormat:@"http://local.mustangtutors.com/Laravel/public/tutor/%d",[self.tutor getUserId]];
+    NSString *url = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/Laravel/public/tutor/%d",[self.tutor getUserId]];
     
     // Initialize Session Configuration
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -81,8 +81,11 @@
         }
         //process the tutor info here
         NSLog(@"JSON: %@", responseObject);
-        [self.tutor setAverageRating:[[responseObject objectForKey:@"average_rating"]doubleValue]];
         [self.tutor setNumberOfRatings:[[responseObject objectForKey:@"numberOfRatings"]integerValue]];
+        if([self.tutor getNumberOfRatings] != 0){
+            [self.tutor setAverageRating:[[responseObject objectForKey:@"average_rating"]doubleValue]];
+        }
+
         NSLog(@"Average Rating%f Number of Ratings %d",[self.tutor getAverageRating],[self.tutor getNumberOfRatings]);
         NSLog(@"average rating whole part %f",floor([self.tutor getAverageRating]));
         [self.nameLabel setText:[self.tutor getFullName]];
@@ -108,7 +111,7 @@
 - (IBAction)toggleAvailable:(UISwitch *)sender {
     [self.tutor toggleAvailability];
     NSLog (@"in here");
-    NSString *url = [NSString stringWithFormat:@"http://local.mustangtutors.com/Laravel/public/users/toggle/%d",[self.tutor getUserId]];
+    NSString *url = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/Laravel/public/users/toggle/%d",[self.tutor getUserId]];
     
     NSLog(@"userid =%d  available%hhd",[self.tutor getUserId],[self.tutor isAvailable]);
     // Initialize Session Configuration
@@ -138,8 +141,10 @@
     
     [self setExtraInitialStates];
     
-    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://local.mustangtutors.com/img/tutors/%d.jpg",[self.tutor getUserId]];
+    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[self.tutor getUserId]];
     [self setImageView:self.tutorImageView withString:tutorProfileImagePath];
+    self.availableSwitch.tintColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
+    self.availableSwitch.onTintColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -172,9 +177,9 @@
 }
 -(void)setStarValues:(double)numStars
 {
-    NSString * starImagePath = @"http://local.mustangtutors.com/img/star.png";
-    NSString * halfStarImagePath =@"http://local.mustangtutors.com/img/halfstar.png";
-    NSString * emptyStarImagePath =@"http://local.mustangtutors.com/img/emptystar.png";
+    NSString * starImagePath = @"http://mustangtutors.floccul.us/img/star.png";
+    NSString * halfStarImagePath =@"http://mustangtutors.floccul.us/img/halfstar.png";
+    NSString * emptyStarImagePath =@"http://mustangtutors.floccul.us/img/emptystar.png";
     
     //set fifth star
     //if 5

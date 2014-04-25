@@ -11,8 +11,6 @@
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *smuIdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *welcomeValueLabel;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 -(IBAction)clickedBackground;
 @end

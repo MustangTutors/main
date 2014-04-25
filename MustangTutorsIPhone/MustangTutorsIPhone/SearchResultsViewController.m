@@ -30,6 +30,37 @@
 {
     return 1;    //count of section
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    /*
+    if (indexPath.row == 0){
+        cell.backgroundColor = [UIColor blueColor];
+    } else if((indexPath.row) % 2 == 1){
+        cell.backgroundColor = [UIColor whiteColor];
+    }else if(indexPath.row % 4 == 0){
+        cell.backgroundColor = [UIColor blueColor];
+    }else{
+        cell.backgroundColor = [UIColor redColor];
+    }*/
+    SearchResultTableViewCell * temp = [[SearchResultTableViewCell alloc]init];
+    temp = (SearchResultTableViewCell *)cell;
+    if(indexPath.row %2 == 1){
+        temp.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [temp.availableLabel setTextColor:[UIColor colorWithRed:0 green:.62 blue:.984 alpha:1]];
+        [temp.averageRatingLabel setTextColor:[UIColor colorWithRed:0 green:.62 blue:.984 alpha:1]];
+        [temp.tutorNameLabel setTextColor:[UIColor colorWithRed:0 green:.62 blue:.984 alpha:1]];
+        
+
+    }else{
+        temp.backgroundColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
+        [temp.availableLabel setTextColor:[UIColor groupTableViewBackgroundColor]];
+        [temp.averageRatingLabel setTextColor:[UIColor groupTableViewBackgroundColor]];
+        [temp.tutorNameLabel setTextColor:[UIColor groupTableViewBackgroundColor]];
+    }
+    cell.selectedBackgroundView.backgroundColor = [UIColor blackColor];
+    
+    cell = temp;
+    
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -72,11 +103,12 @@
     }
     
     //set image view
-    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://local.mustangtutors.com/img/tutors/%d.jpg",[temp getUserId]];
+    NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[temp getUserId]];
     [self setImageView:cell.tutorImageView withString:tutorProfileImagePath];
 
     //setaverage ratings view
     [cell.averageRatingLabel setText:[NSString stringWithFormat:@"Average Rating of %d ratings: %.3f",[temp getNumberOfRatings],[temp getAverageRating]]];
+
 
     return cell;
 }
@@ -97,17 +129,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    for(int i = 0;i<[self.searchResults.tutors count];i++)
-    {
-        [self setExtraInitialStatesTableView:[self.searchResults.tutors objectAtIndex:i]];
-    }
     
 }
+
 -(void)setExtraInitialStatesTableView:(Tutor *)tutor
 {
     //get the Tutor Info
     
-    NSString *url = [NSString stringWithFormat:@"http://local.mustangtutors.com/Laravel/public/tutor/%d",[tutor getUserId]];
+    NSString *url = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/Laravel/public/tutor/%d",[tutor getUserId]];
     
     // Initialize Session Configuration
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -138,7 +167,7 @@
         [tutor setComments:[responseObject objectForKey:@"comments"]];
         [tutor setHours:[responseObject objectForKey:@"hours"]];
         [tutor setCourses:[responseObject objectForKey:@"courses"]];
-        
+        [self.searchResultsTableView reloadData];
     }] resume];
 }
 

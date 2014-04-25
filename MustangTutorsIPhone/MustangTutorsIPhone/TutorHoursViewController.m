@@ -71,7 +71,18 @@
     }else{
         day = @"Saturday";
     }
-    [cell.ScheduleTimeLabel setText:[NSString stringWithFormat:@"%@ %@ - %@",day,[[[self.tutor getHours]objectAtIndex:indexPath.row]objectForKey:@"start_time"],[[[self.tutor getHours]objectAtIndex:indexPath.row]objectForKey:@"end_time"]]];
+    NSDate * tempStartDate = [[NSDate alloc]init];
+    NSDate * tempEndDate = [[NSDate alloc]init];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    tempStartDate = [formatter dateFromString:[NSString stringWithFormat:@"%@",[[[self.tutor getHours]objectAtIndex:indexPath.row]objectForKey:@"start_time"]]];
+    tempEndDate = [formatter dateFromString:[NSString stringWithFormat:@"%@",[[[self.tutor getHours]objectAtIndex:indexPath.row]objectForKey:@"end_time"]]];
+    [formatter setDateFormat:@"h:mm a"];
+
+    NSString * startTimeString = [formatter stringFromDate:tempStartDate];
+    NSString * endTimeString = [formatter stringFromDate:tempEndDate];
+
+    [cell.ScheduleTimeLabel setText:[NSString stringWithFormat:@"%@ %@ - %@",day,startTimeString,endTimeString]];
     return cell;
 }
 

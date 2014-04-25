@@ -9,6 +9,7 @@
 #import "TutorClassesViewController.h"
 #import "TabBarViewController.h"
 #import "ClassesTableViewCell.h"
+#import "LoginViewController.h"
 @interface TutorClassesViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameCoursesLabel;
 
@@ -29,6 +30,14 @@
     return 1;    //count of section
 }
 
+- (IBAction)logoutButton:(UIButton *)sender {
+    LoginViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    UIStoryboardSegue * logoutSegue = [UIStoryboardSegue segueWithIdentifier:@"logoutSegue" source:self destination:vc performHandler:^{
+        NSLog(@"ballsack");
+        
+    }];
+
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
