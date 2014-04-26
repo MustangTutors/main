@@ -181,5 +181,9 @@
     <style name="comments_label">
         <item name="android:layout_marginTop">20dp</item>
     </style>
+    
+    <style name="comments">
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
 
 </resources>
