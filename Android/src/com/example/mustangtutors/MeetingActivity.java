@@ -82,11 +82,27 @@ public class MeetingActivity extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				// Send info for new meeting
-				if(valid()){
+				int valid = valid();
+				
+				if(valid == 2){
 					new AddTask().execute((Void) null);
 				}
-				else {
+				else if(valid == 0) {
 					CharSequence text = "Incomplete information.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(mContext, text, duration);
+					toast.show();
+				}
+				else if(valid == 1) {
+					CharSequence text = "Invalid SMU ID.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(mContext, text, duration);
+					toast.show();
+				}
+				else if(valid == 3) {
+					CharSequence text = "Invalid time.";
 					int duration = Toast.LENGTH_SHORT;
 
 					Toast toast = Toast.makeText(mContext, text, duration);
@@ -124,7 +140,7 @@ public class MeetingActivity extends FragmentActivity {
 		mEndTime.setText("End Time");
 	}
 	
-	private boolean valid() {
+	private int valid() {
 		String id = mSmuId.getText().toString();
 		String sum = mSummary.getText().toString();
 		String date = mDate.getText().toString();
@@ -132,12 +148,31 @@ public class MeetingActivity extends FragmentActivity {
 		String etime = mEndTime.getText().toString();
 		int cour = mCourses.getSelectedItemPosition();
 		
-		if(!id.equals("") && !sum.equals("") && !date.equals("Date") 
-				&& !stime.equals("Start Time") && !etime.equals("End Time") && cour != 0){
-			return true;
+		if(id.equals("") || sum.equals("") || date.equals("Date") 
+				|| stime.equals("Start Time") || etime.equals("End Time") || cour == 0){
+			return 0;
 		}
 		
-		return false;
+		int id_num = Integer.parseInt(id);
+		
+		if(id_num < 10000000 || id_num > 99999999){
+			return 1;
+		}
+		
+		int start_hour = Integer.parseInt(sHour);
+		int end_hour = Integer.parseInt(eHour);
+		int start_min = Integer.parseInt(sMinute);
+		int end_min = Integer.parseInt(eMinute);
+		
+		if(start_hour > end_hour)
+		{
+			return 3;
+		}
+		else if(start_hour == end_hour && start_min > end_min){
+			return 3;
+		}
+		
+		return 2;
 	}
 
 	@Override
@@ -382,6 +417,7 @@ public class MeetingActivity extends FragmentActivity {
 	        request.addParam("post_meeting", json.toString());
             try {
 	            request.send();
+	            
             } catch (Exception e) {
             }
             
@@ -396,12 +432,6 @@ public class MeetingActivity extends FragmentActivity {
 
 			Toast toast = Toast.makeText(mContext, text, duration);
 			toast.show();
-		}
-
-		@Override
-		protected void onCancelled() {
-//			mAuthTask = null;
-//			showProgress(false);
 		}
 	}
 }
