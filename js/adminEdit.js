@@ -313,7 +313,6 @@ $(document).ready(function() {
             var course_id = regex_id.exec(new_course);
             courses.Courses[course_index].Course_ID = course_id[0];
             course_index++;
-            console.log(courses);
 
         }
 
@@ -324,7 +323,6 @@ $(document).ready(function() {
                 new_courses: JSON.stringify(courses)
             }
         });
-        console.log(JSON.stringify(courses));
         $("span#course_confirmation").show();
         $("button[name='saveCourseChanges']").css("margin-top", -20);
         $("button[name='cancelCourseChanges']").css("margin-top", -20);
@@ -361,7 +359,6 @@ $(document).ready(function() {
                 new_hours: JSON.stringify(hours)
             }
         });
-        console.log(hours);
         $("span#hour_confirmation").show();
         $("button[name='saveHourChanges']").css("margin-top", -20);
         $("button[name='cancelHourChanges']").css("margin-top", -20);

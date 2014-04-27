@@ -214,7 +214,7 @@ $(document).ready(function() {
                 tutorInfo.current_user_rating = rating;
                 $("span#averageRating h3 span").html(convertToStars(json.AVERAGE_RATING));
 
-                var num_ratings = json(tutorInfo.NUMBER_OF_RATINGS);
+                var num_ratings = json.NUMBER_OF_RATINGS;
                 if (num_ratings !== 0) {
                     $("span#averageRating h3 #num_ratings").html("Based on " + num_ratings + " ratings");
                 }

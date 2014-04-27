@@ -235,6 +235,7 @@ public final class R {
         public static final int TutorNumberRatings=0x7f080011;
         public static final int TutorPicture=0x7f08000e;
         public static final int betweener=0x7f08001b;
+        public static final int comments=0x7f08001d;
         public static final int comments_label=0x7f08001c;
         public static final int meeting_info_label=0x7f080015;
         public static final int new_meeting_container=0x7f08001a;
