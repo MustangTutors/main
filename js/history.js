@@ -121,9 +121,9 @@ $(document).ready(function(){
         new_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
 
-        if(new_meeting.end_time < new_meeting.start_time){
+        if(new_meeting.end_time <= new_meeting.start_time){
             $("article.add_meeting").height("360px");
-            $("#meeting_form span.error").html("Invalid end time.");
+            $("#meeting_form span.error").html("Invalid time.");
         }
         else{
             // Send JSON to database
