@@ -73,7 +73,6 @@ $(document).ready(function() {
                     option += "</option>";
                     var identifier = 'select#potential' + (potential-1);
                     $(identifier).append(option);
-                    console.log(potential);
                 }
             }
         });
@@ -99,6 +98,7 @@ $(document).ready(function() {
         application.Hours = new Array();
 
         var selected_courses = $("select.course_dropdown");
+        var unique_courses = [];
 
         for(var i = 0; i < selected_courses.length; i++) {
             var new_course = selected_courses.eq(i).val();
@@ -107,8 +107,12 @@ $(document).ready(function() {
 
             var regex_id = /(\d)/;
             var course_id = regex_id.exec(new_course);
-            application.Courses[i].Course_ID = course_id[0];
+            unique_courses[i] = course_id[0];         
+        }
+        unique_courses = $.unique(unique_courses);
 
+        for(var i = 0; i < unique_courses.length; i++) {
+            application.Courses[i].Course_ID = unique_courses[i];
         }
 
         var days = $("article#potential_hours ul li input[type='checkbox']");
@@ -133,9 +137,6 @@ $(document).ready(function() {
             url: "Laravel/public/users/apply",
             data: {
                 application: JSON.stringify(application)
-            },
-            success: function(output) {
-                console.log("Sent something");
             }
         });
 
