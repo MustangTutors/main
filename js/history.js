@@ -131,7 +131,15 @@ $(document).ready(function(){
             success: function(json) {
                 console.log(json);
 
-                if(json !== "not a valid smu id"){
+                if(json === "can't add meeting with yourself"){
+                    $("article.add_meeting").height("360px");
+                    $("#meeting_form span.error").html("You cannot add a meeting with yourself.");
+                }
+                else if(json === "not a valid smu id"){
+                    $("article.add_meeting").height("360px");
+                    $("#meeting_form span.error").html("This student does not exist.");
+                }
+                else{
 
                     // Clear and close new meeting window
                     resetNewMeetingForm();
@@ -143,10 +151,6 @@ $(document).ready(function(){
                     new_meeting.first_name = json[0].fName;
                     new_meeting.last_name = json[0].lname;
                     addNewMeeting(new_meeting);
-                }
-                else {
-                    $("article.add_meeting").height("360px");
-                    $("#meeting_form span.error").html("You cannot add a meeting with yourself.");
                 }
             }
         });
