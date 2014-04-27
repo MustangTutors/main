@@ -121,39 +121,43 @@ $(document).ready(function(){
         new_meeting = createNewMeetingObject();
         var newMeetingJSON = JSON.stringify(new_meeting);
 
-        
+        if(new_meeting.end_time < new_meeting.start_time){
+            $("article.add_meeting").height("360px");
+            $("#meeting_form span.error").html("Invalid end time.");
+        }
+        else{
+            // Send JSON to database
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/tutors/addMeeting",
+                data: {post_meeting : newMeetingJSON},
+                success: function(json) {
+                    console.log(json);
 
-        // Send JSON to database
-        $.ajax({
-            type: "POST",
-            url: "Laravel/public/tutors/addMeeting",
-            data: {post_meeting : newMeetingJSON},
-            success: function(json) {
-                console.log(json);
+                    if(json === "can't add meeting with yourself"){
+                        $("article.add_meeting").height("360px");
+                        $("#meeting_form span.error").html("You cannot add a meeting with yourself.");
+                    }
+                    else if(json === "not a valid smu id"){
+                        $("article.add_meeting").height("360px");
+                        $("#meeting_form span.error").html("This student does not exist.");
+                    }
+                    else{
 
-                if(json === "can't add meeting with yourself"){
-                    $("article.add_meeting").height("360px");
-                    $("#meeting_form span.error").html("You cannot add a meeting with yourself.");
+                        // Clear and close new meeting window
+                        resetNewMeetingForm();
+                        $('#subtract_icon').hide();
+                        $('#add_icon').css('display', 'inline-block');
+                        hideAddMeetingWindow();
+
+                        json = JSON.parse(json);
+                        new_meeting.first_name = json[0].fName;
+                        new_meeting.last_name = json[0].lname;
+                        addNewMeeting(new_meeting);
+                    }
                 }
-                else if(json === "not a valid smu id"){
-                    $("article.add_meeting").height("360px");
-                    $("#meeting_form span.error").html("This student does not exist.");
-                }
-                else{
-
-                    // Clear and close new meeting window
-                    resetNewMeetingForm();
-                    $('#subtract_icon').hide();
-                    $('#add_icon').css('display', 'inline-block');
-                    hideAddMeetingWindow();
-
-                    json = JSON.parse(json);
-                    new_meeting.first_name = json[0].fName;
-                    new_meeting.last_name = json[0].lname;
-                    addNewMeeting(new_meeting);
-                }
-            }
-        });
+            });
+        }
     });
 
     // When Reset is clicked on new meeting form
