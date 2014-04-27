@@ -18,7 +18,8 @@
         android:theme="@style/MyCustomTheme" >
         <activity
             android:name="com.example.mustangtutors.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +30,8 @@
             android:name="com.example.mustangtutors.LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName="com.example.mustangtutors.MainActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mustangtutors.MainActivity" />
@@ -37,7 +39,8 @@
         <activity
             android:name="com.example.mustangtutors.MeetingActivity"
             android:label="@string/title_activity_meeting"
-            android:parentActivityName="com.example.mustangtutors.MainActivity" >
+            android:parentActivityName="com.example.mustangtutors.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mustangtutors.MainActivity" />
@@ -45,7 +48,8 @@
         <activity
             android:name="com.example.mustangtutors.TutorActivity"
             android:label="@string/title_activity_tutor"
-            android:parentActivityName="com.example.mustangtutors.MainActivity" >
+            android:parentActivityName="com.example.mustangtutors.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mustangtutors.MainActivity" />
