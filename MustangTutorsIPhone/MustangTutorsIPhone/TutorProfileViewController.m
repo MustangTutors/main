@@ -142,7 +142,7 @@
     [self setExtraInitialStates];
     
     NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[self.tutor getUserId]];
-    [self setImageView:self.tutorImageView withString:tutorProfileImagePath];
+    [self.tutorImageView setImageWithURL:[NSURL URLWithString:tutorProfileImagePath] placeholderImage:[UIImage imageNamed:@"tutor"]];
     self.availableSwitch.tintColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
     self.availableSwitch.onTintColor = [UIColor colorWithRed:0 green:.62 blue:.984 alpha:1];
 }

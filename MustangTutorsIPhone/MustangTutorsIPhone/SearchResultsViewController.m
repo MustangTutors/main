@@ -104,7 +104,9 @@
     
     //set image view
     NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[temp getUserId]];
-    [self setImageView:cell.tutorImageView withString:tutorProfileImagePath];
+    
+    [cell.tutorImageView setImageWithURL:[NSURL URLWithString:tutorProfileImagePath] placeholderImage:[UIImage imageNamed:@"tutor"]];
+
 
     //setaverage ratings view
     [cell.averageRatingLabel setText:[NSString stringWithFormat:@"Average Rating of %d ratings: %.3f",[temp getNumberOfRatings],[temp getAverageRating]]];

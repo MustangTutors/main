@@ -92,7 +92,8 @@
     [self.previousButton setEnabled:NO];
     [self.previousButton setTitle:@"" forState:UIControlStateDisabled];
     [self setCurrentComment:0];
-    if([[self.tutor getComments] objectAtIndex:1] == NULL)
+    //if([[self.tutor getComments] objectAtIndex:1] == NULL)
+    if([self.tutor.comments count]<2)
     {
         [self.nextButton setEnabled:NO];
         [self.nextButton setTitle:@"" forState:UIControlStateDisabled];

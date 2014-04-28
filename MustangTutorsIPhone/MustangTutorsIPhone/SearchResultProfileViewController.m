@@ -42,7 +42,7 @@
     [self.numberOfRatingsLabel setText:[NSString stringWithFormat:@"Average Rating of %d ratings",[self.tutor getNumberOfRatings]]];
     [self setStarValues:[self.tutor getAverageRating]];
     NSString * tutorProfileImagePath = [NSString stringWithFormat:@"http://mustangtutors.floccul.us/img/tutors/%d.jpg",[self.tutor getUserId]];
-    [self setImageView:self.tutorImageView withString:tutorProfileImagePath];
+    [self.tutorImageView setImageWithURL:[NSURL URLWithString:tutorProfileImagePath] placeholderImage:[UIImage imageNamed:@"tutor"]];
     if(![self.tutor isAvailable])
     {
         [self.availableLabel setText:@"Unavailable"];
