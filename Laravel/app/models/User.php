@@ -200,7 +200,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 echo $extension;
         }
 
-        if($appstatus!=-1 && $appstatus!=0)
+        else if($appstatus!=-1 && $appstatus!=0)
         {
             echo "You have already submitted an application.";
         } 

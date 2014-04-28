@@ -108,6 +108,25 @@ $(document).ready(function() {
 
     });
 
+    $("input[type='file']").on("change", function(e) {
+        e.preventDefault();
+
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "Laravel/public/users/apply",
+            data: {
+                application: formData
+            },
+            processData: false,
+            contentType: false,
+            success: function(output) {
+                console.log(output);
+            }
+        });
+    });
+
     $("button[type='submit']").on("click", function(e) {
 
         e.preventDefault();
@@ -183,8 +202,6 @@ $(document).ready(function() {
 
         if(empty_hours === false && empty_courses === false) {
 
-            var formData = new FormData(document.getElementById("pictureForm"));
-
             //var fileInput = document.getElementById("addProfilePicture");
             //var file = fileInput.files[0];
 
@@ -195,21 +212,11 @@ $(document).ready(function() {
                 url: "Laravel/public/users/apply",
                 data: {
                     application: JSON.stringify(application)
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "Laravel/public/users/apply",
-                data: {application: formData},
-                processData: false,
-                contentType: false,
+                },
                 success: function(output) {
-                    console.log(output);
+                    $("span#submission").show();
                 }
             });
-
-            $("span#submission").show();
         }
         
 
