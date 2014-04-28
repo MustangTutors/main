@@ -1651,6 +1651,14 @@ span#hour_error_2 {
     display: none;
 }
 
+span#submission {
+    color: green;
+    float: right;
+    margin-right: 151px;
+    margin-top: -21px;
+    display: none;
+}
+
 /* End styling for Apply To Be A Tutor Page */
 
 /* Styling for Admin Edit of Tutor Profile*/

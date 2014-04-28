@@ -183,22 +183,34 @@ $(document).ready(function() {
 
         if(empty_hours === false && empty_courses === false) {
 
-            var formData = new FormData();
-            var fileInput = document.getElementById("addProfilePicture");
-            file = fileInput.files[0];
-            formData.append('photo', file, 'photo');
+            var formData = new FormData(document.getElementById("pictureForm"));
+
+            //var fileInput = document.getElementById("addProfilePicture");
+            //var file = fileInput.files[0];
+
+            //formData.append('photo', file, 'photo');
+
             $.ajax({
                 type: "POST",
                 url: "Laravel/public/users/apply",
                 data: {
-                    application: JSON.stringify(application),
-                    photo: $("input[type='file']").serialize()
+                    application: JSON.stringify(application)
                 }
-                //processData: false,
-                //contentType: false
             });
-        }
 
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/users/apply",
+                data: {application: formData},
+                processData: false,
+                contentType: false,
+                success: function(output) {
+                    console.log(output);
+                }
+            });
+
+            $("span#submission").show();
+        }
         
 
     });

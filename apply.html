@@ -33,7 +33,7 @@
                         <h2></h2>
                     </section>
                 </div>
-                <form id="pictureForm">
+                <form id="pictureForm" enctype="multipart/form-data">
                     <label for="addProfilePicture">Add Profile Picture</label>
                     <input type="file" id="addProfilePicture" name="photo" multiple accept="image/*">
                 </form>
@@ -151,6 +151,7 @@
 
         </div>
         <button type="submit" id="submitApplication">Submit Application</button>
+        <span id="submission">Application Submitted</span>
     </main>
 
     <footer></footer>
