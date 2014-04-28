@@ -16,8 +16,6 @@ $(document).ready(function() {
     var fname;
     var lname;
 
-    $("select.course_dropdown").append("<option></option>");
-
 	$.ajax({
         type: "GET",
         url: "Laravel/public/users/current",
@@ -28,12 +26,15 @@ $(document).ready(function() {
             fname = userInfo[0].fName;
             lname = userInfo[0].lName;
 
+            checkApplicationStatus(user_id);
+
             var name = fname + " " + lname;
             var email = userInfo[0].email;
 
             $("section#contact h2:nth-child(odd)").html(name);
             $("section#contact h2:nth-child(even)").html(email);
 
+            $("select.course_dropdown").append("<option></option>");
         }
     });
 
@@ -141,11 +142,31 @@ $(document).ready(function() {
             type: "POST",
             url: "Laravel/public/users/apply",
             data: {
-                application: JSON.stringify(application)
+                application: JSON.stringify(application),
+                photo: $("input#addProfilePicture").val()
             }
         });
 
     });
 
-
 });
+
+function checkApplicationStatus(id) {
+    $.ajax({
+        type: "GET",
+        url: "Laravel/public/users/apply/status/" + id,
+        success: function(status) {
+            console.log(status);
+            if(status === "1") {
+                console.log("Status");
+                $("article#potential_hours ul").html("Pending. . .");
+                $("article#potential_courses form").html("Pending. . .");
+                $("article#potential_courses form").css("width", "76px");
+                $("img[src='img/add.png']").hide();
+                $("button[type='submit']").hide();
+                $("input#addProfilePicture").hide();
+                $("label[for='addProfilePicture']").hide();
+            }
+        }
+    });
+}

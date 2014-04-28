@@ -1569,9 +1569,13 @@ section#contact {
     display: inline;
 }
 
-button[name="addProfilePicture"] {
+label[for="addProfilePicture"] {
     display: block;
-    margin-left: 17px;
+    margin-left: 10px;
+}
+
+input#addProfilePicture {
+    display: block;
 }
 
 input[name="transcriptUpload"] {
