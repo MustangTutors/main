@@ -14,7 +14,12 @@ $(document).ready(function(){
     fillNewMeetingCourses();
 
 	// When toggle view clicked, load correct view
-	$(document).on('change', '#history_view input[type="checkbox"]', toggleView);
+	$(document).on('change', '#history_view input[type="checkbox"]', function() {
+        toggleView(1);
+    });
+    $(document).on('change', '#history_view2 input[type="checkbox"]', function() {
+        toggleView(2);
+    });
 
 	// Add "Share" message when user hovers over share icon and change share icon to gray
 	$(document).on('mouseover', '#share', function(){
@@ -229,19 +234,34 @@ $(document).ready(function(){
 });
 
 // Toggle view of history
-function toggleView() {
-	var view = $('#history_view input[type="checkbox"]').prop('checked');
+function toggleView(type) {
+    if (type === 1) {
+        var view = $('#history_view input[type="checkbox"]').prop('checked');
+    }
+    else {
+        var view = $('#history_view2 input[type="checkbox"]').prop('checked');
+    }
 
 	// If on Student View
 	if(view) {
 		$('#tutor_history').fadeOut(200, function() {
 			$('#student_history').fadeIn(100);
+            var toggle = $('#history_view2 input[type="checkbox"]');
+            toggle.prop('checked', true);
+            // Set the colors
+            toggle.siblings('span').children('span.false').css('color', '#AAA');
+            toggle.siblings('span').children('span.true').css('color', 'white');
 		});	
 	}
 	// Else on Tutor View
 	else {
 		$('#student_history').fadeOut(200, function() {
 			$('#tutor_history').fadeIn(100);
+            var toggle = $('#history_view input[type="checkbox"]');
+            toggle.prop('checked', false);
+            // Set the colors
+            toggle.siblings('span').children('span.false').css('color', 'white');
+            toggle.siblings('span').children('span.true').css('color', '#AAA');
 		});	
 	}
 }
@@ -316,12 +336,13 @@ function showView() {
                 // If user not a tutor, don't allow to toggle views
                 if(Number(json.tutor) === 0 || Number(json.active) === 0){
                     $('#history_view input[type="checkbox"]').prop('checked', true);
-                    toggleView();
+                    toggleView(1);
                 }
                 else {
                     $('label#history_view').show();
+                    $('label#history_view2').show();
                     $('#history_view input[type="checkbox"]').prop('checked', false);
-                    toggleView();
+                    toggleView(1);
                 }
             }
         }

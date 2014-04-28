@@ -1005,11 +1005,27 @@ section#tutor_history {
     display: none;
     position: absolute;
     width: 250px;
-    top: 27px;
-    left: 550px;
+    top: 15px;
+    left: 540px;
 }
 
 #history_view a {
+    border: 1px solid #192942;
+    background-color: #192942;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#3092B0), to(#22667B));
+    background-image: -webkit-linear-gradient(top, #3092B0, #22667B);
+    background-image: linear-gradient(to  bottom, from(#3092B0), to(#22667B));
+}
+
+#history_view2 {
+    display: none;
+    position: absolute;
+    width: 250px;
+    top: 15px;
+    left: 540px;
+}
+
+#history_view2 a {
     border: 1px solid #192942;
     background-color: #192942;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#3092B0), to(#22667B));
