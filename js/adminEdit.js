@@ -109,7 +109,6 @@ $(document).ready(function() {
         url: "Laravel/public/courses/showAll",
         success: function(courses) {
             courses = JSON.parse(courses);
-            //$("option").remove();
             for(var i = 0; i < courses.length; i++) {
                 var option = "<option>";
                 option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -136,7 +135,6 @@ $(document).ready(function() {
             url: "Laravel/public/courses/showAll",
             success: function(courses) {
                 courses = JSON.parse(courses);
-                //$("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
                     option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -265,8 +263,8 @@ $(document).ready(function() {
         for(var i = 0; i < list_of_days.length; i++) {
             if(list_of_days[i] !== null) {
                 days.eq(i).prop("checked", true);
-                //start_times.eq(i).val(list_of_start_times[i+1]);
-                //end_times.eq(i).val(list_of_end_times[i+1]);
+                start_times.eq(i).val(list_of_start_times[i].substring(0, 5));
+                end_times.eq(i).val(list_of_end_times[i].substring(0, 5));
             }
         }
     });
