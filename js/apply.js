@@ -108,7 +108,9 @@ $(document).ready(function() {
 
     });
 
-    $("button[type='submit']").on("click", function() {
+    $("button[type='submit']").on("click", function(e) {
+
+        e.preventDefault();
 
         $("span.error").hide();
 
@@ -162,11 +164,11 @@ $(document).ready(function() {
         var empty_hours = true;
 
         if(checked_days.length === 0) {
-            empty_hours = false;
             $("span#hour_error_1").show();
         } else {
             for(var i = 0; i < days.length; i++) {
                 if(days.eq(i).is(":checked")) {
+                    empty_hours = false;
                     if(start_times.eq(i).val() > end_times.eq(i).val()) {
                         $("span#hour_error_2").show();
                     } else { 
@@ -180,16 +182,22 @@ $(document).ready(function() {
             }
         }
 
-        if(empty_hours === true && empty_courses === true) {
-            $.ajax({
-                type: "POST",
-                url: "Laravel/public/users/apply",
-                data: {
-                    application: JSON.stringify(application),
-                    photo: $("input#addProfilePicture").val()
-                }
-            });
-        }
+        var reader = new FileReader();
+
+        var img = new Image();
+
+            if(empty_hours === false && empty_courses === false) {
+                $.ajax({
+                    type: "POST",
+                    url: "Laravel/public/users/apply",
+                    data: {
+                        application: JSON.stringify(application)
+                        //photo: e.target.result
+                    }
+                });
+            }
+
+        
 
     });
 
@@ -200,13 +208,12 @@ function checkApplicationStatus(id) {
         type: "GET",
         url: "Laravel/public/users/apply/status/" + id,
         success: function(status) {
-            console.log(status);
             if(status === "1") {
-                console.log("Status");
                 $("article#potential_hours ul").html("Pending. . .");
                 $("article#potential_courses form").html("Pending. . .");
                 $("article#potential_courses form").css("width", "76px");
                 $("img[src='img/add.png']").hide();
+                $("img[src='img/delete.png']").hide();
                 $("button[type='submit']").hide();
                 $("input#addProfilePicture").hide();
                 $("label[for='addProfilePicture']").hide();
