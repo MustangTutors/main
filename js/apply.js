@@ -138,8 +138,6 @@ $(document).ready(function() {
                 var new_course = selected_courses.eq(i).val();
 
                 if(new_course !== "") {
-                    application.Courses[i] = {};
-
                     var regex_id = /(\d)/;
                     var course_id = regex_id.exec(new_course);
                     unique_courses[i] = course_id[0]; 
@@ -148,6 +146,7 @@ $(document).ready(function() {
             unique_courses = $.unique(unique_courses);
 
             for(var i = 0; i < unique_courses.length; i++) {
+                application.Courses[i] = {};
                 application.Courses[i].Course_ID = unique_courses[i];
             }
         }
@@ -182,20 +181,23 @@ $(document).ready(function() {
             }
         }
 
-        var reader = new FileReader();
+        if(empty_hours === false && empty_courses === false) {
 
-        var img = new Image();
-
-            if(empty_hours === false && empty_courses === false) {
-                $.ajax({
-                    type: "POST",
-                    url: "Laravel/public/users/apply",
-                    data: {
-                        application: JSON.stringify(application)
-                        //photo: e.target.result
-                    }
-                });
-            }
+            var formData = new FormData();
+            var fileInput = document.getElementById("addProfilePicture");
+            file = fileInput.files[0];
+            formData.append('photo', file, 'photo');
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/users/apply",
+                data: {
+                    application: JSON.stringify(application),
+                    photo: $("input[type='file']").serialize()
+                }
+                //processData: false,
+                //contentType: false
+            });
+        }
 
         
 
