@@ -16,6 +16,8 @@ $(document).ready(function() {
     var fname;
     var lname;
 
+    $("select.course_dropdown").append("<option></option>");
+
 	$.ajax({
         type: "GET",
         url: "Laravel/public/users/current",
@@ -58,7 +60,8 @@ $(document).ready(function() {
 		$("div#addCourses form").append(
 			"<span class='potential_course'>" +
                 "<select id='potential" + potential + "' class='course_dropdown'>" +
-                 	"</select></span>"
+                    "<option></option>" +
+                     	"</select></span>"
 		);
 
         $.ajax({
@@ -66,7 +69,6 @@ $(document).ready(function() {
             url: "Laravel/public/courses/showAll",
             success: function(courses) {
                 courses = JSON.parse(courses);
-                //$("option").remove();
                 for(var i = 0; i < courses.length; i++) {
                     var option = "<option>";
                     option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
@@ -121,6 +123,9 @@ $(document).ready(function() {
 
         var hour_index = 0;
 
+        if(days.length === 0) {
+
+        }
 
         for(var i = 0; i < days.length; i++) {
             if(days.eq(i).is(":checked")) {
