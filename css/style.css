@@ -1630,9 +1630,16 @@ button#submitApplication {
     margin-left: 755px;
 }
 
-span#hour_error {
+span#course_error {
     float: right;
     margin-top: -20px;
+    color: red;
+    display: none;
+}
+
+span#hour_error {
+    float: right;
+    margin-top: -40px;
     color: red;
     display: none;
 }

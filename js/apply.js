@@ -118,20 +118,35 @@ $(document).ready(function() {
         var selected_courses = $("select.course_dropdown");
         var unique_courses = [];
 
+        var empty_courses = true;
+
         for(var i = 0; i < selected_courses.length; i++) {
-            var new_course = selected_courses.eq(i).val();
-
-            application.Courses[i] = {};
-
-            var regex_id = /(\d)/;
-            var course_id = regex_id.exec(new_course);
-            unique_courses[i] = course_id[0];         
+            if(selected_courses.eq(i).val() !== "") {
+                empty_courses = false;
+            }
         }
-        unique_courses = $.unique(unique_courses);
 
-        for(var i = 0; i < unique_courses.length; i++) {
-            application.Courses[i].Course_ID = unique_courses[i];
+        if(empty_courses === true) {
+            $("span#course_error").show();
+        } else {
+            for(var i = 0; i < selected_courses.length; i++) {
+                var new_course = selected_courses.eq(i).val();
+
+                if(new_course !== "") {
+                    application.Courses[i] = {};
+
+                    var regex_id = /(\d)/;
+                    var course_id = regex_id.exec(new_course);
+                    unique_courses[i] = course_id[0]; 
+                }        
+            }
+            unique_courses = $.unique(unique_courses);
+
+            for(var i = 0; i < unique_courses.length; i++) {
+                application.Courses[i].Course_ID = unique_courses[i];
+            }
         }
+        
 
         var days = $("article#potential_hours ul li input[type='checkbox']");
         var start_times = $("article#potential_hours ul li input.start_time");
@@ -141,28 +156,33 @@ $(document).ready(function() {
 
         var hour_index = 0;
 
+        var empty_hours = true;
+
         if(checked_days.length === 0) {
+            empty_hours = false;
             $("span#hour_error").show();
-        }
-
-        for(var i = 0; i < days.length; i++) {
-            if(days.eq(i).is(":checked")) {
-                application.Hours[hour_index] = {};
-                application.Hours[hour_index].Day = i+1;
-                application.Hours[hour_index].Start_Time = start_times.eq(i).val();
-                application.Hours[hour_index].End_Time = end_times.eq(i).val();
-                hour_index++;
+        } else {
+            for(var i = 0; i < days.length; i++) {
+                if(days.eq(i).is(":checked")) {
+                    application.Hours[hour_index] = {};
+                    application.Hours[hour_index].Day = i+1;
+                    application.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                    application.Hours[hour_index].End_Time = end_times.eq(i).val();
+                    hour_index++;
+                }
             }
         }
 
-        $.ajax({
-            type: "POST",
-            url: "Laravel/public/users/apply",
-            data: {
-                application: JSON.stringify(application),
-                photo: $("input#addProfilePicture").val()
-            }
-        });
+        if(empty_hours === true && empty_courses === true) {
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/users/apply",
+                data: {
+                    application: JSON.stringify(application),
+                    photo: $("input#addProfilePicture").val()
+                }
+            });
+        }
 
     });
 
