@@ -1632,14 +1632,21 @@ button#submitApplication {
 
 span#course_error {
     float: right;
-    margin-top: -20px;
+    margin-top: -60px;
     color: red;
     display: none;
 }
 
-span#hour_error {
+span#hour_error_1 {
     float: right;
     margin-top: -40px;
+    color: red;
+    display: none;
+}
+
+span#hour_error_2 {
+    float: right;
+    margin-top: -20px;
     color: red;
     display: none;
 }

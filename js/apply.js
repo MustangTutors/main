@@ -109,6 +109,9 @@ $(document).ready(function() {
     });
 
     $("button[type='submit']").on("click", function() {
+
+        $("span.error").hide();
+
         var application = {};
 
         application.User_ID = user_id;
@@ -160,15 +163,19 @@ $(document).ready(function() {
 
         if(checked_days.length === 0) {
             empty_hours = false;
-            $("span#hour_error").show();
+            $("span#hour_error_1").show();
         } else {
             for(var i = 0; i < days.length; i++) {
                 if(days.eq(i).is(":checked")) {
-                    application.Hours[hour_index] = {};
-                    application.Hours[hour_index].Day = i+1;
-                    application.Hours[hour_index].Start_Time = start_times.eq(i).val();
-                    application.Hours[hour_index].End_Time = end_times.eq(i).val();
-                    hour_index++;
+                    if(start_times.eq(i).val() > end_times.eq(i).val()) {
+                        $("span#hour_error_2").show();
+                    } else { 
+                        application.Hours[hour_index] = {};
+                        application.Hours[hour_index].Day = i+1;
+                        application.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                        application.Hours[hour_index].End_Time = end_times.eq(i).val();
+                        hour_index++;
+                    }
                 }
             }
         }

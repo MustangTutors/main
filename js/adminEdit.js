@@ -80,7 +80,6 @@ $(document).ready(function() {
                 tutorInfo.hours = [];
             }
             for(var dayIndex = 0, tutorDayIndex = 0; dayIndex < days.length; dayIndex++) {
-                console.log(dayIndex);
                 var day = $('<li><span class="day"></span><span class="content"></span></li>');
                 day.find('.day').html(days[dayIndex]);
                 if ((tutorDayIndex < tutorInfo.hours.length) && (Number(tutorInfo.hours[tutorDayIndex].day)-1 === dayIndex)) {
