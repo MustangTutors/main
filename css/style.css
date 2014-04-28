@@ -1618,8 +1618,23 @@ img[src="img/add.png"] {
     position: absolute;
 }
 
+img[src="img/delete.png"] {
+    max-width: 30px;
+    max-height: 30px;
+    margin-left: 360px;
+    margin-top: -40px;
+    position: absolute;
+}
+
 button#submitApplication {
     margin-left: 755px;
+}
+
+span#hour_error {
+    float: right;
+    margin-top: -20px;
+    color: red;
+    display: none;
 }
 
 /* End styling for Apply To Be A Tutor Page */

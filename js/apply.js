@@ -86,12 +86,27 @@ $(document).ready(function() {
 
 		var height = $("div#addCourses").height();
 
-		if(height >= 220) {
+		if(height > 240) {
 			var new_height = $("section.applicant_info article").height();
 			$("section.applicant_info article").height(new_height+34);
 		}
 		
 	});
+
+    $("img[src='img/delete.png']").on("click", function(e) {
+
+        e.preventDefault();
+
+        $("span.potential_course:last-of-type()").remove();
+
+        var height = $("div#addCourses").height();
+
+        if(height >= 220) {
+            var new_height = $("section.applicant_info article").height();
+            $("section.applicant_info article").height(new_height-34);
+        }
+
+    });
 
     $("button[type='submit']").on("click", function() {
         var application = {};
@@ -122,10 +137,12 @@ $(document).ready(function() {
         var start_times = $("article#potential_hours ul li input.start_time");
         var end_times = $("article#potential_hours ul li input.end_time");
 
+        var checked_days = $("article#potential_hours ul li input[type='checkbox']:checked");
+
         var hour_index = 0;
 
-        if(days.length === 0) {
-
+        if(checked_days.length === 0) {
+            $("span#hour_error").show();
         }
 
         for(var i = 0; i < days.length; i++) {
