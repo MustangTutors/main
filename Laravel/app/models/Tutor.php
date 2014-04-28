@@ -251,6 +251,43 @@ FROM rating where tutor_id = ?";
             echo "not a valid smu id";
         }
     }
-        
+    public function documentMeetingIphone($tutor_id)
+    {
+        header('Content-type: application/json');
+        //echo json_encode(array("in here"));
+        //echo json_encode(array($_POST));
+       // die();
+        //$json=json_decode($_POST['post_meeting']);
+        $smu_id=$_POST['student_id'];
+        $result=DB::select("SELECT user_id, fName, lname FROM users WHERE smu_id=?",array($smu_id)); 
+        if(isset($result[0])) {
+            $userid=$result[0]->user_id;
+            $courseid = $_POST['course_id'];
+            $date = $_POST['day'];
+            $startTime = $_POST['start_time'];
+            $endTime = $_POST['end_time'];
+            $Summary = $_POST['summary'];
+       // echo json_encode(array($smu_id));
+        //echo json_encode(array($userid));
+        //echo json_encode(array($courseid));
+        //echo json_encode(array($tutor_id));
+        //echo json_encode(array($date));
+        //echo json_encode(array($startTime));
+        //echo json_encode(array($endTime));
+        //echo json_encode(array($Summary));
+
+
+            $query = "INSERT INTO records(user_id, course_id, tutor_user_id, Date, start_time, end_time, summary) VALUES (?,?,?,?,?,?,?)";
+            $info = DB::insert($query,array($userid,$courseid,$tutor_id,$date,$startTime,$endTime,$Summary));
+
+            //echo json_encode($_POST['student_id']);
+            echo json_encode($result);
+
+        }
+        else{
+            echo "not a valid smu id";
+        }
+    }
+
 }
 ?>

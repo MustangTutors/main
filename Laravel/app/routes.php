@@ -157,6 +157,18 @@ Route::get('tutor/{id}',function($id)
     $temp->getInfoForTutorsPage($user_id,$id);
 })
 ->where('id','[0-9]+');
+Route::get('tutorWithCourseId/{id}',function($id)
+{
+    $temp = new Tutor();
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    }
+    else {
+        $user_id = 0;
+    }
+    $temp->getInfoForTutorsPageWithCourseId($user_id,$id);
+})
+->where('id','[0-9]+');
 
 Route::get('tutor/search',function()
 {   
@@ -258,6 +270,13 @@ Route::post('tutors/addMeeting/{id?}', function($id = '-1')
     }
 
 });
+Route::post('iphone/tutors/addMeeting/{id?}', function($id = '-1')
+{
+    $temp = new Tutor();
+    $temp->documentMeetingIphone($id);
+
+});
+
 
 Route::get('courses/showAll', function()
 {

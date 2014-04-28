@@ -500,7 +500,7 @@ public class MainActivity extends Activity {
 			if (id.isEmpty()) {
 				return -1;
 			}
-			
+
 			AjaxRequest request = new AjaxRequest("GET",
 			        "http://mustangtutors.floccul.us/Laravel/public/users/available/"
 			                + id);
@@ -645,6 +645,10 @@ public class MainActivity extends Activity {
 				        .getString("Available"));
 				Bitmap image = loadImageFromNetwork("http://mustangtutors.floccul.us/img/tutors/"
 				        + id + ".jpg");
+				if (image == null) {
+					image = BitmapFactory.decodeResource(
+					        mContext.getResources(), R.drawable.tutor);
+				}
 
 				tutors.add(new Tutor(id, tutorName, numRatings, rating,
 				        availability, image));

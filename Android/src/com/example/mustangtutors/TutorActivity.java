@@ -96,7 +96,7 @@ public class TutorActivity extends Activity {
              
         tutorName.setText(fullName);
         
-        new DownloadImageTask(tutorPicture)
+        new DownloadImageTask(this, tutorPicture)
     	.execute("http://mustangtutors.floccul.us/img/tutors/" + id + ".jpg");
         
         if (numberRatings > 0) {

@@ -4,6 +4,7 @@ package com.example.mustangtutors;
 
 import java.io.InputStream;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -12,8 +13,10 @@ import android.widget.ImageView;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
+    Context mContext;
 
-    public DownloadImageTask(ImageView bmImage) {
+    public DownloadImageTask(Context mContext, ImageView bmImage) {
+    	this.mContext = mContext;
         this.bmImage = bmImage;
     }
 
@@ -31,6 +34,10 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
+    	if (result == null) {
+    		result = BitmapFactory.decodeResource(
+			        mContext.getResources(), R.drawable.tutor);
+		}
         bmImage.setImageBitmap(result);
     }
 }
