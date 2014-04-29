@@ -1675,6 +1675,10 @@ span#submission {
     display: none;
 }
 
+input[type="time"]::-webkit-clear-button {
+    display: none;
+}
+
 /* End styling for Apply To Be A Tutor Page */
 
 /* Styling for Admin Edit of Tutor Profile*/

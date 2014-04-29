@@ -108,7 +108,7 @@ $(document).ready(function() {
 
     });
 
-    $("input[type='file']").on("change", function(e) {
+    /*$("input[type='file']").on("change", function(e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
@@ -125,7 +125,7 @@ $(document).ready(function() {
                 console.log(output);
             }
         });
-    });
+    });*/
 
     $("button[type='submit']").on("click", function(e) {
 
@@ -202,10 +202,12 @@ $(document).ready(function() {
 
         if(empty_hours === false && empty_courses === false) {
 
-            //var fileInput = document.getElementById("addProfilePicture");
-            //var file = fileInput.files[0];
+            var formData = new FormData();
 
-            //formData.append('photo', file, 'photo');
+            var fileInput = document.getElementById("addProfilePicture");
+            var file = fileInput.files[0];
+
+            formData.append('photo', file, 'photo');
 
             $.ajax({
                 type: "POST",
@@ -215,6 +217,19 @@ $(document).ready(function() {
                 },
                 success: function(output) {
                     $("span#submission").show();
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/users/apply",
+                data: {
+                    application: formData
+                },
+                processData: false,
+                contentType: false,
+                success: function(output) {
+                    console.log(output);
                 }
             });
         }
