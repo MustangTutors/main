@@ -79,6 +79,7 @@ function setToggleColor(id) {
     var toggle;
     if (which === undefined) {
         toggle = $('label.toggle' + id + ' input[type="checkbox"]');
+        console.log(toggle);
     }
     else {
         toggle = $(this);

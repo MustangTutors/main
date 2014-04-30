@@ -41,6 +41,7 @@ $(document).ready(function() {
 	$.ajax({
         type: "GET",
         url: "Laravel/public/tutor/" + user_id,
+        async: false,
         success: function(output) {
 
             tutorInfo = JSON.parse(output);
@@ -58,6 +59,11 @@ $(document).ready(function() {
             if (Number(tutorInfo.active) === 1) {
                 $("span#tutorpage_available").html(available[tutorInfo.available]);
                 $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
+                // Set toggle to "Enabled"
+                $('#active_toggle label.toggle input[type="checkbox"]').prop('checked', true);
+                
+                // Set the colors
+                setToggleColor("#active_toggle");
             }
             else {
                 $("span#tutorpage_available").html("Disabled");
