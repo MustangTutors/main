@@ -196,9 +196,15 @@ FROM rating where tutor_id = ?";
     {
         $result = DB::select("select * from users where user_id = ?",array($id));
         if($result[0]->active != 1)
+        {
             DB::update("update users SET active = 1 WHERE user_id = ?",array($id));
+            echo "1";
+        }
         else
+        {
             DB::update("update users SET active = 0 WHERE user_id = ?",array($id));
+            echo "0";
+        }
  
      }
 

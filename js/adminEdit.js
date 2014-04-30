@@ -41,7 +41,6 @@ $(document).ready(function() {
 	$.ajax({
         type: "GET",
         url: "Laravel/public/tutor/" + user_id,
-        async: false,
         success: function(output) {
 
             tutorInfo = JSON.parse(output);
@@ -56,15 +55,16 @@ $(document).ready(function() {
             $("span#averageRating h3 #num_ratings").html("Based on " + Number(tutorInfo.numberOfRatings) + " ratings");
 			$("span#yourRating h3 span").html(convertToStars(tutorInfo.current_user_rating));
 
-            if (Number(tutorInfo.active) === 1) {
-                $("span#tutorpage_available").html(available[tutorInfo.available]);
-                $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
-                // Set toggle to "Enabled"
-                $('label.toggle#active_toggle_switch input[type="checkbox"]').prop('checked', true);
-            }
-            else {
+            if (Number(tutorInfo.active) === 0) {
                 $("span#tutorpage_available").html("Disabled");
                 $("span#tutorpage_available").addClass("disabled");
+                // Set toggle to "Disabled"
+                $('label.toggle#active_toggle_switch input[type="checkbox"]').prop('checked', true);
+                setToggleColor("#active_toggle_switch");
+            }
+            else {
+                $("span#tutorpage_available").html(available[tutorInfo.available]);
+                $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
             }
 
 			for(var i = 0; i < tutorInfo.courses.length; i++) {
@@ -371,14 +371,19 @@ $(document).ready(function() {
             type: "GET",
             url: "Laravel/public/tutors/toggle/active/" + user_id,
             success: function(output) {
-                // TODO: update the availability indicator
+                if (output === "1") {
+                    $("span#tutorpage_available").html(available[tutorInfo.available]);
+                    $("span#tutorpage_available").removeClass("disabled");
+                    $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
+                }
+                else if (output === "0") {
+                    $("span#tutorpage_available").html("Disabled");
+                    $("span#tutorpage_available").removeClass(available[tutorInfo.available].toLowerCase());
+                    $("span#tutorpage_available").addClass("disabled");
+                }
                 console.log(output);
             }
         });
     });
 
-});
-
-$(window).load(function() {
-    setToggleColor("#active_toggle_switch");
 });
