@@ -60,10 +60,7 @@ $(document).ready(function() {
                 $("span#tutorpage_available").html(available[tutorInfo.available]);
                 $("span#tutorpage_available").addClass(available[tutorInfo.available].toLowerCase());
                 // Set toggle to "Enabled"
-                $('#active_toggle label.toggle input[type="checkbox"]').prop('checked', true);
-                
-                // Set the colors
-                setToggleColor("#active_toggle");
+                $('label.toggle#active_toggle_switch input[type="checkbox"]').prop('checked', true);
             }
             else {
                 $("span#tutorpage_available").html("Disabled");
@@ -369,11 +366,19 @@ $(document).ready(function() {
         $("button[name='cancelHourChanges']").css("margin-top", -20);
     });
 
-    $(document).on('change', '#toggleButton input[type="checkbox"]', function() {
+    $(document).on('change', '#active_toggle_switch input[type="checkbox"]', function() {
         $.ajax({
             type: "GET",
-            url: "Laravel/public/tutors/toggle/active/" + user_id
+            url: "Laravel/public/tutors/toggle/active/" + user_id,
+            success: function(output) {
+                // TODO: update the availability indicator
+                console.log(output);
+            }
         });
     });
 
+});
+
+$(window).load(function() {
+    setToggleColor("#active_toggle_switch");
 });
