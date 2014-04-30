@@ -3,6 +3,8 @@ $(document).ready(function() {
 	// Get the user_id from query in URL, then get tutor info
 	var user_id = getURLParameter('user_id');
 
+    $("a#edit_link").attr("href", "tutor.html?user_id=" + user_id);
+
     $("section.tutor_info").removeClass("admin_tutor_info");
     $(".edit_button").hide();
 

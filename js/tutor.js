@@ -116,7 +116,6 @@ $(document).ready(function() {
 
             if(is_admin !== 1) {
                 $("a#edit_link").hide();
-                $("button#edit").hide();
             }
 			
         }

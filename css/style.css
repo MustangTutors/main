@@ -1272,6 +1272,7 @@ section#profileBox {
     margin-bottom: 10px;
     margin-top: 30px;
     padding: 10px 40px;
+    position: relative;
 }
 
 #profileBox .tutorPicture {
@@ -1548,9 +1549,10 @@ section#rating img[src*='star']{
     color: white;
 }
 
-button#edit {
-    float: right;
-    margin-top: 188px;
+a#edit_link {
+    position: absolute;
+    right: 45px;
+    bottom: 10px;
 }
 /* End styling for Tutor Profile */
 
@@ -1735,7 +1737,7 @@ span#activeLabel {
 
 div#active_toggle {
     float: right;
-    margin-top: 188px;
+    margin-top: 25px;
 }
 
 span#course_confirmation, span#hour_confirmation {
