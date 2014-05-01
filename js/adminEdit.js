@@ -3,8 +3,6 @@ $(document).ready(function() {
 	// Get the user_id from query in URL, then get tutor info
 	var user_id = getURLParameter('user_id');
 
-    $("a#edit_link").attr("href", "tutor.html?user_id=" + user_id);
-
     $("section.tutor_info").removeClass("admin_tutor_info");
     $(".edit_button").hide();
 
@@ -20,6 +18,10 @@ $(document).ready(function() {
                 if (Number(json.user_id) !== Number(user_id)) {
                     $("#tutorProfilePage #yourRating").css('display', 'inline-block');
                     $("#tutorProfilePage #comment_form").show();
+                }
+                if (Number(json.admin) === 1) {
+                    $("a#edit_link").attr("href", "tutor.html?user_id=" + user_id);
+                    $("a#edit_link").show();
                 }
             }
         }
@@ -52,7 +54,14 @@ $(document).ready(function() {
             $(".tutorPicture img").attr('src', profile_pic);
  
             $("span#averageRating h3 span").html(convertToStars(tutorInfo.average_rating));
-            $("span#averageRating h3 #num_ratings").html("Based on " + Number(tutorInfo.numberOfRatings) + " ratings");
+
+            var num_ratings = Number(tutorInfo.numberOfRatings);
+            if (num_ratings !== 0) {
+                $("span#averageRating h3 #num_ratings").html("Based on " + num_ratings + " ratings");
+            }
+            else {
+                $("span#averageRating h3 #num_ratings").html("");
+            }
 			$("span#yourRating h3 span").html(convertToStars(tutorInfo.current_user_rating));
 
             if (Number(tutorInfo.active) === 0) {

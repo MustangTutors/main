@@ -112,10 +112,10 @@ $(document).ready(function() {
                 }
             }
 
-            $("a#edit_link").attr("href", "adminEdit.html?user_id=" + user_id);
 
-            if(is_admin !== 1) {
-                $("a#edit_link").hide();
+            if(is_admin === 1) {
+                $("a#edit_link").attr("href", "adminEdit.html?user_id=" + user_id);
+                $("a#edit_link").show();
             }
 			
         }

@@ -58,6 +58,7 @@ h2 {
 }
 
 #title {
+    position: absolute;
 	width: 370px;
 	margin-top: 20px;
 	margin-left: 10px;
@@ -228,7 +229,6 @@ section#login {
     display: none;
     margin-right: 40px;
     margin-top: 20px;
-    width: 300px;
     text-align: right;
     position: relative;
 }
@@ -1300,7 +1300,7 @@ section#rating span h3 span, .schedule {
 
 
 #tutorpage_available {
-    margin-top: -36px;
+    position: absolute;
     margin-left: 30px;
 }
 
@@ -1553,6 +1553,7 @@ a#edit_link {
     position: absolute;
     right: 45px;
     bottom: 10px;
+    display: none;
 }
 /* End styling for Tutor Profile */
 
@@ -1736,8 +1737,9 @@ span#activeLabel {
 }
 
 div#active_toggle {
-    float: right;
-    margin-top: 25px;
+    position: absolute;
+    right: 30px;
+    top: 40px;
 }
 
 span#course_confirmation, span#hour_confirmation {
