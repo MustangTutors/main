@@ -135,13 +135,6 @@ Route::post('users/addPhoto',function()
     echo $temp->addPhoto();
 });
 
-
-Route::post('users/testPhoto',function()
-{
-    $temp = new User();
-    $temp->testAddPhoto();
-});
-
 Route::get('users/apply/status/{id}',function($id = -1)
 {
     if($id==-1 && isset($_SESSION['user_id'])) $id = $_SESSION['user_id'];
