@@ -239,10 +239,42 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 Input::file('photo')->move('../../img/tutors', $newName);
                 return $newName;
             }
+            else
+            {
+                return "failed";
+            }
         }
         else
         {
             return "failed";
+        }
+    }
+
+    public function testAddPhoto()
+    {
+        $user_id = $_SESSION['user_id'];
+        echo $user_id . "<br>";
+        if ($user_id != -1)
+        {
+            if(Input::hasFile('photo'))
+            {
+                $extension = Input::file('photo')->getClientOriginalExtension();
+                echo $extension . "<br>";
+                if (strtolower($extension) != "jpg")
+                {
+                    echo "invalid" . "<br>";
+                }
+                $newName=$user_id.".jpg";
+                Input::file('photo')->move('../../img/tutors', $newName);
+                echo $newName . "<br>";
+            }
+            else {
+                echo "no photo<br>";
+            }
+        }
+        else
+        {
+            echo "failed" . "<br>";
         }
     }
 
