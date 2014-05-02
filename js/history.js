@@ -465,6 +465,11 @@ function resetNewMeetingForm() {
 
     // Reset Summary
     $('#meeting_form textarea[name="summary"]').val("");
+
+    // Reset more options to default
+    $('#more_message').html("More Course Options");
+    $('#more_options').html("More >>");
+    fillNewMeetingCourses(true);
 }
 
 function createNewMeetingObject() {
