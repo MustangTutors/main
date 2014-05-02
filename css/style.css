@@ -1073,8 +1073,8 @@ section#tutor_history {
 
 #add_message, #cancel_message {
     display: none;
-    top: 10px;
-    left: 840px;
+    top: 47px;
+    right: 0px;
 }
 
 /* Styling for new meeting. */
@@ -1136,6 +1136,20 @@ section#tutor_history {
     width: 60%;
     margin-right: auto;
     margin-left: auto;
+}
+
+#more_options {
+    width: auto;
+}
+
+.hover_holder{
+    position: relative;
+}
+
+#more_message {
+    display: none;
+    top: 35px;
+    left: 570px;
 }
 
 /* End styling for new meeting. */

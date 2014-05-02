@@ -1,3 +1,5 @@
+var user_id = "-1";
+
 // Check if the user is logged in. If not, redirect to findstudent.html
 $.ajax({
     url: "Laravel/public/users/current",
@@ -11,7 +13,6 @@ $.ajax({
 
 $(document).ready(function(){
     showView();
-    fillNewMeetingCourses();
 
 	// When toggle view clicked, load correct view
 	$(document).on('change', '#history_view input[type="checkbox"]', function() {
@@ -170,6 +171,30 @@ $(document).ready(function(){
         event.preventDefault();
 
         resetNewMeetingForm();
+    });
+
+    // More options hover
+    $(document).on('mouseover', '#more_options', function(){
+        $('#more_message').show();
+    });
+
+    // More options hover, out
+    $(document).on('mouseout', '#more_options', function(){
+        $('#more_message').hide();
+    });
+
+    // When More is clicked for more course options
+    $(document).on('click', '#more_options', function(){
+        if($('#more_message').html() === "Fewer Course Options"){
+            $('#more_message').html("More Course Options");
+            $('#more_options').html("More >>");
+            fillNewMeetingCourses(true);
+        }
+        else {
+            $('#more_message').html("Fewer Course Options");
+            $('#more_options').html("Less >>");
+            fillNewMeetingCourses(false);
+        }
     });
 
 	// Parse JSON for student meetings
@@ -331,6 +356,8 @@ function showView() {
             json = JSON.parse(json);
             json = json[0];
 
+            user_id = json.user_id;
+
             // Logged in
             if(json.length !== 0) {
                 // If user not a tutor, don't allow to toggle views
@@ -345,24 +372,47 @@ function showView() {
                     toggleView(1);
                 }
             }
+
+            fillNewMeetingCourses(true);
         }
     });
 }
 
-function fillNewMeetingCourses() {
-    // Parse JSON for user info
-    $.ajax({
-        url: "Laravel/public/courses/showAll",
-        success: function(json) {
-            json = JSON.parse(json);
+function fillNewMeetingCourses(courses_tutored) {
+    $('select[name="courses"] option').remove();
+    $('#meeting_form select[name="courses"]').append('<option value="" disabled selected>Choose a course</option>');
 
-            for(var i = 0; i < json.length; i++){
-                var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
-                var newOption = '<option value="' + json[i].course_id + '">' + title + '</option>';
-                $('#meeting_form select[name="courses"]').append(newOption);
+    if(courses_tutored) {
+        // Parse JSON for user info
+        $.ajax({
+            url: "Laravel/public/tutor/" + user_id,
+            success: function(json) {
+                json = JSON.parse(json);
+                json = json.courses;
+
+                for(var i = 0; i < json.length; i++){
+                    var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                    var newOption = '<option value="' + json[i].course_id + '">' + title + '</option>';
+                    $('#meeting_form select[name="courses"]').append(newOption);
+                }
             }
-        }
-    });
+        });
+    }
+    else {
+        // Parse JSON for user info
+        $.ajax({
+            url: "Laravel/public/courses/showAll",
+            success: function(json) {
+                json = JSON.parse(json);
+
+                for(var i = 0; i < json.length; i++){
+                    var title = json[i].subject + " " + json[i].course_number + ": " + json[i].course_name;
+                    var newOption = '<option value="' + json[i].course_id + '">' + title + '</option>';
+                    $('#meeting_form select[name="courses"]').append(newOption);
+                }
+            }
+        });
+    }    
 }
 
 function populateDateAndTime() {

@@ -59,11 +59,12 @@
                             <label for="student_id">Student ID:</label>
                             <input type="text" name="student_id" pattern="[0-9]{8}" placeholder="Enter student ID" required>
                         </div>
-                        <div>
+                        <div class="hover_holder">
                             <label for="courses">Course Tutored:</label>
                             <select name="courses" id="course_selector" required>
-                                <option value="" disabled selected>Choose a course</option>
                             </select>
+                            <a class="button" id="more_options">More >></a>
+                            <span id="more_message" class="hover">More Course Options</span>
                         </div>
                         <div>
                             <label for="date">Date:</label>
