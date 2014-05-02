@@ -129,6 +129,12 @@ Route::post('users/apply',function()
 
 });
 
+Route::post('users/addPhoto',function()
+{
+    $temp = new User();
+    echo $temp->addPhoto();
+});
+
 Route::get('users/apply/status/{id}',function($id = -1)
 {
     if($id==-1 && isset($_SESSION['user_id'])) $id = $_SESSION['user_id'];

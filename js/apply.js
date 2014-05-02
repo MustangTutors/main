@@ -108,25 +108,31 @@ $(document).ready(function() {
 
     });
 
-    /*$("input[type='file']").on("change", function(e) {
-        e.preventDefault();
-
-        var formData = new FormData($(this)[0]);
-
+    // Profile picture upload
+    $("#addProfilePicture").on("change", function() {
+        var data = new FormData();
+        data.append('photo', $('#addProfilePicture')[0].files[0]);
         $.ajax({
-            type: "POST",
-            url: "Laravel/public/users/apply",
-            data: {
-                application: formData
-            },
-            processData: false,
+            url: 'Laravel/public/users/addPhoto',
+            data: data,
+            cache: false,
             contentType: false,
-            success: function(output) {
-                console.log(output);
+            processData: false,
+            type: 'POST',
+            success: function(output){
+                if (output === "invalid") {
+                    alert("Invalid picture. Please submit a .jpg");
+                }
+                else if (output !== "failed") {
+                    var url = "img/tutors/" + output + "?rand=" + Math.random();
+                    console.log(url);
+                    $(".tutorPicture img").attr("src", url);
+                }
             }
         });
-    });*/
+    });
 
+    // Application submission
     $("button[type='submit']").on("click", function(e) {
 
         e.preventDefault();
@@ -202,12 +208,12 @@ $(document).ready(function() {
 
         if(empty_hours === false && empty_courses === false) {
 
-            var formData = new FormData();
+            // var formData = new FormData();
 
-            var fileInput = document.getElementById("addProfilePicture");
-            var file = fileInput.files[0];
+            // var fileInput = document.getElementById("addProfilePicture");
+            // var file = fileInput.files[0];
 
-            formData.append('photo', file, 'photo');
+            // formData.append('photo', file, 'photo');
 
             $.ajax({
                 type: "POST",
@@ -220,18 +226,18 @@ $(document).ready(function() {
                 }
             });
 
-            $.ajax({
-                type: "POST",
-                url: "Laravel/public/users/apply",
-                data: {
-                    application: formData
-                },
-                processData: false,
-                contentType: false,
-                success: function(output) {
-                    console.log(output);
-                }
-            });
+            // $.ajax({
+            //     type: "POST",
+            //     url: "Laravel/public/users/apply",
+            //     data: {
+            //         application: formData
+            //     },
+            //     processData: false,
+            //     contentType: false,
+            //     success: function(output) {
+            //         console.log(output);
+            //     }
+            // });
         }
         
 
