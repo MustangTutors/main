@@ -128,7 +128,7 @@ $(document).ready(function() {
             
             // Replace broken tutor images
             $('img').error(function(){
-                $(this).attr('src', 'img/tutors/tutor.png');
+                $(this).attr('src', 'img/tutor.png');
             });
         }
     });
