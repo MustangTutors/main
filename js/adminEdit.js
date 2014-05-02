@@ -395,4 +395,14 @@ $(document).ready(function() {
         });
     });
 
+    // When the enabled/disabled toggle switch is hovered, show a help message
+    $(document).on("mouseover", "#active_toggle", function() {
+        $("#active_toggle_message").show();
+    });
+
+    // When the enabled/disabled toggle switch is not hovered, hide the help message
+    $(document).on("mouseout", "#active_toggle", function() {
+        $("#active_toggle_message").hide();
+    })
+
 });

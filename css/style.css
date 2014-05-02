@@ -1412,14 +1412,14 @@ section#comments h2 {
 }
 
 #comment_form {
-    width: 520px;
+    width: 680px;
     text-align: right;
     margin-bottom: 10px;
     display: none;
 }
 
 div#commentList {
-    width: 526px;
+    width: 686px;
     max-height: 200px;
     overflow: auto;
     background-color: #FEECDA;
@@ -1685,6 +1685,11 @@ input[type="time"]::-webkit-clear-button {
 /* End styling for Apply To Be A Tutor Page */
 
 /* Styling for Admin Edit of Tutor Profile*/
+
+#active_toggle_message {
+    top: 35px;
+    margin-left: -5px;
+}
 
 h2.subheading a, article.schedule button{
     float: right;
