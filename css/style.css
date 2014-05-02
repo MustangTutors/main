@@ -1166,7 +1166,7 @@ section#tutor_history {
     margin-left: 30px;
 }
 
-#find_student #search_bar {
+.horizontal_bar {
     background-color: #B5C4DC;
     border-top: 2px solid #192942;
     border-bottom: 2px solid #192942;
@@ -1662,9 +1662,7 @@ img[src="img/delete.png"] {
 }
 
 button#submitApplication {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 725px;
     width: 150px;
     padding: 5px;
 }
@@ -1773,3 +1771,15 @@ span#course_confirmation, span#hour_confirmation {
 }
 
 /* End stylying for Admin Edit of Tutor Profile*/
+
+/* Begin styling for Success page */
+
+#success h2.heading {
+    text-align: left;
+}
+
+#success span {
+    text-align: left;
+}
+
+/* End styling for Success page */

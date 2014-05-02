@@ -142,7 +142,6 @@ $(document).ready(function() {
 
     // Application submission
     $("button[type='submit']").on("click", function(e) {
-
         e.preventDefault();
 
         $("span.error").hide();
@@ -231,7 +230,7 @@ $(document).ready(function() {
                     application: JSON.stringify(application)
                 },
                 success: function(output) {
-                    $("span#submission").show();
+                    window.location.href = "success.html";
                 }
             });
 
