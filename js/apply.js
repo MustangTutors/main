@@ -44,8 +44,8 @@ $(document).ready(function() {
         success: function(courses) {
             courses = JSON.parse(courses);
             for(var i = 0; i < courses.length; i++) {
-                var option = "<option>";
-                option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                var option = "<option value='" + courses[i].course_id + "'>";
+                option += courses[i].subject + " " + courses[i].course_number + ": " + courses[i].course_name;
                 option += "</option>";
                 $("select.course_dropdown").append(option);
             }
@@ -71,8 +71,8 @@ $(document).ready(function() {
             success: function(courses) {
                 courses = JSON.parse(courses);
                 for(var i = 0; i < courses.length; i++) {
-                    var option = "<option>";
-                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    var option = "<option value='" + courses[i].course_id + "'>";
+                    option += courses[i].subject + " " + courses[i].course_number + ": " + courses[i].course_name;
                     option += "</option>";
                     var identifier = 'select#potential' + (potential-1);
                     $(identifier).append(option);
@@ -90,6 +90,10 @@ $(document).ready(function() {
 			var new_height = $("section.applicant_info article").height();
 			$("section.applicant_info article").height(new_height+34);
 		}
+
+        if ($(".potential_course").size() > 1) {
+            $("img[src='img/delete.png']").show();
+        }
 		
 	});
 
@@ -98,6 +102,10 @@ $(document).ready(function() {
         e.preventDefault();
 
         $("span.potential_course:last-of-type()").remove();
+
+        if ($(".potential_course").size() === 1) {
+            $("img[src='img/delete.png']").hide();
+        }
 
         var height = $("div#addCourses").height();
 
@@ -151,6 +159,7 @@ $(document).ready(function() {
         var empty_courses = true;
 
         for(var i = 0; i < selected_courses.length; i++) {
+            //console.log(selected_courses.eq(i).val());
             if(selected_courses.eq(i).val() !== "") {
                 empty_courses = false;
             }
@@ -163,9 +172,10 @@ $(document).ready(function() {
                 var new_course = selected_courses.eq(i).val();
 
                 if(new_course !== "") {
-                    var regex_id = /(\d)/;
-                    var course_id = regex_id.exec(new_course);
-                    unique_courses[i] = course_id[0]; 
+                    // var regex_id = /(\d)/;
+                    // var course_id = regex_id.exec(new_course);
+                    // unique_courses[i] = course_id[0]; 
+                    unique_courses[i] = new_course;
                 }        
             }
             unique_courses = $.unique(unique_courses);
@@ -175,7 +185,6 @@ $(document).ready(function() {
                 application.Courses[i].Course_ID = unique_courses[i];
             }
         }
-        
 
         var days = $("article#potential_hours ul li input[type='checkbox']");
         var start_times = $("article#potential_hours ul li input.start_time");
@@ -193,7 +202,7 @@ $(document).ready(function() {
             for(var i = 0; i < days.length; i++) {
                 if(days.eq(i).is(":checked")) {
                     empty_hours = false;
-                    if(start_times.eq(i).val() > end_times.eq(i).val()) {
+                    if(start_times.eq(i).val() >= end_times.eq(i).val()) {
                         $("span#hour_error_2").show();
                     } else { 
                         application.Hours[hour_index] = {};
@@ -251,9 +260,9 @@ function checkApplicationStatus(id) {
         url: "Laravel/public/users/apply/status/" + id,
         success: function(status) {
             if(status === "1") {
-                $("article#potential_hours ul").html("Pending. . .");
-                $("article#potential_courses form").html("Pending. . .");
-                $("article#potential_courses form").css("width", "76px");
+                $("article#potential_hours ul").html("Your application is pending. . .");
+                $("#addCourses").html("Your application is pending. . .");
+                //$("article#potential_courses form").css("width", "76px");
                 $("img[src='img/add.png']").hide();
                 $("img[src='img/delete.png']").hide();
                 $("button[type='submit']").hide();

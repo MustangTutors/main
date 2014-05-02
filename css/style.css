@@ -1579,11 +1579,8 @@ section.applicant_info {
 }
 
 section.applicant_info article h2.subheading {
-    float: left;
-    padding-left: 10px;
-    margin-right: 214px;
-    margin-bottom: 10px;
-    clear: both;
+    text-align: left;
+    margin-left: 10px;
 }
 
 section.applicant_info article#potential_hours {
@@ -1623,6 +1620,10 @@ div#applicantInformation {
     margin-top: 20px;
 }
 
+div#addCourses {
+    padding: 15px;
+}
+
 div#addCourses form {
     width: 1px;
     margin-left: 15px;
@@ -1657,6 +1658,7 @@ img[src="img/delete.png"] {
     margin-left: 360px;
     margin-top: -40px;
     position: absolute;
+    display: none;
 }
 
 button#submitApplication {
