@@ -33,6 +33,9 @@ $(document).ready(function() {
 
             $("section#contact h2:nth-child(odd)").html(name);
             $("section#contact h2:nth-child(even)").html(email);
+            
+            var profile_pic = "img/tutors/" + user_id + ".jpg" + "?rand=" + Math.random();
+            $(".tutorPicture img").attr('src', profile_pic);
 
             $("select.course_dropdown").append("<option></option>");
         }
@@ -200,10 +203,11 @@ $(document).ready(function() {
         } else {
             for(var i = 0; i < days.length; i++) {
                 if(days.eq(i).is(":checked")) {
-                    empty_hours = false;
                     if(start_times.eq(i).val() >= end_times.eq(i).val()) {
+                        empty_hours = true;
                         $("span#hour_error_2").show();
                     } else { 
+                        empty_hours = false;
                         application.Hours[hour_index] = {};
                         application.Hours[hour_index].Day = i+1;
                         application.Hours[hour_index].Start_Time = start_times.eq(i).val();
