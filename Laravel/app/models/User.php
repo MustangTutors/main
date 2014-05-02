@@ -239,6 +239,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 Input::file('photo')->move('../../img/tutors', $newName);
                 return $newName;
             }
+            else
+            {
+                return "failed";
+            }
         }
         else
         {
