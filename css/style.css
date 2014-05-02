@@ -1660,7 +1660,11 @@ img[src="img/delete.png"] {
 }
 
 button#submitApplication {
-    margin-left: 755px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    padding: 5px;
 }
 
 span#course_error {
