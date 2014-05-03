@@ -114,9 +114,9 @@ $(document).ready(function() {
 
         var height = $("article#courses ul").height();
 
-        if(height > 143) {
-            var new_height = $("section.tutor_info article").height();
-            $("section.tutor_info article").height(new_height+30);
+        if(height > 200) {
+            var new_height = $("section.tutor_info article#courses").height();
+            $("section.tutor_info article#courses").height(new_height+30);
         }
     });
 
