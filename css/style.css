@@ -1348,9 +1348,11 @@ section.tutor_info {
 
 #courses {
     margin-left: 70px;
+    position: relative;
 }
 
 #hours {
+    position: relative;
     margin-left: -15px;
 }
 
@@ -1704,13 +1706,18 @@ input[type="time"]::-webkit-clear-button {
 
 /* Styling for Admin Edit of Tutor Profile*/
 
+.reset_save_buttons {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
 #active_toggle_message {
     top: 35px;
     margin-left: -5px;
 }
 
 h2.subheading a, article.schedule button{
-    float: right;
+    /*float: right;*/
 }
 
 article.admin_edit span.label {
@@ -1772,6 +1779,12 @@ span#course_confirmation, span#hour_confirmation {
 
 button.edit_button {
     width: 100px;
+}
+
+a#edit_link {
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
 }
 
 /* End stylying for Admin Edit of Tutor Profile*/
