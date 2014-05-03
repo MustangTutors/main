@@ -144,38 +144,41 @@ $(document).ready(function() {
 
         var checkbox_courses = $("span.label input[type='checkbox']");
         var course_index = 0;
+        var unique_courses = [];
 
         for(var i = 0; i < checkbox_courses.length; i++) {
             if(checkbox_courses.eq(i).is(":checked")) {
-                courses.Courses[course_index] = {};
-                courses.Courses[course_index].Course_ID = list_of_course_ids[i];
+                unique_courses[course_index] = Number(list_of_course_ids[i]);
                 course_index++;
             }
         }
 
         var selected_courses = $("select.course_dropdown");
-
         for(var i = 0; i < selected_courses.length; i++) {
             var new_course = selected_courses.eq(i).val();
-
-            courses.Courses[course_index] = {};
-
-            var regex_id = /(\d)/;
-            var course_id = regex_id.exec(new_course);
-            courses.Courses[course_index].Course_ID = course_id[0];
-            course_index++;
-
+            if (new_course) {
+                unique_courses[course_index] = Number(new_course);
+                course_index++;
+            }
         }
 
-        $.ajax({
-            type: "POST",
-            url: "Laravel/public/courses/update",
-            data: {
-                new_courses: JSON.stringify(courses)
+        if (unique_courses.length === 0) {
+            alert("Please select at least one course.");
+        }
+        else {
+            for(var i = 0; i < unique_courses.length; i++) {
+                courses.Courses[i] = {};
+                courses.Courses[i].Course_ID = unique_courses[i];
             }
-        });
-        alert("Your changes have been saved.");
-        $("article#courses img[src='img/pencil.png']").show();
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/courses/update",
+                data: {
+                    new_courses: JSON.stringify(courses)
+                }
+            });
+            alert("Your changes have been saved.");
+        }
     });
 
     // Update hours when "save" is clicked
