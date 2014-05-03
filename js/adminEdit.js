@@ -85,8 +85,6 @@ $(document).ready(function() {
     $("img[src='img/add.png']").on("click", function(e) {
         e.preventDefault();
 
-        console.log("here");
-
         $("article#courses ul").append(
             "<li class='potential_course new_dropdown'>" +
                 "<select id='potential" + potential + "' class='course_dropdown'>" +
@@ -184,36 +182,41 @@ $(document).ready(function() {
     $("button[name='saveHourChanges']").on("click", function(e) {
         e.preventDefault();
 
-        var hours = {};
-        hours.User_ID = user_id;
-        hours.Hours = [];
+        if(checkHours()){
+            var hours = {};
+            hours.User_ID = user_id;
+            hours.Hours = [];
 
-        var days = $("article#hours ul li input[type='checkbox']");
-        var start_times = $("article#hours ul li input.start_time");
-        var end_times = $("article#hours ul li input.end_time");
+            var days = $("article#hours ul li input[type='checkbox']");
+            var start_times = $("article#hours ul li input.start_time");
+            var end_times = $("article#hours ul li input.end_time");
 
-        var hour_index = 0;
+            var hour_index = 0;
 
 
-        for(var i = 0; i < days.length; i++) {
-            if(days.eq(i).is(":checked")) {
-                hours.Hours[hour_index] = {};
-                hours.Hours[hour_index].Day = i+1;
-                hours.Hours[hour_index].Start_Time = start_times.eq(i).val();
-                hours.Hours[hour_index].End_Time = end_times.eq(i).val();
-                hour_index++;
+            for(var i = 0; i < days.length; i++) {
+                if(days.eq(i).is(":checked")) {
+                    hours.Hours[hour_index] = {};
+                    hours.Hours[hour_index].Day = i+1;
+                    hours.Hours[hour_index].Start_Time = start_times.eq(i).val();
+                    hours.Hours[hour_index].End_Time = end_times.eq(i).val();
+                    hour_index++;
+                }
             }
+
+            $.ajax({
+                type: "POST",
+                url: "Laravel/public/schedule/update",
+                data: {
+                    new_hours: JSON.stringify(hours)
+                }
+            });
+            alert("Your changes have been saved.");
+            $("article#hours img[src='img/pencil.png']").show();
         }
-
-        $.ajax({
-            type: "POST",
-            url: "Laravel/public/schedule/update",
-            data: {
-                new_hours: JSON.stringify(hours)
-            }
-        });
-        alert("Your changes have been saved.");
-        $("article#hours img[src='img/pencil.png']").show();
+        else {
+            alert("Invalid hours.");
+        }
     });
 
     // Toggle whether tutor is currently employed or not
@@ -382,4 +385,21 @@ function populateCourses(){
             $("article#courses input[type='checkbox']").prop('checked', true);
         }
     });
+}
+
+function checkHours(){
+    var days = $('article#hours .potential_day input[type="checkbox"]');
+    var start_times = $('article#hours input.start_time[type="time"]');
+    var end_times = $('article#hours input.end_time[type="time"]');
+
+    for(var i = 0; i < days.length; i++) {
+        if(days.eq(i).prop('checked')){
+            if(end_times.eq(i).val() <= start_times.eq(i).val()){
+                console.log("here");
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
