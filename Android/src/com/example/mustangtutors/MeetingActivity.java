@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,10 +130,26 @@ public class MeetingActivity extends FragmentActivity {
 			public void onClick(View v) {
 				if(mMore.getText().equals("More >>")){
 					mMore.setText("Less <<");
+					
+					Context context = getApplicationContext();
+					CharSequence text = "You may now choose any course the A-LEC offers.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(context, text, duration);
+					toast.show();
+					
 					loadCourses(false);
 				}
 				else {
 					mMore.setText("More >>");
+					
+					Context context = getApplicationContext();
+					CharSequence text = "You may now only choose courses you tutor.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(context, text, duration);
+					toast.show();
+					
 					loadCourses(true);
 				}
 			}
@@ -151,6 +167,33 @@ public class MeetingActivity extends FragmentActivity {
 
 	}
 	
+	private void coursesClicked() {
+		if(mMore.getText().equals("More >>")){
+			mMore.setText("Less <<");
+			
+			Context context = getApplicationContext();
+			CharSequence text = "You may now choose any course the A-LEC offers.";
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+			
+			loadCourses(false);
+		}
+		else {
+			mMore.setText("More >>");
+			
+			Context context = getApplicationContext();
+			CharSequence text = "You may now only choose courses you tutor.";
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+			
+			loadCourses(true);
+		}
+	}
+	
 	private void loadCourses(boolean course_tutored){
 		if(course_tutored){
 			new PopulateCoursesLightTask().execute((Void) null);
@@ -163,7 +206,15 @@ public class MeetingActivity extends FragmentActivity {
 	private void resetMeetingForm() {
 		mSmuId.setText("");
 		mSummary.setText("");
-		mCourses.setSelection(0);
+		
+		if(mMore.getText().equals("Less <<")){
+			mMore.setText("More >>");
+			loadCourses(true);
+		}
+		else{
+			mCourses.setSelection(0);
+		}
+		
 		mDate.setText("Date");
 		mStartTime.setText("Start Time");
 		mEndTime.setText("End Time");
