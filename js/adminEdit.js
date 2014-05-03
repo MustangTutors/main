@@ -185,7 +185,10 @@ $(document).ready(function() {
     $("button[name='saveHourChanges']").on("click", function(e) {
         e.preventDefault();
 
-        if(checkHours()){
+        if (numSelectedDays() === 0) {
+            alert("Please select at least one day.");
+        }
+        else if(checkHours()){
             var hours = {};
             hours.User_ID = user_id;
             hours.Hours = [];
@@ -215,10 +218,9 @@ $(document).ready(function() {
                 }
             });
             alert("Your changes have been saved.");
-            $("article#hours img[src='img/pencil.png']").show();
         }
         else {
-            alert("Invalid hours.");
+            alert("Start times must come before end times.");
         }
     });
 
@@ -353,8 +355,7 @@ function populateHours() {
             var end_times = $('article#hours input.end_time[type="time"]');
 
             for(var i = 0; i < json.length; i++){
-                var index = json[i].day;
-                console.log(index);
+                var index = json[i].day - 1;
                 days.eq(index).prop('checked', true);
                 start_times.eq(index).val(json[i].start_time);
                 end_times.eq(index).val(json[i].end_time);
@@ -390,6 +391,10 @@ function populateCourses(){
     });
 }
 
+function numSelectedDays() {
+    return $('article#hours .potential_day input[type="checkbox"]:checked').length;
+}
+
 function checkHours(){
     var days = $('article#hours .potential_day input[type="checkbox"]');
     var start_times = $('article#hours input.start_time[type="time"]');
@@ -398,7 +403,6 @@ function checkHours(){
     for(var i = 0; i < days.length; i++) {
         if(days.eq(i).prop('checked')){
             if(end_times.eq(i).val() <= start_times.eq(i).val()){
-                console.log("here");
                 return false;
             }
         }
