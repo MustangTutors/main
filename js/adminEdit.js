@@ -98,11 +98,11 @@ $(document).ready(function() {
             success: function(courses) {
                 courses = JSON.parse(courses);
 
-                $("select.course_dropdown").append('<option value="" disabled selected>Choose a course</option>');
+                $("select.course_dropdown").eq(-1).append('<option value="" disabled selected>Choose a course</option>');
 
                 for(var i = 0; i < courses.length; i++) {
-                    var option = "<option>";
-                    option += courses[i].course_id + " " + courses[i].subject + " " + courses[i].course_number + " " + courses[i].course_name;
+                    var option = "<option value='" + courses[i].course_id + "'>";
+                    option += courses[i].subject + " " + courses[i].course_number + ": " + courses[i].course_name;
                     option += "</option>";
                     var identifier = 'select#potential' + (potential-1);
                     $(identifier).append(option);
