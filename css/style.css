@@ -1563,7 +1563,7 @@ section#rating img[src*='star']{
     color: white;
 }
 
-a#edit_link {
+a#link {
     position: absolute;
     right: 45px;
     bottom: 10px;
@@ -1768,6 +1768,10 @@ div#active_toggle {
 span#course_confirmation, span#hour_confirmation {
     color: red;
     display: none;
+}
+
+button.edit_button {
+    width: 100px;
 }
 
 /* End stylying for Admin Edit of Tutor Profile*/
