@@ -136,7 +136,7 @@ $(document).ready(function() {
     });
 
 
-    // Update courses
+    // Update courses when "save" is clicked
     $("button[name='saveCourseChanges']").on("click", function(e) {
         e.preventDefault();
 
@@ -176,13 +176,11 @@ $(document).ready(function() {
                 new_courses: JSON.stringify(courses)
             }
         });
-        $("span#course_confirmation").show();
-        $("button[name='saveCourseChanges']").css("margin-top", -20);
-        $("button[name='cancelCourseChanges']").css("margin-top", -20);
+        alert("Your changes have been saved.");
         $("article#courses img[src='img/pencil.png']").show();
     });
 
-    // Update hours
+    // Update hours when "save" is clicked
     $("button[name='saveHourChanges']").on("click", function(e) {
         e.preventDefault();
 
@@ -214,9 +212,7 @@ $(document).ready(function() {
                 new_hours: JSON.stringify(hours)
             }
         });
-        $("span#hour_confirmation").show();
-        $("button[name='saveHourChanges']").css("margin-top", -20);
-        $("button[name='cancelHourChanges']").css("margin-top", -20);
+        alert("Your changes have been saved.");
         $("article#hours img[src='img/pencil.png']").show();
     });
 
