@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,8 @@ public class MeetingActivity extends FragmentActivity {
 	private Button mSend;
 	private Button mReset;
 	
+	private Button mMore;
+	
 	private Activity mContext;
 	
 	private Spinner mCourses;
@@ -76,6 +79,8 @@ public class MeetingActivity extends FragmentActivity {
 		
 		mSend = (Button) findViewById(R.id.submit);
 		mReset = (Button) findViewById(R.id.reset);
+		
+		mMore = (Button) findViewById(R.id.more_courses);
 		
 		// Set on click listener for submitting new meeting form
 		mSend.setOnClickListener(new OnClickListener() {
@@ -119,7 +124,22 @@ public class MeetingActivity extends FragmentActivity {
 			}
 		});
 		
-		new PopulateCoursesTask().execute((Void) null);
+		mMore.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(mMore.getText().equals("More >>")){
+					mMore.setText("Less <<");
+					loadCourses(false);
+				}
+				else {
+					mMore.setText("More >>");
+					loadCourses(true);
+				}
+			}
+		});
+		
+		loadCourses(true);
 	}
 
 	/**
@@ -129,6 +149,15 @@ public class MeetingActivity extends FragmentActivity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	private void loadCourses(boolean course_tutored){
+		if(course_tutored){
+			new PopulateCoursesLightTask().execute((Void) null);
+		}
+		else {
+			new PopulateCoursesTask().execute((Void) null);
+		}
 	}
 	
 	private void resetMeetingForm() {
@@ -362,6 +391,41 @@ public class MeetingActivity extends FragmentActivity {
         	JSONArray json;
             try {
                 json = new JSONArray(request.send());
+                courses = new String[json.length()+1];
+                mCourseId = new String[json.length()+1];
+                courses[0] = "Select a Course";
+                mCourseId[0] = "";
+                for (int i = 0; i < json.length(); i++) {
+                	JSONObject course = (JSONObject) json.get(i);
+                	courses[i+1] = course.getString("subject") + " " + course.getString("course_number") + ": " + course.getString("course_name");
+                	mCourseId[i+1] = "" + course.getString("course_id");
+                }
+            } catch (Exception e) {
+            	return false;
+            }
+            return true;
+		}
+    	
+    	@Override
+    	protected void onPostExecute(Boolean result) {
+    		if(result){
+    			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, courses);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mCourses.setAdapter(adapter);
+    		}
+    	}
+    }
+    
+    // AsyncTask for populating courses
+    public class PopulateCoursesLightTask extends AsyncTask<Void, Void, Boolean> {
+    	
+    	@Override
+		protected Boolean doInBackground(Void... params) {
+            AjaxRequest request = new AjaxRequest("GET", "http://mustangtutors.floccul.us/Laravel/public/tutor/" + sharedPref.getString("user_id", ""));
+        	JSONObject json_obj;
+            try {
+                json_obj = new JSONObject(request.send());
+               	JSONArray json = json_obj.getJSONArray("courses");
                 courses = new String[json.length()+1];
                 mCourseId = new String[json.length()+1];
                 courses[0] = "Select a Course";

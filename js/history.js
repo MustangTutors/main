@@ -192,7 +192,7 @@ $(document).ready(function(){
         }
         else {
             $('#more_message').html("Fewer Course Options");
-            $('#more_options').html("Less >>");
+            $('#more_options').html("Less <<");
             fillNewMeetingCourses(false);
         }
     });
