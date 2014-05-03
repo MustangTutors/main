@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -502,9 +503,9 @@ public class MeetingActivity extends FragmentActivity {
     	}
     }
     
-    public class AddTask extends AsyncTask<Void, Void, Boolean> {
+    public class AddTask extends AsyncTask<Void, Void, Integer> {
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected Integer doInBackground(Void... params) {
 			String url = "http://mustangtutors.floccul.us/Laravel/public/tutors/addMeeting/" + sharedPref.getString("user_id", "");
 			System.out.println(url);
 			AjaxRequest request = new AjaxRequest("POST", url);
@@ -531,22 +532,47 @@ public class MeetingActivity extends FragmentActivity {
 			System.out.println(asdf);
 	        request.addParam("post_meeting", json.toString());
             try {
-	            request.send();
+	            String result = request.send();
+	            
+	            if(result.equals("can't add meeting with yourself\n")){  
+	            	
+	            	return 1;
+	            }
+	            else if(result.equals("not a valid smu id\n")){
+	            	
+	            	return 2;
+	            }
 	            
             } catch (Exception e) {
             }
             
-            return true;
+            return 0;
 		}
 		
-		protected void onPostExecute(Boolean result){
-			resetMeetingForm();
-			
-			CharSequence text = "Meeting Added";
-			int duration = Toast.LENGTH_SHORT;
+		protected void onPostExecute(Integer result){
+			if(result == 0){
+				resetMeetingForm();
+				
+				CharSequence text = "Meeting Added";
+				int duration = Toast.LENGTH_SHORT;
 
-			Toast toast = Toast.makeText(mContext, text, duration);
-			toast.show();
+				Toast toast = Toast.makeText(mContext, text, duration);
+				toast.show();
+			}
+			else if(result == 1){
+				CharSequence text = "You cannot add a meeting with yourself.";
+    			int duration = Toast.LENGTH_SHORT;
+
+    			Toast toast = Toast.makeText(mContext, text, duration);
+    			toast.show();
+			}
+			else if(result == 2){
+				CharSequence text = "That student does not exist.";
+    			int duration = Toast.LENGTH_SHORT;
+
+    			Toast toast = Toast.makeText(mContext, text, duration);
+    			toast.show();
+			}
 		}
 	}
 }
