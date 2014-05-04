@@ -3,6 +3,20 @@ var list_of_course_ids = [];
 // Get the user_id from query in URL, then get tutor info
 var user_id = getURLParameter('user_id');
 
+// Check if the user is logged in and an admin. If not, redirect to the tutor page
+$.ajax({
+    url: "Laravel/public/users/current",
+    success: function(json) {
+        json = JSON.parse(json);
+        if (json.length === 0) {
+            window.location.href = "tutor.html?user_id=" + user_id;
+        }
+        else if (json.length === 1 && Number(json[0].admin) !== 1) {
+            window.location.href = "index.html?user_id=" + user_id;
+        }
+    }
+});
+
 $(document).ready(function() {
 
     // Hides the Your Rating section if the user is the same person as the tutor.
