@@ -1786,6 +1786,7 @@ a#edit_link {
     position: absolute;
     right: 30px;
     bottom: 10px;
+    display: none;
 }
 
 /* End stylying for Admin Edit of Tutor Profile*/
