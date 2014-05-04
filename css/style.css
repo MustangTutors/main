@@ -1515,6 +1515,7 @@ section#rating img[src*='star']{
     display: none;
     top: 150px;
     right: -100px;
+    z-index: 1000;
 }
 
 #editRating h3 {
